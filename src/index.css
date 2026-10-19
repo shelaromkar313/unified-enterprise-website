@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #0f172a;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* Cisco Official Products & Services Typography Stack */
+.font-cisco {
+  font-family: "CiscoSans", "Cisco Sans", "Fira Sans", Arial, Helvetica, sans-serif !important;
+  letter-spacing: -0.012em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Corporate Red selection */
+::selection {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+/* Softcentric Dark Tech Hero Background with Network Grid */
+.soft-hero-bg {
+  background-color: #070b12;
+  background-image: 
+    radial-gradient(circle at 50% 20%, rgba(220, 38, 38, 0.22) 0%, rgba(7, 11, 18, 0.95) 70%),
+    linear-gradient(to right, rgba(239, 68, 68, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(239, 68, 68, 0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+}
+
+/* 3D Perspective Grid Room for Coverflow Section (matches user screenshot) */
+.coverflow-room-bg {
+  background-color: #101318;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Faint Gray 3D Perspective Grid Room matching the user's shared color swatch (#D2D2D2 / #D5D5D5) */
+.coverflow-room-faint-gray {
+  background-color: #d2d5da;
+  background-image: 
+    radial-gradient(circle at 50% 35%, #e8ebef 0%, #d4d7dc 55%, #c8cdd3 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floor grid on faint gray background (subtle neutral slate perspective wireframe) */
+.ue-grid-floor-light {
+  position: absolute;
+  bottom: 0;
+  left: -40%;
+  right: -40%;
+  height: 52%;
+  background-image: 
+    linear-gradient(to right, rgba(148, 163, 184, 0.28) 1px, transparent 1px),
+    linear-gradient(to top, rgba(148, 163, 184, 0.28) 1px, transparent 1px);
+  background-size: 56px 56px;
+  transform: perspective(400px) rotateX(68deg);
+  transform-origin: bottom center;
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 20%, black 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 20%, black 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ceiling grid on faint gray background */
+.ue-grid-ceiling-light {
+  position: absolute;
+  top: 0;
+  left: -40%;
+  right: -40%;
+  height: 44%;
+  background-image: 
+    linear-gradient(to right, rgba(14, 165, 233, 0.13) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14, 165, 233, 0.13) 1px, transparent 1px);
+  background-size: 56px 56px;
+  transform: perspective(400px) rotateX(-68deg);
+  transform-origin: top center;
+  mask-image: linear-gradient(to top, transparent 0%, rgba(0,0,0,0.4) 20%, black 100%);
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, rgba(0,0,0,0.4) 20%, black 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Floor grid with 3D perspective (converging towards horizon) */
+.ue-grid-floor {
+  position: absolute;
+  bottom: 0;
+  left: -30%;
+  right: -30%;
+  height: 52%;
+  background-image: 
+    linear-gradient(to right, rgba(69, 215, 245, 0.14) 1px, transparent 1px),
+    linear-gradient(to top, rgba(69, 215, 245, 0.14) 1px, transparent 1px);
+  background-size: 52px 52px;
+  transform: perspective(380px) rotateX(66deg);
+  transform-origin: bottom center;
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 30%, black 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 30%, black 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ceiling grid with 3D perspective (converging downwards towards horizon) */
+.ue-grid-ceiling {
+  position: absolute;
+  top: 0;
+  left: -30%;
+  right: -30%;
+  height: 44%;
+  background-image: 
+    linear-gradient(to right, rgba(69, 215, 245, 0.11) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(69, 215, 245, 0.11) 1px, transparent 1px);
+  background-size: 52px 52px;
+  transform: perspective(380px) rotateX(-66deg);
+  transform-origin: top center;
+  mask-image: linear-gradient(to top, transparent 0%, rgba(0,0,0,0.6) 30%, black 100%);
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, rgba(0,0,0,0.6) 30%, black 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 3D Perspective container */
+.perspective-container {
+  perspective: 1100px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+/* Floating Vertical Support Button on right edge */
+.soft-floating-support {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 45;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Softcentric Red Vibrant Gradient */
+.soft-gradient-card {
+  background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+}
+
+.soft-gradient-dark {
+  background: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
+}
+
+/* ==========================================================================
+   Smooth Scroll Reveal System (Hardware-accelerated with graceful fallbacks)
+   ========================================================================== */
+.scroll-reveal-item {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Graceful Fallback: Never hide content if user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Fallback for print styles */
+@media print {
+  .scroll-reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
