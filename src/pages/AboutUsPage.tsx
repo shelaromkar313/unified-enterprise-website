@@ -305,7 +305,7 @@ export default function AboutUsPage({ onOpenQuickSupport }: AboutUsPageProps) {
                         Eliminating the Multi-Vendor Fault Line
                       </h3>
                       <p className="text-sm text-slate-700 leading-relaxed">
-                        Softcentric & Unified Enterprise Solutions was established to resolve the critical friction point in enterprise operations: finger-pointing between separate hardware vendors, network engineers, telecom providers, and maintenance contractors.
+                        Unified Enterprise Solutions was established to resolve the critical friction point in enterprise operations: finger-pointing between separate hardware vendors, network engineers, telecom providers, and maintenance contractors.
                       </p>
                       <p className="text-sm text-slate-700 leading-relaxed">
                         By integrating Tier-1 hardware procurement, carrier-grade telecom gateways, and certified SLA maintenance under one single roof, we deliver seamless uptime and single-point accountability for over 450+ corporate clients nationwide.
@@ -462,7 +462,7 @@ export default function AboutUsPage({ onOpenQuickSupport }: AboutUsPageProps) {
                 {selectedCategoryId === 'careers' && (
                   <div className="space-y-6">
                     <div className="pb-4 border-b border-slate-100">
-                      <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Careers at Softcentric & Unified Enterprise</h2>
+                      <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Careers at Unified Enterprise Solutions</h2>
                       <span className="text-xs text-[#dc2626] font-semibold block mt-1">Join Our High-Performance Systems & Network Engineering Teams</span>
                     </div>
 

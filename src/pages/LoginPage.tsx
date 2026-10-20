@@ -413,7 +413,7 @@ export default function LoginPage() {
           </a>
         </div>
         <p className="text-[11px] text-slate-400">
-          © {new Date().getFullYear()} Unified Enterprise Solutions / Softcentric Technology. All rights reserved.
+          © {new Date().getFullYear()} Unified Enterprise Solutions. All rights reserved.
         </p>
       </footer>
 
