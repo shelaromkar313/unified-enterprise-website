@@ -132,7 +132,7 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 space-y-20">          {/* Section B: Unified IT & Telecom Management */}
           <div className="bg-white rounded-3xl p-8 sm:p-10 lg:p-12 border border-slate-200 shadow-sm">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              <ScrollReveal delay={0} duration={650} distance={24} className="lg:col-span-5 space-y-4">
+              <ScrollReveal delay={0} duration={800} distance={32} className="lg:col-span-5 space-y-4">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#dc2626] block">
                   Complete Technology Lifecycle
                 </span>
@@ -153,7 +153,7 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
                 </div>
               </ScrollReveal>
 
-              <ScrollRevealGroup stagger={80} baseDelay={60} duration={650} distance={24} className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <ScrollRevealGroup stagger={110} baseDelay={60} duration={800} distance={32} className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-slate-200 transition-all">
                   <div className="flex items-center gap-2.5 mb-2">
                     <span className="w-2 h-2 rounded-full bg-[#dc2626]" />
@@ -199,7 +199,7 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
 
           {/* Section C: Our Service Delivery Model */}
           <div>
-            <ScrollReveal delay={0} duration={650} distance={24} className="text-center max-w-3xl mx-auto mb-12">
+            <ScrollReveal delay={0} duration={800} distance={32} className="text-center max-w-3xl mx-auto mb-12">
               <span className="text-xs font-bold uppercase tracking-widest text-[#dc2626] block mb-2">
                 Proven Execution Blueprint
               </span>
@@ -211,7 +211,7 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
               </p>
             </ScrollReveal>
 
-            <ScrollRevealGroup stagger={80} baseDelay={80} duration={650} distance={24} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <ScrollRevealGroup stagger={110} baseDelay={80} duration={800} distance={32} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs relative">
                 <span className="text-3xl font-extrabold text-slate-200 block mb-2 font-mono">01</span>
                 <h4 className="text-base font-bold text-slate-900 mb-2">Discovery & Site Audit</h4>
@@ -247,7 +247,7 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
           </div>
 
           {/* Section D: Request a Consultation (High-Converting Cisco Banner) */}
-          <ScrollReveal delay={0} duration={700} distance={28} className="bg-gradient-to-r from-[#070b12] to-[#0f172a] rounded-3xl p-8 sm:p-12 text-white shadow-xl border border-slate-800">
+          <ScrollReveal delay={0} duration={850} distance={32} className="bg-gradient-to-r from-[#070b12] to-[#0f172a] rounded-3xl p-8 sm:p-12 text-white shadow-xl border border-slate-800">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8 space-y-4 text-left">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-red-400 border border-red-500/20 text-xs font-semibold">

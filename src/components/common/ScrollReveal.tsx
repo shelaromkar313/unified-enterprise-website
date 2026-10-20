@@ -20,11 +20,11 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   className = '',
   style = {},
   id,
-  threshold = 0.12,
-  rootMargin = '0px 0px -40px 0px',
+  threshold = 0.08,
+  rootMargin = '0px 0px -50px 0px',
   delay = 0,
-  duration = 650,
-  distance = 24,
+  duration = 800,
+  distance = 32,
   direction = 'up',
   once = true,
   ...rest
@@ -60,7 +60,7 @@ export interface ScrollRevealGroupProps {
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
-  stagger?: number; // Milliseconds between child reveals (e.g. 80–120ms)
+  stagger?: number; // Milliseconds between child reveals (e.g. 100–140ms)
   baseDelay?: number;
   duration?: number;
   distance?: number;
@@ -73,20 +73,20 @@ export interface ScrollRevealGroupProps {
 /**
  * ScrollRevealGroup Component
  * Staggers direct children smoothly as the container enters the viewport.
- * Caps maximum stagger delay at 320ms so page interaction never feels sluggish.
+ * Caps maximum stagger delay at 400ms so page interaction never feels sluggish.
  */
 export const ScrollRevealGroup: React.FC<ScrollRevealGroupProps> = ({
   as: Component = 'div',
   children,
   className = '',
   style = {},
-  stagger = 90,
+  stagger = 120,
   baseDelay = 0,
-  duration = 650,
-  distance = 24,
+  duration = 800,
+  distance = 32,
   direction = 'up',
-  threshold = 0.1,
-  rootMargin = '0px 0px -40px 0px',
+  threshold = 0.08,
+  rootMargin = '0px 0px -50px 0px',
   once = true,
   ...rest
 }) => {

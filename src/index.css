@@ -161,16 +161,46 @@
 }
 
 /* ==========================================================================
-   Smooth Scroll Reveal System (Hardware-accelerated with graceful fallbacks)
+   Smooth Scroll Reveal System (Cisco-Benchmarked Hardware Accelerated)
    ========================================================================== */
 .scroll-reveal-item {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
+/* Cisco Signature Smooth Scroll Reveal */
+.cisco-reveal,
+[data-reveal],
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.cisco-reveal.is-revealed,
+[data-reveal].is-revealed,
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Smooth Progressive Stagger Delays for Grid Children */
+.cisco-stagger > *:nth-child(1) { transition-delay: 0ms; }
+.cisco-stagger > *:nth-child(2) { transition-delay: 110ms; }
+.cisco-stagger > *:nth-child(3) { transition-delay: 220ms; }
+.cisco-stagger > *:nth-child(4) { transition-delay: 330ms; }
+.cisco-stagger > *:nth-child(5) { transition-delay: 440ms; }
+.cisco-stagger > *:nth-child(6) { transition-delay: 550ms; }
+
 /* Graceful Fallback: Never hide content if user prefers reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .scroll-reveal-item {
+  .scroll-reveal-item,
+  .cisco-reveal,
+  [data-reveal],
+  .reveal-on-scroll {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
@@ -179,8 +209,12 @@
 
 /* Fallback for print styles */
 @media print {
-  .scroll-reveal-item {
+  .scroll-reveal-item,
+  .cisco-reveal,
+  [data-reveal],
+  .reveal-on-scroll {
     opacity: 1 !important;
     transform: none !important;
   }
 }
+

@@ -290,5 +290,78 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     stockStatus: 'In Stock • Pan-India Installation',
     rentalAvailable: false,
     idealFor: 'Datacenter corridors, server rooms, bank vaults, corporate perimeters, and manufacturing floors'
+  },
+
+  // IT HARDWARE & ACCESSORIES (RAM, GPU, NVME SSD, DOCKS)
+  {
+    id: 'server-ram-ddr5-ecc',
+    categoryId: 'it-hardware-accessories',
+    brand: 'Samsung',
+    name: 'Samsung 32GB / 64GB DDR5-4800 ECC Registered RDIMM RAM',
+    image: '/assets/ram_memory_hardware.jpg',
+    tagline: 'Enterprise mission-critical server memory module with on-die ECC and dual 32-bit subchannels for 24/7 datacenters.',
+    specs: {
+      memory: '32GB / 64GB DDR5 Registered DIMM (RDIMM) 288-pin',
+      processor: 'Optimized for Intel Xeon Scalable 4th/5th Gen & AMD EPYC 9004 series',
+      security: 'Hardware on-die ECC error correction and CRC parity checks',
+      ports: 'Standard 288-pin gold-plated DIMM server edge connector (1.1V low power)'
+    },
+    keyPills: ['DDR5 4800 MHz', 'ECC Registered', '64GB RDIMM', '24/7 Datacenter Grade'],
+    stockStatus: 'In Stock • Bulk Lot Ready',
+    rentalAvailable: true,
+    idealFor: 'High-density virtualization hosts, database acceleration, and rackmount server upgrades'
+  },
+  {
+    id: 'nvidia-rtx-6000-ada',
+    categoryId: 'it-hardware-accessories',
+    brand: 'NVIDIA',
+    name: 'NVIDIA RTX 6000 Ada Generation (48GB GDDR6 Workstation & AI GPU)',
+    image: '/assets/gpu_graphics_hardware.jpg',
+    tagline: 'The ultimate professional graphics and AI compute powerhouse for enterprise CAD, AI LLM fine-tuning, and neural rendering.',
+    specs: {
+      processor: '18,176 CUDA Cores, 568 Tensor Cores (4th Gen), 142 RT Cores (3rd Gen)',
+      memory: '48GB GDDR6 with ECC error-correcting code (960 GB/s bandwidth)',
+      security: 'Hardware Root of Trust, secure boot, enterprise vGPU virtualization ready',
+      ports: '4x DisplayPort 1.4a with latching mechanisms, PCIe 4.0 x16 interface'
+    },
+    keyPills: ['48GB GDDR6 ECC', '18,176 CUDA Cores', 'AI / LLM Compute', 'Quad DisplayPort'],
+    stockStatus: 'In Stock • Dedicated SLA',
+    rentalAvailable: true,
+    idealFor: 'AI model training, high-end 3D visual FX workstations, data science, and CAD rendering clusters'
+  },
+  {
+    id: 'micron-7400-pro-nvme-ssd',
+    categoryId: 'it-hardware-accessories',
+    brand: 'Micron',
+    name: 'Micron 7400 PRO 3.84TB / 7.68TB Enterprise PCIe Gen4 NVMe SSD',
+    image: '/assets/nvme_ssd_hardware.jpg',
+    tagline: 'High-endurance enterprise U.2 & M.2 NVMe storage engineered for high-IOPS cloud workloads and low-latency arrays.',
+    specs: {
+      storage: '3.84TB / 7.68TB NVMe 1.4 compliant PCIe 4.0 x4 solid state drive',
+      processor: 'Sequential reads up to 6,800 MB/s, sequential writes up to 5,600 MB/s, 1 Million Random IOPS',
+      security: 'TCG Opal 2.01, Power-Loss Protection (PLP), End-to-end data path protection',
+      ports: 'PCIe Gen4 x4 NVMe U.2 (15mm) and M.2 (22110) enterprise form factors'
+    },
+    keyPills: ['PCIe Gen4 NVMe', 'Up to 7.68TB', '1M IOPS Throughput', 'Hardware PLP Protection'],
+    stockStatus: 'In Stock • Fast Dispatch',
+    rentalAvailable: true,
+    idealFor: 'Enterprise SAN/NAS arrays, mission-critical SQL clusters, and low-latency application servers'
+  },
+  {
+    id: 'dell-thunderbolt-4-dock-wd22tb4',
+    categoryId: 'it-hardware-accessories',
+    brand: 'Dell',
+    name: 'Dell Universal Dual-4K Thunderbolt 4 Enterprise Dock (WD22TB4)',
+    image: '/assets/docking_station_hardware.jpg',
+    tagline: 'Modular high-bandwidth enterprise docking station with 130W Power Delivery and dual 4K/60Hz display support.',
+    specs: {
+      display: 'Supports up to four external displays simultaneously (including dual 4K @ 60Hz or single 5K/8K)',
+      security: 'Kensington lock slot, MAC address pass-through, PXE Boot, Wake-on-LAN',
+      ports: '2x Thunderbolt 4, 1x USB-C 3.2 Gen 2, 3x USB-A 3.2 Gen 1, 2x DisplayPort 1.4, 1x HDMI 2.0, Gigabit Ethernet'
+    },
+    keyPills: ['Thunderbolt 4 (40Gbps)', '130W Power Delivery', 'Dual 4K / 8K Support', 'Gigabit LAN Port'],
+    stockStatus: 'In Stock • Fleet Ready',
+    rentalAvailable: true,
+    idealFor: 'Enterprise hot-desking, hybrid engineering desks, financial trader multi-monitor setups'
   }
 ];

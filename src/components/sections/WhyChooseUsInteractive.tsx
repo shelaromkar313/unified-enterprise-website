@@ -120,7 +120,7 @@ export default function WhyChooseUsInteractive({ onOpenQuickSupport }: WhyChoose
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-16 cisco-reveal">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-red-50 border border-red-200/70 text-xs font-bold uppercase tracking-[0.2em] text-[#dc2626] mb-3">
             <Sparkles className="w-3.5 h-3.5 text-[#dc2626]" />
             <span>Why Choose Us?</span>
@@ -134,7 +134,7 @@ export default function WhyChooseUsInteractive({ onOpenQuickSupport }: WhyChoose
         </div>
 
         {/* 4 Interactive Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 cisco-reveal cisco-stagger">
           {PILLARS.map((card) => (
             <TiltCard 
               key={card.id} 

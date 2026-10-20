@@ -315,7 +315,7 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
       />
 
       {/* Section Header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 mb-8 sm:mb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 mb-8 sm:mb-10 cisco-reveal">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-3 sm:gap-4">
           <div>
             <small className="text-xs font-bold uppercase tracking-[0.2em] text-[#dc2626] block mb-1">
@@ -333,7 +333,7 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
 
       {/* 3D Perspective Coverflow Scene Container */}
       <div 
-        className="relative h-[480px] sm:h-[510px] w-full flex items-center justify-center overflow-visible"
+        className="relative h-[480px] sm:h-[510px] w-full flex items-center justify-center overflow-visible cisco-reveal"
         style={{
           perspective: '1200px',
           perspectiveOrigin: '50% 50%',

@@ -271,7 +271,7 @@ export default function ContactUsPage() {
             )}
 
             {/* Interactive Contact & Inquiry Form */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start cisco-reveal">
               
               {/* Form Container */}
               <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-2xs">
@@ -430,17 +430,31 @@ export default function ContactUsPage() {
 
                 {/* Regional Dispatch Desks */}
                 <div className="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-4 shadow-2xs">
-                  <h3 className="text-sm font-bold text-slate-900">National Engineering Desks</h3>
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-4 bg-[#dc2626] rounded-full" />
+                    <h3 className="text-sm font-bold text-[#173B67]">National Engineering Desks</h3>
+                  </div>
                   
                   <div className="space-y-3 text-xs text-slate-700">
+                    {/* 1. Chennai */}
                     <div className="flex items-start gap-2.5 pb-2.5 border-b border-slate-100">
                       <MapPin className="w-4 h-4 text-[#dc2626] shrink-0 mt-0.5" />
                       <div>
-                        <strong className="text-slate-900 block">Delhi NCR (Headquarters)</strong>
-                        <span>Okhla Industrial Area Phase-III, New Delhi – 110020</span>
+                        <strong className="text-slate-900 block">Chennai Technology Center</strong>
+                        <span>Tidel Park, Rajiv Gandhi Salai, Taramani, Chennai – 600113</span>
                       </div>
                     </div>
 
+                    {/* 2. Pune */}
+                    <div className="flex items-start gap-2.5 pb-2.5 border-b border-slate-100">
+                      <MapPin className="w-4 h-4 text-[#dc2626] shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="text-slate-900 block">Pune Branch Office</strong>
+                        <span>Plot No. 14, Gera Imperium Park, Hinjawadi IT Park, Phase-II, Pune – 411 506</span>
+                      </div>
+                    </div>
+
+                    {/* 3. Mumbai */}
                     <div className="flex items-start gap-2.5 pb-2.5 border-b border-slate-100">
                       <MapPin className="w-4 h-4 text-[#dc2626] shrink-0 mt-0.5" />
                       <div>
@@ -449,19 +463,12 @@ export default function ContactUsPage() {
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-2.5 pb-2.5 border-b border-slate-100">
+                    {/* 4. Bangalore */}
+                    <div className="flex items-start gap-2.5">
                       <MapPin className="w-4 h-4 text-[#dc2626] shrink-0 mt-0.5" />
                       <div>
                         <strong className="text-slate-900 block">Bengaluru Tech Center</strong>
                         <span>Electronic City Phase 1, Bengaluru – 560100</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <MapPin className="w-4 h-4 text-[#dc2626] shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-slate-900 block">Hyderabad Telecom Desk</strong>
-                        <span>HITEC City, Madhapur, Hyderabad – 500081</span>
                       </div>
                     </div>
                   </div>
@@ -477,7 +484,7 @@ export default function ContactUsPage() {
                       Emergency SLA Hotline
                     </span>
                     <span className="text-sm font-bold text-slate-900">
-                      +91 (011) 4987-0000 / 1800-UE-INFRA
+                      +91 8377017477 / 1800-UE-INFRA
                     </span>
                   </div>
                 </div>

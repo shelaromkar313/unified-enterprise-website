@@ -18,6 +18,9 @@ interface SolutionDetail {
   image: string;
   deliverables: string[];
   architecturePoints: string[];
+  whyExists: string;
+  challengesSolved: { title: string; desc: string }[];
+  metrics: string[];
 }
 
 export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps) {
@@ -54,7 +57,7 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
     }
   };
 
-  // Comprehensive details for each category
+  // Comprehensive details for each category with strategic business purpose
   const solutionsData: Record<string, SolutionDetail> = useMemo(() => ({
     'complete-it-infrastructure': {
       id: 'complete-it-infrastructure',
@@ -62,6 +65,13 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
       targetAudience: 'Growing enterprises & corporate headquarters',
       summary: 'Turnkey IT architecture from structural cabling and rack enclosures to computing clusters, virtualization, storage, and centralized endpoint management.',
       image: '/assets/datacenter_servers.jpg',
+      metrics: ['99.99% Core Uptime', 'Tier-1 Compute (Dell/HPE)', 'Turnkey Handover'],
+      whyExists: 'Disjointed systems from multiple cabling, server, and networking vendors create operational friction and blame games. We deliver a unified, load-tested computing architecture under one accountable contract for maximum enterprise uptime.',
+      challengesSolved: [
+        { title: 'Zero Multi-Vendor Friction', desc: 'Single-source accountability across servers, storage, switches, and structured cabling.' },
+        { title: 'N+1 Resilient Redundancy', desc: 'Prevents cascading outages with redundant power, cooling, and network links.' },
+        { title: 'Rapid Facility Handover', desc: 'Accelerates corporate site setup timelines from months down to 2–3 weeks.' }
+      ],
       deliverables: [
         'Datacenter & Server Room Design',
         'Structured Category 6A & High-Speed Fiber Cabling',
@@ -80,6 +90,13 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
       targetAudience: 'Organizations with dispersed communications',
       summary: 'A converged single-vendor operational model unifying voice telephony, high-speed data networks, cybersecurity firewalls, and workstation support under one cohesive architecture.',
       image: '/assets/ue_telecom_voice.jpg',
+      metrics: ['Single SLA Contract', '<15ms Voice Jitter', '35% OpEx Savings'],
+      whyExists: 'Voice telephony and IT networks often operate in isolated silos, causing downtime when calls drop or internet falters. We unify IP-PBX telephony, SIP trunks, switches, and firewalls under one SLA with a single emergency contact number.',
+      challengesSolved: [
+        { title: 'Halts Vendor Blame Games', desc: 'One number to call for both voice telephony and IT network incidents.' },
+        { title: 'Lossless Voice QoS', desc: 'Enforces bandwidth prioritization so voice calls never stutter or disconnect.' },
+        { title: 'Consolidated SLA Billing', desc: 'Reduces operational overhead by up to 35% through single-contract management.' }
+      ],
       deliverables: [
         'Unified IP-PBX & Data Network Convergence',
         'Single Point of Escalation for Both IT Hardware & Voice Telecom',
@@ -98,6 +115,13 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
       targetAudience: 'Small and medium business operations (20–150 seats)',
       summary: 'Right-sized, cost-efficient technology foundations designed for rapid deployment, high data resilience, and seamless scalability without excessive enterprise overhead.',
       image: '/assets/enterprise_laptop_hero.jpg',
+      metrics: ['48-Hour Deployment', 'Predictable Monthly OpEx', 'Zero Ransomware Loss'],
+      whyExists: 'Growing businesses need Fortune 500 stability and cyber protection without the burden of hiring costly in-house network architects. We provide turnkey compact server racks, automated backup vaults, and managed helpdesk at a predictable monthly cost.',
+      challengesSolved: [
+        { title: 'Ransomware-Proof Vaults', desc: 'Immutable hybrid cloud backups protect corporate data from extortion.' },
+        { title: 'Predictable Monthly OpEx', desc: 'Eliminates surprise emergency repair invoices with fixed-rate SLAs.' },
+        { title: 'Effortless Headcount Scale', desc: 'Expands from 20 to 150+ seats without requiring architectural re-work.' }
+      ],
       deliverables: [
         'Plug-and-play Compact Server Racks & Edge Switches',
         'Hybrid Cloud Backup with Ransomware-Proof Local Vaults',
@@ -116,6 +140,13 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
       targetAudience: 'Retail chains, regional branches & multi-facility firms',
       summary: 'Standardized IT blueprints rolled out across multiple geographic locations with secure SD-WAN encrypted tunnels, unified security policies, and coordinated nationwide engineer dispatch.',
       image: '/assets/network_security_firewall.jpg',
+      metrics: ['Pan-India Dispatch', 'Zero-Touch SD-WAN', '100% Policy Parity'],
+      whyExists: 'Branch offices, retail outlets, and regional sites frequently suffer from weak security policies and no onsite technical staff. We enforce nationwide IT parity with automated SD-WAN mesh tunnels backed by certified hands-on engineers across major metros.',
+      challengesSolved: [
+        { title: 'Branch Security Parity', desc: 'Extends uniform firewall policies and content filtering across all locations.' },
+        { title: 'Self-Healing SD-WAN', desc: 'Replaces costly legacy MPLS lines with dynamic multi-ISP traffic routing.' },
+        { title: 'Pan-India Dispatch', desc: 'Onsite certified technicians reach remote branches within hours of dispatch.' }
+      ],
       deliverables: [
         'SD-WAN Site-to-Site Auto-Mesh & Traffic Prioritization',
         'Centralized Branch Firewall Policies & Content Filtering',
@@ -134,6 +165,13 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
       targetAudience: 'Inbound customer support, outbound dialer centers & BPOs',
       summary: 'High-concurrency predictive dialers, multi-agent acoustic workstations, PRI/SIP gateway integration, call recording archives, and redundant ISP failover connectivity for non-stop operations.',
       image: '/assets/telecom_ip_phones.jpg',
+      metrics: ['Sub-15ms Voice Jitter', '99.999% Trunk Availability', '1,000+ Concurrent Lines'],
+      whyExists: 'In contact centers, every second of dialer downtime or audio distortion directly incinerates revenue and triggers client SLA penalties. We engineer clustered predictive dialers, redundant carrier SIP gateways, and acoustic agent hardware for continuous 24/7 duty.',
+      challengesSolved: [
+        { title: 'High-Concurrency Stability', desc: 'Dialer clusters withstand peak morning outbound calling surges without lag.' },
+        { title: 'Dual-ISP Auto Failover', desc: 'Zero dropped customer conversations via automated BGP carrier failover.' },
+        { title: '100% Call Compliance', desc: 'Encrypted call recording archives satisfy regulatory storage requirements.' }
+      ],
       deliverables: [
         'High-Density Vicidial / Asterisk Dialer Server Clusters',
         'Noise-Canceling Agent Terminals & Commercial Headsets',
@@ -152,6 +190,13 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
       targetAudience: 'New facility setups, campus retrofits & tech upgrades',
       summary: 'Rigorous Layer 1 through Layer 7 engineering including cable layout schematics, wireless RF heatmap modeling, VLAN segmentation, core routing, and switch fabric provisioning.',
       image: '/assets/wifi_access_point.jpg',
+      metrics: ['10/40G Optical Backbone', 'Fluke Test Verified', '10-Year Cable Warranty'],
+      whyExists: 'Over 70% of persistent network slowdowns and Wi-Fi dead zones stem from flawed physical cabling and amateur switch configurations. We engineer networks using precision RF heatmaps, certified structured Cat6A/fiber, and VLAN segmentation that scales for a decade.',
+      challengesSolved: [
+        { title: 'Zero Wi-Fi Dead Zones', desc: 'Heatmap modeling eliminates interference in high-density office zones.' },
+        { title: 'Broadcast Storm Defense', desc: 'Hardened Layer 2/3 protocols prevent network freezes and packet loops.' },
+        { title: 'Fluke-Tested Cabling', desc: 'Certified patch dressing with complete port labeling schematics.' }
+      ],
       deliverables: [
         'Comprehensive Site Survey, Heatmap Modeling & Blueprints',
         'Certified Fiber Optic & Category 6A Structured Termination',
@@ -170,6 +215,13 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
       targetAudience: 'Regulated industries, legal, financial & corporate data',
       summary: 'Comprehensive perimeter defense, Zero-Trust network segmentation, multi-gigabit SSL traffic inspection, and encrypted VPN gateway access protecting corporate assets.',
       image: '/assets/network_security_firewall.jpg',
+      metrics: ['Zero-Trust ZTNA', 'Deep Packet SSL Inspection', '24/7 Threat Protection'],
+      whyExists: 'Cyber threats and internal data leaks represent existential corporate risks that basic routers cannot prevent. We deploy Next-Generation Firewalls (Fortinet, Cisco, Sophos) with Zero-Trust access control, deep packet inspection, and encrypted remote VPN gateways.',
+      challengesSolved: [
+        { title: 'Real-Time Threat Blocking', desc: 'Stops zero-day exploits and polymorphic ransomware before reaching users.' },
+        { title: 'Secure Hybrid VPNs', desc: 'Enforces Multi-Factor Authentication (MFA) for all remote staff tunnels.' },
+        { title: 'Audit-Ready Compliance', desc: 'Aligns network security with ISO 27001, SOC 2, and data privacy frameworks.' }
+      ],
       deliverables: [
         'Next-Gen Firewall (NGFW) Deployment (Fortinet / Cisco / Sophos)',
         'Multi-Factor Authenticated SSL & IPsec VPN Portals',
@@ -188,6 +240,13 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
       targetAudience: 'Hybrid workforces and distributed teams',
       summary: 'End-to-end device provisioning, secure remote MDM enrollment, cloud identity sync, and virtual conferencing setups keeping employees productive and secure anywhere.',
       image: '/assets/dell_latitude_laptop.jpg',
+      metrics: ['Zero-Touch MDM Enrollment', 'Instant Remote Wipe', 'Hybrid Conference Ready'],
+      whyExists: 'Managing remote laptops across cities creates severe security vulnerabilities and onboarding friction. We deliver endpoint governance: pre-imaged enterprise laptops arrive at employee doorsteps with Intune MDM, BitLocker encryption, and video conferencing ready to go.',
+      challengesSolved: [
+        { title: '15-Minute Onboarding', desc: 'Zero-touch device enrollment enables immediate out-of-the-box productivity.' },
+        { title: 'Instant Remote Wipe', desc: 'Remotely locks and wipes corporate data if a device is lost or compromised.' },
+        { title: '1-Touch Video Rooms', desc: 'Smart conference room bars connect hybrid teams with clear audio and video.' }
+      ],
       deliverables: [
         'Pre-Configured Enterprise Laptops Shipped Direct to Employees',
         'Mobile Device Management (MDM) & Microsoft Intune Enrollment',
@@ -206,6 +265,13 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
       targetAudience: 'Corporate procurement desks, CTOs & IT directors',
       summary: 'Authorized tier-1 procurement for commercial laptops, desktop fleets, rack servers, network switches, and surveillance hardware at transparent corporate enterprise pricing.',
       image: '/assets/ue_hardware_procurement.jpg',
+      metrics: ['Authorized Tier-1 Partner', 'Direct OEM Warranty', '15-30% Cost Savings'],
+      whyExists: 'Sourcing corporate hardware from unverified brokers risks counterfeit components, voided OEM warranties, and steep markups. As an authorized Tier-1 partner for Dell, HP, Lenovo, Cisco, and Fortinet, we provide direct enterprise pricing, burn-in diagnostics, and official warranties.',
+      challengesSolved: [
+        { title: '15% to 30% Cost Savings', desc: 'Volume enterprise pricing bypasses consumer retail markups.' },
+        { title: 'Guaranteed OEM Genuine', desc: 'Direct supply chain ensures genuine components and active manufacturer support.' },
+        { title: 'Zero Dead-On-Arrival', desc: 'Pre-dispatch stress testing and image flashing ensure instant deployment.' }
+      ],
       deliverables: [
         'Direct OEM Authorized Supply Chain (Dell, HP, Lenovo, Cisco, Fortinet)',
         'Volume Enterprise Pricing & Flexible Payment Terms',
@@ -224,6 +290,13 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
       targetAudience: 'Enterprises managing aging computing and networking estates',
       summary: 'End-to-end governance covering procurement, deployment, warranty tracking, preventive health audits, hardware upgrades, and certified NIST-compliant data wiping upon retirement.',
       image: '/assets/why_data_backed.jpg',
+      metrics: ['NIST 800-88 Certified', 'Audit-Ready Ledger', 'Maximized Residual ROI'],
+      whyExists: 'Aging hardware quietly drains IT maintenance budgets before creating severe data liability risks when retired. We govern physical technology assets throughout their lifespan—tracking warranties, upgrading components, and issuing certified NIST 800-88 data destruction certificates upon retirement.',
+      challengesSolved: [
+        { title: 'Proactive Refresh Cycles', desc: 'Forecasts hardware replacement to eliminate unbudgeted emergency failures.' },
+        { title: 'NIST 800-88 Legal Immunity', desc: 'Tamper-evident data sanitization certificates ensure zero data leakage.' },
+        { title: 'Residual Asset Recovery', desc: 'Recovers cash value through corporate hardware buyback and green recycling.' }
+      ],
       deliverables: [
         'Centralized Hardware Inventory & Warranty Tracking Ledger',
         'Scheduled Preventive Maintenance & Component Upgrades',
@@ -449,97 +522,175 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
             ) : (
               /* 2. CATEGORY VIEW: Clean, High-End Enterprise Solution Presentation */
               currentDetail && (
-                <div className="space-y-8 animate-in fade-in duration-200">
+                <div className="space-y-6 animate-in fade-in duration-200">
                   
                   {/* Category Title Header */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
                     <div>
-                      <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+                      <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                         {currentDetail.name}
                       </h2>
-                      <span className="text-xs text-[#dc2626] font-semibold block mt-1">
-                        Audience: {currentDetail.targetAudience}
+                      <span className="text-xs text-slate-500 font-medium block mt-1.5">
+                        Target Audience: <strong className="text-slate-800">{currentDetail.targetAudience}</strong>
                       </span>
                     </div>
 
                     <button
                       type="button"
                       onClick={() => onOpenConsultation(currentDetail.name)}
-                      className="px-5 py-2.5 rounded-full bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-soft-sm flex items-center gap-2 self-start sm:self-auto"
+                      className="px-5 py-2.5 rounded-full bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-soft-sm flex items-center gap-2 self-start sm:self-auto shrink-0"
                     >
                       <span>Request Solution Blueprint</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
-                  {/* Main Detail Card */}
-                  <div className="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-2xs">
-                    <div className="h-64 sm:h-80 w-full overflow-hidden bg-slate-100 relative">
-                      <img
-                        src={currentDetail.image}
-                        alt={currentDetail.name}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-                    </div>
+                  {/* Minimized Split Hero Card: Executive Summary + Compact Framed Image + Key Metrics */}
+                  <div className="bg-gradient-to-br from-slate-50 via-white to-slate-50 border border-slate-200/90 rounded-2xl p-5 sm:p-7 shadow-xs">
+                    <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+                      
+                      {/* Left: Summary & Metric Pills */}
+                      <div className="flex-1 space-y-3.5">
+                        <div className="flex items-center gap-2">
+                          <span className="w-1.5 h-4 bg-[#173B67] rounded-full inline-block" />
+                          <h3 className="text-sm sm:text-base font-bold text-[#173B67] tracking-tight">
+                            Executive Overview
+                          </h3>
+                        </div>
+                        <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
+                          {currentDetail.summary}
+                        </p>
 
-                    <div className="p-6 sm:p-8 space-y-6">
-                      <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
-                        {currentDetail.summary}
-                      </p>
-
-                      {/* Architecture Pillars */}
-                      <div>
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2.5">
-                          Architectural Pillars
-                        </span>
-                        <div className="flex flex-wrap gap-2">
-                          {currentDetail.architecturePoints.map((point, idx) => (
+                        {/* Quick Metrics Badges */}
+                        <div className="flex flex-wrap items-center gap-2 pt-1">
+                          {currentDetail.metrics.map((m, idx) => (
                             <span
                               key={idx}
-                              className="text-xs font-medium text-slate-800 bg-slate-100 border border-slate-200/80 px-3 py-1.5 rounded-lg"
+                              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-800 bg-white border border-slate-200/90 px-3 py-1.5 rounded-lg shadow-2xs"
                             >
-                              {point}
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#dc2626]" />
+                              {m}
                             </span>
                           ))}
                         </div>
                       </div>
 
-                      {/* Core Deliverables */}
-                      <div className="pt-2 border-t border-slate-100">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-3">
-                          Core Engineering Deliverables
+                      {/* Right: Minimized Image Frame */}
+                      <div className="w-full lg:w-72 xl:w-80 h-44 sm:h-48 rounded-xl overflow-hidden border border-slate-200/90 shadow-sm relative group shrink-0 bg-slate-100">
+                        <img
+                          src={currentDetail.image}
+                          alt={currentDetail.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
+                        <span className="absolute bottom-2.5 left-3 text-[11px] font-semibold text-white/95 bg-slate-900/70 backdrop-blur-xs px-2.5 py-0.5 rounded-md border border-white/20">
+                          Architecture Preview
                         </span>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          {currentDetail.deliverables.map((item, idx) => (
-                            <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-700">
-                              <CheckCircle2 className="w-4 h-4 text-[#dc2626] shrink-0 mt-0.5" />
-                              <span>{item}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Card Action Banner */}
-                      <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 -mx-6 sm:-mx-8 -mb-6 sm:-mb-8 p-6 rounded-b-2xl">
-                        <div>
-                          <span className="text-xs font-bold text-slate-900 block">
-                            Need a custom architecture or technical audit?
-                          </span>
-                          <span className="text-xs text-slate-500">
-                            Our enterprise architects review site surveys and deliver tailored schematics within 48 hours.
-                          </span>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => onOpenConsultation(currentDetail.name)}
-                          className="px-5 py-2 rounded-lg bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-colors whitespace-nowrap"
-                        >
-                          Schedule Technical Review
-                        </button>
                       </div>
 
                     </div>
+                  </div>
+
+                  {/* Why This Solution Exists Section (Strategic Business Purpose) */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 space-y-5 shadow-xs cisco-reveal">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-4 bg-[#dc2626] rounded-full inline-block" />
+                      <h3 className="text-base sm:text-lg font-bold text-[#173B67] tracking-tight">
+                        Why This Solution Exists at Unified Enterprise
+                      </h3>
+                    </div>
+
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {currentDetail.whyExists}
+                    </p>
+
+                    {/* Key Business Challenges Solved */}
+                    <div className="pt-4 border-t border-slate-100">
+                      <div className="flex items-center gap-2 mb-3.5">
+                        <span className="w-1.5 h-4 bg-[#173B67] rounded-full inline-block" />
+                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wide text-[#173B67]">
+                          Strategic Challenges Solved For Your Organization
+                        </h4>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 cisco-reveal cisco-stagger">
+                        {currentDetail.challengesSolved.map((challenge, idx) => (
+                          <div 
+                            key={idx} 
+                            className="bg-slate-50/80 hover:bg-slate-50 border border-slate-200/80 rounded-xl p-4 transition-colors space-y-1.5"
+                          >
+                            <div className="flex items-center gap-1.5 text-xs font-bold text-[#173B67]">
+                              <CheckCircle2 className="w-4 h-4 text-[#dc2626] shrink-0" />
+                              <span>{challenge.title}</span>
+                            </div>
+                            <p className="text-xs text-slate-600 leading-relaxed">
+                              {challenge.desc}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Technical Pillars & Core Engineering Deliverables */}
+                  <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 space-y-6 shadow-xs cisco-reveal">
+                    
+                    {/* Architecture Pillars */}
+                    <div>
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="w-1.5 h-4 bg-[#173B67] rounded-full inline-block" />
+                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wide text-[#173B67]">
+                          Core Architectural Pillars
+                        </h4>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {currentDetail.architecturePoints.map((point, idx) => (
+                          <span
+                            key={idx}
+                            className="text-xs font-medium text-slate-800 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-lg"
+                          >
+                            {point}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Core Deliverables */}
+                    <div className="pt-4 border-t border-slate-100">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="w-1.5 h-4 bg-[#dc2626] rounded-full inline-block" />
+                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wide text-[#173B67]">
+                          Certified Engineering Deliverables
+                        </h4>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {currentDetail.deliverables.map((item, idx) => (
+                          <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-700">
+                            <CheckCircle2 className="w-4 h-4 text-[#dc2626] shrink-0 mt-0.5" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Card Action Banner */}
+                    <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 -mx-6 sm:-mx-8 -mb-6 sm:-mb-8 p-6 rounded-b-2xl">
+                      <div>
+                        <span className="text-xs font-bold text-slate-900 block">
+                          Need a custom architecture or technical audit?
+                        </span>
+                        <span className="text-xs text-slate-500">
+                          Our enterprise architects review site surveys and deliver tailored schematics within 48 hours.
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => onOpenConsultation(currentDetail.name)}
+                        className="px-5 py-2.5 rounded-lg bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-colors whitespace-nowrap"
+                      >
+                        Schedule Technical Review
+                      </button>
+                    </div>
+
                   </div>
 
                 </div>

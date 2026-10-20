@@ -16,11 +16,11 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
   options: ScrollRevealOptions = {}
 ) {
   const {
-    threshold = 0.15,
-    rootMargin = '0px 0px -40px 0px',
+    threshold = 0.08,
+    rootMargin = '0px 0px -50px 0px',
     delay = 0,
-    duration = 650,
-    distance = 24,
+    duration = 800,
+    distance = 32,
     direction = 'up',
     once = true,
   } = options;
@@ -46,6 +46,14 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
       setIsVisible(true);
       setHasAnimated(true);
       return;
+    }
+
+    // Check if element is already in the viewport upon mount (e.g. above-the-fold)
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setIsVisible(true);
+      setHasAnimated(true);
+      if (once) return;
     }
 
     const observer = new IntersectionObserver(

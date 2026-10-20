@@ -56,7 +56,7 @@ export default function ResourcesPage({ onOpenInquiry }: ResourcesPageProps) {
       date: 'October 12, 2026',
       readTime: '5 min read',
       summary: 'Why enterprise CIOs are consolidating fragmented hardware vendors, telecom carriers, and AMC contractors into a single accountable operational SLA model.',
-      image: '/assets/why_expertise.jpg',
+      image: '/assets/linkedin_thought_leadership.jpg',
       linkedinUrl: 'https://www.linkedin.com/pulse/enterprise-it-telecom-integration',
       keyTakeaways: [
         'How vendor finger-pointing adds 42% hidden operational latency',
@@ -270,7 +270,7 @@ export default function ResourcesPage({ onOpenInquiry }: ResourcesPageProps) {
                     <div>
                       <div className="h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-100">
                         <img
-                          src="/assets/why_expertise.jpg"
+                          src="/assets/linkedin_thought_leadership.jpg"
                           alt="LinkedIn Thought Leadership"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />

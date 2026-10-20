@@ -16,6 +16,7 @@ import ResourcesPage from './pages/ResourcesPage';
 import AboutUsPage from './pages/AboutUsPage';
 import ContactUsPage from './pages/ContactUsPage';
 import LoginPage from './pages/LoginPage';
+import { useGlobalScrollReveal } from './hooks/useGlobalScrollReveal';
 
 // Scroll to top automatically on route navigation
 function ScrollToTop() {
@@ -27,6 +28,7 @@ function ScrollToTop() {
 }
 
 function AppContent() {
+  useGlobalScrollReveal();
   const [supportModalOpen, setSupportModalOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('IT Infrastructure Management');

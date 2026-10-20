@@ -328,7 +328,7 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
 
                 {/* If we have specific catalog models for this category */}
                 {displayedCatalogProducts.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 cisco-reveal cisco-stagger">
                     {displayedCatalogProducts.map((product) => (
                       <article
                         key={product.id}
@@ -401,7 +401,7 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                 ) : fallbackProduct ? (
                   /* Fallback clean presentation for remaining categories */
                   <div className="max-w-2xl bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-2xs p-6 sm:p-8">
-                    <div className="h-64 sm:h-72 rounded-xl overflow-hidden mb-6 bg-slate-100">
+                    <div className="h-36 sm:h-44 max-w-md rounded-xl overflow-hidden mb-5 bg-slate-100">
                       <img
                         src={fallbackProduct.image || '/assets/ue_hardware_procurement.jpg'}
                         alt={fallbackProduct.name}
