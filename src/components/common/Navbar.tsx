@@ -7,9 +7,6 @@ interface NavbarProps {
   onOpenLogin?: () => void;
 }
 
-
-
-
 export default function Navbar({ onOpenQuickSupport }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
