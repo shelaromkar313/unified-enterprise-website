@@ -121,7 +121,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     features: ['Optima HD Voice & Acoustic Shield', 'Gigabit Dual-Port Ethernet with PoE', 'Color Touchscreen & BLF Keys', 'Seamless SIP Trunk Integration'],
     specs: 'Standard SIP 2.0 protocol compatible with all major IP-PBX systems',
     rentalAvailable: true,
-    image: '/assets/telecom_ip_phones.jpg',
+    image: '/assets/phone_cisco_8845.jpg',
     badge: 'VoIP Certified'
   },
   {
@@ -132,7 +132,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     features: ['4K Ultra HD & Starlight Night Vision', 'H.265+ Smart Codec Storage Saving', 'AI Smart Motion & Perimeter Detection', 'Encrypted Remote Live Video Access'],
     specs: 'Surveillance-grade RAID storage with automated 30-90 day archiving',
     rentalAvailable: false,
-    image: '/assets/cctv_surveillance.jpg',
+    image: '/assets/cctv_hikvision_2186_dome.jpg',
     badge: '4K AI Vision'
   },
   {

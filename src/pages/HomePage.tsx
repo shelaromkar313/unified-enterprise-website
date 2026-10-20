@@ -160,7 +160,7 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
                     <h4 className="text-sm font-bold text-slate-900">Compute & Storage Staging</h4>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    Dell, HP & Lenovo rack/tower server configuration, SAN/NAS arrays, ESXi/Proxmox clustering, and automated backup schedules.
+                    Dell, HPE, Lenovo & NVIDIA DGX AI supercomputing, rack/tower server configuration, GPU accelerators, SAN/NAS arrays, and ESXi/Proxmox clustering.
                   </p>
                 </div>
 

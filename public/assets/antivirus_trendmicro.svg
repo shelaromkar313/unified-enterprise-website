@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+    <defs>
+      <linearGradient id="bgtm" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFF1F2"/>
+        <stop offset="100%" stop-color="#FFE4E6"/>
+      </linearGradient>
+    </defs>
+    <rect width="600" height="400" fill="url(#bgtm)"/>
+    <rect x="20" y="20" width="560" height="360" rx="24" fill="#FFFFFF" stroke="#FDA4AF" stroke-width="2"/>
+    <!-- Trend Micro T Badge -->
+    <g transform="translate(65, 110)">
+      <circle cx="60" cy="60" r="58" fill="#D91A2A"/>
+      <path d="M30 40 L90 40 L90 56 L68 56 L68 96 L52 96 L52 56 L30 56 Z" fill="#FFFFFF"/>
+      <path d="M25 80 Q10 40 40 20" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.75"/>
+    </g>
+    <!-- Brand details -->
+    <g transform="translate(215, 115)">
+      <text x="0" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="900" fill="#D91A2A" letter-spacing="2">TREND</text>
+      <text x="0" y="80" font-family="system-ui, -apple-system, sans-serif" font-size="30" font-weight="800" fill="#1E293B" letter-spacing="4">MICRO</text>
+      <text x="0" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="19" font-weight="800" fill="#0F172A">Apex One &amp; Worry-Free Services</text>
+      <text x="0" y="158" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#64748B">Cross-Generational Threat Defense &amp; Cloud Sandboxing</text>
+    </g>
+  </svg>

@@ -3,6 +3,12 @@ import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, X, SlidersHorizontal, ShieldCheck, Laptop, Server, ChevronDown } from 'lucide-react';
 import { CATALOG_PRODUCTS, CatalogProduct } from '../data/catalogData';
 import { PRODUCTS_DATA, ProductItem } from '../data/ueContent';
+import PbxTelephonyShowcase from '../components/sections/PbxTelephonyShowcase';
+import CallCenterDialerShowcase from '../components/sections/CallCenterDialerShowcase';
+import GsmGatewaysShowcase from '../components/sections/GsmGatewaysShowcase';
+import SoftwareLicencesShowcase from '../components/sections/SoftwareLicencesShowcase';
+import IllLeasedLineShowcase from '../components/sections/IllLeasedLineShowcase';
+import ManagedVoipShowcase from '../components/sections/ManagedVoipShowcase';
 
 interface ProductsPageProps {
   onOpenInquiry: (productName: string) => void;
@@ -18,6 +24,9 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
   // Brand filter state (for sub-filtering, e.g. Dell, HP, Lenovo)
   const [selectedBrand, setSelectedBrand] = useState<string>('All');
 
+  // Security sub-type filter state ('all' | 'firewall' | 'antivirus')
+  const [securitySubTab, setSecuritySubTab] = useState<'all' | 'firewall' | 'antivirus'>('all');
+
   // Mobile category drawer state
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState<boolean>(false);
 
@@ -28,6 +37,7 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
   useEffect(() => {
     setSelectedCategoryId(urlItem || 'all');
     setSelectedBrand('All');
+    setSecuritySubTab('all');
   }, [urlItem]);
 
   // Handle escape key to close modal
@@ -43,7 +53,7 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
   const categoryList = useMemo(() => [
     { id: 'laptops-desktops', name: 'Laptops & Desktops' },
     { id: 'servers-storage', name: 'Servers & Storage' },
-    { id: 'it-hardware-accessories', name: 'IT Hardware & Accessories' },
+    { id: 'it-hardware-accessories', name: 'IT Hardware, GPUs & Accessories' },
     { id: 'routers-network-switches', name: 'Routers & Network Switches' },
     { id: 'firewalls-network-security', name: 'Firewalls & Network Security' },
     { id: 'wifi-wireless-networking', name: 'Wi-Fi & Wireless Networking' },
@@ -60,6 +70,7 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
   const handleSelectCategory = (id: string) => {
     setSelectedCategoryId(id);
     setSelectedBrand('All');
+    setSecuritySubTab('all');
     if (id === 'all') {
       searchParams.delete('item');
       setSearchParams(searchParams, { replace: true });
@@ -73,17 +84,33 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
     return CATALOG_PRODUCTS.filter((p) => p.categoryId === selectedCategoryId);
   }, [selectedCategoryId]);
 
-  // Available brands for the current category
+  // Available brands for the current category / subtab
   const availableBrands = useMemo(() => {
-    const brands = Array.from(new Set(categoryCatalogProducts.map((p) => p.brand)));
+    let list = categoryCatalogProducts;
+    if (selectedCategoryId === 'firewalls-network-security' && securitySubTab !== 'all') {
+      list = list.filter((p) => {
+        if (securitySubTab === 'antivirus') return p.subCategory === 'antivirus';
+        if (securitySubTab === 'firewall') return p.subCategory !== 'antivirus';
+        return true;
+      });
+    }
+    const brands = Array.from(new Set(list.map((p) => p.brand)));
     return ['All', ...brands];
-  }, [categoryCatalogProducts]);
+  }, [categoryCatalogProducts, selectedCategoryId, securitySubTab]);
 
   // Filtered products for display
   const displayedCatalogProducts = useMemo(() => {
-    if (selectedBrand === 'All') return categoryCatalogProducts;
-    return categoryCatalogProducts.filter((p) => p.brand === selectedBrand);
-  }, [categoryCatalogProducts, selectedBrand]);
+    let list = categoryCatalogProducts;
+    if (selectedCategoryId === 'firewalls-network-security' && securitySubTab !== 'all') {
+      list = list.filter((p) => {
+        if (securitySubTab === 'antivirus') return p.subCategory === 'antivirus';
+        if (securitySubTab === 'firewall') return p.subCategory !== 'antivirus';
+        return true;
+      });
+    }
+    if (selectedBrand === 'All') return list;
+    return list.filter((p) => p.brand === selectedBrand);
+  }, [categoryCatalogProducts, selectedBrand, selectedCategoryId, securitySubTab]);
 
   // Fallback product info if category not in CATALOG_PRODUCTS
   const fallbackProduct = useMemo(() => {
@@ -297,34 +324,84 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
               /* 2. CATEGORY VIEW: Clean, High-End Enterprise Product Grid (Dell / HP / Amazon Business Style) */
               <div className="space-y-6">
                 
-                {/* Category Header Bar with Breadcrumb and Brand Pills */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
-                  <div>
-                    <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
-                      {currentCategoryObj?.name}
-                    </h2>
-                  </div>
-
-                  {/* Brand Filter Pills (Dell, HP, Lenovo, Apple, ASUS, etc.) */}
-                  {availableBrands.length > 2 && (
-                    <div className="flex items-center flex-wrap gap-1.5">
-                      <span className="text-xs text-slate-400 mr-1 font-medium">Brand:</span>
-                      {availableBrands.map((brand) => (
-                        <button
-                          key={brand}
-                          onClick={() => setSelectedBrand(brand)}
-                          className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
-                            selectedBrand === brand
-                              ? 'bg-[#dc2626] text-white shadow-2xs'
-                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                          }`}
-                        >
-                          {brand}
-                        </button>
-                      ))}
+                {/* Category Header Bar (Only for standard catalog categories with brand filters) */}
+                {!['pbx-business-telephony', 'call-centre-dialer-infrastructure', 'gsm-gateways-pri-fxo-fxs', 'software-business-licences', 'ill-leased-line', 'managed-voip'].includes(selectedCategoryId) && (
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+                    <div>
+                      <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+                        {currentCategoryObj?.name}
+                      </h2>
                     </div>
-                  )}
-                </div>
+
+                    {/* Brand Filter Pills */}
+                    {availableBrands.length > 2 && (
+                      <div className="flex items-center flex-wrap gap-1.5">
+                        <span className="text-xs text-slate-400 mr-1 font-medium">Brand:</span>
+                        {availableBrands.map((brand) => (
+                          <button
+                            key={brand}
+                            onClick={() => setSelectedBrand(brand)}
+                            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
+                              selectedBrand === brand
+                                ? 'bg-[#dc2626] text-white shadow-2xs'
+                                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                            }`}
+                          >
+                            {brand}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* SUB-CATEGORY SELECTOR FOR FIREWALLS & NETWORK SECURITY */}
+                {selectedCategoryId === 'firewalls-network-security' && (
+                  <div className="flex flex-wrap items-center gap-2 pb-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSecuritySubTab('all');
+                        setSelectedBrand('All');
+                      }}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                        securitySubTab === 'all'
+                          ? 'bg-[#17324D] text-white shadow-2xs'
+                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      }`}
+                    >
+                      All Security Solutions ({categoryCatalogProducts.length})
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSecuritySubTab('firewall');
+                        setSelectedBrand('All');
+                      }}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                        securitySubTab === 'firewall'
+                          ? 'bg-[#17324D] text-white shadow-2xs'
+                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      }`}
+                    >
+                      🛡️ Hardware Firewalls &amp; UTM ({categoryCatalogProducts.filter(p => p.subCategory !== 'antivirus').length})
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSecuritySubTab('antivirus');
+                        setSelectedBrand('All');
+                      }}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                        securitySubTab === 'antivirus'
+                          ? 'bg-[#dc2626] text-white shadow-2xs'
+                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      }`}
+                    >
+                      🦠 Antivirus &amp; Endpoint Security ({categoryCatalogProducts.filter(p => p.subCategory === 'antivirus').length})
+                    </button>
+                  </div>
+                )}
 
                 {/* If we have specific catalog models for this category */}
                 {displayedCatalogProducts.length > 0 ? (
@@ -336,22 +413,32 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                       >
                         <div>
                           {/* Product Image Container */}
-                          <div className="relative h-52 bg-slate-50 overflow-hidden">
+                          <div className="relative h-52 bg-white overflow-hidden flex items-center justify-center p-3 border-b border-slate-100">
                             <img
                               src={product.image}
                               alt={product.name}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                              className={`w-full h-full ${
+                                product.subCategory === 'antivirus'
+                                  ? 'object-contain p-2'
+                                  : (product.categoryId === 'firewalls-network-security'
+                                      ? 'object-contain p-2 group-hover:scale-105'
+                                      : 'object-cover group-hover:scale-105')
+                              } transition-transform duration-500`}
                               loading="lazy"
                             />
                             {/* Brand Badge */}
                             <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs text-slate-800 text-[11px] font-bold px-2.5 py-0.5 rounded-md shadow-2xs border border-slate-200/80">
                               {product.brand}
                             </span>
-                            {product.rentalAvailable && (
+                            {product.subCategory === 'antivirus' ? (
+                              <span className="absolute top-3 right-3 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs">
+                                Cloud License
+                              </span>
+                            ) : product.rentalAvailable ? (
                               <span className="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs">
                                 Rent / Buy
                               </span>
-                            )}
+                            ) : null}
                           </div>
 
                           {/* Body Content */}
@@ -398,6 +485,18 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                       </article>
                     ))}
                   </div>
+                ) : selectedCategoryId === 'pbx-business-telephony' ? (
+                  <PbxTelephonyShowcase onOpenInquiry={onOpenInquiry} />
+                ) : selectedCategoryId === 'call-centre-dialer-infrastructure' ? (
+                  <CallCenterDialerShowcase onOpenInquiry={onOpenInquiry} />
+                ) : selectedCategoryId === 'gsm-gateways-pri-fxo-fxs' ? (
+                  <GsmGatewaysShowcase onOpenInquiry={onOpenInquiry} />
+                ) : selectedCategoryId === 'software-business-licences' ? (
+                  <SoftwareLicencesShowcase onOpenInquiry={onOpenInquiry} />
+                ) : selectedCategoryId === 'ill-leased-line' ? (
+                  <IllLeasedLineShowcase onOpenInquiry={onOpenInquiry} />
+                ) : selectedCategoryId === 'managed-voip' ? (
+                  <ManagedVoipShowcase onOpenInquiry={onOpenInquiry} />
                 ) : fallbackProduct ? (
                   /* Fallback clean presentation for remaining categories */
                   <div className="max-w-2xl bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-2xs p-6 sm:p-8">
@@ -462,7 +561,7 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
             <div className="flex items-start justify-between gap-4 mb-5">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-[#dc2626] bg-red-50 px-2.5 py-0.5 rounded-full inline-block mb-1.5">
-                  {inspectProduct.brand} Enterprise Hardware
+                  {inspectProduct.brand} {inspectProduct.subCategory === 'antivirus' ? 'Cybersecurity Software' : 'Enterprise Hardware'}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">
                   {inspectProduct.name}
@@ -478,11 +577,15 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
             </div>
 
             {/* Modal Image */}
-            <div className="h-56 sm:h-64 rounded-xl overflow-hidden mb-5 bg-slate-50">
+            <div className="h-56 sm:h-64 rounded-xl overflow-hidden mb-5 bg-white border border-slate-100 flex items-center justify-center p-4">
               <img
                 src={inspectProduct.image}
                 alt={inspectProduct.name}
-                className="w-full h-full object-cover"
+                className={`max-h-full max-w-full ${
+                  inspectProduct.subCategory === 'antivirus' || inspectProduct.categoryId === 'firewalls-network-security'
+                    ? 'object-contain'
+                    : 'object-cover rounded-lg'
+                }`}
               />
             </div>
 

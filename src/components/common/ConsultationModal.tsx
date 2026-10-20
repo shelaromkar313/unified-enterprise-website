@@ -23,14 +23,34 @@ export default function ConsultationModal({
     teamSize: '20-50 seats',
     message: prefilledNotes
   });
+  const [emailError, setEmailError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const BLOCKED_PERSONAL_DOMAINS = [
+    'gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.co.in', 'yahoo.co.uk',
+    'ymail.com', 'rocketmail.com', 'hotmail.com', 'outlook.com', 'live.com',
+    'msn.com', 'icloud.com', 'me.com', 'mac.com', 'aol.com', 'zoho.com',
+    'mail.com', 'proton.me', 'protonmail.com', 'gmx.com', 'rediffmail.com', 'yandex.com'
+  ];
+
+  const validateCorporateEmail = (emailStr: string): string => {
+    if (!emailStr) return '';
+    const trimmed = emailStr.trim();
+    if (!trimmed.includes('@')) return '';
+    const domain = trimmed.split('@')[1]?.toLowerCase().trim();
+    if (BLOCKED_PERSONAL_DOMAINS.includes(domain)) {
+      return 'Please enter your official company email (e.g. name@company.com). Personal accounts like @gmail.com and @yahoo.com are not accepted.';
+    }
+    return '';
+  };
 
   useEffect(() => {
     setInquiryType(defaultInquiryType);
     if (prefilledNotes) {
       setFormData((prev) => ({ ...prev, message: prefilledNotes }));
     }
+    setEmailError('');
   }, [defaultInquiryType, prefilledNotes, isOpen]);
 
   if (!isOpen) return null;
@@ -46,6 +66,11 @@ export default function ConsultationModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const err = validateCorporateEmail(formData.workEmail);
+    if (err) {
+      setEmailError(err);
+      return;
+    }
     setIsSubmitting(true);
 
     // Simulate enterprise payload processing cleanly
@@ -154,18 +179,47 @@ export default function ConsultationModal({
                 </div>
 
                 <div>
+                  <label className="text-xs font-semibold text-[#17324D] block mb-1">Company / Organization *</label>
+                  <div className="relative">
+                    <Building2 className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#526477]" />
+                    <input
+                      required
+                      type="text"
+                      placeholder="Acme Enterprise Ltd."
+                      value={formData.companyName}
+                      onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
+                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#D6E4EE] bg-[#F8FAFC] focus:outline-none focus:border-[#368C91] focus:bg-white"
+                    />
+                  </div>
+                </div>
+
+                <div>
                   <label className="text-xs font-semibold text-[#17324D] block mb-1">Corporate Email *</label>
                   <div className="relative">
-                    <Mail className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#526477]" />
+                    <Mail className={`w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 ${emailError ? 'text-red-500' : 'text-[#526477]'}`} />
                     <input
                       required
                       type="email"
                       placeholder="michael@company.com"
                       value={formData.workEmail}
-                      onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
-                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#D6E4EE] bg-[#F8FAFC] focus:outline-none focus:border-[#368C91] focus:bg-white"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setFormData({ ...formData, workEmail: val });
+                        setEmailError(validateCorporateEmail(val));
+                      }}
+                      onBlur={(e) => setEmailError(validateCorporateEmail(e.target.value))}
+                      className={`w-full pl-9 pr-3 py-2 text-xs rounded-xl border ${
+                        emailError 
+                          ? 'border-red-500 bg-red-50/40 text-red-950 focus:border-red-500' 
+                          : 'border-[#D6E4EE] bg-[#F8FAFC] focus:border-[#368C91] focus:bg-white'
+                      } focus:outline-none`}
                     />
                   </div>
+                  {emailError && (
+                    <p className="text-[11px] font-semibold text-red-600 mt-1">
+                      ⚠️ {emailError}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -178,21 +232,6 @@ export default function ConsultationModal({
                       placeholder="+1 (555) 000-0000"
                       value={formData.phoneNumber}
                       onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#D6E4EE] bg-[#F8FAFC] focus:outline-none focus:border-[#368C91] focus:bg-white"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-xs font-semibold text-[#17324D] block mb-1">Company / Organization *</label>
-                  <div className="relative">
-                    <Building2 className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#526477]" />
-                    <input
-                      required
-                      type="text"
-                      placeholder="Acme Enterprise Ltd."
-                      value={formData.companyName}
-                      onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
                       className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#D6E4EE] bg-[#F8FAFC] focus:outline-none focus:border-[#368C91] focus:bg-white"
                     />
                   </div>

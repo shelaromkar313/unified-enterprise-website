@@ -210,8 +210,56 @@ export const RENTAL_PRODUCTS: RentalProduct[] = [
       'CAD / GPU Benchmark Verification Suite'
     ]
   },
+  {
+    id: 'rent-nvidia-rtx6000-workstation',
+    categoryId: 'desktop-rental',
+    name: 'NVIDIA RTX 6000 Ada Dual-GPU AI Engineering Workstation',
+    brand: 'NVIDIA',
+    image: '/assets/real_microchip_gpu.jpg',
+    specs: [
+      'Dual NVIDIA RTX 6000 Ada Generation (96GB Total VRAM)',
+      'AMD Ryzen Threadripper PRO 5975WX (32 Cores, 64 Threads)',
+      '256GB ECC DDR4 Registered Workstation Memory',
+      '2x 2TB PCIe Gen4 NVMe M.2 High-Speed SSDs in RAID 0',
+      '1600W Titanium 94% High-Efficiency Power Supply'
+    ],
+    rentalRate: 'From ₹18,500 / month',
+    minLease: '1 Month Minimum',
+    stockStatus: '8 Units in Staging',
+    highlight: 'The ultimate on-premise generative AI development & neural rendering workstation',
+    includedAccessories: [
+      'Dual 4K Professional 27" UltraSharp Displays',
+      'Precision Wireless Ergonomic Keyboard & Mouse',
+      '2kVA Pure Sine Wave Online Dedicated UPS',
+      'Full Ubuntu 22.04 LTS / Windows 11 Pro CUDA Suite'
+    ]
+  },
 
   // 3. Server Rental Products
+  {
+    id: 'rent-nvidia-dgx-h100',
+    categoryId: 'server-rental',
+    name: 'NVIDIA DGX H100 AI Supercomputer Server Rental',
+    brand: 'NVIDIA',
+    image: '/assets/real_server_cluster.jpg',
+    specs: [
+      '8x NVIDIA H100 SXM5 80GB GPUs (640GB HBM3 Memory)',
+      '32 PFLOPS FP8 AI Performance with Transformer Engine',
+      'Dual Intel Xeon Platinum 8480C Processors (112 Cores)',
+      '2TB DDR5 ECC High-Bandwidth System Memory',
+      '8x 400Gb/s OSFP InfiniBand / Ethernet Network Adapters'
+    ],
+    rentalRate: 'Custom Enterprise Lease / Monthly',
+    minLease: '1 Month Minimum',
+    stockStatus: 'AI Staging Lab Ready',
+    highlight: 'Turnkey high-performance compute for LLM training, diffusion models & fine-tuning',
+    includedAccessories: [
+      'NVIDIA Base Command & AI Enterprise Software Stack',
+      'Dual 100GbE QSFP Remote Management Interfaces',
+      'Dedicated Enterprise AI Support SLA & Escalation',
+      'Pre-staged PyTorch, TensorFlow & CUDA Driver Images'
+    ]
+  },
   {
     id: 'rent-dell-poweredge-r750',
     categoryId: 'server-rental',

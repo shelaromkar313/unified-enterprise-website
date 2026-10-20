@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+    <defs>
+      <linearGradient id="bgqh" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFF7ED"/>
+        <stop offset="100%" stop-color="#FFEDD5"/>
+      </linearGradient>
+      <linearGradient id="orangeG" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#F97316"/>
+        <stop offset="100%" stop-color="#EA580C"/>
+      </linearGradient>
+    </defs>
+    <rect width="600" height="400" fill="url(#bgqh)"/>
+    <rect x="20" y="20" width="560" height="360" rx="24" fill="#FFFFFF" stroke="#FDBA74" stroke-width="2"/>
+    <!-- Quick Heal Shield Badge -->
+    <g transform="translate(65, 100)">
+      <path d="M60 0 L120 25 L120 75 C120 120 60 150 60 150 C60 150 0 120 0 75 L0 25 Z" fill="url(#orangeG)"/>
+      <path d="M60 20 L102 38 L102 75 C102 108 60 130 60 130 C60 130 18 108 18 75 L18 38 Z" fill="#FFFFFF" opacity="0.25"/>
+      <path d="M40 70 L55 85 L85 50" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <!-- Brand Name and Tagline -->
+    <g transform="translate(215, 110)">
+      <rect x="0" y="0" width="310" height="74" rx="16" fill="#EA580C"/>
+      <text x="155" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="38" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="-0.5">Quick Heal</text>
+      <text x="155" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="800" fill="#C2410C" text-anchor="middle" letter-spacing="3">SECURITY SIMPLIFIED</text>
+      <text x="155" y="142" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="800" fill="#0F172A" text-anchor="middle">Seqrite Endpoint Security</text>
+      <text x="155" y="168" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#64748B" text-anchor="middle">Enterprise Cloud EDR &amp; Anti-Ransomware</text>
+    </g>
+  </svg>

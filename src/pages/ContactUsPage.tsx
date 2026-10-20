@@ -27,8 +27,27 @@ export default function ContactUsPage() {
     service: 'Enterprise Hardware Quotation',
     message: ''
   });
+  const [emailError, setEmailError] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const BLOCKED_PERSONAL_DOMAINS = [
+    'gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.co.in', 'yahoo.co.uk',
+    'ymail.com', 'rocketmail.com', 'hotmail.com', 'outlook.com', 'live.com',
+    'msn.com', 'icloud.com', 'me.com', 'mac.com', 'aol.com', 'zoho.com',
+    'mail.com', 'proton.me', 'protonmail.com', 'gmx.com', 'rediffmail.com', 'yandex.com'
+  ];
+
+  const validateCorporateEmail = (emailStr: string): string => {
+    if (!emailStr) return '';
+    const trimmed = emailStr.trim();
+    if (!trimmed.includes('@')) return '';
+    const domain = trimmed.split('@')[1]?.toLowerCase().trim();
+    if (BLOCKED_PERSONAL_DOMAINS.includes(domain)) {
+      return 'Please enter your official company email (e.g. name@company.com). Personal emails (@gmail.com, @yahoo.com, etc.) are not accepted.';
+    }
+    return '';
+  };
 
   useEffect(() => {
     setSelectedCategoryId(urlItem || 'all');
@@ -54,6 +73,11 @@ export default function ContactUsPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const err = validateCorporateEmail(formData.email);
+    if (err) {
+      setEmailError(err);
+      return;
+    }
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
@@ -320,19 +344,45 @@ export default function ContactUsPage() {
                       </div>
 
                       <div>
-                        <label className="text-xs font-semibold text-slate-700 block mb-1.5">Business Email *</label>
+                        <label className="text-xs font-semibold text-slate-700 block mb-1.5">Company Name *</label>
                         <input
-                          type="email"
+                          type="text"
                           required
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="r.sharma@company.com"
+                          value={formData.company}
+                          onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                          placeholder="Enterprise Ltd."
                           className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:border-[#dc2626] transition-colors"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-xs font-semibold text-slate-700 block mb-1.5">Official Company Email *</label>
+                        <input
+                          type="email"
+                          required
+                          value={formData.email}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            setFormData({ ...formData, email: val });
+                            setEmailError(validateCorporateEmail(val));
+                          }}
+                          onBlur={(e) => setEmailError(validateCorporateEmail(e.target.value))}
+                          placeholder="r.sharma@company.com"
+                          className={`w-full px-3.5 py-2.5 rounded-lg border text-xs text-slate-900 placeholder:text-slate-400 focus:outline-hidden transition-colors ${
+                            emailError 
+                              ? 'border-red-500 bg-red-50/40 text-red-950 focus:border-red-500' 
+                              : 'border-slate-300 focus:border-[#dc2626]'
+                          }`}
+                        />
+                        {emailError && (
+                          <p className="text-[11px] font-semibold text-red-600 mt-1">
+                            ⚠️ {emailError}
+                          </p>
+                        )}
+                      </div>
+
                       <div>
                         <label className="text-xs font-semibold text-slate-700 block mb-1.5">Direct Phone / WhatsApp *</label>
                         <input
@@ -341,17 +391,6 @@ export default function ContactUsPage() {
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           placeholder="+91 98765 43210"
-                          className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:border-[#dc2626] transition-colors"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="text-xs font-semibold text-slate-700 block mb-1.5">Company / Organization</label>
-                        <input
-                          type="text"
-                          value={formData.company}
-                          onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                          placeholder="Enterprise Ltd."
                           className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:border-[#dc2626] transition-colors"
                         />
                       </div>
