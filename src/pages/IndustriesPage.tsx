@@ -32,7 +32,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
   // Exact 7 categories requested by the user
   const categoryList = useMemo(() => [
     { id: 'smes', name: 'Small & Medium Enterprises' },
-    { id: 'call-centres-bpos', name: 'Call Centres & BPOs' },
+    { id: 'call-centres-bpos', name: 'Call Centers & BPOs' },
     { id: 'manufacturing-industrial', name: 'Manufacturing & Industrial Companies' },
     { id: 'logistics-transportation', name: 'Logistics & Transportation' },
     { id: 'multi-location-businesses', name: 'Multi-Location Businesses' },
@@ -68,7 +68,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
     },
     'call-centres-bpos': {
       id: 'call-centres-bpos',
-      name: 'Call Centres & BPOs',
+      name: 'Call Centers & BPOs',
       challenges: 'High concurrency voice traffic, sub-15ms voice latency requirements, 24/7/365 uninterrupted uptime mandates, and rapid seasonal agent scaling.',
       engineeredSolution: 'High-density predictive dialers, carrier-grade SIP/PRI gateways, noise-canceling telecom hardware, acoustic agent workstations, and hardware leasing for fast ramps.',
       keyProducts: ['Predictive Dialers', 'PRI & SIP Gateways', 'HD IP Phones', 'Equipment Rental'],
@@ -277,18 +277,18 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
               <div className="space-y-10">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-1">
                   
-                  {/* Card 1: Call Centres & BPOs */}
+                  {/* Card 1: Call Centers & BPOs */}
                   <div className="flex flex-col justify-between group">
                     <div>
                       <div className="h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-100">
                         <img
                           src="/assets/telecom_ip_phones.jpg"
-                          alt="Call Centres & BPOs"
+                          alt="Call Centers & BPOs"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
                       <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug">
-                        Call Centres & BPOs
+                        Call Centers & BPOs
                       </h3>
                       <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
                         Predictive dialers, carrier-grade PRI/SIP trunks, noise-canceling headsets, and rapid leasing for fast agent scaling.

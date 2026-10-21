@@ -39,7 +39,7 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
     { id: 'unified-it-telecom-management', name: 'Unified IT & Telecom Management' },
     { id: 'it-infrastructure-smes', name: 'IT Infrastructure for SMEs' },
     { id: 'multi-location-it-management', name: 'Multi-Location IT Management' },
-    { id: 'call-centre-bpo-infrastructure', name: 'Call-Centre & BPO Infrastructure' },
+    { id: 'call-centre-bpo-infrastructure', name: 'Call Center & BPO Infrastructure' },
     { id: 'network-design-implementation', name: 'Network Design & Implementation' },
     { id: 'firewall-network-security', name: 'Firewall & Network Security' },
     { id: 'workplace-remote-office', name: 'Workplace & Remote Office Infrastructure' },
@@ -161,7 +161,7 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
     },
     'call-centre-bpo-infrastructure': {
       id: 'call-centre-bpo-infrastructure',
-      name: 'Call-Centre & BPO Infrastructure',
+      name: 'Call Center & BPO Infrastructure',
       targetAudience: 'Inbound customer support, outbound dialer centers & BPOs',
       summary: 'High-concurrency predictive dialers, multi-agent acoustic workstations, PRI/SIP gateway integration, call recording archives, and redundant ISP failover connectivity for non-stop operations.',
       image: '/assets/telecom_ip_phones.jpg',
@@ -490,13 +490,13 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
                     </button>
                   </div>
 
-                  {/* Card 3: Call-Centre & BPO Infrastructure */}
+                  {/* Card 3: Call Center & BPO Infrastructure */}
                   <div className="flex flex-col justify-between group">
                     <div>
                       <div className="h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-100">
                         <img
                           src="/assets/telecom_ip_phones.jpg"
-                          alt="Call-Centre & BPO Infrastructure"
+                          alt="Call Center & BPO Infrastructure"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>

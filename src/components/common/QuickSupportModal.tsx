@@ -293,7 +293,7 @@ export default function QuickSupportModal({ isOpen, onClose, defaultService = 'I
                   <option value="AMC & Maintenance Support">AMC & Maintenance Support</option>
                   <option value="IP Voice & Video Telephony">IP Voice & Video Telephony</option>
                   <option value="CCTV & Security Surveillance">CCTV & Security Surveillance</option>
-                  <option value="Call-Centre & BPO Infrastructure">Call-Centre & BPO Infrastructure</option>
+                  <option value="Call Center & BPO Infrastructure">Call Center & BPO Infrastructure</option>
                   <option value="Hardware Sales & Procurement">Hardware Sales & Procurement</option>
                 </select>
               </div>

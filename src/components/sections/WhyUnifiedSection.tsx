@@ -60,7 +60,7 @@ export const servicesList: ServiceCardData[] = [
   {
     id: 'service-callcentre',
     serviceId: 'call-centre-bpo',
-    title: 'Call-Centre & BPO Infrastructure',
+    title: 'Call Center & BPO Infrastructure',
     description: 'High-concurrency predictive dialers, PRI and GSM gateways, Asterisk/Vicidial setups, CRM integrations, and agent workstations.',
     image: '/assets/ue_call_centre_bpo.jpg'
   }

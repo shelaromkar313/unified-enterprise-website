@@ -128,7 +128,7 @@ export default function Footer() {
       <h5 className="font-bold text-white mb-3 uppercase tracking-wider text-[11px]">Telephony & Voice</h5>
       <ul className="space-y-2 text-slate-400">
         <li>IP Telephony & PBX</li>
-        <li>Call-Centre Dialers</li>
+        <li>Call Center Dialers</li>
         <li>GSM Gateways & PRI</li>
         <li>Managed VOIP & ILL</li>
       </ul>

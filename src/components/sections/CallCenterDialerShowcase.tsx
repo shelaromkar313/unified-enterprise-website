@@ -14,7 +14,9 @@ import {
   Settings, 
   Clock, 
   ArrowRight, 
-  Radio
+  Radio,
+  Sparkles,
+  CheckCircle2
 } from 'lucide-react';
 
 interface CallCenterDialerShowcaseProps {
@@ -25,46 +27,70 @@ export default function CallCenterDialerShowcase({ onOpenInquiry }: CallCenterDi
   return (
     <div className="space-y-8">
       
-      {/* 1. CLEAN HERO INTRO */}
-      <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-50 border border-red-200 text-[#dc2626] text-[11px] font-bold uppercase tracking-wider mb-3">
-          <Radio className="w-3 h-3 text-[#dc2626]" />
-          <span>Contact Center Automation</span>
-        </div>
+      {/* 1. VISUAL ENTERPRISE HERO (SPLIT LAYOUT WITH REAL AGENT & DIALER IMAGERY) */}
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          {/* Left Column: Content & Benefits */}
+          <div className="lg:col-span-7">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-50 border border-red-200 text-[#dc2626] text-[11px] font-bold uppercase tracking-wider mb-3">
+              <Radio className="w-3 h-3 text-[#dc2626]" />
+              <span>Contact Center Automation</span>
+            </div>
 
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
-          What is <span className="text-[#dc2626]">Call-Centre &amp; Dialer Infrastructure</span>?
-        </h1>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2.5">
+              What is <span className="text-[#dc2626]">Call Center &amp; Dialer Infrastructure</span>?
+            </h1>
 
-        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl mb-5">
-          An <strong className="text-slate-900 font-semibold">Automated Call-Center Dialer</strong> eliminates manual handset dialing. Powered by enterprise <strong className="text-slate-900 font-semibold">astTECS, Asterisk, and Vicidial</strong> engines, our dialers automatically call prospect lists, filter out busy signals, answering machines, and disconnected numbers, and bridge <strong className="text-slate-900 font-semibold">only live customers</strong> directly to your agents.
-        </p>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-5">
+              An <strong className="text-slate-900 font-semibold">Automated Call-Center Dialer</strong> eliminates manual handset dialing and bridges <strong className="text-slate-900 font-semibold">only live customers</strong> directly to your agents. It maximizes outbound campaign productivity, eliminates idle agent waiting time, and automatically synchronizes all call activity with your CRM.
+            </p>
 
-        {/* 3 Quick Value Badges */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 border-t border-slate-100">
-          <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
-            <Zap className="w-4 h-4 text-[#dc2626] shrink-0" />
-            <div>
-              <h4 className="text-xs font-bold text-slate-900">300% Talk-Time Boost</h4>
-              <p className="text-[11px] text-slate-500">From 18 mins to 45+ mins per hour</p>
+            {/* 3 Quick Value Badges */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2 border-t border-slate-100">
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/70 rounded-xl p-2.5">
+                <div className="w-7 h-7 rounded-lg bg-red-50 text-[#dc2626] flex items-center justify-center shrink-0">
+                  <Zap className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <h4 className="text-[11px] font-bold text-slate-900">300% Talk-Time Boost</h4>
+                  <p className="text-[10px] text-slate-500">From 18 to 45+ mins/hr</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/70 rounded-xl p-2.5">
+                <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                  <Headphones className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <h4 className="text-[11px] font-bold text-slate-900">Smart Inbound ACD</h4>
+                  <p className="text-[10px] text-slate-500">Skill queues &amp; sticky agents</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/70 rounded-xl p-2.5">
+                <div className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                  <MessageSquare className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <h4 className="text-[11px] font-bold text-slate-900">WhatsApp Omnichannel</h4>
+                  <p className="text-[10px] text-slate-500">Voice &amp; WhatsApp CRM sync</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
-            <Headphones className="w-4 h-4 text-blue-600 shrink-0" />
-            <div>
-              <h4 className="text-xs font-bold text-slate-900">Smart Inbound ACD</h4>
-              <p className="text-[11px] text-slate-500">Skill-based queues &amp; sticky agents</p>
+          {/* Right Column: High-End Dialer & Agent Call Floor Image */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative rounded-2xl overflow-hidden shadow-md border border-slate-200/80 group">
+              <img
+                src="/assets/call_center_dialer_hero.jpg"
+                alt="Call Center Dialer and Agent Telephony Infrastructure"
+                className="w-full h-64 sm:h-72 object-cover group-hover:scale-103 transition-transform duration-700"
+              />
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
-            <MessageSquare className="w-4 h-4 text-emerald-600 shrink-0" />
-            <div>
-              <h4 className="text-xs font-bold text-slate-900">WhatsApp Omnichannel</h4>
-              <p className="text-[11px] text-slate-500">Unified inbox for voice &amp; chat leads</p>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -75,7 +101,7 @@ export default function CallCenterDialerShowcase({ onOpenInquiry }: CallCenterDi
             The 4 Dialing Modes We Provide
           </h2>
           <p className="text-xs text-slate-500">
-            Powered by enterprise Asterisk, Vicidial, and astTECS architectures for outbound campaigns
+            Powered by enterprise Asterisk and Vicidial architectures for outbound campaigns
           </p>
         </div>
 
@@ -209,14 +235,133 @@ export default function CallCenterDialerShowcase({ onOpenInquiry }: CallCenterDi
         </div>
       </div>
 
-      {/* 3. KEY FEATURES (CLEAN 6-CARD GRID) */}
+      {/* 3. ENTERPRISE FLOOR & DIALER CLUSTER SHOWCASE (DUAL VISUAL CARDS) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        
+        {/* Card A: High-Density BPO Floor & Workstation Layouts */}
+        <div className="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col group">
+          <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-900">
+            <img
+              src="/assets/ue_call_centre_bpo.jpg"
+              alt="High-Density BPO Call Center Floor and Acoustic Workstation Setup"
+              className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-700 opacity-90"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
+            
+            <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 text-white flex items-center gap-1.5">
+              <Headphones className="w-3.5 h-3.5 text-red-400" />
+              <span className="text-[11px] font-bold">Acoustic BPO Floor</span>
+            </div>
+
+            <div className="absolute bottom-3 left-3 right-3 text-white">
+              <span className="text-[10px] font-semibold text-emerald-400 uppercase tracking-wider block mb-0.5">
+                Turnkey Operations
+              </span>
+              <h3 className="text-base font-bold text-white drop-shadow-sm">
+                Acoustic Workstations &amp; Noise-Canceling Headsets
+              </h3>
+            </div>
+          </div>
+
+          <div className="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                We supply and wire complete call-center floors with commercial agent terminals, noise-dampening partitions, and certified headsets from <strong className="text-slate-800">Jabra, Plantronics, and Fanvil</strong>.
+              </p>
+
+              <div className="space-y-2 border-t border-slate-100 pt-3 mb-5 text-xs text-slate-700">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#dc2626] shrink-0" />
+                  <span>Acoustic-treated workstations with Cat6 gigabit PoE drops</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#dc2626] shrink-0" />
+                  <span>Live wallboard display monitors showing queue SLAs</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#dc2626] shrink-0" />
+                  <span>Rental &amp; AMC options for flexible seasonal ramp-ups</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => onOpenInquiry('Call Center Floor & Headset Workstation Setup')}
+              className="w-full py-2 px-3 rounded-xl bg-slate-50 hover:bg-slate-900 text-slate-800 hover:text-white border border-slate-200 hover:border-slate-900 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+            >
+              <span>Consult Floor Workstations</span>
+              <ArrowRight className="w-3 h-3" />
+            </button>
+          </div>
+        </div>
+
+        {/* Card B: VICIdial & Asterisk Clustered Dialing Core */}
+        <div className="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col group">
+          <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-900">
+            <img
+              src="/assets/pbx_server_cloud.jpg"
+              alt="VICIdial and Asterisk Clustered Telephony Server Infrastructure"
+              className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-700 opacity-90"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
+
+            <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 text-white flex items-center gap-1.5">
+              <Server className="w-3.5 h-3.5 text-blue-400" />
+              <span className="text-[11px] font-bold">Clustered Dialer Engine</span>
+            </div>
+
+            <div className="absolute bottom-3 left-3 right-3 text-white">
+              <span className="text-[10px] font-semibold text-blue-400 uppercase tracking-wider block mb-0.5">
+                High Concurrency
+              </span>
+              <h3 className="text-base font-bold text-white drop-shadow-sm">
+                Carrier-Grade VICIdial Server Clusters
+              </h3>
+            </div>
+          </div>
+
+          <div className="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                Scalable clustered telephony architecture handling thousands of simultaneous calls with automated answering machine detection (AMD) and real-time CRM screen-pops.
+              </p>
+
+              <div className="space-y-2 border-t border-slate-100 pt-3 mb-5 text-xs text-slate-700">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                  <span>Multi-server load-balancing for 50 to 1,000+ agents</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                  <span>Dual PRI / SIP carrier trunks with sub-second failover</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                  <span>Encrypted stereo recording storage with instant URL playback</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => onOpenInquiry('VICIdial Clustered Server Architecture')}
+              className="w-full py-2 px-3 rounded-xl bg-slate-50 hover:bg-[#dc2626] text-slate-800 hover:text-white border border-slate-200 hover:border-[#dc2626] text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+            >
+              <span>Review Server Clustering</span>
+              <ArrowRight className="w-3 h-3" />
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      {/* 4. KEY FEATURES (CLEAN 6-CARD GRID) */}
       <div>
         <div className="mb-4">
           <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
             Features Our Company Provides &amp; Configures
           </h2>
           <p className="text-xs text-slate-500">
-            Enterprise call handling, quality supervision, and CRM connectivity inspired by astTECS standards
+            Enterprise call handling, quality supervision, and CRM connectivity for high-velocity teams
           </p>
         </div>
 
@@ -283,7 +428,7 @@ export default function CallCenterDialerShowcase({ onOpenInquiry }: CallCenterDi
         </div>
       </div>
 
-      {/* 4. SERVICES MY COMPANY PROVIDES (CLEAN 4 STEPS) */}
+      {/* 5. SERVICES MY COMPANY PROVIDES (CLEAN 4 STEPS) */}
       <div className="bg-slate-50/80 border border-slate-200/90 rounded-2xl p-6">
         <h2 className="text-base sm:text-lg font-bold text-slate-900 mb-1">
           Services My Company Provides (End-to-End Delivery)
@@ -299,7 +444,7 @@ export default function CallCenterDialerShowcase({ onOpenInquiry }: CallCenterDi
             </div>
             <h4 className="text-xs font-bold text-slate-900 mb-1">1. Dialer Server Setup</h4>
             <p className="text-[11px] text-slate-600 leading-relaxed">
-              On-premise or cloud installation of Asterisk, Vicidial, and astTECS dialer servers.
+              On-premise or cloud installation of Asterisk, Vicidial, and custom dialer clusters.
             </p>
           </div>
 
@@ -333,9 +478,10 @@ export default function CallCenterDialerShowcase({ onOpenInquiry }: CallCenterDi
             </p>
           </div>
         </div>
+        
       </div>
 
-      {/* 5. CLEAN CONSULTATION CALLOUT */}
+      {/* 6. CLEAN CONSULTATION CALLOUT */}
       <div className="bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5">
         <div>
           <span className="text-[10px] font-bold text-red-400 uppercase tracking-wider block mb-1">

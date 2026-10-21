@@ -25,46 +25,85 @@ export default function PbxTelephonyShowcase({ onOpenInquiry }: PbxTelephonyShow
   return (
     <div className="space-y-8">
       
-      {/* 1. CLEAN HERO INTRO (MINIMALIST & SCANNABLE) */}
-      <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-50 border border-red-200 text-[#dc2626] text-[11px] font-bold uppercase tracking-wider mb-3">
-          <Radio className="w-3 h-3 text-[#dc2626]" />
-          <span>Enterprise Telephony</span>
-        </div>
+      {/* 1. VISUAL ENTERPRISE HERO (SPLIT LAYOUT WITH REAL TELECOM IMAGERY) */}
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          {/* Left Column: Content & Benefits */}
+          <div className="lg:col-span-7">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-50 border border-red-200 text-[#dc2626] text-[11px] font-bold uppercase tracking-wider mb-3">
+              <Radio className="w-3 h-3 text-[#dc2626]" />
+              <span>Enterprise VoIP &amp; Cloud PBX</span>
+            </div>
 
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
-          What is <span className="text-[#dc2626]">PBX &amp; Business Telephony</span>?
-        </h1>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2.5">
+              What is <span className="text-[#dc2626]">PBX &amp; Business Telephony</span>?
+            </h1>
 
-        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl mb-5">
-          A <strong className="text-slate-900 font-semibold">Private Branch Exchange (PBX)</strong> is your company's private telephone system. It allows all employees to call each other internally for <strong className="text-slate-900 font-semibold">100% free</strong> via 3-digit extensions (e.g., Ext 101, 102), while sharing external telecom lines for incoming and outgoing customer calls with automated voice menus (IVR).
-        </p>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-5">
+              A <strong className="text-slate-900 font-semibold">Private Branch Exchange (PBX)</strong> is your company's private voice network. It connects all employee desks and mobile devices internally for <strong className="text-slate-900 font-semibold">100% free extension calls</strong> (e.g., Ext 101, 102), while intelligently routing customer calls through automated multi-level IVRs, AI voicebots, and carrier SIP trunks.
+            </p>
 
-        {/* 3 Quick Value Badges */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 border-t border-slate-100">
-          <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
-            <PhoneCall className="w-4 h-4 text-[#dc2626] shrink-0" />
-            <div>
-              <h4 className="text-xs font-bold text-slate-900">Free Extension Calling</h4>
-              <p className="text-[11px] text-slate-500">Zero cost between desks &amp; branches</p>
+            {/* 3 Quick Value Badges */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2 border-t border-slate-100">
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/70 rounded-xl p-2.5">
+                <div className="w-7 h-7 rounded-lg bg-red-50 text-[#dc2626] flex items-center justify-center shrink-0">
+                  <PhoneCall className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <h4 className="text-[11px] font-bold text-slate-900">Zero-Cost Calling</h4>
+                  <p className="text-[10px] text-slate-500">Free desk-to-desk intercom</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/70 rounded-xl p-2.5">
+                <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                  <Users className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <h4 className="text-[11px] font-bold text-slate-900">Multi-Level IVR</h4>
+                  <p className="text-[10px] text-slate-500">"Press 1 for Sales, 2 Support"</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/70 rounded-xl p-2.5">
+                <div className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                  <Smartphone className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <h4 className="text-[11px] font-bold text-slate-900">Mobile Softphone</h4>
+                  <p className="text-[10px] text-slate-500">iOS &amp; Android office extensions</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
-            <Users className="w-4 h-4 text-blue-600 shrink-0" />
-            <div>
-              <h4 className="text-xs font-bold text-slate-900">Smart IVR Attendant</h4>
-              <p className="text-[11px] text-slate-500">"Press 1 for Sales, 2 for Support"</p>
+          {/* Right Column: High-End Hardware & Telephony Image with Audio Quality SLA */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200/80 group">
+              <img
+                src="/assets/telecom_ip_phones.jpg"
+                alt="Enterprise PBX and Business IP Telephony Infrastructure"
+                className="w-full h-64 sm:h-72 object-cover group-hover:scale-103 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/15 to-transparent" />
+
+              {/* Carrier-Grade Engine & Audio SLA Pill */}
+              <div className="absolute bottom-3.5 left-3.5 right-3.5 bg-slate-900/90 backdrop-blur-md p-3 rounded-xl border border-white/10 text-white flex items-center justify-between">
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                    <span className="text-xs font-bold text-white">Carrier-Grade UVC Engine</span>
+                  </div>
+                  <p className="text-[10px] text-slate-300">HD Wideband Opus Audio • Sub-Second WebRTC</p>
+                </div>
+                <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                  99.999% SLA
+                </span>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
-            <Smartphone className="w-4 h-4 text-emerald-600 shrink-0" />
-            <div>
-              <h4 className="text-xs font-bold text-slate-900">Work Anywhere Softphones</h4>
-              <p className="text-[11px] text-slate-500">Office extension on iPhone/Android</p>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -210,14 +249,115 @@ export default function PbxTelephonyShowcase({ onOpenInquiry }: PbxTelephonyShow
         </div>
       </div>
 
-      {/* 3. KEY FEATURES (CLEAN 6-CARD GRID) */}
+      {/* 3. ENTERPRISE INFRASTRUCTURE & AGENT WORKSTATION SHOWCASE (VISUAL DUAL CARDS) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        
+        {/* Card A: Cloud Datacenter & Dedicated PBX Infrastructure */}
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-7 shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-red-50 text-[#dc2626] flex items-center justify-center font-bold">
+                <Server className="w-5 h-5" />
+              </div>
+              <span className="text-[11px] font-bold text-[#dc2626] bg-red-50 border border-red-100 px-3 py-1 rounded-full uppercase tracking-wider">
+                Cloud &amp; On-Premise Core
+              </span>
+            </div>
+
+            <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-1">
+              Reliable Backbone
+            </span>
+            <h3 className="text-lg font-bold text-slate-900 mb-2">
+              Carrier-Grade PBX Infrastructure
+            </h3>
+
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              Deploy on dedicated 1U/2U on-premise appliances or high-speed AWS cloud clusters with direct SIP trunk peering to <strong className="text-slate-800">Airtel, Tata, and Jio</strong>.
+            </p>
+
+            <div className="space-y-2.5 border-t border-slate-100 pt-4 mb-5 text-xs text-slate-700">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#dc2626] shrink-0" />
+                <span>Direct Indian carrier SIP trunk peering (VoIP / PRI)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#dc2626] shrink-0" />
+                <span>High-availability failover with 99.999% guaranteed SLA</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#dc2626] shrink-0" />
+                <span>Built-in SBC with TLS/SRTP voice encryption</span>
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => onOpenInquiry('PBX Infrastructure & SIP Trunk Peering')}
+            className="w-full py-2.5 px-3 rounded-xl bg-slate-50 hover:bg-slate-900 text-slate-800 hover:text-white border border-slate-200 hover:border-slate-900 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+          >
+            <span>Consult Infrastructure Specs</span>
+            <ArrowRight className="w-3 h-3" />
+          </button>
+        </div>
+
+        {/* Card B: Omnichannel Agent Workstation & Mobility */}
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-7 shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+                <Headphones className="w-5 h-5" />
+              </div>
+              <span className="text-[11px] font-bold text-blue-700 bg-blue-50 border border-blue-100 px-3 py-1 rounded-full uppercase tracking-wider">
+                Frontline &amp; Remote Staff
+              </span>
+            </div>
+
+            <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider block mb-1">
+              Workplace Ergonomics
+            </span>
+            <h3 className="text-lg font-bold text-slate-900 mb-2">
+              Omnichannel Headsets &amp; Softphones
+            </h3>
+
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              Empower your customer support agents and sales teams with crystal-clear wideband Opus audio, browser-based WebRTC dialing, and instant extension roaming.
+            </p>
+
+            <div className="space-y-2.5 border-t border-slate-100 pt-4 mb-5 text-xs text-slate-700">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                <span>Sub-second browser WebRTC &amp; noise-canceling headsets</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                <span>iOS &amp; Android office extensions with push notifications</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                <span>Real-time whisper coaching &amp; supervisor silent listen</span>
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => onOpenInquiry('Agent Workstation & Softphone Setup')}
+            className="w-full py-2.5 px-3 rounded-xl bg-slate-50 hover:bg-[#dc2626] text-slate-800 hover:text-white border border-slate-200 hover:border-[#dc2626] text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+          >
+            <span>Configure Agent Workstations</span>
+            <ArrowRight className="w-3 h-3" />
+          </button>
+        </div>
+
+      </div>
+
+      {/* 4. KEY FEATURES (CLEAN 9-CARD GRID WITH AI CAPABILITIES) */}
       <div>
         <div className="mb-4">
           <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
             Key Telephony Features Included
           </h2>
           <p className="text-xs text-slate-500">
-            Essential tools for professional call handling and supervisory control
+            Professional call routing, supervisory control, and AI-powered voice automation from Unified Voice
           </p>
         </div>
 
@@ -281,10 +421,52 @@ export default function PbxTelephonyShowcase({ onOpenInquiry }: PbxTelephonyShow
               Incoming calls pop up client history automatically in Zoho, Salesforce, or LeadSquared.
             </p>
           </div>
+
+          {/* 07. AI Voicebot (From Unified Voice UVC PBX) */}
+          <div className="bg-white border border-indigo-200/90 rounded-xl p-3.5 shadow-2xs relative overflow-hidden group hover:border-indigo-400 transition-all">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="w-6 h-6 rounded-md bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-[11px]">07</span>
+              <h4 className="text-xs font-bold text-slate-900">Conversational AI Voicebot</h4>
+              <span className="ml-auto text-[9px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200/80 px-1.5 py-0.5 rounded-full shrink-0 flex items-center gap-0.5">
+                <Sparkles className="w-2.5 h-2.5" /> AI
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-600 leading-relaxed">
+              24/7 intelligent voice agent answering caller queries in natural language, automating FAQs, and routing with smart intent recognition.
+            </p>
+          </div>
+
+          {/* 08. AI Call Transcription (From Unified Voice UVC PBX) */}
+          <div className="bg-white border border-violet-200/90 rounded-xl p-3.5 shadow-2xs relative overflow-hidden group hover:border-violet-400 transition-all">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="w-6 h-6 rounded-md bg-violet-50 text-violet-600 flex items-center justify-center font-bold text-[11px]">08</span>
+              <h4 className="text-xs font-bold text-slate-900">Real-Time Call Transcription</h4>
+              <span className="ml-auto text-[9px] font-bold text-violet-700 bg-violet-50 border border-violet-200/80 px-1.5 py-0.5 rounded-full shrink-0 flex items-center gap-0.5">
+                <Sparkles className="w-2.5 h-2.5" /> AI
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-600 leading-relaxed">
+              Live automated speech-to-text converting calls into searchable, timestamped text records for rapid supervisor QA and compliance audits.
+            </p>
+          </div>
+
+          {/* 09. AI Call Summaries & Disposition (From Unified Voice UVC PBX) */}
+          <div className="bg-white border border-teal-200/90 rounded-xl p-3.5 shadow-2xs relative overflow-hidden group hover:border-teal-400 transition-all">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="w-6 h-6 rounded-md bg-teal-50 text-teal-600 flex items-center justify-center font-bold text-[11px]">09</span>
+              <h4 className="text-xs font-bold text-slate-900">AI Summaries &amp; Sentiment</h4>
+              <span className="ml-auto text-[9px] font-bold text-teal-700 bg-teal-50 border border-teal-200/80 px-1.5 py-0.5 rounded-full shrink-0 flex items-center gap-0.5">
+                <Sparkles className="w-2.5 h-2.5" /> AI
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-600 leading-relaxed">
+              Auto-detects customer sentiment, generates bullet-point call summaries, and automatically syncs disposition notes to CRM without manual agent typing.
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* 4. SERVICES MY COMPANY PROVIDES (CLEAN 4 STEPS) */}
+      {/* 5. SERVICES MY COMPANY PROVIDES (CLEAN 4 STEPS) */}
       <div className="bg-slate-50/80 border border-slate-200/90 rounded-2xl p-6">
         <h2 className="text-base sm:text-lg font-bold text-slate-900 mb-1">
           Services My Company Provides (End-to-End Delivery)
@@ -336,7 +518,7 @@ export default function PbxTelephonyShowcase({ onOpenInquiry }: PbxTelephonyShow
         </div>
       </div>
 
-      {/* 5. CLEAN CONSULTATION CALLOUT */}
+      {/* 6. CLEAN CONSULTATION CALLOUT */}
       <div className="bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5">
         <div>
           <span className="text-[10px] font-bold text-red-400 uppercase tracking-wider block mb-1">

@@ -32,13 +32,58 @@ interface IllPlan {
 
 const ILL_PLANS: IllPlan[] = [
   {
-    id: 'plan-50',
-    name: '50 Mbps Leased Line',
-    speed: '50 Mbps',
+    id: 'plan-10',
+    name: '10 Mbps Leased Line',
+    speed: '10 Mbps',
+    users: '5 – 15 Users',
+    sla: '99.5% Uptime SLA',
+    ips: '2 to 4 Static Public IPs',
+    badge: 'Small Office / Retail',
+    features: [
+      '1:1 Symmetrical Upload & Download',
+      'Dedicated unshared fiber optic pipe',
+      '< 4-Hour Mean Time to Repair (MTTR)',
+      'Managed Fast Ethernet / Gigabit CPE router'
+    ]
+  },
+  {
+    id: 'plan-20',
+    name: '20 Mbps Leased Line',
+    speed: '20 Mbps',
+    users: '10 – 25 Users',
+    sla: '99.5% Uptime SLA',
+    ips: '4 Static Public IPs (/29)',
+    badge: 'SME / Startup',
+    features: [
+      '1:1 Symmetrical Upload & Download',
+      'Low latency for Cloud ERP, Tally & Email',
+      'Zero peak-hour throttling or buffering',
+      'Managed CPE router + 24/7 link monitoring'
+    ]
+  },
+  {
+    id: 'plan-30',
+    name: '30 Mbps Leased Line',
+    speed: '30 Mbps',
     users: '15 – 35 Users',
     sla: '99.5% Uptime SLA',
     ips: '4 Static Public IPs (/29)',
-    badge: 'Branch Office',
+    badge: 'Mid-Sized Branch',
+    features: [
+      '1:1 Symmetrical Upload & Download',
+      'Smooth HD video conferencing & Teams',
+      'Zero latency jitter for SIP voice calls',
+      'Managed Gigabit CPE router + MRTG graphs'
+    ]
+  },
+  {
+    id: 'plan-50',
+    name: '50 Mbps Leased Line',
+    speed: '50 Mbps',
+    users: '35 – 60 Users',
+    sla: '99.5% Uptime SLA',
+    ips: '4 Static Public IPs (/29)',
+    badge: 'Growing Office',
     features: [
       '1:1 Symmetrical Upload & Download',
       'Dedicated unshared fiber pipe',
@@ -50,7 +95,7 @@ const ILL_PLANS: IllPlan[] = [
     id: 'plan-100',
     name: '100 Mbps Leased Line',
     speed: '100 Mbps',
-    users: '35 – 80 Users',
+    users: '50 – 100 Users',
     sla: '99.5% Uptime SLA',
     ips: '4 to 8 Static Public IPs',
     badge: 'Most Popular',
@@ -66,7 +111,7 @@ const ILL_PLANS: IllPlan[] = [
     id: 'plan-300',
     name: '300 Mbps Leased Line',
     speed: '300 Mbps',
-    users: '80 – 200 Users',
+    users: '100 – 250 Users',
     sla: '99.9% Uptime SLA',
     ips: '8 to 13 Static Public IPs (/28)',
     badge: 'Call Centers & BPOs',
@@ -81,7 +126,7 @@ const ILL_PLANS: IllPlan[] = [
     id: 'plan-1000',
     name: '1 Gbps+ Leased Line',
     speed: '1 Gbps to 10 Gbps',
-    users: '200+ Users & Data Centers',
+    users: '250+ Users & Data Centers',
     sla: '99.95% Carrier SLA',
     ips: 'Custom /27 Subnet + BGP ASN',
     badge: 'Enterprise Flagship',
@@ -141,7 +186,7 @@ export default function IllLeasedLineShowcase({ onOpenInquiry }: IllLeasedLineSh
         </div>
       </div>
 
-      {/* 2. BANDWIDTH PACKAGES (CLEAN 2x2 GRID) */}
+      {/* 2. BANDWIDTH PACKAGES (CLEAN 3-COLUMN GRID) */}
       <div>
         <div className="mb-4">
           <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
@@ -152,7 +197,7 @@ export default function IllLeasedLineShowcase({ onOpenInquiry }: IllLeasedLineSh
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {ILL_PLANS.map((plan) => (
             <div
               key={plan.id}

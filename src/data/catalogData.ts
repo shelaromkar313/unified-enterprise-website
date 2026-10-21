@@ -168,7 +168,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['Dual Intel Xeon', 'Up to 8TB DDR5', '24x NVMe Bays', 'iDRAC9 Enterprise'],
     stockStatus: 'In Stock • Custom Staged in 48h',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'VMware ESXi clusters, Microsoft Hyper-V, and high-concurrency SQL/Oracle databases'
   },
   {
@@ -187,7 +187,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['HPE iLO 6', 'PCIe Gen5 Ready', 'Dual 1600W PSU', 'Tier-3 Certified'],
     stockStatus: 'In Stock • Pre-Configured',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'Enterprise ERP systems (SAP HANA), AI inference models, and cloud consolidation'
   },
   {
@@ -206,7 +206,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['1U High Density', 'Dual Xeon Scalable', '10x NVMe Bays', 'PCIe Gen5 Support'],
     stockStatus: 'In Stock • Same-Day Dispatch',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'High-density web farms, microservices clusters, and compute-heavy container nodes'
   },
   {
@@ -225,7 +225,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['Lenovo XClarity', 'GPU AI Acceleration', '40 Drive AnyBay', 'Dual 1800W PSUs'],
     stockStatus: 'In Stock • Pan-India Delivery',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'Big data analytics, AI model fine-tuning, and large VMware vSphere deployments'
   },
   {
@@ -244,7 +244,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['1U Form Factor', 'HPE Silicon Root', '10x SFF Bays', 'Dual Titanium PSUs'],
     stockStatus: 'In Stock • Fast Deployment',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'Edge datacenters, corporate branch hubs, and dedicated software build nodes'
   },
   {
@@ -263,7 +263,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['Office-Quiet Acoustics', '24x 3.5" Massive Bays', 'Dual Xeon Support', 'Tower or 5U Rack'],
     stockStatus: 'In Stock • Fleet Customization',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'Branch bank offices, regional warehousing hubs, and localized on-prem backup servers'
   },
   {
@@ -282,7 +282,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['12-Bay Expandable', 'Synology DSM OS', 'Dual Redundant PSUs', '430K 4K IOPS'],
     stockStatus: 'In Stock • Rapid Dispatch',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'Centralized enterprise backup, surveillance NVR video vaults, and CAD/creative file shares'
   },
   {
@@ -301,7 +301,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['All-Flash NVMe U.2', 'AMD EPYC 16-Core', 'Dual 25GbE SFP28', 'ZFS Inline Dedup'],
     stockStatus: 'Available on Order • 48h Testing',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: '4K/8K real-time media editing pipelines, high-IOPS virtualization, and database staging'
   },
   {
@@ -320,26 +320,26 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['8x NVIDIA H100 GPUs', '640GB HBM3 Memory', '32 PFLOPS FP8 AI', '8x 400Gb/s InfiniBand'],
     stockStatus: 'In Stock • Tier-1 AI Delivery',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'Foundation LLM pre-training, generative AI enterprise models, national AI compute clusters, and autonomous systems'
   },
 
-  // ROUTERS & NETWORK SWITCHES (8 Enterprise Products)
+  // ROUTERS & NETWORK SWITCHES (Cisco, D-Link, TP-Link, Aruba, Ubiquiti, MikroTik, Juniper)
   {
     id: 'cisco-catalyst-9300-switch',
     categoryId: 'routers-network-switches',
     brand: 'Cisco',
     name: 'Cisco Catalyst 9300 48-Port PoE+ Core Switch (C9300-48P)',
-    image: '/assets/real_rack_switch.jpg',
-    tagline: 'Industry-standard enterprise access layer switches with StackWise-480 and 90W UPOE+.',
+    image: '/assets/switch_cisco_catalyst_9300.jpg',
+    tagline: 'Industry-standard enterprise access layer switch with 48x Gigabit PoE+, StackWise-480, and modular 10G/25G uplinks.',
     specs: {
       processor: 'Cisco UADP 2.0 ASIC with integrated x86 CPU architecture for container hosting',
-      memory: '16GB DRAM with 16GB Flash storage',
+      memory: '16GB DRAM with 16GB Flash storage and high-capacity packet buffering',
       storage: 'Modular 10G / 25G / 40G uplink network adapters',
       security: 'Encrypted Traffic Analytics (ETA), MACsec-256 link encryption, Trustworthy Solutions',
       ports: '48x 10/100/1000 Gigabit Ethernet PoE+ ports (740W power budget), StackWise-480'
     },
-    keyPills: ['48-Port PoE+ 740W', 'StackWise 480 Gbps', 'MACsec-256 Security', 'Cisco DNA Ready'],
+    keyPills: ['48-Port PoE+ (740W)', 'StackWise-480 Gbps', 'MACsec-256 Crypto', 'Cisco DNA Ready'],
     stockStatus: 'In Stock • New & Refurbished Available',
     rentalAvailable: true,
     idealFor: 'Campus LAN core, high-density IP phone fleets, and enterprise Wi-Fi 6 powering'
@@ -349,7 +349,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     categoryId: 'routers-network-switches',
     brand: 'Cisco',
     name: 'Cisco Catalyst 9200L 24-Port Gigabit Switch (C9200L-24P-4G)',
-    image: '/assets/poe_network_switch.jpg',
+    image: '/assets/switch_cisco_catalyst_9200l.jpg',
     tagline: 'Enterprise-grade simplicity, high security, and Layer 3 routing for corporate branch offices.',
     specs: {
       processor: 'Cisco UADP 2.0mini ASIC with hardware-based access control and telemetry',
@@ -358,35 +358,89 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
       ports: '24x 10/100/1000 PoE+ ports (370W power budget) + 4x 1G SFP fixed uplink ports',
       storage: 'StackWise-80 architecture (stack up to 8 switches for 80 Gbps unified backplane)'
     },
-    keyPills: ['24-Port PoE+ 370W', 'StackWise-80', 'Layer 3 Routing', 'Cisco IOS XE'],
+    keyPills: ['24-Port PoE+ (370W)', 'StackWise-80', 'Layer 3 Routing', 'Cisco IOS XE'],
     stockStatus: 'In Stock • Immediate Dispatch',
     rentalAvailable: true,
     idealFor: 'Corporate branch offices, retail store infrastructure, and regional department wiring closets'
   },
   {
-    id: 'cisco-catalyst-1000-switch',
+    id: 'cisco-catalyst-8300-router',
     categoryId: 'routers-network-switches',
     brand: 'Cisco',
-    name: 'Cisco Catalyst 1000 48-Port Full PoE+ Switch (C1000-48FP-4G-L)',
-    image: '/assets/network_security_firewall.jpg',
-    tagline: 'Quiet, reliable Gigabit Ethernet switch designed for small to medium enterprise networks.',
+    name: 'Cisco Catalyst 8300 Series Enterprise Edge Router (C8300-1N1S-4T2X)',
+    image: '/assets/router_cisco_catalyst_8300.jpg',
+    tagline: 'Flagship enterprise SD-WAN edge routing platform delivering multi-gigabit encrypted throughput.',
     specs: {
-      processor: 'ARM-based dual-core network management engine',
-      memory: '512MB RAM and 256MB Flash storage',
-      security: 'Comprehensive 802.1X, Private VLANs, Port Security, and DHCP snooping',
-      ports: '48x 10/100/1000 RJ-45 ports with full 740W PoE+ budget + 4x Gigabit SFP uplinks'
+      processor: '8-Core multi-threaded x86 enterprise routing processor running Cisco IOS XE',
+      memory: '16GB DRAM (expandable to 32GB) + 16GB internal onboard storage',
+      security: 'Hardware crypto engine with 2 Gbps SD-WAN IPSec throughput, Cisco Umbrella DNS security',
+      ports: '2x 10G SFP+ ports, 4x 1G RJ-45 ports, 1x Network Interface Module (NIM) slot, redundant PSUs'
     },
-    keyPills: ['48-Port Full PoE+ (740W)', '4x 1G SFP Uplinks', 'Fanless Acoustic Mode', 'Zero Touch Setup'],
-    stockStatus: 'In Stock • Bulk Units Ready',
+    keyPills: ['2 Gbps SD-WAN Crypto', 'Dual 10G SFP+ Ports', 'Dual Redundant PSUs', 'Cloud OnRamp'],
+    stockStatus: 'In Stock • Enterprise Configured',
     rentalAvailable: true,
-    idealFor: 'Floor-wide CCTV deployments, VoIP phone distribution, and educational computer labs'
+    idealFor: 'Corporate headquarters WAN aggregation, multi-cloud interconnects, and SD-WAN rollouts'
+  },
+  {
+    id: 'dlink-dgs-1210-52mp-switch',
+    categoryId: 'routers-network-switches',
+    brand: 'D-Link',
+    name: 'D-Link DGS-1210-52MP 52-Port Gigabit Smart Managed PoE+ Switch',
+    image: '/assets/switch_dlink_dgs_1210_52mp.png',
+    tagline: 'High-capacity 52-port Gigabit Smart Managed switch with 48x PoE+ ports and 4x Gigabit SFP optical ports.',
+    specs: {
+      processor: 'Smart Managed Layer 2 architecture with Auto Surveillance VLAN and Voice VLAN',
+      memory: 'High-density packet buffer with 104 Gbps switching capacity',
+      security: 'Access Control Lists (ACL), D-Link Safeguard Engine, Port Security, 802.1X',
+      ports: '48x 10/100/1000 PoE+ ports (370W power budget) + 4x Combo Gigabit RJ45/SFP ports'
+    },
+    keyPills: ['52-Port Smart Managed', '48x PoE+ (370W)', 'Surveillance VLAN', '4x SFP Uplinks'],
+    stockStatus: 'In Stock • Same-Day Dispatch',
+    rentalAvailable: true,
+    idealFor: 'Enterprise CCTV IP camera surveillance, VoIP office phone systems, and corporate floor aggregation'
+  },
+  {
+    id: 'dlink-dgs-1210-28p-switch',
+    categoryId: 'routers-network-switches',
+    brand: 'D-Link',
+    name: 'D-Link DGS-1210-28P 28-Port Gigabit Smart Managed PoE+ Switch',
+    image: '/assets/switch_dlink_dgs_1210_28p.png',
+    tagline: 'Feature-rich 28-port Gigabit Smart Managed switch with 24x PoE+ ports and 4x Gigabit SFP optical uplinks.',
+    specs: {
+      processor: 'High-speed non-blocking switching fabric with intelligent fan speed control',
+      memory: 'Dual image and dual configuration files for minimal firmware upgrade downtime',
+      security: 'Static routing, IGMP Snooping, Loopback Detection, 802.1p Quality of Service',
+      ports: '24x 10/100/1000 PoE+ ports (193W budget) + 4x Gigabit SFP optical slots'
+    },
+    keyPills: ['24x PoE+ Ports', '4x Gigabit SFP', 'D-Link Safeguard', 'Energy Efficient Ethernet'],
+    stockStatus: 'In Stock • Fleet Staged',
+    rentalAvailable: true,
+    idealFor: 'Small-to-medium business offices, commercial branch networks, and retail point-of-sale setups'
+  },
+  {
+    id: 'tplink-omada-sg3428xmp-switch',
+    categoryId: 'routers-network-switches',
+    brand: 'TP-Link',
+    name: 'TP-Link Omada SG3428XMP 24-Port PoE+ L2+ Switch (4x 10G SFP+)',
+    image: '/assets/switch_tplink_sg3428xmp.jpg',
+    tagline: 'Enterprise L2+ managed switch featuring 24x Gigabit PoE+ ports and 4x lightning-fast 10G SFP+ uplinks.',
+    specs: {
+      processor: 'High-speed 128 Gbps switching capacity integrated into Omada SDN centralized cloud management',
+      memory: 'Layer 2+ static routing with IP-MAC-Port Binding and DHCP Snooping',
+      security: 'Access Control List (L2~L4 ACL), 802.1X, Port Security, DoS Defend, 802.1Q VLAN',
+      ports: '24x Gigabit PoE+ 802.3af/at ports (384W power budget) + 4x 10G SFP+ slots + RJ45/Micro-USB Console'
+    },
+    keyPills: ['24x PoE+ (384W)', '4x 10G SFP+ Slots', 'Omada Cloud SDN', 'L2+ Static Routing'],
+    stockStatus: 'In Stock • Immediate Dispatch',
+    rentalAvailable: true,
+    idealFor: 'High-bandwidth Wi-Fi 6 access point networks, 10G server uplinks, and enterprise SMB backbones'
   },
   {
     id: 'aruba-cx-6200f-48g-switch',
     categoryId: 'routers-network-switches',
     brand: 'Aruba',
     name: 'Aruba CX 6200F 48G Class 4 PoE 4SFP+ Switch (JL728A)',
-    image: '/assets/ue_network_design.jpg',
+    image: '/assets/switch_aruba_cx6200f.png',
     tagline: 'Modern, cloud-managed enterprise access switch powered by AOS-CX with built-in telemetry.',
     specs: {
       processor: 'Quad Core ARM Cortex A72 @ 1.8GHz with Aruba Gen7 ASIC architecture',
@@ -400,47 +454,47 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     idealFor: 'Campus core access, smart office IoT endpoints, and high-bandwidth wireless backhaul'
   },
   {
-    id: 'cisco-catalyst-8300-router',
+    id: 'ubiquiti-unifi-switch-enterprise-48',
     categoryId: 'routers-network-switches',
-    brand: 'Cisco',
-    name: 'Cisco Catalyst 8300 Series Enterprise Edge Router (C8300-1N1S-4T2X)',
-    image: '/assets/real_rack_switch.jpg',
-    tagline: 'Flagship enterprise SD-WAN edge routing platform delivering multi-gigabit encrypted throughput.',
+    brand: 'Ubiquiti',
+    name: 'Ubiquiti UniFi Enterprise Switch 48 PoE (USW-Enterprise-48-PoE)',
+    image: '/assets/switch_ubiquiti_enterprise_48.png',
+    tagline: 'Managed 2.5GbE PoE+ switch with 25G SFP28 optical uplinks and centralized UniFi OS management.',
     specs: {
-      processor: '8-Core multi-threaded x86 enterprise routing processor',
-      memory: '16GB DRAM (expandable to 32GB) + 16GB internal onboard storage',
-      security: 'Hardware crypto engine with 2 Gbps SD-WAN IPSec throughput, Cisco Umbrella DNS security',
-      ports: '2x 10G SFP+ ports, 4x 1G RJ-45 ports, 1x Network Interface Module (NIM) slot, redundant PSUs'
+      processor: 'Integrated Layer 3 hardware routing engine with inter-VLAN routing',
+      memory: 'High-speed buffer architecture for zero-packet loss Wi-Fi 6E backhaul',
+      security: '802.1X port access control, storm control, client isolation, UniFi Network Controller',
+      ports: '48x 2.5GbE 802.3at PoE+ RJ45 ports (720W total budget) + 4x 25G SFP28 uplinks'
     },
-    keyPills: ['2 Gbps SD-WAN Crypto', 'Dual 10G SFP+ Ports', 'Dual Redundant PSUs', 'Cloud OnRamp'],
-    stockStatus: 'In Stock • Enterprise Configured',
+    keyPills: ['48x 2.5G mGig PoE+', '4x 25G SFP28 Uplinks', '720W Total PoE', 'UniFi Touchscreen Display'],
+    stockStatus: 'In Stock • Bulk Staged',
     rentalAvailable: true,
-    idealFor: 'Corporate headquarters WAN aggregation, multi-cloud interconnects, and SD-WAN rollouts'
+    idealFor: 'Powering high-density Wi-Fi 6E/7 access point fleets and modern creative studio networks'
   },
   {
-    id: 'juniper-ex3400-48p-switch',
+    id: 'mikrotik-crs328-switch',
     categoryId: 'routers-network-switches',
-    brand: 'Juniper',
-    name: 'Juniper Networks EX3400 48-Port PoE+ Switch',
-    image: '/assets/poe_network_switch.jpg',
-    tagline: 'High-performance cost-effective enterprise switch with Virtual Chassis technology and Junos OS.',
+    brand: 'MikroTik',
+    name: 'MikroTik CRS328-24P-4S+RM 24-Port Dual-Boot PoE+ Switch',
+    image: '/assets/switch_mikrotik_crs328.webp',
+    tagline: 'High-performance 24-port Gigabit switch with automatic 802.3af/at & Passive PoE output and 4x 10G SFP+ ports.',
     specs: {
-      processor: 'Dual-core 1GHz enterprise network processor running Junos OS',
-      memory: '2GB DRAM and 2GB Flash memory',
-      security: 'sFlow monitoring, MAC limiting, Layer 2-4 Access Control Lists (ACLs)',
-      ports: '48x 10/100/1000 PoE+ ports (740W budget), 4x 10G SFP+ uplinks, 2x 40G QSFP+ stacking ports'
+      processor: 'Dual boot architecture: choose RouterOS for routing or SwOS for pure layer 2 wire-speed switching',
+      memory: 'Marvell 98DX3236 enterprise switch chip with non-blocking 128 Gbps throughput',
+      security: 'VLAN filtering, MAC security, ACLs, port isolation, bandwidth shaping',
+      ports: '24x Gigabit RJ45 ports with auto-sensing PoE (500W budget) + 4x 10G SFP+ cages'
     },
-    keyPills: ['Virtual Chassis 40G', '48x PoE+ (740W)', '4x 10G SFP+ Uplinks', 'Junos OS Carrier Grade'],
-    stockStatus: 'In Stock • Pan-India Testing',
+    keyPills: ['Dual-Boot RouterOS/SwOS', '24x Auto PoE (500W)', '4x 10G SFP+ Cages', 'Rackmount 1U'],
+    stockStatus: 'In Stock • Staged & Tested',
     rentalAvailable: true,
-    idealFor: 'Converged data and voice networks, high-density call centres, and university campuses'
+    idealFor: 'ISP edge distribution, mixed passive/active PoE installations, and high-performance telecom setups'
   },
   {
     id: 'mikrotik-ccr2116-router',
     categoryId: 'routers-network-switches',
     brand: 'MikroTik',
     name: 'MikroTik CCR2116-12G-4S+ 16-Core Cloud Core Router',
-    image: '/assets/network_security_firewall.jpg',
+    image: '/assets/router_mikrotik_ccr2116.webp',
     tagline: 'Insane 16-core ARM 64-bit performance for BGP routing, large ISP peering, and high-concurrency NAT.',
     specs: {
       processor: 'Amazon Annapurna Labs Alpine AL73400 16-Core 2.0 GHz 64-bit ARM CPU',
@@ -454,22 +508,79 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     idealFor: 'ISP data centers, corporate primary Internet gateways, and high-throughput BGP routing'
   },
   {
-    id: 'ubiquiti-unifi-switch-enterprise-48',
+    id: 'juniper-ex3400-48p-switch',
     categoryId: 'routers-network-switches',
-    brand: 'Ubiquiti',
-    name: 'Ubiquiti UniFi Enterprise Switch 48 PoE (USW-Enterprise-48-PoE)',
-    image: '/assets/ue_network_design.jpg',
-    tagline: 'Managed 2.5GbE PoE+ switch with 25G SFP28 optical uplinks and centralized UniFi OS management.',
+    brand: 'Juniper',
+    name: 'Juniper Networks EX3400 48-Port PoE+ Switch',
+    image: '/assets/switch_juniper_ex3400.jpg',
+    tagline: 'High-performance cost-effective enterprise switch with Virtual Chassis technology and Junos OS.',
     specs: {
-      processor: 'Integrated Layer 3 hardware routing engine with inter-VLAN routing',
-      memory: 'High-speed buffer architecture for zero-packet loss Wi-Fi 6E backhaul',
-      security: '802.1X port access control, storm control, client isolation, UniFi Network Controller',
-      ports: '48x 2.5GbE 802.3at PoE+ RJ45 ports (720W total budget) + 4x 25G SFP28 uplinks'
+      processor: 'Dual-core 1GHz enterprise network processor running Junos OS',
+      memory: '2GB DRAM and 2GB Flash memory',
+      security: 'sFlow monitoring, MAC limiting, Layer 2-4 Access Control Lists (ACLs)',
+      ports: '48x 10/100/1000 PoE+ ports (740W budget), 4x 10G SFP+ uplinks, 2x 40G QSFP+ stacking ports'
     },
-    keyPills: ['48x 2.5G mGig PoE+', '4x 25G SFP28 Uplinks', '720W Total PoE', 'UniFi Touchscreen Display'],
-    stockStatus: 'In Stock • Bulk Staged',
+    keyPills: ['Virtual Chassis 40G', '48x PoE+ (740W)', '4x 10G SFP+ Uplinks', 'Junos OS Carrier Grade'],
+    stockStatus: 'In Stock • Pan-India Testing',
     rentalAvailable: true,
-    idealFor: 'Powering high-density Wi-Fi 6E/7 access point fleets and modern creative studio networks'
+    idealFor: 'Converged data and voice networks, high-density call centres, and university campuses'
+  },
+  {
+    id: 'tplink-tl-wr940n-router',
+    categoryId: 'routers-network-switches',
+    brand: 'TP-Link',
+    name: 'TP-Link TL-WR940N 450Mbps Wireless N Router (3 Antennas)',
+    image: '/assets/router_tplink_tl_wr940n.jpg',
+    tagline: 'Iconic 450Mbps 3-antenna wireless router with 3x3 MIMO technology, Bandwidth Control, and WPS quick encryption.',
+    specs: {
+      display: 'Front-facing green LED diagnostic panel for Power, WAN, Wireless, and 4x LAN ports',
+      processor: 'Qualcomm high-speed network processor with 3x3 MIMO multi-antenna signal enhancement',
+      memory: 'High-reliability packet routing engineered for smooth VoIP, HD video calls, and online office tasks',
+      security: 'SPI Firewall, IP/MAC/Domain filtering, WPA/WPA2-PSK enterprise encryption, Access Control',
+      ports: '1x 10/100M WAN port + 4x 10/100M LAN ports, 3x 5dBi fixed omnidirectional high-gain antennas'
+    },
+    keyPills: ['3x 5dBi Antennas', '450 Mbps High-Speed', 'IP Bandwidth Control', 'WPS Quick Security'],
+    stockStatus: 'In Stock • Bulk Lot Warehouse',
+    rentalAvailable: true,
+    idealFor: 'Commercial retail shops, clinic receptions, branch connectivity, and local office broadband'
+  },
+  {
+    id: 'dlink-dir-825-router',
+    categoryId: 'routers-network-switches',
+    brand: 'D-Link',
+    name: 'D-Link DIR-825 AC1200 MU-MIMO Gigabit Dual-Band Wi-Fi Router',
+    image: '/assets/router_dlink_dir825.png',
+    tagline: 'High-performance dual-band Gigabit Wi-Fi router with 4 high-gain antennas, MU-MIMO, and USB share port.',
+    specs: {
+      display: 'Multi-status LED indicator bar for Internet, 2.4GHz, 5GHz, USB, and LAN ports',
+      processor: 'High-performance multi-core processor with 802.11ac dual-band concurrent speeds (867 Mbps + 300 Mbps)',
+      memory: 'Supports 30+ simultaneous office devices with intelligent QoS traffic prioritization',
+      security: 'Dual-active SPI/NAT firewalls, WPA3 encryption, guest Wi-Fi isolation, VPN pass-through',
+      ports: '1x Gigabit WAN port + 4x Gigabit LAN ports + 1x USB 2.0 share port, 4x 5dBi external antennas'
+    },
+    keyPills: ['AC1200 Dual-Band', 'Full Gigabit Ports', '4x High-Gain Antennas', 'USB Media Sharing'],
+    stockStatus: 'In Stock • Immediate Dispatch',
+    rentalAvailable: true,
+    idealFor: 'SMB enterprise workspaces, office leased-line terminations, and branch fiber connections'
+  },
+  {
+    id: 'tplink-archer-ax53-router',
+    categoryId: 'routers-network-switches',
+    brand: 'TP-Link',
+    name: 'TP-Link Archer AX53 AX3000 Dual-Band Gigabit Wi-Fi 6 Router',
+    image: '/assets/router_tplink_archer_ax53.jpg',
+    tagline: 'Next-gen Wi-Fi 6 Gigabit router delivering blazing 3.0 Gbps speeds, Target Wake Time, and HomeShield security.',
+    specs: {
+      display: 'Minimalist sleek front LED status indicators with night-mode schedule dimming',
+      processor: 'Dual-Core enterprise CPU powering 2402 Mbps on 5GHz + 574 Mbps on 2.4GHz',
+      memory: 'Expanded RAM buffer handling 50+ concurrent users with OFDMA and 4x streams',
+      security: 'TP-Link HomeShield real-time IoT protection, WPA3 security, VPN Client (OpenVPN/WireGuard)',
+      ports: '1x Gigabit WAN port + 4x Gigabit LAN ports, 4x external high-gain antennas with Beamforming'
+    },
+    keyPills: ['Wi-Fi 6 (3000 Mbps)', 'Gigabit WAN/LAN', 'WireGuard & OpenVPN', 'TP-Link HomeShield'],
+    stockStatus: 'In Stock • Same-Day Dispatch',
+    rentalAvailable: true,
+    idealFor: 'High-bandwidth modern corporate suites, engineering workstations, and hybrid offices'
   },
 
   // FIREWALLS & NETWORK SECURITY (8 Enterprise Products)
@@ -859,18 +970,169 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     idealFor: 'Organizations running Sophos Firewalls, hybrid workforces, and enterprises seeking turnkey XDR'
   },
 
-  // WI-FI & WIRELESS NETWORKING (8 Enterprise Products)
+  // WI-FI & WIRELESS NETWORKING (D-Link, TP-Link, Cisco, Aruba, Ubiquiti, Ruckus)
+  {
+    id: 'dlink-dap-x2850-ap',
+    categoryId: 'wifi-wireless-networking',
+    brand: 'D-Link',
+    name: 'D-Link DAP-X2850 Nuclias Connect AX3600 Wi-Fi 6 Access Point',
+    image: '/assets/wifi_dlink_dap_x2850.png',
+    tagline: 'High-density 4x4 MU-MIMO Wi-Fi 6 enterprise ceiling access point delivering aggregate speeds up to 3.6 Gbps.',
+    specs: {
+      display: 'Multi-state diagnostic LED ring indicating power, LAN status, and 2.4G/5G radio telemetry',
+      processor: '4x4:4 MU-MIMO dual-band Wi-Fi 6 engine with OFDMA, Beamforming, and Airtime Fairness',
+      memory: 'Engineered for high client density with centralized management for up to 1,000 APs via Nuclias',
+      security: 'WPA3 Personal & Enterprise, 802.1X Network Access Control, Rogue AP Detection, Captive Portal',
+      ports: '1x 2.5 Gbps PoE+ Ethernet port (802.3at) + 1x 10/100/1000 Gigabit LAN port + RJ45 Console'
+    },
+    keyPills: ['Wi-Fi 6 (AX3600)', '2.5G PoE+ Port', '4x4 MU-MIMO', 'Nuclias Connect'],
+    stockStatus: 'In Stock • Same-Day Dispatch',
+    rentalAvailable: true,
+    idealFor: 'Enterprise corporate offices, educational institutions, university halls, and luxury hospitality'
+  },
+  {
+    id: 'dlink-dap-x2810-ap',
+    categoryId: 'wifi-wireless-networking',
+    brand: 'D-Link',
+    name: 'D-Link DAP-X2810 Nuclias Connect AX1800 Wi-Fi 6 Access Point',
+    image: '/assets/wifi_dlink_dap_x2810.png',
+    tagline: 'Next-generation Wi-Fi 6 business access point designed for smooth multi-user collaboration and SMB density.',
+    specs: {
+      display: 'Low-profile soft LED status indicator for discrete ceiling or wall mount installations',
+      processor: 'Dual-band 802.11ax Wi-Fi 6 chipset with 2x2 MU-MIMO and intelligent band steering',
+      memory: 'High-efficiency client handling supporting 128+ concurrent active business endpoints',
+      security: 'WPA3 Enterprise encryption, VLAN segmentation, SSID suppression, RADIUS authentication',
+      ports: '1x Gigabit Ethernet PoE port (802.3at) with versatile ceiling and wall mounting brackets'
+    },
+    keyPills: ['Wi-Fi 6 (AX1800)', 'Gigabit PoE Input', 'Band Steering', 'WPA3 Enterprise'],
+    stockStatus: 'In Stock • Fleet Ready',
+    rentalAvailable: true,
+    idealFor: 'Commercial branch offices, retail store chains, medical clinics, and open coworking desks'
+  },
+  {
+    id: 'dlink-dnh-100-controller',
+    categoryId: 'wifi-wireless-networking',
+    brand: 'D-Link',
+    name: 'D-Link DNH-100 Nuclias Connect Hardware Controller Hub',
+    image: '/assets/wifi_dlink_dnh100.png',
+    tagline: 'Dedicated on-premise hardware controller supporting centralized configuration and monitoring for up to 100 APs.',
+    specs: {
+      display: 'Front-panel LED status array for power, LAN link/act, and USB activity',
+      processor: 'Pre-loaded Nuclias Connect software engine with real-time RF analytics dashboard',
+      memory: 'Integrated storage for automated multi-site configuration backups and historical traffic logs',
+      security: 'Role-based multi-tenant administration, SSL certificate encryption, customizable guest captive portal',
+      ports: '1x 10/100/1000 Gigabit Ethernet port, 1x USB 3.0 port for local config snapshots'
+    },
+    keyPills: ['Up to 100 APs Managed', 'Zero Cloud License Fees', 'Plug & Play Setup', 'Nuclias Connect'],
+    stockStatus: 'In Stock • Pre-Configured',
+    rentalAvailable: true,
+    idealFor: 'Multi-floor corporate headquarters, school networks, and multi-branch distributed retail'
+  },
+  {
+    id: 'tplink-omada-eap670-ap',
+    categoryId: 'wifi-wireless-networking',
+    brand: 'TP-Link',
+    name: 'TP-Link Omada EAP670 AX5400 Ceiling Mount Wi-Fi 6 AP',
+    image: '/assets/wifi_tplink_eap670.jpg',
+    tagline: 'Ultra-fast AX5400 enterprise ceiling access point with 160MHz channels, 2.5G PoE+, and Omada Mesh.',
+    specs: {
+      display: 'Discreet circular LED status light with schedule control for non-distracting office deployment',
+      processor: 'HE160 multi-gigabit Wi-Fi 6 architecture (4804 Mbps on 5GHz + 574 Mbps on 2.4GHz)',
+      memory: 'Engineered for 250+ concurrent client devices with seamless 802.11k/v/r fast roaming',
+      security: 'WPA3-Enterprise, Captive Portal (SMS/Voucher/LDAP), 802.1X, Rogue AP containment, 16 SSIDs',
+      ports: '1x 2.5 Gbps Ethernet port supporting 802.3at PoE+ and 12V DC input'
+    },
+    keyPills: ['AX5400 (5.4 Gbps)', '2.5G Multi-Gig PoE+', 'Omada Mesh & SDN', 'HE160 Channels'],
+    stockStatus: 'In Stock • Bulk Lot Warehouse',
+    rentalAvailable: true,
+    idealFor: 'High-density tech offices, conference auditoriums, enterprise campuses, and hospitality suites'
+  },
+  {
+    id: 'tplink-omada-eap610-outdoor-ap',
+    categoryId: 'wifi-wireless-networking',
+    brand: 'TP-Link',
+    name: 'TP-Link Omada EAP610-Outdoor AX1800 Long-Range Outdoor AP',
+    image: '/assets/wifi_tplink_eap610_outdoor.jpg',
+    tagline: 'IP67 weatherproof Wi-Fi 6 outdoor access point delivering high-speed coverage up to 300+ meters.',
+    specs: {
+      display: 'Outdoor-visible system LED with durable weather-sealed cable grommet',
+      processor: 'High-power RF front-end amplifiers with dual high-gain omnidirectional external antennas',
+      memory: 'Long-range mesh node capable of maintaining stable wireless backhaul links in extreme climates',
+      security: 'IP67 waterproof & dustproof enclosure, 6kV lightning protection, WPA3-Enterprise',
+      ports: '1x Gigabit Ethernet port supporting 802.3at PoE and 48V Passive PoE'
+    },
+    keyPills: ['IP67 Weatherproof', 'Wi-Fi 6 AX1800', '300m+ Outdoor Range', '6kV Lightning Shield'],
+    stockStatus: 'In Stock • Same-Day Dispatch',
+    rentalAvailable: true,
+    idealFor: 'Factory outdoor yards, corporate park campuses, resort grounds, and logistics parking bays'
+  },
+  {
+    id: 'tplink-omada-oc200-controller',
+    categoryId: 'wifi-wireless-networking',
+    brand: 'TP-Link',
+    name: 'TP-Link Omada OC200 Cloud Hardware Controller Hub',
+    image: '/assets/wifi_tplink_oc200.jpg',
+    tagline: 'Centralized enterprise management hub for Omada access points, switches, and VPN routers with zero-touch provisioning.',
+    specs: {
+      display: 'Industrial metal chassis with LED link indicators and Kensington security slot',
+      processor: 'Dedicated micro-SoC optimized for 24/7 continuous network monitoring and automated backups',
+      memory: 'Centrally controls up to 100 Omada APs, JetStream switches, and SafeStream routers',
+      security: 'Cloud access anywhere without recurring monthly fees, multi-tenant isolation, real-time RF heatmaps',
+      ports: '2x 10/100 Mbps Ethernet ports (1x 802.3af/at PoE input), 1x USB 2.0 port for config snapshots'
+    },
+    keyPills: ['100 Device Control', 'Zero Monthly Fees', 'Omada Cloud SDN', 'PoE Powered'],
+    stockStatus: 'In Stock • Fleet Staged',
+    rentalAvailable: true,
+    idealFor: 'Enterprise IT teams managing multi-site business branch Wi-Fi networks and corporate clusters'
+  },
+  {
+    id: 'tplink-omada-er7206-router',
+    categoryId: 'wifi-wireless-networking',
+    brand: 'TP-Link',
+    name: 'TP-Link Omada ER7206 Multi-Gigabit Enterprise VPN Gateway',
+    image: '/assets/hw_tplink_er7206.jpg',
+    tagline: 'Enterprise multi-WAN VPN router seamlessly integrated into Omada SDN with hardware IPsec/WireGuard tunnels.',
+    specs: {
+      processor: 'Dual-core 64-bit enterprise network processor with hardware crypto acceleration',
+      memory: 'Supports up to 100 concurrent IPsec VPN tunnels with 4x Gigabit WAN multi-line load balancing',
+      security: 'One-click automated VPN deployment, enterprise SPI firewall, DoS defense, IP/MAC binding',
+      ports: '1x Gigabit SFP WAN port + 5x Gigabit RJ45 ports (1 WAN, 2 WAN/LAN, 2 LAN)'
+    },
+    keyPills: ['Multi-WAN Load Balancing', 'Gigabit SFP Port', 'IPsec & WireGuard', 'Omada SDN Mesh'],
+    stockStatus: 'In Stock • Immediate Dispatch',
+    rentalAvailable: true,
+    idealFor: 'Corporate headquarters, branch interconnects, and resilient multi-ISP leased lines'
+  },
+  {
+    id: 'cisco-catalyst-9120-ap',
+    categoryId: 'wifi-wireless-networking',
+    brand: 'Cisco',
+    name: 'Cisco Catalyst 9120AX Wi-Fi 6 Enterprise Access Point',
+    image: '/assets/wifi_cisco_catalyst_9120.png',
+    tagline: 'Flagship enterprise 802.11ax Wi-Fi 6 access point with Cisco CleanAir spectrum intelligence and IoT radios.',
+    specs: {
+      display: 'Multi-color diagnostic LED indicator for instant link status and RF synchronization',
+      processor: 'Custom Cisco RF ASIC with CleanAir spectrum intelligence and interference suppression',
+      memory: 'Supports up to 500 active client devices concurrently with zero packet degradation',
+      security: 'WPA3 Enterprise, Cisco DNA Spaces location analytics, Rogue AP automated containment, BLE 5.0',
+      ports: '1x 2.5G Multigigabit Ethernet (mGig) RJ-45 PoE+ port'
+    },
+    keyPills: ['Wi-Fi 6 (802.11ax)', '2.5G mGig PoE+', 'Cisco CleanAir RF', '500+ Clients'],
+    stockStatus: 'In Stock • Fleet Ready',
+    rentalAvailable: true,
+    idealFor: 'High-density open offices, corporate headquarters, hospitals, and convention centers'
+  },
   {
     id: 'aruba-ap-635-wifi6e',
     categoryId: 'wifi-wireless-networking',
     brand: 'Aruba',
     name: 'Aruba AP-635 Campus Wi-Fi 6E Access Point',
-    image: '/assets/real_wifi_ap.jpg',
-    tagline: 'Flagship enterprise tri-band 802.11ax Wi-Fi 6E access point unlocking the ultra-wide 6 GHz band.',
+    image: '/assets/wifi_aruba_ap635.png',
+    tagline: 'Flagship enterprise tri-band 802.11ax Wi-Fi 6E access point unlocking the ultra-wide 6 GHz spectrum band.',
     specs: {
-      display: 'Tri-color circular status LED ring for network and radio health',
+      display: 'Tri-color circular status LED ring for network and radio health diagnostics',
       processor: 'Aruba ClientMatch technology with intelligent band steering and RF optimization',
-      memory: 'Supports up to 512 associated client devices per radio',
+      memory: 'Supports up to 512 associated client devices per radio across 2.4GHz, 5GHz, and 6GHz',
       security: 'WPA3 Enterprise, Enhanced Open (OWE), integrated BLE 5.0 and Zigbee IoT radio',
       ports: 'Dual 2.5 Gbps Smart Rate (mGig) Ethernet ports with PoE hitless failover'
     },
@@ -880,54 +1142,36 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     idealFor: 'High-density corporate auditoriums, modern tech campuses, and university lecture halls'
   },
   {
-    id: 'cisco-catalyst-9120-ap',
-    categoryId: 'wifi-wireless-networking',
-    brand: 'Cisco',
-    name: 'Cisco Catalyst 9120AX Wi-Fi 6 Access Point',
-    image: '/assets/wifi_access_point.jpg',
-    tagline: 'Enterprise-class 802.11ax Wi-Fi 6 access point engineered for mission-critical campus density.',
-    specs: {
-      display: 'Multi-color diagnostic LED indicator for instant link status',
-      processor: 'Custom Cisco RF ASIC with CleanAir spectrum intelligence and interference suppression',
-      memory: 'Supports up to 500 active client devices concurrently',
-      security: 'WPA3 Enterprise, Cisco DNA Spaces location analytics, Rogue AP automated containment',
-      ports: '1x 2.5G Multigigabit Ethernet (mGig) RJ-45 PoE+ port'
-    },
-    keyPills: ['Wi-Fi 6 (802.11ax)', '2.5G mGig PoE+', 'Cisco CleanAir RF', '500+ Clients'],
-    stockStatus: 'In Stock • Fleet Ready',
-    rentalAvailable: true,
-    idealFor: 'High-density open offices, corporate headquarters, hospitals, and convention centers'
-  },
-  {
-    id: 'ubiquiti-unifi-u6-enterprise',
+    id: 'ubiquiti-unifi-u6-pro',
     categoryId: 'wifi-wireless-networking',
     brand: 'Ubiquiti',
-    name: 'Ubiquiti UniFi U6 Enterprise Wi-Fi 6E AP',
-    image: '/assets/real_wifi_ap.jpg',
-    tagline: 'Tri-band Wi-Fi 6E ceiling access point designed for seamless high-density client environments.',
+    name: 'Ubiquiti UniFi U6 Pro Enterprise Wi-Fi 6 Access Point',
+    image: '/assets/wifi_ubiquiti_u6_pro.png',
+    tagline: 'High-performance ceiling-mounted Wi-Fi 6 access point engineered for demanding enterprise environments.',
     specs: {
-      display: 'RGB ring LED for customizable location tagging and status visualization',
-      processor: 'High-efficiency 10-stream Wi-Fi architecture with 4x4 MU-MIMO on 5GHz and 6GHz',
-      memory: 'Engineered for over 600 concurrent client devices with zero-handoff fast roaming',
-      security: 'WPA3 Personal / Enterprise, VLAN isolation, guest captive portal',
-      ports: '1x 2.5GbE RJ45 port powered via 802.3at PoE+'
+      display: 'Signature UniFi subtle RGB ring LED for customizable location tagging and status visualization',
+      processor: 'Dual-band Wi-Fi 6 with 4x4 MU-MIMO on 5 GHz (4.8 Gbps) and 2x2 MIMO on 2.4 GHz (573.5 Mbps)',
+      memory: 'Supports over 350+ concurrent client connections with seamless zero-handoff roaming',
+      security: 'WPA3 Personal / Enterprise, 802.1Q VLAN isolation, guest captive portal with voucher system',
+      ports: '1x GbE RJ45 Ethernet port powered via standard 802.3at PoE+'
     },
-    keyPills: ['Tri-Band Wi-Fi 6E', '10.2 Gbps Total Rate', '2.5GbE PoE+ Input', '600+ Client Capacity'],
+    keyPills: ['Wi-Fi 6 4x4 MU-MIMO', '5.3 Gbps Aggregate', '350+ Active Clients', 'UniFi Network App'],
     stockStatus: 'In Stock • Bulk Lots In Warehouse',
     rentalAvailable: true,
-    idealFor: 'High-density coworking spaces, conference centers, creative agencies, and IT parks'
+    idealFor: 'High-density coworking spaces, conference centers, creative design agencies, and IT parks'
   },
   {
     id: 'ruckus-zoneflex-r750',
     categoryId: 'wifi-wireless-networking',
     brand: 'Ruckus',
-    name: 'Ruckus Wireless ZoneFlex R750 Wi-Fi 6 AP',
-    image: '/assets/wifi_access_point.jpg',
+    name: 'Ruckus Wireless ZoneFlex R750 Wi-Fi 6 Enterprise AP',
+    image: '/assets/wifi_ruckus_r750.jpg',
     tagline: 'Premium 4x4:4 Wi-Fi 6 access point with patented BeamFlex+ adaptive antenna technology.',
     specs: {
-      processor: 'Multi-core enterprise Wi-Fi SoC with BeamFlex+ dynamic directional antennas',
-      memory: 'High-capacity client buffer for 1024 concurrent client connections',
-      security: 'WPA3, DPSK (Dynamic Pre-Shared Keys), rogue AP detection, smart mesh networking',
+      display: 'Multi-indicator LED panel for power, 2.4GHz/5GHz radios, and Ethernet link diagnostics',
+      processor: 'Multi-core enterprise Wi-Fi SoC with BeamFlex+ dynamic directional antenna patterns',
+      memory: 'High-capacity client buffer engineered for 1,024 concurrent client connections',
+      security: 'WPA3, DPSK (Dynamic Pre-Shared Keys), rogue AP detection, SmartMesh automated healing',
       ports: '1x 2.5GbE Ethernet port + 1x 1GbE Ethernet port with PoE+ input, USB 2.0 port'
     },
     keyPills: ['BeamFlex+ Antennas', '4x4:4 MU-MIMO', '1024 Client Capacity', 'Industrial & Stadium Grade'],
@@ -935,81 +1179,62 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     rentalAvailable: true,
     idealFor: 'Stadiums, manufacturing factory floors, airport terminals, and large educational campuses'
   },
-  {
-    id: 'aruba-instant-on-ap25',
-    categoryId: 'wifi-wireless-networking',
-    brand: 'Aruba',
-    name: 'Aruba Instant On AP25 Dual-Band Wi-Fi 6 AP',
-    image: '/assets/real_wifi_ap.jpg',
-    tagline: 'High-speed 4x4 Wi-Fi 6 access point tailored for small-to-midsize business environments.',
-    specs: {
-      processor: '4x4 MU-MIMO on 5GHz with OFDMA and Target Wake Time (TWT)',
-      memory: 'Provides smooth connectivity for up to 100 active devices per room',
-      security: 'Built-in security gateway & firewall, two-factor authentication, WPA3 support',
-      ports: '1x 2.5 Gigabit Ethernet port with 802.3at PoE input'
-    },
-    keyPills: ['Wi-Fi 6 4x4:4', '5.37 Gbps Speed', '2.5G Uplink', 'Instant On Cloud App'],
-    stockStatus: 'In Stock • Immediate Dispatch',
-    rentalAvailable: true,
-    idealFor: 'Midsize office suites, luxury boutique hotels, consulting firms, and retail flagships'
-  },
-  {
-    id: 'cisco-catalyst-9800-l-controller',
-    categoryId: 'wifi-wireless-networking',
-    brand: 'Cisco',
-    name: 'Cisco Catalyst 9800-L Wireless LAN Controller',
-    image: '/assets/network_security_firewall.jpg',
-    tagline: 'Enterprise-grade wireless controller for small to medium campuses with seamless software updates.',
-    specs: {
-      processor: 'Multi-core control plane running open and programmable Cisco IOS XE',
-      memory: 'Supports up to 250 Access Points and 5,000 clients simultaneously',
-      security: 'Encrypted Traffic Analytics, Cisco DNA Spaces, MACsec encryption, Rogue detection',
-      ports: '2x 10G SFP+ or 4x 1G uplinks, 1x RJ45 console, redundant power supply option'
-    },
-    keyPills: ['250 APs / 5,000 Clients', '5 Gbps Throughput', 'Stateful HA Switchover', 'Cisco IOS XE'],
-    stockStatus: 'In Stock • Enterprise Configured',
-    rentalAvailable: true,
-    idealFor: 'Centralized wireless management across multi-building campuses and hospitals'
-  },
-  {
-    id: 'ubiquiti-building-bridge-ubb',
-    categoryId: 'wifi-wireless-networking',
-    brand: 'Ubiquiti',
-    name: 'Ubiquiti UniFi Building-to-Building Bridge (UBB 60GHz)',
-    image: '/assets/real_wifi_ap.jpg',
-    tagline: 'Gigabit 60 GHz wireless link with 5 GHz failover for high-throughput building-to-building connectivity.',
-    specs: {
-      display: 'Integrated LED ring indicating precise alignment status between paired units',
-      processor: 'Point-to-point wireless engine delivering up to 1.7+ Gbps real aggregate throughput',
-      memory: 'Up to 500-meter line-of-sight range with automatic 5 GHz weather failover',
-      security: 'Proprietary AES-128 wireless link encryption, managed seamlessly in UniFi Controller',
-      ports: '1x Gigabit Ethernet PoE port per dish unit'
-    },
-    keyPills: ['60 GHz Gigabit Link', '1.7+ Gbps Speed', '5 GHz Auto Failover', '500m Operating Range'],
-    stockStatus: 'In Stock • Paired Kits Ready',
-    rentalAvailable: true,
-    idealFor: 'Connecting adjacent corporate office buildings, warehouse facilities, and cross-street annexes'
-  },
-  {
-    id: 'aruba-instant-on-ap22',
-    categoryId: 'wifi-wireless-networking',
-    brand: 'Aruba',
-    name: 'Aruba Instant On AP22 High-Density Indoor AP',
-    image: '/assets/wifi_access_point.jpg',
-    tagline: 'Cost-effective, Wi-Fi 6 certified access point engineered for modern hybrid office desks.',
-    specs: {
-      processor: '2x2:2 802.11ax Wi-Fi 6 architecture with OFDMA and Smart Mesh support',
-      memory: 'Handles 75+ active users per AP without latency spikes',
-      security: 'WPA2/WPA3 Enterprise and Personal, TPM chipset hardware key storage',
-      ports: '1x 10/100/1000 Gigabit Ethernet port with 802.3af PoE power'
-    },
-    keyPills: ['Wi-Fi 6 Certified', '1.77 Gbps Speed', 'Smart Mesh Support', 'Cost-Effective Fleets'],
-    stockStatus: 'In Stock • Bulk Lot Ready',
-    rentalAvailable: true,
-    idealFor: 'Department floors, legal and accounting firms, meeting rooms, and training centers'
-  },
 
-  // BUSINESS PHONES & IP PHONES (8 Enterprise Products)
+  // BUSINESS PHONES & IP PHONES (Grandstream Priority, Polycom, Cisco, Yealink, Fanvil)
+  {
+    id: 'grandstream-grp2615-ip-phone',
+    categoryId: 'business-phones-ip-phones',
+    brand: 'Grandstream',
+    name: 'Grandstream GRP2615 Carrier-Grade HD IP Phone',
+    image: '/assets/phone_grandstream_grp2615.png',
+    tagline: 'Carrier-grade 10-line IP phone featuring integrated dual-band Wi-Fi and 40 digital BLF keys.',
+    specs: {
+      display: '4.3-inch (480x272) TFT color LCD screen with customizable faceplates',
+      processor: 'Dual firmware images for carrier-grade reliability and seamless zero-downtime provisioning',
+      security: 'Enterprise-level protection including secure boot, dual firmware images, and encrypted data storage',
+      ports: 'Dual switched auto-sensing 10/100/1000 Gigabit ports with PoE, integrated dual-band Wi-Fi & Bluetooth'
+    },
+    keyPills: ['10 Lines / 5 SIP', 'Integrated Wi-Fi & BT', '40 Virtual BLF Keys', 'Carrier-Grade Security'],
+    stockStatus: 'In Stock • Same-Day Dispatch',
+    rentalAvailable: true,
+    idealFor: 'Enterprises needing wireless VoIP desks, call center supervisors, and hotel reception desks'
+  },
+  {
+    id: 'grandstream-grp2616-ip-phone',
+    categoryId: 'business-phones-ip-phones',
+    brand: 'Grandstream',
+    name: 'Grandstream GRP2616 Dual-Screen Carrier-Grade IP Phone',
+    image: '/assets/phone_grandstream_grp2616.png',
+    tagline: 'High-end 16-line carrier-grade IP phone with dual color LCD screens, integrated Wi-Fi, and 48 virtual keys.',
+    specs: {
+      display: 'Main 4.3" color LCD (480x272) + secondary 2.4" color screen for digital multipurpose keys',
+      processor: 'Carrier-grade audio engine with dual-firmware images for zero-interruption live upgrades',
+      security: 'Enterprise-level security including secure boot, encrypted configuration files, TLS, and SRTP',
+      ports: 'Dual switched auto-sensing 10/100/1000 Gigabit ports with PoE, integrated dual-band Wi-Fi & Bluetooth 5.0'
+    },
+    keyPills: ['Dual Color Screens', '16 Lines / 6 SIP', 'Integrated Wi-Fi & BT', '48 Virtual Multi Keys'],
+    stockStatus: 'In Stock • Priority Fleet Dispatch',
+    rentalAvailable: true,
+    idealFor: 'Executive desktop workstations, multi-tasking administrative teams, and busy reception desks'
+  },
+  {
+    id: 'grandstream-gxv3480-smart-video',
+    categoryId: 'business-phones-ip-phones',
+    brand: 'Grandstream',
+    name: 'Grandstream GXV3480 Android Smart Video IP Phone',
+    image: '/assets/phone_grandstream_gxv3480.png',
+    tagline: 'All-in-one 16-line multimedia business video phone powered by Android 11 with 8" touch screen.',
+    specs: {
+      display: '8.0" (1280x800) capacitive 10-point touch IPS LCD screen',
+      processor: 'Quad-core 2.0 GHz ARM processor with hardware 1080p video decoding/encoding',
+      security: 'Android 11 enterprise MDM, 2MP tiltable camera with privacy shutter, SRTP / TLS',
+      ports: 'Dual Gigabit ports with PoE/PoE+, HDMI input/output, dual-band Wi-Fi 6, Bluetooth 5.0'
+    },
+    keyPills: ['8" Touch Screen', 'Android 11 OS', '1080p HD Video Camera', '16 SIP Lines / Accounts'],
+    stockStatus: 'In Stock • Premium Flagship',
+    rentalAvailable: true,
+    idealFor: 'Senior corporate executives, telehealth consult desks, and video-conference rooms'
+  },
   {
     id: 'poly-vvx-450-ip-phone',
     categoryId: 'business-phones-ip-phones',
@@ -1065,42 +1290,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     idealFor: 'General knowledge workers, customer support desks, and corporate cubicle floors'
   },
   {
-    id: 'grandstream-grp2615-ip-phone',
-    categoryId: 'business-phones-ip-phones',
-    brand: 'Grandstream',
-    name: 'Grandstream GRP2615 Carrier-Grade HD IP Phone',
-    image: '/assets/phone_grandstream_grp2615.png',
-    tagline: 'Carrier-grade 10-line IP phone featuring integrated dual-band Wi-Fi and 40 digital BLF keys.',
-    specs: {
-      display: '4.3-inch (480x272) TFT color LCD screen with customizable faceplates',
-      processor: 'Dual firmware images for carrier-grade reliability and seamless zero-downtime provisioning',
-      security: 'Enterprise-level protection including secure boot, dual firmware images, and encrypted data storage',
-      ports: 'Dual switched auto-sensing 10/100/1000 Gigabit ports with PoE, integrated dual-band Wi-Fi & Bluetooth'
-    },
-    keyPills: ['10 Lines / 5 SIP', 'Integrated Wi-Fi & BT', '40 Virtual BLF Keys', 'Carrier-Grade Security'],
-    stockStatus: 'In Stock • Same-Day Dispatch',
-    rentalAvailable: true,
-    idealFor: 'Enterprises needing wireless VoIP desks, call center supervisors, and hotel reception desks'
-  },
-  {
-    id: 'grandstream-gxv3480-smart-video',
-    categoryId: 'business-phones-ip-phones',
-    brand: 'Grandstream',
-    name: 'Grandstream GXV3480 Android Smart Video IP Phone',
-    image: '/assets/phone_grandstream_gxv3480.png',
-    tagline: 'All-in-one 16-line multimedia business video phone powered by Android 11 with 8" touch screen.',
-    specs: {
-      display: '8.0" (1280x800) capacitive 10-point touch IPS LCD screen',
-      processor: 'Quad-core 2.0 GHz ARM processor with hardware 1080p video decoding/encoding',
-      security: 'Android 11 enterprise MDM, 2MP tiltable camera with privacy shutter, SRTP / TLS',
-      ports: 'Dual Gigabit ports with PoE/PoE+, HDMI input/output, dual-band Wi-Fi 6, Bluetooth 5.0'
-    },
-    keyPills: ['8" Touch Screen', 'Android 11 OS', '1080p HD Video Camera', '16 SIP Lines / Accounts'],
-    stockStatus: 'In Stock • Premium Flagship',
-    rentalAvailable: true,
-    idealFor: 'Senior corporate executives, telehealth consult desks, and video-conference rooms'
-  },
-  {
     id: 'yealink-sip-t54w-ip-phone',
     categoryId: 'business-phones-ip-phones',
     brand: 'Yealink',
@@ -1153,6 +1342,78 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     stockStatus: 'In Stock • Verified Inventory',
     rentalAvailable: true,
     idealFor: 'C-suite boardrooms, municipal council chambers, and corporate training rooms'
+  },
+  {
+    id: 'fanvil-x4u-ip-phone',
+    categoryId: 'business-phones-ip-phones',
+    brand: 'Fanvil',
+    name: 'Fanvil X4U Enterprise Dual-Screen Gigabit IP Phone',
+    image: '/assets/phone_fanvil_x4u.png',
+    tagline: 'Dual-screen business IP phone featuring Harman acoustic speaker, 12 SIP lines, and 30 DSS keys with dual Gigabit PoE.',
+    specs: {
+      display: 'Main 2.8" color LCD (320x240) + secondary 2.4" color screen for digital DSS keys with LED backlight',
+      processor: 'Harman Kardon tuned acoustic speaker with Opus codec and wideband HD audio clarity',
+      security: 'Transport Layer Security (TLS 1.2), SRTP, 802.1X, HTTPS, OpenVPN, encrypted configuration',
+      ports: 'Dual switched Gigabit Ethernet ports (10/100/1000) with integrated PoE, RJ9 headset port with EHS'
+    },
+    keyPills: ['Dual Color Screens', '12 SIP Lines', 'Harman Acoustic Audio', '30 Digital DSS Keys'],
+    stockStatus: 'In Stock • Immediate Dispatch',
+    rentalAvailable: true,
+    idealFor: 'Fast-paced corporate desks, enterprise administrative staff, and busy contact center operators'
+  },
+  {
+    id: 'fanvil-x7-touch-ip-phone',
+    categoryId: 'business-phones-ip-phones',
+    brand: 'Fanvil',
+    name: 'Fanvil X7 Touch Screen Enterprise IP Phone',
+    image: '/assets/phone_fanvil_x7.png',
+    tagline: 'High-end executive SIP phone with 7-inch capacitive touchscreen, 127 DSS keys, and built-in Bluetooth.',
+    specs: {
+      display: '7.0-inch capacitive color touchscreen (1024x600 resolution) with customizable user interface',
+      processor: 'High-performance audio SoC with Harman acoustic chamber and full-duplex hands-free speaker',
+      security: 'TLS/SRTP, AES-256 configuration encryption, 802.1X network access control, OpenVPN',
+      ports: 'Dual Gigabit ports with PoE, built-in Bluetooth 4.2, 1x USB 2.0 port for Wi-Fi dongle or flash drive'
+    },
+    keyPills: ['7" Touch Screen', '20 SIP Accounts', '127 DSS Virtual Keys', 'Built-in Bluetooth'],
+    stockStatus: 'In Stock • Executive Ready',
+    rentalAvailable: true,
+    idealFor: 'C-level executives, department managers, reception consoles, and control centers'
+  },
+  {
+    id: 'fanvil-v67-smart-video-phone',
+    categoryId: 'business-phones-ip-phones',
+    brand: 'Fanvil',
+    name: 'Fanvil V67 Flagship Smart Video IP Phone (Android)',
+    image: '/assets/phone_fanvil_v67.png',
+    tagline: 'Flagship executive smart video phone powered by Android with 7" touchscreen, HD camera, and antibacterial surface.',
+    specs: {
+      display: '7.0-inch adjustable capacitive color touch display with dynamic keypad lighting and intuitive UI',
+      processor: 'Quad-Core processor with built-in 5MP 1080p camera with privacy shutter running Android 9.0',
+      security: 'Antibacterial material surface, enterprise MDM security, TLS 1.3, SRTP encrypted voice/video',
+      ports: 'Dual Gigabit Ethernet with PoE, integrated dual-band Wi-Fi (2.4G/5G), built-in Bluetooth 5.0, USB 2.0'
+    },
+    keyPills: ['7" Touch Display', '5MP 1080p Camera', 'Antibacterial Casing', 'Wi-Fi & Bluetooth 5.0'],
+    stockStatus: 'In Stock • Premium Flagship',
+    rentalAvailable: true,
+    idealFor: 'Executive conference suites, telehealth consult desks, modern corporate boardrooms, and smart offices'
+  },
+  {
+    id: 'fanvil-x3u-gigabit-ip-phone',
+    categoryId: 'business-phones-ip-phones',
+    brand: 'Fanvil',
+    name: 'Fanvil X3U Entry-to-Mid Business Gigabit IP Phone',
+    image: '/assets/phone_fanvil_x3u.png',
+    tagline: 'Reliable and cost-effective Gigabit IP phone with 2.8" color screen, 6 SIP lines, and HD wideband audio.',
+    specs: {
+      display: '2.8-inch (320x240) color LCD screen with intuitive navigation keys and multi-language support',
+      processor: 'Wideband codec G.722 and Opus support with acoustic echo cancellation',
+      security: 'Standard SIP 2.0, TLS, SRTP, 802.1X, automated TR-069 / HTTPS provisioning',
+      ports: 'Dual Gigabit Ethernet ports (10/100/1000) with integrated PoE Class 1, RJ9 headset port'
+    },
+    keyPills: ['6 SIP Lines', '2.8" Color Screen', 'Dual Gigabit PoE', 'Wideband HD Voice'],
+    stockStatus: 'In Stock • Mass Deployment Fleet',
+    rentalAvailable: true,
+    idealFor: 'General corporate staff cubicles, hotel room administration, and high-volume office deployments'
   },
 
   // CCTV & SECURITY SURVEILLANCE (8 Enterprise Products)

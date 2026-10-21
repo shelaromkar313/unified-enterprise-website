@@ -60,7 +60,7 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
     { id: 'business-phones-ip-phones', name: 'Business Phones & IP Phones' },
     { id: 'cctv', name: 'CCTV' },
     { id: 'pbx-business-telephony', name: 'PBX & Business Telephony' },
-    { id: 'call-centre-dialer-infrastructure', name: 'Call-Centre & Dialer Infrastructure' },
+    { id: 'call-centre-dialer-infrastructure', name: 'Call Center & Dialer Infrastructure' },
     { id: 'gsm-gateways-pri-fxo-fxs', name: 'GSM Gateways, PRI, FXO & FXS' },
     { id: 'software-business-licences', name: 'Software & Business Licences' },
     { id: 'ill-leased-line', name: 'ILL' },
@@ -420,7 +420,7 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                               className={`w-full h-full ${
                                 product.subCategory === 'antivirus'
                                   ? 'object-contain p-2'
-                                  : (product.categoryId === 'firewalls-network-security'
+                                  : (product.categoryId === 'firewalls-network-security' || product.categoryId === 'wifi-wireless-networking' || product.categoryId === 'routers-network-switches' || product.categoryId === 'business-phones-ip-phones'
                                       ? 'object-contain p-2 group-hover:scale-105'
                                       : 'object-cover group-hover:scale-105')
                               } transition-transform duration-500`}
@@ -434,11 +434,19 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                               <span className="absolute top-3 right-3 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs">
                                 Cloud License
                               </span>
+                            ) : product.categoryId === 'servers-storage' ? (
+                              <span className="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs">
+                                Buy Only
+                              </span>
                             ) : product.rentalAvailable ? (
                               <span className="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs">
                                 Rent / Buy
                               </span>
-                            ) : null}
+                            ) : (
+                              <span className="absolute top-3 right-3 bg-slate-800 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs">
+                                Buy Only
+                              </span>
+                            )}
                           </div>
 
                           {/* Body Content */}
@@ -582,7 +590,7 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                 src={inspectProduct.image}
                 alt={inspectProduct.name}
                 className={`max-h-full max-w-full ${
-                  inspectProduct.subCategory === 'antivirus' || inspectProduct.categoryId === 'firewalls-network-security'
+                  inspectProduct.subCategory === 'antivirus' || inspectProduct.categoryId === 'firewalls-network-security' || inspectProduct.categoryId === 'wifi-wireless-networking' || inspectProduct.categoryId === 'routers-network-switches' || inspectProduct.categoryId === 'business-phones-ip-phones'
                     ? 'object-contain'
                     : 'object-cover rounded-lg'
                 }`}

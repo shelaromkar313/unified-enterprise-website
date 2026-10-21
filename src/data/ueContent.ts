@@ -65,7 +65,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     description: 'Rackmount, tower, and blade servers with enterprise SAN/NAS storage arrays configured for virtualization, mission-critical databases, and private cloud.',
     features: ['Redundant Hot-Swap Power Supplies', 'Hardware RAID Configurations', 'iDRAC / iLO Lights-Out Management', 'Scalable Flash & Hybrid Tiers'],
     specs: 'Dual-Socket Scalable Processors, Up to 2TB ECC DDR5, SAS/NVMe Arrays',
-    rentalAvailable: true,
+    rentalAvailable: false,
     image: '/assets/datacenter_servers.jpg',
     badge: 'Enterprise Grade'
   },
@@ -88,7 +88,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     features: ['Gigabit & 10G/40G SFP+ Uplinks', 'PoE+ (802.3at) Power Budget', 'VLAN, QoS & LACP Trunking', 'High-Availability Stacking'],
     specs: 'Wire-speed switching fabric up to 176 Gbps with redundant power',
     rentalAvailable: true,
-    image: '/assets/network_security_firewall.jpg',
+    image: '/assets/switch_cisco_catalyst_9300.jpg',
     badge: 'Core Infrastructure'
   },
   {
@@ -110,7 +110,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     features: ['Multi-User MIMO & OFDMA', 'Seamless 802.11r/k Fast Roaming', 'Guest Captive Portal & WPA3-Enterprise', 'RF Heatmap & Coverage Auditing'],
     specs: 'Supports 500+ concurrent clients per AP with beamforming precision',
     rentalAvailable: true,
-    image: '/assets/wifi_access_point.jpg',
+    image: '/assets/wifi_tplink_eap670.jpg',
     badge: 'High Density'
   },
   {
@@ -148,7 +148,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
   },
   {
     id: 'call-centre-dialer-infrastructure',
-    name: 'Call-Centre & Dialer Infrastructure',
+    name: 'Call Center & Dialer Infrastructure',
     category: 'Telecom',
     description: 'Predictive, progressive, and manual dialers, agent performance dashboards, CRM integration connectors, and multi-tenant telephony infrastructure for BPOs.',
     features: ['Predictive & Auto-Dialing Algorithms', 'Live Call Barging, Whispering & Monitoring', 'Real-Time Queue Analytics & Wallboards', 'Integration with Zoho, Salesforce, Freshdesk'],
@@ -242,7 +242,7 @@ export const SOLUTIONS_DATA: SolutionItem[] = [
   },
   {
     id: 'call-centre-bpo-infra',
-    title: 'Call-Centre & BPO Infrastructure',
+    title: 'Call Center & BPO Infrastructure',
     targetAudience: 'Inbound customer support, outbound dialer centers & BPOs',
     summary: 'High-concurrency voice dialers, multi-agent acoustic workstations, PRI/SIP gateway integration, call recording archives, and failover connectivity for uninterrupted 24/7 call flows.',
     deliverables: ['High-Density Dialer Server Deployment', 'Noise-Canceling Agent Terminal Setup', 'Dual ISP Automatic Link Failover', 'Custom CRM Screen-Pop Telephony Integration'],
@@ -406,10 +406,10 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
   },
   {
     id: 'call-centres-bpos',
-    title: 'Call Centres & BPOs',
+    title: 'Call Centers & BPOs',
     challenges: 'High concurrency call traffic, strict voice latency thresholds, 24/7 uptime needs, and rapid agent headcount scaling.',
     engineeredSolution: 'Predictive dialer infrastructure, low-latency PRI/SIP gateways, noise-canceling telecom hardware, and equipment rental for fast ramps.',
-    keyProducts: ['PBX & Business Telephony', 'Call-Centre & Dialer Infra', 'Equipment Rental']
+    keyProducts: ['PBX & Business Telephony', 'Call Center & Dialer Infra', 'Equipment Rental']
   },
   {
     id: 'manufacturing-industrial',
