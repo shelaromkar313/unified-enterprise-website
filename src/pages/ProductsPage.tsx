@@ -63,7 +63,7 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
     { id: 'call-centre-dialer-infrastructure', name: 'Call Center & Dialer Infrastructure' },
     { id: 'gsm-gateways-pri-fxo-fxs', name: 'GSM Gateways, PRI, FXO & FXS' },
     { id: 'software-business-licences', name: 'Software & Business Licences' },
-    { id: 'ill-leased-line', name: 'ILL' },
+    { id: 'ill-leased-line', name: 'Internet Leased Line (ILL)' },
     { id: 'managed-voip', name: 'Managed VOIP' },
   ], []);
 

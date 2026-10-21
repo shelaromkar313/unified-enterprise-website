@@ -181,7 +181,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
   },
   {
     id: 'ill-leased-line',
-    name: 'ILL (Internet Leased Line)',
+    name: 'Internet Leased Line (ILL)',
     category: 'Connectivity',
     description: 'Dedicated 1:1 symmetrical bandwidth leased line connectivity with enterprise-grade SLA, guaranteed latency, and static IP blocks for critical operations.',
     features: ['1:1 Symmetrical Upload & Download', '99.5%+ Uptime Service Level Agreement', 'Dual-Ring Fiber Path Redundancy', '24/7 Managed NOC Monitoring'],
