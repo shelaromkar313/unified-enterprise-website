@@ -5,6 +5,7 @@ export interface CatalogProduct {
   brand: string;
   name: string;
   image: string;
+  gallery?: string[];
   tagline: string;
   specs: {
     display?: string;
@@ -24,6 +25,57 @@ export interface CatalogProduct {
 
 export const CATALOG_PRODUCTS: CatalogProduct[] = [
   // LAPTOPS & DESKTOPS
+  {
+    id: 'acer-veriton-m200-h610',
+    categoryId: 'laptops-desktops',
+    subCategory: 'Desktops & Workstations',
+    brand: 'Acer',
+    name: 'Acer Veriton M200 Desktop (Core i5 14400 / 21.5" Bundle)',
+    image: '/assets/acer_veriton_m200_bundle.jpg',
+    gallery: [
+      '/assets/acer_veriton_m200_bundle.jpg',
+      '/assets/acer_veriton_m200.png'
+    ],
+    tagline: 'Enterprise 14th Gen Intel Core i5 desktop in 16L MT chassis with 21.5" FHD monitor, 512GB NVMe SSD, and 5-Year OEM warranty.',
+    specs: {
+      processor: '14th Gen Intel Core i5 14400 (10 Cores, 16 Threads, up to 4.70 GHz, 20MB Cache)',
+      chipset: 'Intel H610 Express Chipset Motherboard',
+      memory: '16GB DDR4 3200MHz RAM (Dual-channel, expandable up to 64GB)',
+      storage: '512GB M.2 PCIe Gen4 NVMe High-Speed SSD',
+      display: '21.5" Full HD (1920x1080) LED IPS Anti-Glare Display included',
+      peripherals: 'Acer Commercial USB Keyboard & Optical Mouse Bundle',
+      chassis: 'Micro-Tower (MT) 16L Commercial Chassis with Front USB 3.2 & Audio',
+      os: 'DOS / Windows 11 Pro Enterprise OEM Ready',
+      warranty: '5-Year Comprehensive OEM Commercial On-Site Warranty'
+    },
+    keyPills: ['Rent / Buy Option', 'Core i5 14400', '16GB DDR4', '512GB NVMe', '21.5" Monitor Bundle', '5-Year Warranty'],
+    stockStatus: 'In Stock • Ready to Deploy',
+    rentalAvailable: true,
+    idealFor: 'Enterprise offices, BPOs, finance teams, government tenders, and mission-critical desk workstations'
+  },
+  {
+    id: 'acer-travellite-tl14-52m',
+    categoryId: 'laptops-desktops',
+    subCategory: 'Commercial Laptops',
+    brand: 'Acer',
+    name: 'Acer TravelLite TL14-52M Laptop (Core 5 120U)',
+    image: '/assets/acer_travellite_tl14.jpg',
+    tagline: 'Lightweight 14" FHD IPS commercial ultrabook powered by Intel Core 5 with Wi-Fi 6, 2M FHD camera, and 5-Year commercial warranty.',
+    specs: {
+      processor: 'Intel Core 5 120U Processor (10 Cores, 12 Threads, up to 5.0 GHz Turbo, 12MB Cache)',
+      display: '14.0" Full HD (1920x1080) IPS Anti-Glare Slim-Bezel Display, 16:9, ComfortView',
+      memory: '16GB DDR4 High-Speed RAM (Expandable up to 32GB)',
+      storage: '512GB PCIe Gen4 NVMe M.2 SSD',
+      connectivity: 'Intel Wi-Fi 6 (802.11ax) + Bluetooth 5.2 Dual-Band Wireless',
+      camera: 'FHD (2M / 1080p) Web Camera with Physical Privacy Shutter & Dual Noise-Cancelling Mics',
+      os: 'DOS / Windows 11 Pro National Academic & Enterprise Ready',
+      warranty: '5-Year Extended Commercial Warranty (1-Year Battery & Adapter, Non-ADP)'
+    },
+    keyPills: ['Rent / Buy Option', 'Intel Core 5 120U', '14" FHD IPS', '16GB RAM', '512GB SSD', 'Wi-Fi 6 + FHD Cam', '5-Year Warranty'],
+    stockStatus: 'In Stock • Bulk Enterprise Allocation',
+    rentalAvailable: true,
+    idealFor: 'Executive mobility, corporate sales fleets, consulting teams, and remote workforces'
+  },
   {
     id: 'dell-latitude-7440',
     categoryId: 'laptops-desktops',
@@ -436,42 +488,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     idealFor: 'High-bandwidth Wi-Fi 6 access point networks, 10G server uplinks, and enterprise SMB backbones'
   },
   {
-    id: 'aruba-cx-6200f-48g-switch',
-    categoryId: 'routers-network-switches',
-    brand: 'Aruba',
-    name: 'Aruba CX 6200F 48G Class 4 PoE 4SFP+ Switch (JL728A)',
-    image: '/assets/switch_aruba_cx6200f.png',
-    tagline: 'Modern, cloud-managed enterprise access switch powered by AOS-CX with built-in telemetry.',
-    specs: {
-      processor: 'Quad Core ARM Cortex A72 @ 1.8GHz with Aruba Gen7 ASIC architecture',
-      memory: '8GB DDR4 RAM and 16GB eMMC Flash storage',
-      security: 'Dynamic Segmentation, MACsec link protection, Role-based policy enforcement',
-      ports: '48x 10/100/1000BASE-T Class 4 PoE ports (up to 740W) + 4x 1/10G SFP+ uplink slots'
-    },
-    keyPills: ['48x PoE+ (740W)', '4x 10G SFP+ Ports', 'Aruba AOS-CX OS', 'Network Analytics Engine'],
-    stockStatus: 'In Stock • Certified Staged',
-    rentalAvailable: true,
-    idealFor: 'Campus core access, smart office IoT endpoints, and high-bandwidth wireless backhaul'
-  },
-  {
-    id: 'ubiquiti-unifi-switch-enterprise-48',
-    categoryId: 'routers-network-switches',
-    brand: 'Ubiquiti',
-    name: 'Ubiquiti UniFi Enterprise Switch 48 PoE (USW-Enterprise-48-PoE)',
-    image: '/assets/switch_ubiquiti_enterprise_48.png',
-    tagline: 'Managed 2.5GbE PoE+ switch with 25G SFP28 optical uplinks and centralized UniFi OS management.',
-    specs: {
-      processor: 'Integrated Layer 3 hardware routing engine with inter-VLAN routing',
-      memory: 'High-speed buffer architecture for zero-packet loss Wi-Fi 6E backhaul',
-      security: '802.1X port access control, storm control, client isolation, UniFi Network Controller',
-      ports: '48x 2.5GbE 802.3at PoE+ RJ45 ports (720W total budget) + 4x 25G SFP28 uplinks'
-    },
-    keyPills: ['48x 2.5G mGig PoE+', '4x 25G SFP28 Uplinks', '720W Total PoE', 'UniFi Touchscreen Display'],
-    stockStatus: 'In Stock • Bulk Staged',
-    rentalAvailable: true,
-    idealFor: 'Powering high-density Wi-Fi 6E/7 access point fleets and modern creative studio networks'
-  },
-  {
     id: 'mikrotik-crs328-switch',
     categoryId: 'routers-network-switches',
     brand: 'MikroTik',
@@ -541,7 +557,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['3x 5dBi Antennas', '450 Mbps High-Speed', 'IP Bandwidth Control', 'WPS Quick Security'],
     stockStatus: 'In Stock • Bulk Lot Warehouse',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'Commercial retail shops, clinic receptions, branch connectivity, and local office broadband'
   },
   {
@@ -560,7 +576,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['AC1200 Dual-Band', 'Full Gigabit Ports', '4x High-Gain Antennas', 'USB Media Sharing'],
     stockStatus: 'In Stock • Immediate Dispatch',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'SMB enterprise workspaces, office leased-line terminations, and branch fiber connections'
   },
   {
@@ -579,7 +595,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['Wi-Fi 6 (3000 Mbps)', 'Gigabit WAN/LAN', 'WireGuard & OpenVPN', 'TP-Link HomeShield'],
     stockStatus: 'In Stock • Same-Day Dispatch',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'High-bandwidth modern corporate suites, engineering workstations, and hybrid offices'
   },
 
@@ -638,42 +654,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     stockStatus: 'In Stock • Custom Staged',
     rentalAvailable: true,
     idealFor: 'Corporate enterprise edges, government department security, and banking networks'
-  },
-  {
-    id: 'palo-alto-pa440',
-    categoryId: 'firewalls-network-security',
-    brand: 'Palo Alto',
-    name: 'Palo Alto Networks PA-440 ML-Powered NGFW',
-    image: '/assets/hw_paloalto_pa440.png',
-    tagline: 'World-leading Machine Learning-Powered Next-Gen Firewall preventing unknown zero-day threats inline.',
-    specs: {
-      processor: 'Dedicated multi-core security processing architecture running PAN-OS 11',
-      memory: 'High-density memory for real-time TLS 1.3 decryption and application classification',
-      security: 'Inline Cloud-Delivered Security Services, WildFire sandbox, Advanced Threat Prevention',
-      ports: '8x 10/100/1000 Gigabit RJ45 ports, redundant DC power inputs option'
-    },
-    keyPills: ['ML-Powered NGFW', '900 Mbps Threat SLA', 'PAN-OS 11 Inline AI', 'WildFire Zero-Day'],
-    stockStatus: 'In Stock • Gold Partner Certified',
-    rentalAvailable: true,
-    idealFor: 'Enterprise branch perimeters, fintech cloud connectors, and healthcare data security'
-  },
-  {
-    id: 'sophos-xgs-2100',
-    categoryId: 'firewalls-network-security',
-    brand: 'Sophos',
-    name: 'Sophos XGS 2100 Enterprise Firewall Appliance',
-    image: '/assets/hw_sophos_xgs2100.png',
-    tagline: 'Dual-processor Xstream architecture accelerating trusted SaaS and cloud application traffic.',
-    specs: {
-      processor: 'Dual-processor engine: dedicated x86 CPU + dedicated Xstream Flow Processor (NPU)',
-      memory: '16GB high-speed memory for deep TLS inspection and synchronized security',
-      security: 'Sophos Central cloud management, Synchronized Security endpoint heartbeat, Zero-Day sandstorm',
-      ports: '10x 1GbE Copper, 2x 1GbE SFP optical, 1x Flexi Port slot for modular 10GbE SFP+ uplinks'
-    },
-    keyPills: ['Dual-Engine Xstream', '1.25 Gbps Threat SLA', 'Synchronized Security', 'Modular Expansion Slot'],
-    stockStatus: 'In Stock • Complete Bundle Available',
-    rentalAvailable: true,
-    idealFor: 'Medium to large enterprises, multi-branch corporations, and school district networks'
   },
   {
     id: 'sonicwall-nsa-2700',
@@ -749,44 +729,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     stockStatus: 'In Stock • Same-Day Dispatch',
     rentalAvailable: true,
     idealFor: 'Small offices, retail chain stores, medical clinics, and branch office networks'
-  },
-  {
-    id: 'sophos-xgs-116-firewall',
-    categoryId: 'firewalls-network-security',
-    subCategory: 'firewall',
-    brand: 'Sophos',
-    name: 'Sophos XGS 116 Desktop Next-Gen Firewall Appliance',
-    image: '/assets/hw_sophos_xgs116.png',
-    tagline: 'Dual-processor Xstream architecture desktop firewall delivering 330 Mbps threat protection with built-in SFP optical uplink.',
-    specs: {
-      processor: 'Dual-processor engine: Multi-core x86 CPU + dedicated Xstream Flow Processor (NPU)',
-      memory: '8GB high-speed memory for TLS 1.3 decryption without performance penalties',
-      security: 'Sophos Synchronized Security, Deep Learning threat analysis, CryptoGuard anti-ransomware',
-      ports: '8x GE Copper ports + 1x SFP optical fiber port, optional redundant external power supply'
-    },
-    keyPills: ['Dual-Processor Xstream', '330 Mbps Threat SLA', 'Built-in SFP Fiber', 'Synchronized Security'],
-    stockStatus: 'In Stock • Pan-India Delivery',
-    rentalAvailable: true,
-    idealFor: 'Medium enterprise branches, school networks, and distributed corporate offices'
-  },
-  {
-    id: 'watchguard-firebox-t45',
-    categoryId: 'firewalls-network-security',
-    subCategory: 'firewall',
-    brand: 'WatchGuard',
-    name: 'WatchGuard Firebox T45 Unified Security Appliance',
-    image: '/assets/hw_watchguard_t45.png',
-    tagline: 'High-performance tabletop firewall appliance with 557 Mbps UTM throughput and multi-layered Total Security Suite.',
-    specs: {
-      processor: 'Multi-core Intel security hardware architecture with automated dynamic packet filtering',
-      memory: 'Integrated hardware cryptographic accelerator for IPsec and IKEv2 site-to-site VPNs',
-      security: 'WatchGuard Total Security Suite: APT Blocker, DNSWatch, ThreatSync XDR, Gateway AntiVirus',
-      ports: '5x Gigabit Ethernet ports (including 1x PoE+ port to power access points or VoIP phones)'
-    },
-    keyPills: ['557 Mbps UTM SLA', 'WatchGuard Total Security', 'Built-In PoE+ Port', 'Cloud-Managed'],
-    stockStatus: 'In Stock • Fully Licensed',
-    rentalAvailable: true,
-    idealFor: 'Midsize corporate offices, remote clinics, and branch operations needing PoE endpoints'
   },
   {
     id: 'sonicwall-tz470-firewall',
@@ -1086,24 +1028,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     idealFor: 'Enterprise IT teams managing multi-site business branch Wi-Fi networks and corporate clusters'
   },
   {
-    id: 'tplink-omada-er7206-router',
-    categoryId: 'wifi-wireless-networking',
-    brand: 'TP-Link',
-    name: 'TP-Link Omada ER7206 Multi-Gigabit Enterprise VPN Gateway',
-    image: '/assets/hw_tplink_er7206.jpg',
-    tagline: 'Enterprise multi-WAN VPN router seamlessly integrated into Omada SDN with hardware IPsec/WireGuard tunnels.',
-    specs: {
-      processor: 'Dual-core 64-bit enterprise network processor with hardware crypto acceleration',
-      memory: 'Supports up to 100 concurrent IPsec VPN tunnels with 4x Gigabit WAN multi-line load balancing',
-      security: 'One-click automated VPN deployment, enterprise SPI firewall, DoS defense, IP/MAC binding',
-      ports: '1x Gigabit SFP WAN port + 5x Gigabit RJ45 ports (1 WAN, 2 WAN/LAN, 2 LAN)'
-    },
-    keyPills: ['Multi-WAN Load Balancing', 'Gigabit SFP Port', 'IPsec & WireGuard', 'Omada SDN Mesh'],
-    stockStatus: 'In Stock • Immediate Dispatch',
-    rentalAvailable: true,
-    idealFor: 'Corporate headquarters, branch interconnects, and resilient multi-ISP leased lines'
-  },
-  {
     id: 'cisco-catalyst-9120-ap',
     categoryId: 'wifi-wireless-networking',
     brand: 'Cisco',
@@ -1121,44 +1045,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     stockStatus: 'In Stock • Fleet Ready',
     rentalAvailable: true,
     idealFor: 'High-density open offices, corporate headquarters, hospitals, and convention centers'
-  },
-  {
-    id: 'aruba-ap-635-wifi6e',
-    categoryId: 'wifi-wireless-networking',
-    brand: 'Aruba',
-    name: 'Aruba AP-635 Campus Wi-Fi 6E Access Point',
-    image: '/assets/wifi_aruba_ap635.png',
-    tagline: 'Flagship enterprise tri-band 802.11ax Wi-Fi 6E access point unlocking the ultra-wide 6 GHz spectrum band.',
-    specs: {
-      display: 'Tri-color circular status LED ring for network and radio health diagnostics',
-      processor: 'Aruba ClientMatch technology with intelligent band steering and RF optimization',
-      memory: 'Supports up to 512 associated client devices per radio across 2.4GHz, 5GHz, and 6GHz',
-      security: 'WPA3 Enterprise, Enhanced Open (OWE), integrated BLE 5.0 and Zigbee IoT radio',
-      ports: 'Dual 2.5 Gbps Smart Rate (mGig) Ethernet ports with PoE hitless failover'
-    },
-    keyPills: ['Wi-Fi 6E (6GHz Band)', '3.9 Gbps Peak Speed', 'Dual 2.5G Smart Rate', 'Aruba ESP Ready'],
-    stockStatus: 'In Stock • Same-Day Dispatch',
-    rentalAvailable: true,
-    idealFor: 'High-density corporate auditoriums, modern tech campuses, and university lecture halls'
-  },
-  {
-    id: 'ubiquiti-unifi-u6-pro',
-    categoryId: 'wifi-wireless-networking',
-    brand: 'Ubiquiti',
-    name: 'Ubiquiti UniFi U6 Pro Enterprise Wi-Fi 6 Access Point',
-    image: '/assets/wifi_ubiquiti_u6_pro.png',
-    tagline: 'High-performance ceiling-mounted Wi-Fi 6 access point engineered for demanding enterprise environments.',
-    specs: {
-      display: 'Signature UniFi subtle RGB ring LED for customizable location tagging and status visualization',
-      processor: 'Dual-band Wi-Fi 6 with 4x4 MU-MIMO on 5 GHz (4.8 Gbps) and 2x2 MIMO on 2.4 GHz (573.5 Mbps)',
-      memory: 'Supports over 350+ concurrent client connections with seamless zero-handoff roaming',
-      security: 'WPA3 Personal / Enterprise, 802.1Q VLAN isolation, guest captive portal with voucher system',
-      ports: '1x GbE RJ45 Ethernet port powered via standard 802.3at PoE+'
-    },
-    keyPills: ['Wi-Fi 6 4x4 MU-MIMO', '5.3 Gbps Aggregate', '350+ Active Clients', 'UniFi Network App'],
-    stockStatus: 'In Stock • Bulk Lots In Warehouse',
-    rentalAvailable: true,
-    idealFor: 'High-density coworking spaces, conference centers, creative design agencies, and IT parks'
   },
   {
     id: 'ruckus-zoneflex-r750',
@@ -1581,7 +1467,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['Smart Backlighting', 'Logi Bolt Encrypted', 'Multi-OS & 3 Devices', 'USB-C Rechargeable'],
     stockStatus: 'In Stock • Enterprise Bulk Packs Available',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'Software developers, financial analysts, enterprise workstations, and executive desks'
   },
   {
@@ -1599,7 +1485,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['8000 DPI Darkfield', 'MagSpeed Quiet Scroll', 'Logi Bolt Encrypted', '70-Day Battery'],
     stockStatus: 'In Stock • Ready to Ship',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'Creative agencies, CAD engineers, data scientists, and power productivity users'
   },
   {
@@ -1617,7 +1503,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     },
     keyPills: ['3-Device Pairing', '36-Month Battery', '128-Bit AES Encrypted', 'Dell Peripheral Manager'],
     stockStatus: 'In Stock • Bulk Deployments',
-    rentalAvailable: true,
+    rentalAvailable: false,
     idealFor: 'Corporate call centers, enterprise IT fleets, shared work pods, and operations floors'
   },
   {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { 
+import {
   ArrowRight, CheckCircle2, PhoneCall
 } from 'lucide-react';
 import WhyUnifiedSection from '../components/sections/WhyUnifiedSection';
@@ -31,7 +31,7 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
           console.log('Autoplay attempt caught:', err);
           // If browser policy delays autoplay until first user gesture
           const handleInteraction = () => {
-            video.play().catch(() => {});
+            video.play().catch(() => { });
             window.removeEventListener('click', handleInteraction);
             window.removeEventListener('touchstart', handleInteraction);
           };
@@ -100,7 +100,7 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
             </h1>
 
             <p className="text-sm sm:text-[15px] lg:text-base text-slate-100/95 leading-relaxed mb-7 max-w-lg font-normal text-left drop-shadow-[0_1px_8px_rgba(0,0,0,0.8)]">
-              We manage, optimize, and support your entire IT ecosystem with expert solutions in enterprise infrastructure, AMC maintenance, network design, telecom voice, and hardware rentals — delivered with speed and reliability.
+              We manage, optimize, and support your entire IT ecosystem with expert solutions in enterprise infrastructure, AMC maintenance, network design, telecom voice, and hardware rentals, delivered with speed and reliability.
             </p>
 
             {/* Cisco-Benchmarked Dual Action Buttons */}
@@ -255,7 +255,7 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
                   <span>Free Technical Architecture Consultation</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
-                  Request a Consultation
+                  Request a Free Consultation
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
                   Speak directly with an enterprise systems architect. Whether you require 50 rental laptops dispatched tomorrow, a comprehensive server AMC, or a complete network revamp, we provide prompt, transparent quotations.
@@ -286,11 +286,11 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
                 </button>
 
                 <a
-                  href="tel:+918377017477"
+                  href="tel:+919972457774"
                   className="w-full sm:w-auto min-h-[48px] px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white border border-white/20 font-semibold text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
                 >
                   <PhoneCall className="w-4 h-4 text-red-400" />
-                  <span>Call +91-8377017477</span>
+                  <span>Call +91-9972457774</span>
                 </a>
               </div>
             </div>

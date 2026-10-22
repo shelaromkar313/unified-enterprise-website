@@ -9,6 +9,7 @@ export interface ServiceCardData {
   id: string;
   serviceId: string;
   title: string;
+  category: string;
   description: string;
   image: string;
 }
@@ -19,6 +20,7 @@ export const servicesList: ServiceCardData[] = [
     id: 'service-hardware',
     serviceId: 'hardware-procurement',
     title: 'Hardware Sales & OEM Procurement',
+    category: 'Hardware & OEM',
     description: 'Turnkey procurement of rack servers, Cisco/Fortinet firewalls, L2/L3 managed switches, and enterprise workstations with direct OEM warranties.',
     image: '/assets/ue_hardware_procurement.jpg'
   },
@@ -26,6 +28,7 @@ export const servicesList: ServiceCardData[] = [
     id: 'service-rental',
     serviceId: 'equipment-rental',
     title: 'IT Equipment Rental & Leasing',
+    category: 'Device Rentals',
     description: 'Get the latest IT hardware that drives client businesses. Laptops, desktops, servers, IT peripherals: cost-effective and fully managed.',
     image: '/assets/ue_rental_leasing.jpg'
   },
@@ -33,6 +36,7 @@ export const servicesList: ServiceCardData[] = [
     id: 'service-network',
     serviceId: 'network-design',
     title: 'Network Design & Deployment',
+    category: 'Enterprise Network',
     description: 'Fast, secure, and reliable networks built for your business needs. We plan, configure, and deploy networks that support seamless operations.',
     image: '/assets/ue_network_design.jpg'
   },
@@ -40,6 +44,7 @@ export const servicesList: ServiceCardData[] = [
     id: 'service-amc',
     serviceId: 'amc-support',
     title: 'AMC & Maintenance Support',
+    category: 'Critical AMC',
     description: 'Proactive monitoring, timely updates, and quick issue resolution. We keep your IT systems running at full efficiency.',
     image: '/assets/ue_amc_support.jpg'
   },
@@ -47,6 +52,7 @@ export const servicesList: ServiceCardData[] = [
     id: 'service-telecom',
     serviceId: 'telecom-voice',
     title: 'Unified Telecom & Carrier Voice',
+    category: 'VoIP & Telecom',
     description: 'Grandstream & Asterisk IP PBX deployments, SIP trunking, BPO predictive dialers, and ISP leased line coordination ensuring 99.9% uptime.',
     image: '/assets/ue_telecom_voice.jpg'
   },
@@ -54,6 +60,7 @@ export const servicesList: ServiceCardData[] = [
     id: 'service-cctv',
     serviceId: 'cctv-surveillance',
     title: 'CCTV & Security Surveillance',
+    category: 'Surveillance',
     description: 'High-definition 4K IP dome/bullet cameras, NVR/DVR storage arrays, video analytics, and multi-branch remote monitoring control rooms.',
     image: '/assets/ue_cctv_surveillance.jpg'
   },
@@ -61,6 +68,7 @@ export const servicesList: ServiceCardData[] = [
     id: 'service-callcentre',
     serviceId: 'call-centre-bpo',
     title: 'Call Center & BPO Infrastructure',
+    category: 'BPO & Dialer',
     description: 'High-concurrency predictive dialers, PRI and GSM gateways, Asterisk/Vicidial setups, CRM integrations, and agent workstations.',
     image: '/assets/ue_call_centre_bpo.jpg'
   }
@@ -77,7 +85,6 @@ function getSignedDistance(index: number, activeIndex: number, total: number): n
 export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSectionProps) {
   // Start on index 2 (Network Design & Deployment)
   const [activeIndex, setActiveIndex] = useState(2);
-  const [isHovered, setIsHovered] = useState(false);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 1600
   );
@@ -87,7 +94,8 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
   const sectionRef = useRef<HTMLElement | null>(null);
   const wheelAccumulatorRef = useRef<number>(0);
   const lastWheelTimeRef = useRef<number>(0);
-  const isPointerDownRef = useRef<boolean>(false);
+  const isInteractingRef = useRef<boolean>(false);
+  const lastInteractionTimeRef = useRef<number>(0);
   const pointerStartXRef = useRef<number>(0);
   const pointerStartYRef = useRef<number>(0);
   const hasDraggedRef = useRef<boolean>(false);
@@ -101,12 +109,40 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
   }, []);
 
   const nextSlide = useCallback(() => {
+    lastInteractionTimeRef.current = Date.now();
     setActiveIndex((prev) => (prev + 1) % total);
   }, [total]);
 
   const prevSlide = useCallback(() => {
+    lastInteractionTimeRef.current = Date.now();
     setActiveIndex((prev) => (prev - 1 + total) % total);
   }, [total]);
+
+  // Global pointer release listeners to ensure dragging/touching never freezes auto-rotation
+  useEffect(() => {
+    const handleGlobalRelease = () => {
+      isInteractingRef.current = false;
+      setTimeout(() => {
+        hasDraggedRef.current = false;
+      }, 60);
+    };
+
+    window.addEventListener('pointerup', handleGlobalRelease);
+    window.addEventListener('pointercancel', handleGlobalRelease);
+    window.addEventListener('mouseup', handleGlobalRelease);
+    window.addEventListener('touchend', handleGlobalRelease);
+    window.addEventListener('touchcancel', handleGlobalRelease);
+    window.addEventListener('blur', handleGlobalRelease);
+
+    return () => {
+      window.removeEventListener('pointerup', handleGlobalRelease);
+      window.removeEventListener('pointercancel', handleGlobalRelease);
+      window.removeEventListener('mouseup', handleGlobalRelease);
+      window.removeEventListener('touchend', handleGlobalRelease);
+      window.removeEventListener('touchcancel', handleGlobalRelease);
+      window.removeEventListener('blur', handleGlobalRelease);
+    };
+  }, []);
 
   // Touchpad horizontal swipe support
   useEffect(() => {
@@ -145,14 +181,15 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
   // Pointer drag gestures
   const handlePointerDown = (e: React.PointerEvent) => {
     if (e.button !== 0 && e.pointerType === 'mouse') return;
-    isPointerDownRef.current = true;
+    isInteractingRef.current = true;
+    lastInteractionTimeRef.current = Date.now();
     hasDraggedRef.current = false;
     pointerStartXRef.current = e.clientX;
     pointerStartYRef.current = e.clientY;
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
-    if (!isPointerDownRef.current) return;
+    if (!isInteractingRef.current) return;
     const diffX = pointerStartXRef.current - e.clientX;
 
     if (Math.abs(diffX) > 8) {
@@ -170,13 +207,24 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
   };
 
   const handlePointerUp = () => {
-    isPointerDownRef.current = false;
+    isInteractingRef.current = false;
     setTimeout(() => {
       hasDraggedRef.current = false;
     }, 60);
   };
 
-  // Carousel stays static without continuous auto-playback rendering; navigation is user-controlled
+  // Continuous rock-solid auto-rotate every 1800ms with auto-healing
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const isActivelyInteracting = isInteractingRef.current && (Date.now() - lastInteractionTimeRef.current < 2500);
+      if (!isActivelyInteracting) {
+        isInteractingRef.current = false;
+        setActiveIndex((prev) => (prev + 1) % total);
+      }
+    }, 1800);
+
+    return () => clearInterval(timer);
+  }, [total]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -190,10 +238,13 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
 
   // Touch swipe support for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
+    isInteractingRef.current = true;
+    lastInteractionTimeRef.current = Date.now();
     setTouchStartX(e.touches[0].clientX);
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
+    isInteractingRef.current = false;
     if (touchStartX === null) return;
     const touchEndX = e.changedTouches[0].clientX;
     const diff = touchStartX - touchEndX;
@@ -299,8 +350,6 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
       ref={sectionRef}
       id="why-unified"
       className="bg-[#f1f5f9] text-slate-900 pt-12 pb-16 sm:pt-16 sm:pb-20 relative select-none border-b border-slate-200 overflow-hidden"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       aria-label="Why Unified Enterprise Solutions"
@@ -369,6 +418,7 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
                 onClick={() => {
                   if (hasDraggedRef.current) return;
                   if (!slot.isCenter) {
+                    lastInteractionTimeRef.current = Date.now();
                     setActiveIndex(idx);
                   }
                 }}
@@ -377,7 +427,7 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
                   zIndex: slot.zIndex,
                   opacity: slot.opacity,
                   pointerEvents: slot.pointerEvents,
-                  transition: 'transform 750ms cubic-bezier(0.22, 1, 0.36, 1), opacity 700ms ease, box-shadow 700ms ease',
+                  transition: 'transform 600ms cubic-bezier(0.25, 1, 0.5, 1), opacity 550ms ease, box-shadow 550ms ease',
                   transformStyle: 'preserve-3d',
                   backfaceVisibility: 'hidden',
                   WebkitBackfaceVisibility: 'hidden',
@@ -398,6 +448,15 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
+                      <div className="absolute top-2.5 left-2.5 bg-slate-900/80 backdrop-blur-md px-2.5 py-0.5 rounded-lg border border-white/10 text-white text-[10px] font-bold uppercase tracking-wider">
+                        {card.category}
+                      </div>
+                      {slot.isCenter && (
+                        <div className="absolute top-2.5 right-2.5 bg-[#dc2626] text-white px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider shadow-sm flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                          <span>Active</span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Card Title in executive navy (#173B67) */}
@@ -444,10 +503,13 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
         {servicesList.map((_, idx) => (
           <button
             key={idx}
-            onClick={() => setActiveIndex(idx)}
-            className={`h-2 rounded-full transition-all duration-300 focus:outline-none ${
+            onClick={() => {
+              lastInteractionTimeRef.current = Date.now();
+              setActiveIndex(idx);
+            }}
+            className={`h-2 rounded-full transition-all duration-300 focus:outline-none cursor-pointer ${
               activeIndex === idx
-                ? 'w-7 bg-[#dc2626] shadow-[0_0_12px_rgba(220,38,38,0.5)]'
+                ? 'w-8 bg-[#dc2626] shadow-[0_0_12px_rgba(220,38,38,0.5)]'
                 : 'w-2 bg-slate-300 hover:bg-slate-400'
             }`}
             aria-label={`Go to slide ${idx + 1}`}

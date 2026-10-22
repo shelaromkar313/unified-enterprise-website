@@ -43,7 +43,7 @@ export default function HeroSection({ onExploreSolutions, onTalkToExperts }: Her
 
             {/* Supporting Text: approx 16-18px */}
             <p className="text-base sm:text-lg text-[#526477] leading-relaxed max-w-xl">
-              IT infrastructure, networking, telecom systems, and managed support — engineered around your business for resilient uptime and seamless multi-site expansion.
+              IT infrastructure, networking, telecom systems, and managed support, engineered around your business for resilient uptime and seamless multi-site expansion.
             </p>
 
             {/* CTAs */}

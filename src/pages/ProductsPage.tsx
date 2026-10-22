@@ -32,6 +32,12 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
 
   // Modal inspection state
   const [inspectProduct, setInspectProduct] = useState<CatalogProduct | null>(null);
+  const [activeModalImage, setActiveModalImage] = useState<string | null>(null);
+
+  const openInspectModal = (product: CatalogProduct) => {
+    setInspectProduct(product);
+    setActiveModalImage(product.image);
+  };
 
   // Sync with URL query parameter
   useEffect(() => {
@@ -293,28 +299,32 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                   </button>
                 </div>
 
-                {/* Card 3: Services for a resilient infrastructure */}
+                {/* Card 3: Voice AI & Speech Intelligence */}
                 <div className="flex flex-col justify-between group">
                   <div>
-                    <div className="h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-100">
-                      <img
-                        src="/assets/datacenter_servers.jpg"
-                        alt="Services for a resilient infrastructure"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
+                    <div className="h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-900 border border-slate-800 flex items-center justify-center p-6 text-white relative">
+                      <div className="absolute inset-0 bg-gradient-to-br from-red-600/25 via-transparent to-blue-600/25 pointer-events-none" />
+                      <div className="text-center relative z-10 space-y-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-red-400 bg-red-950/80 border border-red-800 px-2.5 py-0.5 rounded-full inline-block">
+                          ★ Priority AI Suite
+                        </span>
+                        <h4 className="text-lg font-black leading-snug">Voice AI & Speech Analytics</h4>
+                        <p className="text-xs text-slate-300">STT, TTS, Multiple AI Voicebots & Real-Time Sentiment</p>
+                      </div>
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug">
-                      Services for a resilient infrastructure
+                      Voice AI, STT, TTS & Call Analytics
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                      See, remediate, modernize, and defend AI threats at machine speed using Cisco Resilient Infrastructure Services, powered by Cisco IQ.
+                      Deploy autonomous conversational Voice AI agents, sub-200ms Indian-accent transcription, and live sentiment scoring on AWS UVC PBX cloud telephony.
                     </p>
                   </div>
                   <button
-                    onClick={() => handleSelectCategory('servers-storage')}
+                    type="button"
+                    onClick={() => handleSelectCategory('software-business-licences')}
                     className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#dc2626] hover:underline"
                   >
-                    <span>Explore how</span>
+                    <span>Explore Software &amp; Voice AI</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -418,8 +428,8 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                               src={product.image}
                               alt={product.name}
                               className={`w-full h-full ${
-                                product.subCategory === 'antivirus'
-                                  ? 'object-contain p-2'
+                                product.subCategory === 'antivirus' || product.brand === 'Acer'
+                                  ? 'object-contain p-2 group-hover:scale-105'
                                   : (product.categoryId === 'firewalls-network-security' || product.categoryId === 'wifi-wireless-networking' || product.categoryId === 'routers-network-switches' || product.categoryId === 'business-phones-ip-phones'
                                       ? 'object-contain p-2 group-hover:scale-105'
                                       : 'object-cover group-hover:scale-105')
@@ -434,12 +444,8 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                               <span className="absolute top-3 right-3 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs">
                                 Cloud License
                               </span>
-                            ) : product.categoryId === 'servers-storage' ? (
-                              <span className="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs">
-                                Buy Only
-                              </span>
                             ) : product.rentalAvailable ? (
-                              <span className="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs">
+                              <span className="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs">
                                 Rent / Buy
                               </span>
                             ) : (
@@ -484,7 +490,7 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                             Request Quote
                           </button>
                           <button
-                            onClick={() => setInspectProduct(product)}
+                            onClick={() => openInspectModal(product)}
                             className="py-2 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors"
                           >
                             Quick View
@@ -584,18 +590,48 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
               </button>
             </div>
 
-            {/* Modal Image */}
-            <div className="h-56 sm:h-64 rounded-xl overflow-hidden mb-5 bg-white border border-slate-100 flex items-center justify-center p-4">
+            {/* Modal Image Box */}
+            <div className="h-56 sm:h-64 rounded-xl overflow-hidden mb-3 bg-white border border-slate-100 flex items-center justify-center p-4">
               <img
-                src={inspectProduct.image}
+                src={activeModalImage || inspectProduct.image}
                 alt={inspectProduct.name}
                 className={`max-h-full max-w-full ${
-                  inspectProduct.subCategory === 'antivirus' || inspectProduct.categoryId === 'firewalls-network-security' || inspectProduct.categoryId === 'wifi-wireless-networking' || inspectProduct.categoryId === 'routers-network-switches' || inspectProduct.categoryId === 'business-phones-ip-phones'
+                  inspectProduct.subCategory === 'antivirus' || inspectProduct.brand === 'Acer' || inspectProduct.categoryId === 'firewalls-network-security' || inspectProduct.categoryId === 'wifi-wireless-networking' || inspectProduct.categoryId === 'routers-network-switches' || inspectProduct.categoryId === 'business-phones-ip-phones'
                     ? 'object-contain'
                     : 'object-cover rounded-lg'
                 }`}
               />
             </div>
+
+            {/* Multi-angle Gallery Thumbnails */}
+            {inspectProduct.gallery && inspectProduct.gallery.length > 1 && (
+              <div className="flex items-center gap-2 mb-4 overflow-x-auto pb-1">
+                {inspectProduct.gallery.map((imgUrl, gIdx) => {
+                  const isCurrent = (activeModalImage || inspectProduct.image) === imgUrl;
+                  return (
+                    <button
+                      key={gIdx}
+                      type="button"
+                      onClick={() => setActiveModalImage(imgUrl)}
+                      className={`h-14 w-20 rounded-lg border-2 p-1 bg-white shrink-0 transition-all flex items-center justify-center overflow-hidden cursor-pointer ${
+                        isCurrent
+                          ? 'border-[#dc2626] ring-2 ring-red-100 shadow-xs'
+                          : 'border-slate-200 hover:border-slate-300 opacity-70 hover:opacity-100'
+                      }`}
+                    >
+                      <img
+                        src={imgUrl}
+                        alt={`Angle ${gIdx + 1}`}
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </button>
+                  );
+                })}
+                <span className="text-[10px] text-slate-400 font-medium ml-1">
+                  Click to switch angles
+                </span>
+              </div>
+            )}
 
             {/* Detailed Technical Specs Table */}
             <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 mb-6 space-y-2 text-xs">
@@ -621,6 +657,42 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                 <div className="flex flex-col sm:flex-row sm:justify-between py-1 border-b border-slate-200/60">
                   <span className="font-semibold text-slate-500">Storage:</span>
                   <span className="text-slate-800 font-medium text-right sm:max-w-md">{inspectProduct.specs.storage}</span>
+                </div>
+              )}
+              {inspectProduct.specs.chipset && (
+                <div className="flex flex-col sm:flex-row sm:justify-between py-1 border-b border-slate-200/60">
+                  <span className="font-semibold text-slate-500">Chipset:</span>
+                  <span className="text-slate-800 font-medium text-right sm:max-w-md">{inspectProduct.specs.chipset}</span>
+                </div>
+              )}
+              {inspectProduct.specs.chassis && (
+                <div className="flex flex-col sm:flex-row sm:justify-between py-1 border-b border-slate-200/60">
+                  <span className="font-semibold text-slate-500">Chassis:</span>
+                  <span className="text-slate-800 font-medium text-right sm:max-w-md">{inspectProduct.specs.chassis}</span>
+                </div>
+              )}
+              {inspectProduct.specs.peripherals && (
+                <div className="flex flex-col sm:flex-row sm:justify-between py-1 border-b border-slate-200/60">
+                  <span className="font-semibold text-slate-500">Included Peripherals:</span>
+                  <span className="text-slate-800 font-medium text-right sm:max-w-md">{inspectProduct.specs.peripherals}</span>
+                </div>
+              )}
+              {inspectProduct.specs.connectivity && (
+                <div className="flex flex-col sm:flex-row sm:justify-between py-1 border-b border-slate-200/60">
+                  <span className="font-semibold text-slate-500">Connectivity:</span>
+                  <span className="text-slate-800 font-medium text-right sm:max-w-md">{inspectProduct.specs.connectivity}</span>
+                </div>
+              )}
+              {inspectProduct.specs.camera && (
+                <div className="flex flex-col sm:flex-row sm:justify-between py-1 border-b border-slate-200/60">
+                  <span className="font-semibold text-slate-500">Webcam:</span>
+                  <span className="text-slate-800 font-medium text-right sm:max-w-md">{inspectProduct.specs.camera}</span>
+                </div>
+              )}
+              {inspectProduct.specs.warranty && (
+                <div className="flex flex-col sm:flex-row sm:justify-between py-1 border-b border-slate-200/60">
+                  <span className="font-semibold text-slate-500">Warranty Coverage:</span>
+                  <span className="text-slate-800 font-bold text-right sm:max-w-md text-[#dc2626]">{inspectProduct.specs.warranty}</span>
                 </div>
               )}
               {inspectProduct.specs.security && (

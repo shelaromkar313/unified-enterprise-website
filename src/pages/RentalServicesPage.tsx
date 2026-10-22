@@ -41,6 +41,31 @@ interface RentalDetail {
 export const RENTAL_PRODUCTS: RentalProduct[] = [
   // 1. Laptop Rental Products
   {
+    id: 'rent-acer-travellite-tl14-52m',
+    categoryId: 'laptop-rental',
+    name: 'Acer TravelLite TL14-52M Commercial Ultrabook',
+    brand: 'Acer',
+    image: '/assets/acer_travellite_tl14.jpg',
+    specs: [
+      'Intel Core 5 120U (10 Cores, 12 Threads, up to 5.0 GHz)',
+      '16GB DDR4 High-Speed RAM',
+      '512GB PCIe Gen4 NVMe M.2 SSD',
+      '14.0" Full HD (1920x1080) IPS Slim-Bezel Display',
+      'Wi-Fi 6 + Bluetooth 5.2, FHD (2M) Privacy Shutter Camera',
+      '5-Year Extended Commercial Warranty Coverage'
+    ],
+    rentalRate: 'From ₹1,750 / month',
+    minLease: '1 Month Minimum',
+    stockStatus: 'Priority Fleet • 150+ Units Ready',
+    highlight: 'Priority commercial fleet choice with 5-year commercial warranty and high battery efficiency',
+    includedAccessories: [
+      'Original Acer 65W Rapid Power Adapter',
+      'Commercial Padded Laptop Shoulder Bag',
+      'Acer Optical Wireless Mouse',
+      'Corporate Enterprise OS Staging & BitLocker Encryption'
+    ]
+  },
+  {
     id: 'rent-dell-latitude-5440',
     categoryId: 'laptop-rental',
     name: 'Dell Latitude 5440 Enterprise Ultrabook',
@@ -138,6 +163,30 @@ export const RENTAL_PRODUCTS: RentalProduct[] = [
   },
 
   // 2. Desktop Rental Products
+  {
+    id: 'rent-acer-veriton-m200-h610',
+    categoryId: 'desktop-rental',
+    name: 'Acer Veriton M200 Desktop (Core i5 14400 / 21.5" Bundle)',
+    brand: 'Acer',
+    image: '/assets/acer_veriton_m200_bundle.jpg',
+    specs: [
+      'Intel Core i5 14400 (10 Cores, 16 Threads, up to 4.70 GHz)',
+      '16GB DDR4 RAM + 512GB NVMe High-Speed SSD',
+      'Intel H610 Chipset / 16-Liter MT Commercial Chassis',
+      'Acer 21.5" Full HD IPS Display + USB KB & Mouse Bundle',
+      'DOS / Windows 11 Ready, 5-Year OEM Comprehensive Support'
+    ],
+    rentalRate: 'From ₹1,450 / month',
+    minLease: '1 Month Minimum',
+    stockStatus: 'Priority Fleet • 200+ Units Ready',
+    highlight: 'Priority commercial desktop bundle with 21.5" monitor, 14th Gen Core i5 & 5-year warranty',
+    includedAccessories: [
+      'Acer 21.5" Full HD Anti-Glare Monitor',
+      'Acer Commercial USB Keyboard & Optical Mouse',
+      'DisplayPort / HDMI & Heavy-Duty Power Cords',
+      'Pre-staged OS Imaging & Antivirus Provisioning'
+    ]
+  },
   {
     id: 'rent-dell-optiplex-7010-micro',
     categoryId: 'desktop-rental',
@@ -1214,13 +1263,24 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                               <img
                                 src={product.image}
                                 alt={product.name}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-lg"
+                                className={`w-full h-full transition-transform duration-300 rounded-lg ${
+                                  product.brand === 'Acer'
+                                    ? 'object-contain p-2 group-hover:scale-105'
+                                    : 'object-cover group-hover:scale-105'
+                                }`}
                               />
                               
                               {/* Brand Badge */}
-                              <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs border border-slate-200/80 text-slate-800 text-[10px] font-bold px-2 py-0.5 rounded shadow-2xs">
-                                {product.brand}
-                              </span>
+                              <div className="absolute top-3 left-3 flex items-center gap-1.5">
+                                <span className="bg-white/95 backdrop-blur-xs border border-slate-200/80 text-slate-800 text-[10px] font-bold px-2 py-0.5 rounded shadow-2xs">
+                                  {product.brand}
+                                </span>
+                                {product.brand === 'Acer' && (
+                                  <span className="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs flex items-center gap-1">
+                                    Rent / Buy
+                                  </span>
+                                )}
+                              </div>
 
                               {/* Availability Pill */}
                               <span className="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs flex items-center gap-1">
@@ -1433,11 +1493,13 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
 
             {/* Modal Image + Highlights */}
             <div className="flex flex-col sm:flex-row gap-5 items-center bg-slate-50 border border-slate-200/80 p-4 rounded-xl">
-              <div className="w-full sm:w-44 h-36 rounded-lg overflow-hidden bg-white border border-slate-200/70 shrink-0">
+              <div className="w-full sm:w-48 h-36 rounded-lg overflow-hidden bg-white border border-slate-200/70 shrink-0 flex items-center justify-center p-1">
                 <img
                   src={inspectRentalProduct.image}
                   alt={inspectRentalProduct.name}
-                  className="w-full h-full object-cover"
+                  className={`w-full h-full ${
+                    inspectRentalProduct.brand === 'Acer' ? 'object-contain p-1' : 'object-cover'
+                  }`}
                 />
               </div>
               <div className="space-y-2 flex-1">

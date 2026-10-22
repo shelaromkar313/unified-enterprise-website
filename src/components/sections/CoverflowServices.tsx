@@ -17,13 +17,13 @@ export default function CoverflowServices({ onOpenQuickSupport }: CoverflowServi
     {
       id: 'infra-mgmt',
       title: 'IT Infrastructure Management',
-      description: 'We ensure your entire IT environment runs smoothly, securely, and without interruptions. From servers to networks — everything optimized for peak performance.',
+      description: 'We ensure your entire IT environment runs smoothly, securely, and without interruptions. From servers to networks, everything optimized for peak performance.',
       image: '/assets/datacenter_servers.jpg'
     },
     {
       id: 'equipment-rental',
       title: 'IT Equipment Rental & Leasing',
-      description: 'Get the latest IT hardware without heavy upfront investment. Laptops, desktops, servers & more — delivered, maintained, and fully managed.',
+      description: 'Get the latest IT hardware without heavy upfront investment. Laptops, desktops, servers & more, delivered, maintained, and fully managed.',
       image: '/assets/enterprise_laptop_hero.jpg'
     },
     {

@@ -26,7 +26,7 @@ interface SoftwareLicencesShowcaseProps {
   onOpenInquiry: (topic: string) => void;
 }
 
-type LicenseCategory = 'all' | 'm365-suites' | 'core-apps' | 'windows-server' | 'google-workspace' | 'database';
+type LicenseCategory = 'all' | 'voice-ai' | 'm365-suites' | 'core-apps' | 'windows-server' | 'google-workspace' | 'database';
 
 interface LicenseProduct {
   id: string;
@@ -46,6 +46,112 @@ interface LicenseProduct {
 }
 
 const LICENCE_PRODUCTS: LicenseProduct[] = [
+  // --- PRIORITY 1: VOICE AI & SPEECH INTELLIGENCE SERVICES ---
+  {
+    id: 'voice-ai-multiple-agents',
+    name: 'Multiple Voice AI Agents & Conversational Bots',
+    category: 'voice-ai',
+    categoryLabel: 'Voice AI Telephony',
+    image: '/assets/voice_ai_agent_icon.png',
+    licenseModel: 'CLOUD TELEPHONY / UVC PBX (AWS HOSTED)',
+    tagline: 'Autonomous multi-persona Voicebots handling 10,000+ concurrent inbound & outbound calls with natural human turn-taking',
+    description: 'Deploy dedicated conversational Voice AI agents for Tier-1 Customer Support, Outbound Lead Qualification, Payment/EMI Recovery, and CSAT Surveys. Features sub-450ms latency, natural barge-in (caller can interrupt), and instant warm SIP transfer to human agents with full transcript context.',
+    highlightApps: ['Inbound Support', 'Outbound Sales', 'EMI Recovery', 'CSAT Surveys', 'Barge-In', 'SIP Transfer'],
+    keyFeatures: [
+      'Autonomous conversational inbound customer care & outbound sales bots',
+      'Sub-450ms voice response time with zero awkward latency pauses',
+      'Caller barge-in supported: Callers can interrupt naturally to clarify questions',
+      'Direct CRM auto-sync with Salesforce, Zoho, HubSpot, and LeadSquared',
+      'Warm/cold SIP transfer to human supervisors with full transcript handoff'
+    ],
+    specs: [
+      'Platform: AWS EC2 Cloud PBX & WebRTC',
+      'Signaling: TLS & WSS (WebSocket Secure)',
+      'Security: Fail2ban, MFA, VAPT & SOC 2 Certified'
+    ],
+    idealFor: 'Enterprises, BPOs, NBFCs, and sales teams requiring 24/7 call automation without adding human headcount',
+    badge: 'Priority Service',
+    badgeColor: 'bg-red-50 text-[#dc2626] border-red-200'
+  },
+  {
+    id: 'speech-to-text-and-tts-engine',
+    name: 'Speech to Text (STT) & Neural Text to Speech (TTS)',
+    category: 'voice-ai',
+    categoryLabel: 'Speech Engine',
+    image: '/assets/speech_stt_tts_icon.png',
+    licenseModel: 'REAL-TIME STREAMING API (WEBSOCKET / REST)',
+    tagline: 'Telecom-optimized speech recognition and neural multi-voice synthesis across 12+ Indian regional languages and accents',
+    description: 'Built specifically for low-bandwidth 8kHz/16kHz Indian telecom voice streams, code-mixed dialects (Hinglish, Tanglish), and noisy call center environments. Converts voice to text in <150ms and synthesizes lifelike neural speech with natural cadence, pitch, and emotion.',
+    highlightApps: ['STT Streaming', 'Neural TTS', '12+ Indian Languages', 'Hinglish Support', 'Noise Filter', 'SSML Tags'],
+    keyFeatures: [
+      'Trained on Indian regional accents, code-mixed Hinglish & Tanglish dialects',
+      'Sub-150ms ultra-low latency real-time streaming over WebSocket (WSS)',
+      'Acoustic background noise suppression & call center ambient cancellation',
+      'Neural multi-voice TTS with variable pitch, speed, and emotion controls',
+      'Custom corporate vocabulary adaptation for banking, insurance, and medical terms'
+    ],
+    specs: [
+      'Audio Codecs: 8kHz/16kHz G.711, Opus, PCM, AMR-WB',
+      'Languages: English, Hindi, Tamil, Telugu, Marathi, Bengali, Kannada +5 more',
+      'Delivery: Streaming WebSocket (WSS) & REST Batch APIs'
+    ],
+    idealFor: 'IVR modernizations, mobile app voice interfaces, banking automation, and telecom operators',
+    badge: 'Most Popular',
+    badgeColor: 'bg-red-50 text-[#dc2626] border-red-200'
+  },
+  {
+    id: 'voice-call-transcription-analytics',
+    name: 'Voice Call Transcription & Audio Analytics',
+    category: 'voice-ai',
+    categoryLabel: 'Call Intelligence',
+    image: '/assets/call_transcription_icon.png',
+    licenseModel: 'PER AUDIO MINUTE OR CONCURRENT CHANNEL',
+    tagline: '100% automated call transcription with dual-channel stereo diarization, PII masking, and instant CRM summaries',
+    description: 'Eliminates manual after-call wrap-up work. Generates exact millisecond-timestamped transcripts separating agent and customer audio channels, redacts sensitive customer data (card numbers, OTPs, Aadhaar), and automatically writes structured executive summaries into your CRM.',
+    highlightApps: ['Live Transcripts', 'Diarization', 'CRM Auto-Sync', 'PII Redaction', 'Keyword Search', 'Audit Trails'],
+    keyFeatures: [
+      'Dual-channel stereo audio diarization separating agent and caller streams',
+      'Real-time live transcript feed for supervisor monitoring and compliance',
+      'Automatic PII & PCI redaction (masks card numbers, CVVs, OTPs, Aadhaar)',
+      'Automated executive call summary generation with key action items',
+      'Global keyword search across thousands of recorded audio hours in seconds'
+    ],
+    specs: [
+      'Accuracy: 98.4% Word Error Rate (WER) benchmark on Indian telecom streams',
+      'Export Formats: JSON, PDF, TXT, Webhook payloads',
+      'Integrations: Salesforce, Zoho CRM, Freshdesk, Zendesk'
+    ],
+    idealFor: 'Customer support centers, telesales agencies, collection teams, and compliance QA departments',
+    badge: 'Enterprise Grade',
+    badgeColor: 'bg-blue-50 text-blue-700 border-blue-200'
+  },
+  {
+    id: 'call-sentiment-analysis-emotion',
+    name: 'Sentiment Analysis of Calls & Emotion Scoring',
+    category: 'voice-ai',
+    categoryLabel: 'Emotion AI',
+    image: '/assets/sentiment_analysis_icon.png',
+    licenseModel: 'REAL-TIME QA TELEMETRY SUITE',
+    tagline: 'Real-time vocal pitch and NLP tone tracking across 100% of calls with instant supervisor agitation threshold alerts',
+    description: 'Move from 2% random call audits to 100% automated quality assurance. Evaluates customer emotional trajectory (Positive, Neutral, Frustrated, Hostile, Delighted) in real time. Automatically alerts supervisors when caller agitation spikes, enabling one-click live Whisper and Barge-in intervention.',
+    highlightApps: ['Emotion Tracking', 'Acoustic Pitch', 'Agitation Alerts', 'Live Barge-In', '100% QA Scoring', 'Churn Prediction'],
+    keyFeatures: [
+      'Real-time sentiment scoring based on acoustic pitch, speaking pace, and NLP tone',
+      'Live supervisor alerts when caller agitation crosses safety thresholds',
+      'One-click UVC PBX supervisor controls: Silent Listen, Whisper, and Live Barge-In',
+      '100% automated QA scorecards grading script compliance and agent politeness',
+      'Predictive customer churn detection identifying dissatisfied accounts early'
+    ],
+    specs: [
+      'Evaluation SLA: Real-time live scoring with <5s escalation notification',
+      'Metrics: CSAT prediction, empathy index, escalation rate, churn risk',
+      'Compliance: Fully encrypted telemetry adhering to HIPAA and SOC 2'
+    ],
+    idealFor: 'Quality assurance managers, contact center directors, and customer experience operations',
+    badge: 'Highest Security',
+    badgeColor: 'bg-purple-50 text-purple-700 border-purple-200'
+  },
+
   // --- MICROSOFT 365 BUSINESS SUITES ---
   {
     id: 'm365-business-standard',
@@ -425,6 +531,18 @@ export default function SoftwareLicencesShowcase({ onOpenInquiry }: SoftwareLice
 
         <button
           type="button"
+          onClick={() => setActiveTab('voice-ai')}
+          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            activeTab === 'voice-ai'
+              ? 'bg-[#dc2626] text-white shadow-2xs'
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+          }`}
+        >
+          🎙️ Voice AI &amp; Speech Services ({LICENCE_PRODUCTS.filter(p => p.category === 'voice-ai').length})
+        </button>
+
+        <button
+          type="button"
           onClick={() => setActiveTab('m365-suites')}
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
             activeTab === 'm365-suites'
@@ -493,30 +611,30 @@ export default function SoftwareLicencesShowcase({ onOpenInquiry }: SoftwareLice
           >
             <div>
               {/* Product Header / Icon Container */}
-              <div className="relative h-48 bg-slate-50/70 overflow-hidden flex items-center justify-center p-6 border-b border-slate-100">
+              <div className="relative h-52 bg-white overflow-hidden flex items-center justify-center p-6 border-b border-slate-100">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-24 h-24 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-xs"
+                  className="w-28 h-28 object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md"
                   loading="lazy"
                 />
-                {/* Category Badge */}
-                <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs text-slate-800 text-[10px] font-bold px-2.5 py-0.5 rounded-md shadow-2xs border border-slate-200/80">
+                {/* Category Badge (Top-Left Pill) */}
+                <span className="absolute top-3.5 left-3.5 bg-white text-slate-700 text-[11px] font-semibold px-3 py-1 rounded-lg border border-slate-200 shadow-2xs">
                   {product.categoryLabel}
                 </span>
-                {/* Highlighting Badge */}
-                <span className={`absolute top-3 right-3 text-[10px] font-bold px-2.5 py-0.5 rounded-full border shadow-2xs ${product.badgeColor}`}>
+                {/* Highlighting Badge (Top-Right Pill) */}
+                <span className={`absolute top-3.5 right-3.5 text-[11px] font-semibold px-3 py-1 rounded-full border shadow-2xs ${product.badgeColor}`}>
                   {product.badge}
                 </span>
               </div>
 
               {/* Body Content */}
               <div className="p-5">
-                <div className="mb-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626]">
+                <div className="mb-2.5">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#dc2626] block">
                     {product.licenseModel}
                   </span>
-                  <h3 className="text-base font-bold text-slate-900 group-hover:text-[#dc2626] transition-colors leading-snug mt-0.5">
+                  <h3 className="text-base sm:text-[17px] font-bold text-[#dc2626] leading-snug mt-1">
                     {product.name}
                   </h3>
                 </div>
@@ -527,11 +645,11 @@ export default function SoftwareLicencesShowcase({ onOpenInquiry }: SoftwareLice
 
                 {/* Highlight App Icons / Badges if present */}
                 {product.highlightApps && (
-                  <div className="flex flex-wrap gap-1.5 mb-3.5">
+                  <div className="flex flex-wrap gap-1.5 mb-3">
                     {product.highlightApps.map((app, idx) => (
                       <span
                         key={idx}
-                        className="text-[10px] font-semibold bg-red-50 text-[#dc2626] px-2 py-0.5 rounded-md border border-red-100"
+                        className="text-[11px] font-semibold bg-red-50 text-[#dc2626] px-2.5 py-0.5 rounded-md border border-red-200/80 inline-flex items-center gap-1"
                       >
                         ✓ {app}
                       </span>
@@ -539,37 +657,37 @@ export default function SoftwareLicencesShowcase({ onOpenInquiry }: SoftwareLice
                   </div>
                 )}
 
-                {/* Specs Chips */}
-                <div className="flex flex-wrap gap-1.5 mb-3.5">
+                {/* Specs Chips - Stacked full-width or inline chips */}
+                <div className="flex flex-col gap-1.5 mb-3.5">
                   {product.specs.slice(0, 2).map((spec, idx) => (
                     <span
                       key={idx}
-                      className="text-[10px] font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md"
+                      className="text-[11px] font-normal bg-slate-100/90 text-slate-700 px-3 py-1 rounded-md inline-block w-fit"
                     >
                       {spec}
                     </span>
                   ))}
                 </div>
 
-                {/* Ideal For Box */}
-                <div className="bg-slate-50 border border-slate-200/70 rounded-lg p-2.5 text-[11px] text-slate-600">
-                  <strong className="text-slate-900 font-semibold block mb-0.5">Best Suited For:</strong>
+                {/* Best Suited For Container */}
+                <div className="bg-slate-50/90 border border-slate-200/80 rounded-xl p-3 text-[11px] text-slate-600 leading-relaxed">
+                  <strong className="text-slate-900 font-bold block mb-0.5">Best Suited For:</strong>
                   {product.idealFor}
                 </div>
               </div>
             </div>
 
             {/* Footer Buttons */}
-            <div className="p-5 pt-0 border-t border-slate-100 mt-3 flex items-center gap-2">
+            <div className="p-5 pt-0 border-t border-slate-100/90 mt-3 flex items-center gap-2">
               <button
                 onClick={() => onOpenInquiry(`Licensing Inquiry: ${product.name}`)}
-                className="flex-1 py-2 px-3 rounded-lg bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-colors text-center cursor-pointer"
+                className="flex-1 py-2.5 px-3.5 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs sm:text-sm font-bold transition-all text-center cursor-pointer shadow-xs active:scale-[0.99]"
               >
-                Get License Quote
+                {product.category === 'voice-ai' ? 'Get Service Quote' : 'Get License Quote'}
               </button>
               <button
                 onClick={() => setSelectedProduct(product)}
-                className="py-2 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors cursor-pointer"
+                className="py-2.5 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold transition-all cursor-pointer active:scale-[0.99]"
               >
                 Plan Details
               </button>
@@ -692,7 +810,7 @@ export default function SoftwareLicencesShowcase({ onOpenInquiry }: SoftwareLice
             How Our Company Supports Your Software Fleet
           </h2>
           <p className="text-xs text-slate-500">
-            More than just license keys — we deliver complete tenant onboarding, email migration, and ongoing license optimization
+            More than just license keys: we deliver complete tenant onboarding, email migration, and ongoing license optimization
           </p>
         </div>
 

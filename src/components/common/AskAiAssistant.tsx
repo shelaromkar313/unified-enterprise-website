@@ -145,7 +145,7 @@ export default function AskAiAssistant({ onOpenQuickSupport }: AskAiAssistantPro
           sender: 'bot',
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           text: "I can connect you with our Enterprise Sales Engineering Desk right away. Our team assists with bulk procurement quotes, leasing terms, and Tier-1 hardware compliance.",
-          suggestions: ['Call Sales: +91 8377017477', 'Request Formal Quote', 'Explore Equipment Catalog'],
+          suggestions: ['Call Sales: +91 9972457774', 'Request Formal Quote', 'Explore Equipment Catalog'],
           cta: {
             label: 'Open Quick Consultation Form',
             action: () => onOpenQuickSupport?.('Enterprise Sales Consultation')

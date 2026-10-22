@@ -33,13 +33,16 @@ export default function Navbar({ onOpenQuickSupport }: NavbarProps) {
     { name: 'Services & AMC', path: '/services' },
     { name: 'Rental Services', path: '/rental' },
     { name: 'Industries', path: '/industries' },
-    { name: 'Resources', path: '/resources' },
     { name: 'About Us', path: '/about-us' },
     { name: 'Contact Us', path: '/contact-us' },
   ];
 
   // Quick search directory data
   const searchItems = [
+    { title: 'Multiple Voice AI Agents & Conversational Bots', category: 'Priority Voice AI', path: '/products?item=voice-ai-speech-services', icon: PhoneCall },
+    { title: 'Speech to Text (STT) & Neural Text to Speech (TTS)', category: 'Priority Voice AI', path: '/products?item=voice-ai-speech-services', icon: PhoneCall },
+    { title: 'Real-Time Voice Call Transcription & Audio Analytics', category: 'Call Intelligence', path: '/products?item=voice-ai-speech-services', icon: PhoneCall },
+    { title: 'Call Sentiment Analysis & Customer Tone Scoring', category: 'Call Intelligence', path: '/products?item=voice-ai-speech-services', icon: PhoneCall },
     { title: 'Rack Servers & Dell PowerEdge', category: 'Hardware Sales', path: '/products', icon: Server },
     { title: 'Cisco & Fortinet Next-Gen Firewalls', category: 'Security & Network', path: '/products', icon: ShieldCheck },
     { title: 'Flexible Laptop & Server Rentals', category: 'Rental & Leasing', path: '/rental', icon: Laptop },

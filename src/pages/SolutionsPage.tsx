@@ -3,24 +3,18 @@ import { useSearchParams } from 'react-router-dom';
 import { 
   Server, PhoneCall, Briefcase, Network, 
   Headphones, Cpu, ShieldCheck, Laptop, 
-  CheckCircle2, ArrowRight, Layers, ShoppingBag, RefreshCw, ChevronDown 
+  CheckCircle2, ArrowRight, Layers, ShoppingBag, 
+  RefreshCw, ChevronDown, Check, X, Sparkles,
+  Zap, Building2, BookOpen, ChevronUp, FileCheck
 } from 'lucide-react';
+import { 
+  SOLUTIONS_DATA, 
+  SLA_ESCALATION_LEVELS, 
+  SolutionItem 
+} from '../data/solutionsData';
 
 interface SolutionsPageProps {
   onOpenConsultation: (solutionTitle: string) => void;
-}
-
-interface SolutionDetail {
-  id: string;
-  name: string;
-  targetAudience: string;
-  summary: string;
-  image: string;
-  deliverables: string[];
-  architecturePoints: string[];
-  whyExists: string;
-  challengesSolved: { title: string; desc: string }[];
-  metrics: string[];
 }
 
 export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps) {
@@ -28,12 +22,13 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
   const urlItem = searchParams.get('item');
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>(urlItem || 'all');
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState(false);
+  const [deepDiveExpanded, setDeepDiveExpanded] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     setSelectedCategoryId(urlItem || 'all');
   }, [urlItem]);
 
-  // The exact 10 categories requested by the user
+  // The exact 10 solutions from the official architectural blueprint PDF
   const categoryList = useMemo(() => [
     { id: 'complete-it-infrastructure', name: 'Complete IT Infrastructure' },
     { id: 'unified-it-telecom-management', name: 'Unified IT & Telecom Management' },
@@ -57,286 +52,36 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
     }
   };
 
-  // Comprehensive details for each category with strategic business purpose
-  const solutionsData: Record<string, SolutionDetail> = useMemo(() => ({
-    'complete-it-infrastructure': {
-      id: 'complete-it-infrastructure',
-      name: 'Complete IT Infrastructure',
-      targetAudience: 'Growing enterprises & corporate headquarters',
-      summary: 'Turnkey IT architecture from structural cabling and rack enclosures to computing clusters, virtualization, storage, and centralized endpoint management.',
-      image: '/assets/datacenter_servers.jpg',
-      metrics: ['99.99% Core Uptime', 'Tier-1 Compute (Dell/HPE)', 'Turnkey Handover'],
-      whyExists: 'Disjointed systems from multiple cabling, server, and networking vendors create operational friction and blame games. We deliver a unified, load-tested computing architecture under one accountable contract for maximum enterprise uptime.',
-      challengesSolved: [
-        { title: 'Zero Multi-Vendor Friction', desc: 'Single-source accountability across servers, storage, switches, and structured cabling.' },
-        { title: 'N+1 Resilient Redundancy', desc: 'Prevents cascading outages with redundant power, cooling, and network links.' },
-        { title: 'Rapid Facility Handover', desc: 'Accelerates corporate site setup timelines from months down to 2–3 weeks.' }
-      ],
-      deliverables: [
-        'Datacenter & Server Room Design',
-        'Structured Category 6A & High-Speed Fiber Cabling',
-        'High-Density Compute & Storage Deployment (Dell / HPE)',
-        'Unified Active Directory / Identity & Access Policies'
-      ],
-      architecturePoints: [
-        'Redundant Core Architecture with 99.99% Target Uptime',
-        'Centralized Lights-Out Remote Management (iDRAC / iLO)',
-        'Scalable Virtualization (VMware vSphere / Proxmox / Hyper-V)'
-      ]
-    },
-    'unified-it-telecom-management': {
-      id: 'unified-it-telecom-management',
-      name: 'Unified IT & Telecom Management',
-      targetAudience: 'Organizations with dispersed communications',
-      summary: 'A converged single-vendor operational model unifying voice telephony, high-speed data networks, cybersecurity firewalls, and workstation support under one cohesive architecture.',
-      image: '/assets/ue_telecom_voice.jpg',
-      metrics: ['Single SLA Contract', '<15ms Voice Jitter', '35% OpEx Savings'],
-      whyExists: 'Voice telephony and IT networks often operate in isolated silos, causing downtime when calls drop or internet falters. We unify IP-PBX telephony, SIP trunks, switches, and firewalls under one SLA with a single emergency contact number.',
-      challengesSolved: [
-        { title: 'Halts Vendor Blame Games', desc: 'One number to call for both voice telephony and IT network incidents.' },
-        { title: 'Lossless Voice QoS', desc: 'Enforces bandwidth prioritization so voice calls never stutter or disconnect.' },
-        { title: 'Consolidated SLA Billing', desc: 'Reduces operational overhead by up to 35% through single-contract management.' }
-      ],
-      deliverables: [
-        'Unified IP-PBX & Data Network Convergence',
-        'Single Point of Escalation for Both IT Hardware & Voice Telecom',
-        'Consolidated SLA Billing & Multi-Carrier Management',
-        'Proactive Cross-Domain System Telemetry & Incident Alerts'
-      ],
-      architecturePoints: [
-        'QoS-Enforced Voice Routing with Zero Packet Jitter',
-        'Unified SLA Management with Pan-India Engineer Dispatch',
-        'Zero Vendor Finger-Pointing Guarantee'
-      ]
-    },
-    'it-infrastructure-smes': {
-      id: 'it-infrastructure-smes',
-      name: 'IT Infrastructure for SMEs',
-      targetAudience: 'Small and medium business operations (20–150 seats)',
-      summary: 'Right-sized, cost-efficient technology foundations designed for rapid deployment, high data resilience, and seamless scalability without excessive enterprise overhead.',
-      image: '/assets/enterprise_laptop_hero.jpg',
-      metrics: ['48-Hour Deployment', 'Predictable Monthly OpEx', 'Zero Ransomware Loss'],
-      whyExists: 'Growing businesses need Fortune 500 stability and cyber protection without the burden of hiring costly in-house network architects. We provide turnkey compact server racks, automated backup vaults, and managed helpdesk at a predictable monthly cost.',
-      challengesSolved: [
-        { title: 'Ransomware-Proof Vaults', desc: 'Immutable hybrid cloud backups protect corporate data from extortion.' },
-        { title: 'Predictable Monthly OpEx', desc: 'Eliminates surprise emergency repair invoices with fixed-rate SLAs.' },
-        { title: 'Effortless Headcount Scale', desc: 'Expands from 20 to 150+ seats without requiring architectural re-work.' }
-      ],
-      deliverables: [
-        'Plug-and-play Compact Server Racks & Edge Switches',
-        'Hybrid Cloud Backup with Ransomware-Proof Local Vaults',
-        'Standardized Corporate Laptops & Desktop Workstations',
-        'Fully Managed Anti-Virus, Patching & Remote Helpdesk'
-      ],
-      architecturePoints: [
-        'Budget-Predictable Operational Model',
-        'Fast 48-Hour Turnaround Deployment',
-        'Minimal On-Premises Maintenance Overhead'
-      ]
-    },
-    'multi-location-it-management': {
-      id: 'multi-location-it-management',
-      name: 'Multi-Location IT Management',
-      targetAudience: 'Retail chains, regional branches & multi-facility firms',
-      summary: 'Standardized IT blueprints rolled out across multiple geographic locations with secure SD-WAN encrypted tunnels, unified security policies, and coordinated nationwide engineer dispatch.',
-      image: '/assets/network_security_firewall.jpg',
-      metrics: ['Pan-India Dispatch', 'Zero-Touch SD-WAN', '100% Policy Parity'],
-      whyExists: 'Branch offices, retail outlets, and regional sites frequently suffer from weak security policies and no onsite technical staff. We enforce nationwide IT parity with automated SD-WAN mesh tunnels backed by certified hands-on engineers across major metros.',
-      challengesSolved: [
-        { title: 'Branch Security Parity', desc: 'Extends uniform firewall policies and content filtering across all locations.' },
-        { title: 'Self-Healing SD-WAN', desc: 'Replaces costly legacy MPLS lines with dynamic multi-ISP traffic routing.' },
-        { title: 'Pan-India Dispatch', desc: 'Onsite certified technicians reach remote branches within hours of dispatch.' }
-      ],
-      deliverables: [
-        'SD-WAN Site-to-Site Auto-Mesh & Traffic Prioritization',
-        'Centralized Branch Firewall Policies & Content Filtering',
-        'Standardized Regional Office Hardware Packages',
-        'Coordinated Onsite Engineer Dispatch Across Major Metros'
-      ],
-      architecturePoints: [
-        'Zero-Touch Branch Provisioning & Auto-Config',
-        'Centralized NOC Telemetry & Cloud Oversight',
-        'Identical High Performance & Security Across All Sites'
-      ]
-    },
-    'call-centre-bpo-infrastructure': {
-      id: 'call-centre-bpo-infrastructure',
-      name: 'Call Center & BPO Infrastructure',
-      targetAudience: 'Inbound customer support, outbound dialer centers & BPOs',
-      summary: 'High-concurrency predictive dialers, multi-agent acoustic workstations, PRI/SIP gateway integration, call recording archives, and redundant ISP failover connectivity for non-stop operations.',
-      image: '/assets/telecom_ip_phones.jpg',
-      metrics: ['Sub-15ms Voice Jitter', '99.999% Trunk Availability', '1,000+ Concurrent Lines'],
-      whyExists: 'In contact centers, every second of dialer downtime or audio distortion directly incinerates revenue and triggers client SLA penalties. We engineer clustered predictive dialers, redundant carrier SIP gateways, and acoustic agent hardware for continuous 24/7 duty.',
-      challengesSolved: [
-        { title: 'High-Concurrency Stability', desc: 'Dialer clusters withstand peak morning outbound calling surges without lag.' },
-        { title: 'Dual-ISP Auto Failover', desc: 'Zero dropped customer conversations via automated BGP carrier failover.' },
-        { title: '100% Call Compliance', desc: 'Encrypted call recording archives satisfy regulatory storage requirements.' }
-      ],
-      deliverables: [
-        'High-Density Vicidial / Asterisk Dialer Server Clusters',
-        'Noise-Canceling Agent Terminals & Commercial Headsets',
-        'Dual ISP Automatic Link Failover with BGP Peering',
-        'Custom CRM Screen-Pop & Webhook Telephony Integration'
-      ],
-      architecturePoints: [
-        'Sub-15ms Low Voice Latency Carrier Architecture',
-        '100% Call Recording Storage Compliance (Local & Cloud)',
-        'Surge-Ready Scale from 50 to 1,000+ Concurrent Agents'
-      ]
-    },
-    'network-design-implementation': {
-      id: 'network-design-implementation',
-      name: 'Network Design & Implementation',
-      targetAudience: 'New facility setups, campus retrofits & tech upgrades',
-      summary: 'Rigorous Layer 1 through Layer 7 engineering including cable layout schematics, wireless RF heatmap modeling, VLAN segmentation, core routing, and switch fabric provisioning.',
-      image: '/assets/wifi_access_point.jpg',
-      metrics: ['10/40G Optical Backbone', 'Fluke Test Verified', '10-Year Cable Warranty'],
-      whyExists: 'Over 70% of persistent network slowdowns and Wi-Fi dead zones stem from flawed physical cabling and amateur switch configurations. We engineer networks using precision RF heatmaps, certified structured Cat6A/fiber, and VLAN segmentation that scales for a decade.',
-      challengesSolved: [
-        { title: 'Zero Wi-Fi Dead Zones', desc: 'Heatmap modeling eliminates interference in high-density office zones.' },
-        { title: 'Broadcast Storm Defense', desc: 'Hardened Layer 2/3 protocols prevent network freezes and packet loops.' },
-        { title: 'Fluke-Tested Cabling', desc: 'Certified patch dressing with complete port labeling schematics.' }
-      ],
-      deliverables: [
-        'Comprehensive Site Survey, Heatmap Modeling & Blueprints',
-        'Certified Fiber Optic & Category 6A Structured Termination',
-        'Layer 2/3 Switch VLAN Segmentation & OSPF/BGP Routing',
-        'Post-Deployment Spectrum Verification & Heatmap Validation'
-      ],
-      architecturePoints: [
-        'Clean Modular Rack Cable Dressing with Color-Coded Patching',
-        'ISO/IEC-Standard Fluke Cable Test Certification',
-        'High-Throughput 10Gbps/40Gbps SFP+ Backbone Links'
-      ]
-    },
-    'firewall-network-security': {
-      id: 'firewall-network-security',
-      name: 'Firewall & Network Security',
-      targetAudience: 'Regulated industries, legal, financial & corporate data',
-      summary: 'Comprehensive perimeter defense, Zero-Trust network segmentation, multi-gigabit SSL traffic inspection, and encrypted VPN gateway access protecting corporate assets.',
-      image: '/assets/network_security_firewall.jpg',
-      metrics: ['Zero-Trust ZTNA', 'Deep Packet SSL Inspection', '24/7 Threat Protection'],
-      whyExists: 'Cyber threats and internal data leaks represent existential corporate risks that basic routers cannot prevent. We deploy Next-Generation Firewalls (Fortinet, Cisco, Sophos) with Zero-Trust access control, deep packet inspection, and encrypted remote VPN gateways.',
-      challengesSolved: [
-        { title: 'Real-Time Threat Blocking', desc: 'Stops zero-day exploits and polymorphic ransomware before reaching users.' },
-        { title: 'Secure Hybrid VPNs', desc: 'Enforces Multi-Factor Authentication (MFA) for all remote staff tunnels.' },
-        { title: 'Audit-Ready Compliance', desc: 'Aligns network security with ISO 27001, SOC 2, and data privacy frameworks.' }
-      ],
-      deliverables: [
-        'Next-Gen Firewall (NGFW) Deployment (Fortinet / Cisco / Sophos)',
-        'Multi-Factor Authenticated SSL & IPsec VPN Portals',
-        'Automated Daily Security Configuration Backups',
-        'Quarterly Vulnerability Scanning & Rule Optimization'
-      ],
-      architecturePoints: [
-        'Zero-Trust Network Access (ZTNA) Enforcement',
-        'Real-Time Anti-Ransomware & Deep Packet Inspection',
-        'High-Availability Active-Passive Clustering'
-      ]
-    },
-    'workplace-remote-office': {
-      id: 'workplace-remote-office',
-      name: 'Workplace & Remote Office Infrastructure',
-      targetAudience: 'Hybrid workforces and distributed teams',
-      summary: 'End-to-end device provisioning, secure remote MDM enrollment, cloud identity sync, and virtual conferencing setups keeping employees productive and secure anywhere.',
-      image: '/assets/dell_latitude_laptop.jpg',
-      metrics: ['Zero-Touch MDM Enrollment', 'Instant Remote Wipe', 'Hybrid Conference Ready'],
-      whyExists: 'Managing remote laptops across cities creates severe security vulnerabilities and onboarding friction. We deliver endpoint governance: pre-imaged enterprise laptops arrive at employee doorsteps with Intune MDM, BitLocker encryption, and video conferencing ready to go.',
-      challengesSolved: [
-        { title: '15-Minute Onboarding', desc: 'Zero-touch device enrollment enables immediate out-of-the-box productivity.' },
-        { title: 'Instant Remote Wipe', desc: 'Remotely locks and wipes corporate data if a device is lost or compromised.' },
-        { title: '1-Touch Video Rooms', desc: 'Smart conference room bars connect hybrid teams with clear audio and video.' }
-      ],
-      deliverables: [
-        'Pre-Configured Enterprise Laptops Shipped Direct to Employees',
-        'Mobile Device Management (MDM) & Microsoft Intune Enrollment',
-        'Secure Always-On Home-Office VPN Connectors',
-        'Turnkey Video Conference Room Bars & Smart Panels'
-      ],
-      architecturePoints: [
-        'Zero-Touch Device Provisioning Directly Out of the Box',
-        'Instant Remote Data Wipe & BitLocker Encryption',
-        'Uniform Security Baseline Across On-Premises and Remote Staff'
-      ]
-    },
-    'it-hardware-procurement': {
-      id: 'it-hardware-procurement',
-      name: 'IT Hardware Procurement',
-      targetAudience: 'Corporate procurement desks, CTOs & IT directors',
-      summary: 'Authorized tier-1 procurement for commercial laptops, desktop fleets, rack servers, network switches, and surveillance hardware at transparent corporate enterprise pricing.',
-      image: '/assets/ue_hardware_procurement.jpg',
-      metrics: ['Authorized Tier-1 Partner', 'Direct OEM Warranty', '15-30% Cost Savings'],
-      whyExists: 'Sourcing corporate hardware from unverified brokers risks counterfeit components, voided OEM warranties, and steep markups. As an authorized Tier-1 partner for Dell, HP, Lenovo, Cisco, and Fortinet, we provide direct enterprise pricing, burn-in diagnostics, and official warranties.',
-      challengesSolved: [
-        { title: '15% to 30% Cost Savings', desc: 'Volume enterprise pricing bypasses consumer retail markups.' },
-        { title: 'Guaranteed OEM Genuine', desc: 'Direct supply chain ensures genuine components and active manufacturer support.' },
-        { title: 'Zero Dead-On-Arrival', desc: 'Pre-dispatch stress testing and image flashing ensure instant deployment.' }
-      ],
-      deliverables: [
-        'Direct OEM Authorized Supply Chain (Dell, HP, Lenovo, Cisco, Fortinet)',
-        'Volume Enterprise Pricing & Flexible Payment Terms',
-        'Pre-Delivery Burn-In Testing & Custom OS Image Flashing',
-        'Pan-India Safe Transit & Asset Tagging'
-      ],
-      architecturePoints: [
-        'Official OEM Warranties & Direct Support Entitlements',
-        'Consistent Fleet Sourcing for Easy Spare Part Interoperability',
-        'Next-Business-Day Replacement Coordination'
-      ]
-    },
-    'it-asset-lifecycle-management': {
-      id: 'it-asset-lifecycle-management',
-      name: 'IT Asset Lifecycle Management',
-      targetAudience: 'Enterprises managing aging computing and networking estates',
-      summary: 'End-to-end governance covering procurement, deployment, warranty tracking, preventive health audits, hardware upgrades, and certified NIST-compliant data wiping upon retirement.',
-      image: '/assets/why_data_backed.jpg',
-      metrics: ['NIST 800-88 Certified', 'Audit-Ready Ledger', 'Maximized Residual ROI'],
-      whyExists: 'Aging hardware quietly drains IT maintenance budgets before creating severe data liability risks when retired. We govern physical technology assets throughout their lifespan—tracking warranties, upgrading components, and issuing certified NIST 800-88 data destruction certificates upon retirement.',
-      challengesSolved: [
-        { title: 'Proactive Refresh Cycles', desc: 'Forecasts hardware replacement to eliminate unbudgeted emergency failures.' },
-        { title: 'NIST 800-88 Legal Immunity', desc: 'Tamper-evident data sanitization certificates ensure zero data leakage.' },
-        { title: 'Residual Asset Recovery', desc: 'Recovers cash value through corporate hardware buyback and green recycling.' }
-      ],
-      deliverables: [
-        'Centralized Hardware Inventory & Warranty Tracking Ledger',
-        'Scheduled Preventive Maintenance & Component Upgrades',
-        'NIST 800-88 Cryptographic Data Erasure Certification',
-        'Responsible E-Waste Recycling & Residual Value Buyback'
-      ],
-      architecturePoints: [
-        'Predictable Total Cost of Ownership (TCO) Optimization',
-        '100% Audit-Ready Compliance Certificates',
-        'Zero Data Leakage Risk on Asset Decommissioning'
-      ]
-    }
-  }), []);
+  const toggleDeepDive = (id: string) => {
+    setDeepDiveExpanded(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
-  const currentCategoryObj = categoryList.find((c) => c.id === selectedCategoryId);
-  const currentDetail = solutionsData[selectedCategoryId];
+  const currentSolution: SolutionItem | undefined = SOLUTIONS_DATA[selectedCategoryId];
+  const currentCategoryObj = categoryList.find(c => c.id === selectedCategoryId);
 
   return (
-    <div className="min-h-[85vh] bg-white py-10 lg:py-14 border-b border-slate-100">
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+    <div className="min-h-[85vh] bg-white py-8 lg:py-12 border-b border-slate-100">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Mobile Category Selector (Visible on mobile/tablet < lg) */}
+          {/* Mobile Category Selector */}
           <div className="lg:hidden col-span-1 mb-2">
             <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3.5 shadow-2xs">
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0 flex-1">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626] block">
-                    Solutions Domain
+                    Enterprise Solution Vertical
                   </span>
                   <p className="text-sm font-bold text-slate-900 truncate">
                     {selectedCategoryId === 'all'
                       ? 'Solutions Home'
-                      : currentCategoryObj?.name || 'All Solutions'}
+                      : currentSolution?.name || 'All Solutions'}
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setMobileCategoryOpen(!mobileCategoryOpen)}
-                  className="px-3.5 py-2 min-h-[40px] rounded-xl bg-white border border-slate-200 text-xs font-semibold text-[#dc2626] shadow-2xs flex items-center gap-1.5 active:scale-95 transition-all shrink-0"
+                  className="px-3.5 py-2 min-h-[40px] rounded-xl bg-white border border-slate-200 text-xs font-semibold text-[#dc2626] shadow-2xs flex items-center gap-1.5 active:scale-95 transition-all shrink-0 cursor-pointer"
                 >
                   <span>{mobileCategoryOpen ? 'Close' : 'Solutions'}</span>
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${mobileCategoryOpen ? 'rotate-180' : ''}`} />
@@ -345,17 +90,17 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
 
               {/* Collapsible Mobile Category List */}
               {mobileCategoryOpen && (
-                <div className="mt-3 pt-3 border-t border-slate-200/80 max-h-[300px] overflow-y-auto space-y-1">
+                <div className="mt-3 pt-3 border-t border-slate-200/80 max-h-[340px] overflow-y-auto space-y-1">
                   <button
                     onClick={() => {
                       handleSelectCategory('all');
                       setMobileCategoryOpen(false);
                     }}
-                    className={`w-full text-left py-2.5 px-3 min-h-[42px] flex items-center rounded-lg text-xs font-medium transition-colors ${
+                    className={`w-full text-left py-2.5 px-3 min-h-[42px] flex items-center justify-between rounded-lg text-xs font-medium transition-colors cursor-pointer ${
                       selectedCategoryId === 'all' ? 'bg-[#dc2626] text-white font-bold' : 'text-slate-700 hover:bg-slate-100'
                     }`}
                   >
-                    Solutions Home
+                    <span>Solutions Home (Overview)</span>
                   </button>
                   {categoryList.map((item) => (
                     <button
@@ -364,11 +109,11 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
                         handleSelectCategory(item.id);
                         setMobileCategoryOpen(false);
                       }}
-                      className={`w-full text-left py-2.5 px-3 min-h-[42px] flex items-center rounded-lg text-xs font-medium transition-colors ${
+                      className={`w-full text-left py-2.5 px-3 min-h-[42px] flex items-center justify-between rounded-lg text-xs font-medium transition-colors cursor-pointer ${
                         selectedCategoryId === item.id ? 'bg-[#dc2626] text-white font-bold' : 'text-slate-700 hover:bg-slate-100'
                       }`}
                     >
-                      {item.name}
+                      <span>{item.name}</span>
                     </button>
                   ))}
                 </div>
@@ -376,14 +121,14 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
             </div>
           </div>
 
-          {/* Left Column: Clean Cisco-Style Minimalist Navigation (Desktop) */}
+          {/* Left Column: Clean Sidebar Navigation (Desktop) */}
           <aside className="hidden lg:block lg:col-span-3 border-r border-slate-200/90 pr-5 lg:sticky lg:top-28">
             {/* Solutions Home Link */}
             <div className="mb-4 pb-3 border-b border-slate-100">
               <button
                 type="button"
                 onClick={() => handleSelectCategory('all')}
-                className={`relative text-left text-[13.5px] leading-snug transition-colors duration-150 block w-full py-1.5 pl-3.5 ${
+                className={`relative text-left text-[13.5px] leading-snug transition-colors duration-150 block w-full py-1.5 pl-3.5 cursor-pointer ${
                   selectedCategoryId === 'all'
                     ? 'text-[#dc2626] font-bold'
                     : 'text-[#dc2626] hover:underline font-medium'
@@ -408,10 +153,10 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
                     <button
                       type="button"
                       onClick={() => handleSelectCategory(item.id)}
-                      className={`relative text-left text-[13.5px] leading-relaxed transition-colors duration-150 block w-full py-1.5 pl-3.5 ${
+                      className={`relative text-left text-[13px] leading-relaxed transition-colors duration-150 block w-full py-2 pl-3.5 pr-2 rounded-lg cursor-pointer ${
                         isActive
-                          ? 'text-slate-900 font-bold'
-                          : 'text-slate-700 hover:text-[#dc2626] font-normal'
+                          ? 'text-slate-900 font-bold bg-slate-50'
+                          : 'text-slate-700 hover:text-[#dc2626] hover:bg-slate-50/60 font-normal'
                       }`}
                     >
                       {isActive && (
@@ -428,269 +173,766 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
             </ul>
           </aside>
 
-          {/* Right Column: Cisco 3-Card Home OR Rich Enterprise Solution View */}
-          <main className="lg:col-span-9">
+          {/* Right Column: Main Content */}
+          <main className="lg:col-span-9 space-y-8">
             
-            {/* 1. HOME VIEW: Cisco 3-Card Spotlight */}
+            {/* VIEW 1: SOLUTIONS HOME (ALL 10 BLUEPRINT CATALOG + SLA MATRIX) */}
             {selectedCategoryId === 'all' ? (
-              <div className="space-y-10">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-1">
-                  
-                  {/* Card 1: Complete IT Infrastructure */}
-                  <div className="flex flex-col justify-between group">
-                    <div>
-                      <div className="h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img
-                          src="/assets/datacenter_servers.jpg"
-                          alt="Complete IT Infrastructure"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                      <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug">
-                        Turnkey Enterprise Infrastructure
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                        From structural cabling and compute clusters to virtualization and Active Directory, architected for zero downtime.
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleSelectCategory('complete-it-infrastructure')}
-                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#dc2626] hover:underline"
-                    >
-                      <span>Explore architecture</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
+              <div className="space-y-8">
+                
+                {/* Official Natural Architecture Blueprint Hero */}
+                <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs relative overflow-hidden">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-[#dc2626] text-xs font-bold uppercase tracking-wider mb-3">
+                    <Sparkles className="w-3.5 h-3.5 text-[#dc2626]" />
+                    <span>Official Natural Architecture Blueprint</span>
                   </div>
 
-                  {/* Card 2: Firewall & Network Security */}
-                  <div className="flex flex-col justify-between group">
-                    <div>
-                      <div className="h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img
-                          src="/assets/network_security_firewall.jpg"
-                          alt="Firewall & Network Security"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                      <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug">
-                        Zero-Trust Security & SD-WAN
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                        Enforce encrypted multi-branch VPN mesh, deep SSL inspection, and perimeter defense against emerging ransomware vectors.
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleSelectCategory('firewall-network-security')}
-                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#dc2626] hover:underline"
-                    >
-                      <span>Request security blueprint</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                  <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2 text-slate-900">
+                    Unified Enterprise Solutions
+                  </h1>
 
-                  {/* Card 3: Call Center & BPO Infrastructure */}
-                  <div className="flex flex-col justify-between group">
-                    <div>
-                      <div className="h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img
-                          src="/assets/telecom_ip_phones.jpg"
-                          alt="Call Center & BPO Infrastructure"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                      <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug">
-                        High-Concurrency Voice & Dialers
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                        Carrier-grade low-latency PRI/SIP gateways, automated dialers, and acoustic workstations engineered for 24/7 call flows.
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleSelectCategory('call-centre-bpo-infrastructure')}
-                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#dc2626] hover:underline"
-                    >
-                      <span>Consult voice architect</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl mb-5">
+                    Master Architecture, Deep-Dive Technical Engineering &amp; Content Specification for enterprise IT infrastructure. Includes visual cards, custom specialty frameworks, certified handover deliverables, and original deep-dive engineering guides for every vertical.
+                  </p>
 
+                  <div className="flex flex-wrap items-center gap-2 pt-3.5 border-t border-slate-100 text-xs">
+                    <span className="bg-slate-50 text-slate-700 px-3 py-1 rounded-md border border-slate-200/80">
+                      Architecture: <strong className="text-slate-900 font-semibold">Customized by Specialty</strong>
+                    </span>
+                    <span className="bg-slate-50 text-slate-700 px-3 py-1 rounded-md border border-slate-200/80">
+                      Content Depth: <strong className="text-slate-900 font-semibold">Cards, Deliverables + Deep-Dive Articles</strong>
+                    </span>
+                    <span className="bg-emerald-50 text-emerald-800 px-3 py-1 rounded-md border border-emerald-200">
+                      Status: <strong className="text-emerald-700 font-semibold">Ready to Publish</strong>
+                    </span>
+                  </div>
                 </div>
+
+                {/* Official Enterprise SLA Escalation Matrix (PDF Page 1) */}
+                <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-4 bg-[#dc2626] rounded-full inline-block" />
+                      <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
+                        Official Enterprise SLA Escalation Matrix
+                      </h2>
+                    </div>
+                    <span className="text-[11px] font-semibold text-red-600 bg-red-50 border border-red-200 px-2.5 py-0.5 rounded-full w-fit">
+                      Guaranteed Multi-Tier Governance
+                    </span>
+                  </div>
+
+                  <p className="text-xs text-slate-600 leading-relaxed mb-5">
+                    Enterprise clients are never left stranded with junior technicians. Unified Enterprise enforces a transparent, 5-tier escalation path for all AMC, infrastructure, and technical support contracts, ensuring rapid progression up to executive leadership for high-severity incidents:
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+                    {SLA_ESCALATION_LEVELS.map((lvl, idx) => (
+                      <div
+                        key={idx}
+                        className={`bg-slate-50/70 border border-slate-200/80 rounded-xl p-3.5 border-t-4 ${lvl.accentColor} hover:bg-white hover:shadow-xs transition-all flex flex-col justify-between`}
+                      >
+                        <div>
+                          <div className="flex items-center justify-between gap-1 mb-1.5">
+                            <span className="text-[10px] font-mono font-bold text-slate-500 uppercase">
+                              {lvl.level}
+                            </span>
+                            <span className={`text-[9px] font-bold px-1.5 py-0.2 rounded border ${lvl.badgeColor}`}>
+                              {lvl.badge}
+                            </span>
+                          </div>
+                          <h4 className="text-xs font-bold text-slate-900 mb-1">
+                            {lvl.role}
+                          </h4>
+                          <p className="text-[11px] text-slate-600 leading-snug">
+                            {lvl.desc}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 10 Solutions Grid (From the PDF) */}
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h2 className="text-lg font-bold text-slate-900 tracking-tight">
+                        Explore All 10 Enterprise Solutions
+                      </h2>
+                      <p className="text-xs text-slate-500">
+                        Select any vertical to view custom specialty frameworks, deliverables, and engineering guides
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {categoryList.map((cat) => {
+                      const sol = SOLUTIONS_DATA[cat.id];
+                      if (!sol) return null;
+                      return (
+                        <div
+                          key={sol.id}
+                          className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group"
+                        >
+                          <div>
+                            {/* Card Image Header */}
+                            <div className="relative h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-100 border border-slate-200/70">
+                              <img
+                                src={sol.image}
+                                alt={sol.name}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                loading="lazy"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-900/15 to-transparent pointer-events-none" />
+                              
+                              <div className="absolute top-2.5 left-2.5">
+                                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-slate-950/80 backdrop-blur-md text-white border border-white/10 uppercase tracking-wider">
+                                  {sol.solutionNumber}
+                                </span>
+                              </div>
+
+                              <div className="absolute top-2.5 right-2.5">
+                                <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/90 text-white backdrop-blur-md flex items-center gap-1 shadow-xs">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                                  Blueprint Ready
+                                </span>
+                              </div>
+
+                              <div className="absolute bottom-2.5 left-3 right-3 text-white">
+                                <span className="text-[11px] font-bold text-red-300 block truncate">
+                                  {sol.badge}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Card Content Header */}
+                            <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#dc2626] transition-colors leading-snug mb-1">
+                              {sol.name}
+                            </h3>
+
+                            <span className="text-[11px] text-slate-500 block mb-2.5">
+                              Ideal For: <strong className="text-slate-700">{sol.idealFor}</strong>
+                            </span>
+
+                            <p className="text-xs text-slate-600 leading-relaxed mb-3 line-clamp-2">
+                              {sol.heroSubtitle}
+                            </p>
+
+                            {/* Value Pills */}
+                            <div className="flex flex-wrap gap-1.5 mb-3">
+                              {sol.valuePills.map((pill, idx) => (
+                                <span
+                                  key={idx}
+                                  className="text-[10px] font-medium bg-slate-50 border border-slate-200/70 text-slate-700 px-2 py-0.5 rounded-md inline-flex items-center gap-1"
+                                >
+                                  <span className="w-1.5 h-1.5 rounded-full bg-[#dc2626]" />
+                                  {pill}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2 mt-2">
+                            <span className="text-[10px] text-slate-400 truncate max-w-[200px]">
+                              OEMs: {sol.authorizedOem.split(',')[0]} &amp; more
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => handleSelectCategory(sol.id)}
+                              className="text-xs font-bold text-[#dc2626] hover:text-[#b91c1c] inline-flex items-center gap-1 cursor-pointer"
+                            >
+                              <span>Explore Blueprint</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
               </div>
             ) : (
-              /* 2. CATEGORY VIEW: Clean, High-End Enterprise Solution Presentation */
-              currentDetail && (
+
+              /* VIEW 2: SELECTED SOLUTION SPECIFICATION (100% MATCHING PDF CONTENT) */
+              currentSolution && (
                 <div className="space-y-6 animate-in fade-in duration-200">
                   
-                  {/* Category Title Header */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
-                    <div>
-                      <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                        {currentDetail.name}
-                      </h2>
-                      <span className="text-xs text-slate-500 font-medium block mt-1.5">
-                        Target Audience: <strong className="text-slate-800">{currentDetail.targetAudience}</strong>
+                  {/* Solution Header & Meta Banner: Split Hero with High-Resolution Architecture Showcase */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 shadow-xs">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                      
+                      {/* Left Side: Overview & Deliverables Meta */}
+                      <div className="lg:col-span-7 space-y-3.5">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="text-xs font-bold text-[#dc2626] bg-red-50 border border-red-200 px-3 py-1 rounded-full">
+                            {currentSolution.badge}
+                          </span>
+                          <span className="text-xs font-medium text-slate-500 bg-slate-100 border border-slate-200/70 px-2.5 py-0.5 rounded-full">
+                            SLA-Backed Multi-Tier Governance
+                          </span>
+                        </div>
+
+                        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                          {currentSolution.name}
+                        </h1>
+
+                        <p className="text-xs text-slate-500 font-medium">
+                          Ideal For: <strong className="text-slate-800">{currentSolution.idealFor}</strong>
+                        </p>
+
+                        <div className="pt-2 border-t border-slate-100">
+                          <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1.5 leading-snug">
+                            {currentSolution.heroSubtitle}
+                          </h3>
+                          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3.5">
+                            {currentSolution.heroParagraph}
+                          </p>
+
+                          {/* 3 Value Pills */}
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {currentSolution.valuePills.map((pill, idx) => (
+                              <span
+                                key={idx}
+                                className="text-xs font-semibold bg-red-50/80 border border-red-100 text-[#dc2626] px-3 py-1 rounded-full inline-flex items-center gap-1.5"
+                              >
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#dc2626]" />
+                                {pill}
+                              </span>
+                            ))}
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => onOpenConsultation(`${currentSolution.name} Blueprint Request`)}
+                            className="px-5 py-2.5 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-xs inline-flex items-center gap-2 cursor-pointer active:scale-95"
+                          >
+                            <span>Request Engineering Blueprint</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Right Side: High-Definition Framed Architecture Showcase */}
+                      <div className="lg:col-span-5">
+                        <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md group bg-slate-900 aspect-[4/3] sm:aspect-[16/11]">
+                          <img
+                            src={currentSolution.image}
+                            alt={currentSolution.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/25 to-transparent pointer-events-none" />
+                          
+                          <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+                            <span className="text-[10px] font-bold px-2.5 py-1 rounded-md bg-slate-950/80 backdrop-blur-md text-white border border-white/10 uppercase tracking-wider">
+                              Architecture Blueprint
+                            </span>
+                            <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/90 text-white backdrop-blur-md flex items-center gap-1 shadow-xs">
+                              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                              Certified Architecture
+                            </span>
+                          </div>
+
+                          <div className="absolute bottom-3 left-3 right-3 text-white">
+                            <p className="text-xs font-bold truncate drop-shadow-sm">
+                              {currentSolution.name}
+                            </p>
+                            <p className="text-[10px] text-slate-300 truncate">
+                              Authorized OEMs: {currentSolution.authorizedOem.split(',')[0]}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {/* Specialty Framework / Comparison Section (PDF Box 1) */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 shadow-xs">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5 pb-3 border-b border-slate-100">
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-5 bg-[#dc2626] rounded-full inline-block" />
+                        <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight uppercase">
+                          {currentSolution.frameworkTitle}
+                        </h3>
+                      </div>
+                      <span className="text-[11px] font-semibold text-slate-500 bg-slate-50 border border-slate-200 px-3 py-1 rounded-full w-fit">
+                        Technical Comparison &amp; Architecture Model
                       </span>
                     </div>
 
-                    <button
-                      type="button"
-                      onClick={() => onOpenConsultation(currentDetail.name)}
-                      className="px-5 py-2.5 rounded-full bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-soft-sm flex items-center gap-2 self-start sm:self-auto shrink-0"
-                    >
-                      <span>Request Solution Blueprint</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                    {/* Comparison Model */}
+                    {currentSolution.frameworkType === 'comparison' && currentSolution.comparisonData && (
+                      <div className="space-y-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
+                          
+                          {/* Box 1: Traditional Siloed / Multi-Vendor Setup */}
+                          <div className="bg-slate-50/90 border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-2xs flex flex-col justify-between transition-all hover:border-slate-300">
+                            <div>
+                              <div className="flex items-center justify-between gap-2 mb-3">
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 uppercase tracking-wide">
+                                  <span className="w-4 h-4 rounded-full bg-rose-200/80 text-rose-700 flex items-center justify-center text-[10px] font-black">✕</span>
+                                  <span>{currentSolution.comparisonData.traditionalTitle}</span>
+                                </span>
+                                <span className="text-[10px] font-semibold text-rose-600 bg-rose-50/60 px-2 py-0.5 rounded-md border border-rose-100">
+                                  Siloed Risk
+                                </span>
+                              </div>
 
-                  {/* Minimized Split Hero Card: Executive Summary + Compact Framed Image + Key Metrics */}
-                  <div className="bg-gradient-to-br from-slate-50 via-white to-slate-50 border border-slate-200/90 rounded-2xl p-5 sm:p-7 shadow-xs">
-                    <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-                      
-                      {/* Left: Summary & Metric Pills */}
-                      <div className="flex-1 space-y-3.5">
-                        <div className="flex items-center gap-2">
-                          <span className="w-1.5 h-4 bg-[#173B67] rounded-full inline-block" />
-                          <h3 className="text-sm sm:text-base font-bold text-[#173B67] tracking-tight">
-                            Executive Overview
-                          </h3>
+                              <p className="text-[11px] text-slate-500 mb-4 leading-relaxed">
+                                Multiple uncoordinated contractors, finger-pointing during outages, unmanaged power/cooling, and fragmented support billing.
+                              </p>
+
+                              <div className="space-y-3">
+                                {currentSolution.comparisonData.traditionalPoints.map((pt, idx) => {
+                                  const hasColon = pt.includes(':');
+                                  const [title, ...rest] = hasColon ? pt.split(':') : ['', pt];
+                                  return (
+                                    <div
+                                      key={idx}
+                                      className="bg-white/90 border border-rose-100 rounded-xl p-3.5 flex items-start gap-3 shadow-2xs"
+                                    >
+                                      <span className="w-5 h-5 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                                        ✕
+                                      </span>
+                                      <div className="text-xs text-slate-700 leading-relaxed">
+                                        {hasColon ? (
+                                          <>
+                                            <strong className="text-slate-900 block font-semibold mb-0.5">{title}</strong>
+                                            <span className="text-slate-600">{rest.join(':')}</span>
+                                          </>
+                                        ) : (
+                                          <span className="text-slate-600">{pt}</span>
+                                        )}
+                                      </div>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+
+                            <div className="pt-4 mt-5 border-t border-slate-200/70 flex items-center gap-2 text-[11px] text-rose-600 font-medium">
+                              <span>⚠️ Incurs downtime, finger-pointing vendors &amp; degraded component lifespan</span>
+                            </div>
+                          </div>
+
+                          {/* Box 2: Unified Enterprise Converged Model */}
+                          <div className="bg-white border-2 border-emerald-500/40 rounded-2xl p-5 sm:p-6 shadow-sm relative overflow-hidden flex flex-col justify-between transition-all hover:shadow-md">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-bl-full pointer-events-none" />
+                            
+                            <div>
+                              <div className="flex items-center justify-between gap-2 mb-3">
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 uppercase tracking-wide">
+                                  <span className="w-4 h-4 rounded-full bg-emerald-200 text-emerald-800 flex items-center justify-center text-[10px] font-black">✓</span>
+                                  <span>{currentSolution.comparisonData.convergedTitle}</span>
+                                </span>
+                                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 uppercase tracking-wider">
+                                  Recommended Standard
+                                </span>
+                              </div>
+
+                              <p className="text-[11px] text-slate-500 mb-4 leading-relaxed">
+                                Single accountable partner, dedicated on-site L1/L2 engineers, audit and modernization of existing equipment, and unified AMC.
+                              </p>
+
+                              <div className="space-y-3">
+                                {currentSolution.comparisonData.convergedPoints.map((pt, idx) => {
+                                  const hasColon = pt.includes(':');
+                                  const [title, ...rest] = hasColon ? pt.split(':') : ['', pt];
+                                  return (
+                                    <div
+                                      key={idx}
+                                      className="bg-emerald-50/40 border border-emerald-200/80 rounded-xl p-3.5 flex items-start gap-3 shadow-2xs"
+                                    >
+                                      <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                                        ✓
+                                      </span>
+                                      <div className="text-xs text-slate-800 leading-relaxed">
+                                        {hasColon ? (
+                                          <>
+                                            <strong className="text-slate-900 block font-semibold mb-0.5">{title}</strong>
+                                            <span className="text-slate-700">{rest.join(':')}</span>
+                                          </>
+                                        ) : (
+                                          <span className="text-slate-700">{pt}</span>
+                                        )}
+                                      </div>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+
+                            <div className="pt-4 mt-5 border-t border-emerald-100 flex items-center gap-2 text-[11px] text-emerald-700 font-semibold">
+                              <span>✨ Single accountable partner with guaranteed 5-Tier SLA governance</span>
+                            </div>
+                          </div>
+
                         </div>
-                        <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
-                          {currentDetail.summary}
-                        </p>
 
-                        {/* Quick Metrics Badges */}
-                        <div className="flex flex-wrap items-center gap-2 pt-1">
-                          {currentDetail.metrics.map((m, idx) => (
-                            <span
+                        {/* Visual Architecture Feature Banner */}
+                        <div className="rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 p-4 sm:p-5 text-white flex flex-col md:flex-row items-center justify-between gap-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-white/20 bg-slate-800">
+                              <img src={currentSolution.image} alt="Architecture preview" className="w-full h-full object-cover" />
+                            </div>
+                            <div>
+                              <h4 className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                                <span>Turnkey Deployment &amp; Modernization Blueprint</span>
+                                <span className="text-[10px] bg-red-600 text-white font-mono px-1.5 py-0.2 rounded">5-Tier Escalation</span>
+                              </h4>
+                              <p className="text-[11px] text-slate-300">
+                                Need our senior architects on-site? We survey physical floorplans, power phase balance, and cable pathways.
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => onOpenConsultation(`Onsite Survey: ${currentSolution.name}`)}
+                            className="px-4 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-900 text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer active:scale-95"
+                          >
+                            Book On-Site Survey
+                          </button>
+                        </div>
+
+                      </div>
+                    )}
+
+                    {/* Packages Model (e.g. Solution 03 SMEs) */}
+                    {currentSolution.frameworkType === 'packages' && currentSolution.cardsData && (
+                      <div className="space-y-5">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                          {currentSolution.cardsData.map((pkg, idx) => (
+                            <div
                               key={idx}
-                              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-800 bg-white border border-slate-200/90 px-3 py-1.5 rounded-lg shadow-2xs"
+                              className="bg-white border-2 border-slate-200/80 hover:border-red-400/80 rounded-2xl p-5 sm:p-6 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group"
                             >
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#dc2626]" />
-                              {m}
-                            </span>
+                              <div>
+                                <span className="text-[10px] font-bold text-[#dc2626] bg-red-50 border border-red-200/80 px-2.5 py-1 rounded-md inline-block mb-3">
+                                  {pkg.badge}
+                                </span>
+                                <h4 className="text-sm font-bold text-slate-900 group-hover:text-[#dc2626] transition-colors mb-2 leading-snug">
+                                  {pkg.title}
+                                </h4>
+                                <p className="text-xs text-slate-600 leading-relaxed">
+                                  {pkg.desc}
+                                </p>
+                              </div>
+                              <div className="pt-3 mt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                                <span>Includes L1/L2 Onsite Support</span>
+                                <span className="text-[#dc2626] font-bold">✓ Active AMC</span>
+                              </div>
+                            </div>
                           ))}
                         </div>
-                      </div>
 
-                      {/* Right: Minimized Image Frame */}
-                      <div className="w-full lg:w-72 xl:w-80 h-44 sm:h-48 rounded-xl overflow-hidden border border-slate-200/90 shadow-sm relative group shrink-0 bg-slate-100">
-                        <img
-                          src={currentDetail.image}
-                          alt={currentDetail.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-                        <span className="absolute bottom-2.5 left-3 text-[11px] font-semibold text-white/95 bg-slate-900/70 backdrop-blur-xs px-2.5 py-0.5 rounded-md border border-white/20">
-                          Architecture Preview
-                        </span>
+                        {/* Visual Banner */}
+                        <div className="rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 p-4 sm:p-5 text-white flex flex-col md:flex-row items-center justify-between gap-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-white/20 bg-slate-800">
+                              <img src={currentSolution.image} alt="Package preview" className="w-full h-full object-cover" />
+                            </div>
+                            <div>
+                              <h4 className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                                <span>SME Managed Infrastructure &amp; On-Site AMC Support</span>
+                                <span className="text-[10px] bg-red-600 text-white font-mono px-1.5 py-0.2 rounded">Zero CapEx Options</span>
+                              </h4>
+                              <p className="text-[11px] text-slate-300">
+                                Predictable monthly support with zero lock-in contracts and dedicated on-site engineer visits.
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => onOpenConsultation(`SME Package Consultation: ${currentSolution.name}`)}
+                            className="px-4 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-900 text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer active:scale-95"
+                          >
+                            Explore SME Plans
+                          </button>
+                        </div>
                       </div>
+                    )}
 
-                    </div>
+                    {/* Grid-4 Model (e.g. Solution 04 Multi-Location, Solution 07 Security) */}
+                    {currentSolution.frameworkType === 'grid-4' && currentSolution.cardsData && (
+                      <div className="space-y-5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                          {currentSolution.cardsData.map((card, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-slate-50/80 border border-slate-200/90 hover:border-red-300 rounded-2xl p-4.5 hover:bg-white hover:shadow-sm transition-all flex flex-col justify-between"
+                            >
+                              <div>
+                                <div className="w-8 h-8 rounded-lg bg-red-50 border border-red-100 text-[#dc2626] font-bold text-xs flex items-center justify-center mb-2.5">
+                                  0{idx + 1}
+                                </div>
+                                <h4 className="text-xs sm:text-sm font-bold text-slate-900 mb-1.5 leading-snug">
+                                  {card.title}
+                                </h4>
+                                <p className="text-[11px] text-slate-600 leading-relaxed">
+                                  {card.desc}
+                                </p>
+                              </div>
+                              <div className="pt-2 mt-3 border-t border-slate-100 text-[10px] font-semibold text-emerald-700">
+                                ✓ Certified Governance
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Visual Banner */}
+                        <div className="rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 p-4 sm:p-5 text-white flex flex-col md:flex-row items-center justify-between gap-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-white/20 bg-slate-800">
+                              <img src={currentSolution.image} alt="Framework preview" className="w-full h-full object-cover" />
+                            </div>
+                            <div>
+                              <h4 className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                                <span>Enterprise Architecture &amp; Governance Matrix</span>
+                                <span className="text-[10px] bg-red-600 text-white font-mono px-1.5 py-0.2 rounded">Certified</span>
+                              </h4>
+                              <p className="text-[11px] text-slate-300">
+                                Pre-configured hardware kits, multi-WAN failovers, and on-site L2 security engineer audits.
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => onOpenConsultation(`Architecture Consultation: ${currentSolution.name}`)}
+                            className="px-4 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-900 text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer active:scale-95"
+                          >
+                            Schedule Technical Review
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Steps-4 & Stages-4 Model (e.g. Solution 08 Workplace, Solution 10 Lifecycle) */}
+                    {(currentSolution.frameworkType === 'steps-4' || currentSolution.frameworkType === 'stages-4') && currentSolution.cardsData && (
+                      <div className="space-y-5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                          {currentSolution.cardsData.map((step, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-slate-50/80 border border-slate-200/90 hover:border-red-300 rounded-2xl p-4.5 hover:bg-white hover:shadow-sm transition-all flex flex-col justify-between"
+                            >
+                              <div>
+                                <span className="text-[10px] font-bold text-[#dc2626] bg-red-50 border border-red-200/60 px-2 py-0.5 rounded-md uppercase tracking-wider block w-fit mb-2">
+                                  Phase {idx + 1}
+                                </span>
+                                <h4 className="text-xs sm:text-sm font-bold text-slate-900 mb-1.5 leading-snug">
+                                  {step.title}
+                                </h4>
+                                <p className="text-[11px] text-slate-600 leading-relaxed">
+                                  {step.desc}
+                                </p>
+                              </div>
+                              <div className="pt-2 mt-3 border-t border-slate-100 text-[10px] font-semibold text-slate-400">
+                                Milestone Verified
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Visual Banner */}
+                        <div className="rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 p-4 sm:p-5 text-white flex flex-col md:flex-row items-center justify-between gap-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-white/20 bg-slate-800">
+                              <img src={currentSolution.image} alt="Phases preview" className="w-full h-full object-cover" />
+                            </div>
+                            <div>
+                              <h4 className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                                <span>Turnkey Lifecycle Execution &amp; Onsite Support</span>
+                                <span className="text-[10px] bg-red-600 text-white font-mono px-1.5 py-0.2 rounded">NIST 800-88</span>
+                              </h4>
+                              <p className="text-[11px] text-slate-300">
+                                Extend estate usability by 24–36 months through targeted component upgrades and certified wiping.
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => onOpenConsultation(`Lifecycle Audit: ${currentSolution.name}`)}
+                            className="px-4 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-900 text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer active:scale-95"
+                          >
+                            Book Hardware Audit
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Acquisitions-3 Model (e.g. Solution 09 Procurement) */}
+                    {currentSolution.frameworkType === 'acquisitions-3' && currentSolution.cardsData && (
+                      <div className="space-y-5">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                          {currentSolution.cardsData.map((acq, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-white border-2 border-slate-200/80 hover:border-red-400/80 rounded-2xl p-5 sm:p-6 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group"
+                            >
+                              <div>
+                                <span className="text-[10px] font-bold text-[#dc2626] bg-red-50 border border-red-200/80 px-2.5 py-1 rounded-md inline-block mb-3">
+                                  Procurement Option 0{idx + 1}
+                                </span>
+                                <h4 className="text-sm font-bold text-slate-900 group-hover:text-[#dc2626] transition-colors mb-2 leading-snug">
+                                  {acq.title}
+                                </h4>
+                                <p className="text-xs text-slate-600 leading-relaxed">
+                                  {acq.desc}
+                                </p>
+                              </div>
+                              <div className="pt-3 mt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                                <span>100% Factory Direct</span>
+                                <span className="text-emerald-700 font-bold">✓ Official Warranty</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Visual Banner */}
+                        <div className="rounded-xl overflow-hidden border border-slate-200/80 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 p-4 sm:p-5 text-white flex flex-col md:flex-row items-center justify-between gap-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-white/20 bg-slate-800">
+                              <img src={currentSolution.image} alt="Procurement preview" className="w-full h-full object-cover" />
+                            </div>
+                            <div>
+                              <h4 className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                                <span>Authorized Tier-1 Dell, HP, Lenovo &amp; Acer Partner</span>
+                                <span className="text-[10px] bg-red-600 text-white font-mono px-1.5 py-0.2 rounded">Tier-1 Direct</span>
+                              </h4>
+                              <p className="text-[11px] text-slate-300">
+                                24-Hour pre-delivery diagnostic burn-in testing with full GST invoices and OEM warranty registration.
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => onOpenConsultation(`Hardware Quote: ${currentSolution.name}`)}
+                            className="px-4 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-900 text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer active:scale-95"
+                          >
+                            Request Volume Pricing
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
-                  {/* Why This Solution Exists Section (Strategic Business Purpose) */}
-                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 space-y-5 shadow-xs cisco-reveal">
-                    <div className="flex items-center gap-2">
+                  {/* Core Business & Technical Advantages (3 Cards) */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs">
+                    <div className="flex items-center gap-2 mb-4">
                       <span className="w-1.5 h-4 bg-[#dc2626] rounded-full inline-block" />
-                      <h3 className="text-base sm:text-lg font-bold text-[#173B67] tracking-tight">
-                        Why This Solution Exists at Unified Enterprise
+                      <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight uppercase">
+                        Core Business &amp; Technical Advantages
                       </h3>
                     </div>
 
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {currentDetail.whyExists}
-                    </p>
-
-                    {/* Key Business Challenges Solved */}
-                    <div className="pt-4 border-t border-slate-100">
-                      <div className="flex items-center gap-2 mb-3.5">
-                        <span className="w-1.5 h-4 bg-[#173B67] rounded-full inline-block" />
-                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wide text-[#173B67]">
-                          Strategic Challenges Solved For Your Organization
-                        </h4>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 cisco-reveal cisco-stagger">
-                        {currentDetail.challengesSolved.map((challenge, idx) => (
-                          <div 
-                            key={idx} 
-                            className="bg-slate-50/80 hover:bg-slate-50 border border-slate-200/80 rounded-xl p-4 transition-colors space-y-1.5"
-                          >
-                            <div className="flex items-center gap-1.5 text-xs font-bold text-[#173B67]">
-                              <CheckCircle2 className="w-4 h-4 text-[#dc2626] shrink-0" />
-                              <span>{challenge.title}</span>
-                            </div>
-                            <p className="text-xs text-slate-600 leading-relaxed">
-                              {challenge.desc}
-                            </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      {currentSolution.coreAdvantages.map((adv, idx) => (
+                        <div
+                          key={idx}
+                          className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-4 hover:border-red-200 transition-all"
+                        >
+                          <div className="flex items-center gap-1.5 text-xs font-bold text-[#dc2626] mb-1.5">
+                            <CheckCircle2 className="w-4 h-4 text-[#dc2626] shrink-0" />
+                            <span>{adv.title}</span>
                           </div>
-                        ))}
-                      </div>
+                          <p className="text-xs text-slate-600 leading-relaxed">
+                            {adv.desc}
+                          </p>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
-                  {/* Technical Pillars & Core Engineering Deliverables */}
-                  <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 space-y-6 shadow-xs cisco-reveal">
-                    
-                    {/* Architecture Pillars */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="w-1.5 h-4 bg-[#173B67] rounded-full inline-block" />
-                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wide text-[#173B67]">
-                          Core Architectural Pillars
-                        </h4>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {currentDetail.architecturePoints.map((point, idx) => (
-                          <span
-                            key={idx}
-                            className="text-xs font-medium text-slate-800 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-lg"
-                          >
-                            {point}
-                          </span>
-                        ))}
-                      </div>
+                  {/* Certified Handover Checklist (4 Deliverables) */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs">
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className="w-1.5 h-4 bg-[#dc2626] rounded-full inline-block" />
+                      <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight uppercase">
+                        What You Receive (Certified Handover Checklist)
+                      </h3>
                     </div>
 
-                    {/* Core Deliverables */}
-                    <div className="pt-4 border-t border-slate-100">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="w-1.5 h-4 bg-[#dc2626] rounded-full inline-block" />
-                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wide text-[#173B67]">
-                          Certified Engineering Deliverables
-                        </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-700">
+                      {currentSolution.handoverChecklist.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-start gap-2.5 bg-slate-50/80 p-3 rounded-xl border border-slate-100"
+                        >
+                          <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Engineering Deep Dive & Guide (Expandable / Detailed) */}
+                  <div className="bg-slate-50/70 border border-slate-200/90 rounded-2xl p-6 shadow-xs">
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <div className="flex items-center gap-2">
+                        <BookOpen className="w-4 h-4 text-[#dc2626]" />
+                        <h3 className="text-xs sm:text-sm font-bold text-slate-900 uppercase tracking-wide">
+                          📖 Engineering Deep Dive &amp; Guide
+                        </h3>
                       </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {currentDetail.deliverables.map((item, idx) => (
-                          <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-700">
-                            <CheckCircle2 className="w-4 h-4 text-[#dc2626] shrink-0 mt-0.5" />
-                            <span>{item}</span>
-                          </div>
-                        ))}
-                      </div>
+                      <span className="text-[10px] font-semibold text-slate-500 bg-white border border-slate-200 px-2.5 py-0.5 rounded-full">
+                        {currentSolution.deepDive.readTime}
+                      </span>
                     </div>
 
-                    {/* Card Action Banner */}
-                    <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 -mx-6 sm:-mx-8 -mb-6 sm:-mb-8 p-6 rounded-b-2xl">
-                      <div>
-                        <span className="text-xs font-bold text-slate-900 block">
-                          Need a custom architecture or technical audit?
-                        </span>
-                        <span className="text-xs text-slate-500">
-                          Our enterprise architects review site surveys and deliver tailored schematics within 48 hours.
-                        </span>
-                      </div>
+                    <h4 className="text-sm sm:text-base font-bold text-slate-900 mb-3 leading-snug">
+                      {currentSolution.deepDive.title}
+                    </h4>
+
+                    {/* Deep dive content with toggle */}
+                    <div className="space-y-3 text-xs text-slate-600 leading-relaxed">
+                      <p>{currentSolution.deepDive.paragraphs[0]}</p>
+
+                      {deepDiveExpanded[currentSolution.id] && (
+                        <div className="space-y-3 pt-2 animate-in fade-in duration-200">
+                          {currentSolution.deepDive.paragraphs.slice(1).map((p, idx) => (
+                            <p key={idx}>{p}</p>
+                          ))}
+                        </div>
+                      )}
+
                       <button
                         type="button"
-                        onClick={() => onOpenConsultation(currentDetail.name)}
-                        className="px-5 py-2.5 rounded-lg bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-colors whitespace-nowrap"
+                        onClick={() => toggleDeepDive(currentSolution.id)}
+                        className="text-xs font-bold text-[#dc2626] hover:text-[#b91c1c] inline-flex items-center gap-1 pt-1 cursor-pointer"
                       >
-                        Schedule Technical Review
+                        <span>{deepDiveExpanded[currentSolution.id] ? 'Collapse Engineering Analysis' : 'Read Full Engineering Deep Dive'}</span>
+                        {deepDiveExpanded[currentSolution.id] ? (
+                          <ChevronUp className="w-3.5 h-3.5" />
+                        ) : (
+                          <ChevronDown className="w-3.5 h-3.5" />
+                        )}
                       </button>
                     </div>
+                  </div>
 
+                  {/* Authorized OEM Equipment & Schedule Review Footer */}
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
+                    <div>
+                      <span className="text-[11px] font-bold text-slate-500 block mb-0.5">
+                        Authorized OEM Equipment:
+                      </span>
+                      <p className="text-xs font-bold text-slate-800">
+                        {currentSolution.authorizedOem}
+                      </p>
+                      <p className="text-[11px] text-slate-500 mt-1">
+                        Need a custom setup or site survey? Our enterprise engineers visit your location and provide complete architectural schematics within 48 hours.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => onOpenConsultation(`Technical Review: ${currentSolution.name}`)}
+                      className="px-5 py-2.5 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer flex items-center gap-1.5 active:scale-95"
+                    >
+                      <span>Schedule Technical Review ✨</span>
+                    </button>
                   </div>
 
                 </div>

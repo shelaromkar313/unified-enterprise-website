@@ -129,7 +129,7 @@ export default function WhyChooseUsInteractive({ onOpenQuickSupport }: WhyChoose
             Power Digital Growth That Matters
           </h2>
           <p className="text-sm sm:text-base text-slate-600 mt-2.5 max-w-xl mx-auto leading-relaxed">
-            Your Vision, Our Technology — Driven for Real Results.
+            Your Vision, Our Technology: Driven for Real Results.
           </p>
         </div>
 

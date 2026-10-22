@@ -223,7 +223,7 @@ export default function AuthModal({
                         href="#help"
                         onClick={(e) => {
                           e.preventDefault();
-                          alert('Enterprise Support Desk hotline: +91 8377017477 / support@unifiedenterprise.com');
+                          alert('Enterprise Support Desk hotline: +91 9972457774 / support@unifiedenterprise.com');
                         }}
                         className="text-[#dc2626] hover:underline"
                       >
