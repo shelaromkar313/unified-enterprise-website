@@ -217,7 +217,7 @@ export default function AskAiAssistant({ onOpenQuickSupport }: AskAiAssistantPro
   return (
     <>
       {/* 1. Cisco-Style Floating Launcher Button & Hover Tooltip */}
-      <div className="fixed bottom-6 right-6 z-45 pointer-events-none">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-45 pointer-events-none">
         <div className="relative flex items-center justify-end">
           {/* Hover Speech Bubble - "✦ Hello, how can I help?" matching Cisco screenshot */}
           {!isOpen && (
@@ -225,7 +225,7 @@ export default function AskAiAssistant({ onOpenQuickSupport }: AskAiAssistantPro
               onClick={() => setIsOpen(true)}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className={`absolute right-full mr-3 whitespace-nowrap cursor-pointer bg-white px-3.5 py-2 rounded-xl text-slate-800 text-xs sm:text-sm font-semibold shadow-[0_6px_25px_rgba(0,0,0,0.18)] border border-slate-200/90 flex items-center gap-2 select-none transition-all duration-200 ${
+              className={`hidden sm:flex absolute right-full mr-3 whitespace-nowrap cursor-pointer bg-white px-3.5 py-2 rounded-xl text-slate-800 text-xs sm:text-sm font-semibold shadow-[0_6px_25px_rgba(0,0,0,0.18)] border border-slate-200/90 items-center gap-2 select-none transition-all duration-200 ${
                 isHovered ? 'opacity-100 translate-x-0 scale-100 pointer-events-auto' : 'opacity-0 translate-x-2 scale-95 pointer-events-none'
               }`}
             >
@@ -242,12 +242,12 @@ export default function AskAiAssistant({ onOpenQuickSupport }: AskAiAssistantPro
               onClick={() => setIsOpen(true)}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className="w-14 h-14 rounded-full bg-[#dc2626] hover:bg-[#b91c1c] text-white shadow-[0_6px_22px_rgba(220,38,38,0.45)] hover:shadow-[0_8px_28px_rgba(185,28,28,0.6)] transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center group focus:outline-none focus:ring-4 focus:ring-red-300/40 pointer-events-auto"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#dc2626] hover:bg-[#b91c1c] text-white shadow-[0_6px_22px_rgba(220,38,38,0.45)] hover:shadow-[0_8px_28px_rgba(185,28,28,0.6)] transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center group focus:outline-none focus:ring-4 focus:ring-red-300/40 pointer-events-auto"
               aria-label="Open AI Assistant"
               title="Ask Unified AI Assistant"
             >
               {/* Custom Unified Enterprise AI Emblem */}
-              <UnifiedAiEmblem className="w-8 h-8 group-hover:scale-110 transition-transform duration-300 drop-shadow-xs" />
+              <UnifiedAiEmblem className="w-6 h-6 sm:w-8 sm:h-8 group-hover:scale-110 transition-transform duration-300 drop-shadow-xs" />
             </button>
           )}
         </div>
@@ -258,8 +258,8 @@ export default function AskAiAssistant({ onOpenQuickSupport }: AskAiAssistantPro
         <div 
           className={`fixed z-50 bg-white rounded-2xl shadow-[0_15px_60px_rgba(0,0,0,0.3)] border border-slate-200/90 flex flex-col overflow-hidden transition-all duration-300 animate-in fade-in slide-in-from-bottom-4 ${
             isMaximized 
-              ? 'bottom-4 right-4 sm:bottom-6 sm:right-6 w-[95vw] sm:w-[700px] h-[90vh]' 
-              : 'bottom-4 right-4 sm:bottom-6 sm:right-6 w-[94vw] sm:w-[390px] h-[580px] max-h-[85vh]'
+              ? 'bottom-3 right-3 sm:bottom-6 sm:right-6 w-[calc(100vw-24px)] sm:w-[700px] h-[88vh] sm:h-[90vh]' 
+              : 'bottom-3 right-3 sm:bottom-6 sm:right-6 w-[calc(100vw-24px)] sm:w-[390px] h-[520px] sm:h-[580px] max-h-[85vh]'
           }`}
         >
           {/* Top Red Header */}

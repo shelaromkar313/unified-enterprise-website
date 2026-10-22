@@ -16,7 +16,8 @@ import {
   RefreshCw, 
   Database,
   ExternalLink,
-  MessageSquare
+  MessageSquare,
+  Tag
 } from 'lucide-react';
 
 interface GsmGatewaysShowcaseProps {
@@ -40,6 +41,7 @@ interface GatewayProduct {
   idealFor: string;
   badge: string;
   badgeColor: string;
+  rentalAvailable?: boolean;
 }
 
 const GATEWAY_PRODUCTS: GatewayProduct[] = [
@@ -208,54 +210,68 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
     <div className="space-y-8">
       
       {/* 1. HERO INTRO BANNER */}
-      <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-50 border border-red-200 text-[#dc2626] text-[11px] font-bold uppercase tracking-wider mb-3">
-          <Radio className="w-3 h-3 text-[#dc2626]" />
-          <span>Telephony Infrastructure &amp; Gateways</span>
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xs">
+        <div className="flex flex-wrap items-center gap-2 mb-3">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-50 border border-red-200 text-[#dc2626] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">
+            <Radio className="w-3 h-3 text-[#dc2626]" />
+            <span>Telephony Infrastructure &amp; Gateways</span>
+          </div>
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] sm:text-[11px] font-bold tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+            Rent &amp; Buy Available On All Models
+          </span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight mb-2 break-words">
           Enterprise <span className="text-[#dc2626]">GSM, FXS, FXO &amp; PRI Gateways</span>
         </h1>
 
         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl mb-5">
-          VoIP Gateways act as the essential bridge between modern <strong className="text-slate-900 font-semibold">IP-PBX &amp; Cloud Telephony</strong> systems and traditional telecom networks. Whether you need to connect <strong className="text-slate-900 font-semibold">4G LTE SIM cards (GSM)</strong>, preserve <strong className="text-slate-900 font-semibold">analog handsets &amp; fax machines (FXS)</strong>, or route calls through <strong className="text-slate-900 font-semibold">BSNL/Airtel copper landlines (FXO)</strong> with power-failover lifeline protection, we provide certified hardware, custom dialplan configuration, and end-to-end integration.
+          VoIP Gateways act as the essential bridge between modern <strong className="text-slate-900 font-semibold">IP-PBX &amp; Cloud Telephony</strong> systems and traditional telecom networks. Whether you need to connect <strong className="text-slate-900 font-semibold">4G LTE SIM cards (GSM)</strong>, preserve <strong className="text-slate-900 font-semibold">analog handsets &amp; fax machines (FXS)</strong>, or route calls through <strong className="text-slate-900 font-semibold">BSNL/Airtel copper landlines (FXO)</strong> with power-failover lifeline protection, we provide certified hardware for <strong className="text-emerald-700 font-bold">flexible rental</strong> or <strong className="text-slate-900 font-bold">outright purchase</strong> with complete dialplan configuration.
         </p>
 
-        {/* 3 Value Pillars */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 border-t border-slate-100">
+        {/* 4 Value Pillars */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 pt-1 border-t border-slate-100">
           <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
             <Smartphone className="w-4 h-4 text-[#dc2626] shrink-0" />
-            <div>
-              <h4 className="text-xs font-bold text-slate-900">4G LTE / VoLTE Gateways</h4>
-              <p className="text-[11px] text-slate-500">Cut mobile call rates by up to 70%</p>
+            <div className="min-w-0">
+              <h4 className="text-xs font-bold text-slate-900 truncate">4G LTE / VoLTE</h4>
+              <p className="text-[11px] text-slate-500">Cut mobile call rates by 70%</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
             <PhoneCall className="w-4 h-4 text-blue-600 shrink-0" />
-            <div>
-              <h4 className="text-xs font-bold text-slate-900">FXS Analog Gateways</h4>
-              <p className="text-[11px] text-slate-500">Keep legacy phones, faxes &amp; intercoms</p>
+            <div className="min-w-0">
+              <h4 className="text-xs font-bold text-slate-900 truncate">FXS Analog Gateways</h4>
+              <p className="text-[11px] text-slate-500">Keep legacy phones &amp; faxes</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
-            <Zap className="w-4 h-4 text-emerald-600 shrink-0" />
-            <div>
-              <h4 className="text-xs font-bold text-slate-900">FXO PSTN Lifeline</h4>
-              <p className="text-[11px] text-slate-500">Zero downtime emergency landlines</p>
+            <Zap className="w-4 h-4 text-amber-600 shrink-0" />
+            <div className="min-w-0">
+              <h4 className="text-xs font-bold text-slate-900 truncate">FXO PSTN Lifeline</h4>
+              <p className="text-[11px] text-slate-500">Zero downtime landlines</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2.5 bg-emerald-50/80 border border-emerald-200 rounded-xl p-3">
+            <RefreshCw className="w-4 h-4 text-emerald-700 shrink-0" />
+            <div className="min-w-0">
+              <h4 className="text-xs font-bold text-emerald-950 truncate">Rent &amp; Buy Options</h4>
+              <p className="text-[11px] text-emerald-700">Zero-CAPEX or OEM purchase</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* 2. SUB-CATEGORY FILTER TABS */}
-      <div className="flex flex-wrap items-center gap-2 pb-1 border-b border-slate-200/80">
+      {/* 2. SUB-CATEGORY FILTER TABS - Horizontal Scroll for Mobile */}
+      <div className="flex items-center gap-2 pb-2 border-b border-slate-200/80 overflow-x-auto scrollbar-none -mx-1 px-1">
         <button
           type="button"
           onClick={() => setActiveTab('all')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+          className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 min-h-[38px] ${
             activeTab === 'all'
               ? 'bg-[#dc2626] text-white shadow-2xs'
               : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -267,54 +283,54 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
         <button
           type="button"
           onClick={() => setActiveTab('gsm')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+          className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 min-h-[38px] ${
             activeTab === 'gsm'
               ? 'bg-[#dc2626] text-white shadow-2xs'
               : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
           }`}
         >
-          📱 GSM / 4G LTE Gateways ({GATEWAY_PRODUCTS.filter(p => p.category === 'gsm').length})
+          📱 GSM / 4G LTE ({GATEWAY_PRODUCTS.filter(p => p.category === 'gsm').length})
         </button>
 
         <button
           type="button"
           onClick={() => setActiveTab('fxs')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+          className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 min-h-[38px] ${
             activeTab === 'fxs'
               ? 'bg-[#dc2626] text-white shadow-2xs'
               : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
           }`}
         >
-          ☎️ Analog FXS Gateways ({GATEWAY_PRODUCTS.filter(p => p.category === 'fxs').length})
+          ☎️ Analog FXS ({GATEWAY_PRODUCTS.filter(p => p.category === 'fxs').length})
         </button>
 
         <button
           type="button"
           onClick={() => setActiveTab('fxo')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+          className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 min-h-[38px] ${
             activeTab === 'fxo'
               ? 'bg-[#dc2626] text-white shadow-2xs'
               : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
           }`}
         >
-          🔌 Analog FXO Gateways ({GATEWAY_PRODUCTS.filter(p => p.category === 'fxo').length})
+          🔌 Analog FXO ({GATEWAY_PRODUCTS.filter(p => p.category === 'fxo').length})
         </button>
 
         <button
           type="button"
           onClick={() => setActiveTab('hybrid')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+          className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 min-h-[38px] ${
             activeTab === 'hybrid'
               ? 'bg-[#dc2626] text-white shadow-2xs'
               : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
           }`}
         >
-          ⚡ Hybrid (FXS + FXO) ({GATEWAY_PRODUCTS.filter(p => p.category === 'hybrid').length})
+          ⚡ Hybrid ({GATEWAY_PRODUCTS.filter(p => p.category === 'hybrid').length})
         </button>
       </div>
 
-      {/* 3. PRODUCT CATALOG GRID WITH REAL DINSTAR ASSETS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      {/* 3. PRODUCT CATALOG GRID */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
         {filteredProducts.map((product) => (
           <article
             key={product.id}
@@ -322,30 +338,39 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
           >
             <div>
               {/* Product Image Container */}
-              <div className="relative h-52 bg-slate-50/70 overflow-hidden flex items-center justify-center p-4 border-b border-slate-100">
+              <div className="relative h-44 sm:h-52 bg-slate-50/70 overflow-hidden flex items-center justify-center p-3 sm:p-4 border-b border-slate-100">
                 <img
                   src={product.image}
                   alt={product.name}
                   className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                   onError={(e) => {
-                    // Fallback to placeholder if external site blocks hotlink
                     (e.target as HTMLImageElement).src = '/assets/ue_hardware_procurement.jpg';
                   }}
                 />
-                {/* Brand Badge */}
-                <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs text-slate-800 text-[11px] font-bold px-2.5 py-0.5 rounded-md shadow-2xs border border-slate-200/80">
-                  Dinstar
-                </span>
-                {/* Port / Type Badge */}
-                <span className={`absolute top-3 right-3 text-[10px] font-bold px-2.5 py-0.5 rounded-full border shadow-2xs ${product.badgeColor}`}>
-                  {product.badge}
-                </span>
+                
+                {/* Brand Badge & Rent/Buy Badge (Left) */}
+                <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 z-10">
+                  <span className="bg-white/95 backdrop-blur-xs text-slate-800 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md shadow-2xs border border-slate-200/80">
+                    Dinstar
+                  </span>
+                  <span className="bg-emerald-600 text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-200" />
+                    Rent / Buy
+                  </span>
+                </div>
+                
+                {/* Right Badge: Model Type (Safely truncated on mobile) */}
+                <div className="absolute top-2.5 right-2.5 z-10 max-w-[48%]">
+                  <span className={`text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full border shadow-2xs truncate block ${product.badgeColor}`}>
+                    {product.badge}
+                  </span>
+                </div>
               </div>
 
               {/* Body Content */}
-              <div className="p-5">
-                <div className="flex items-center gap-2 mb-1.5">
+              <div className="p-4 sm:p-5">
+                <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                   <span className="text-[11px] font-bold text-[#dc2626] uppercase tracking-wider">
                     {product.categoryLabel}
                   </span>
@@ -355,20 +380,20 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
                   </span>
                 </div>
 
-                <h3 className="text-base font-bold text-slate-900 group-hover:text-[#dc2626] transition-colors mb-2 leading-snug">
+                <h3 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-[#dc2626] transition-colors mb-2 leading-snug break-words">
                   {product.name}
                 </h3>
 
-                <p className="text-xs text-slate-600 leading-relaxed mb-3.5 line-clamp-3">
+                <p className="text-xs text-slate-600 leading-relaxed mb-3 line-clamp-2 sm:line-clamp-3">
                   {product.description}
                 </p>
 
                 {/* Specs Chips */}
-                <div className="flex flex-wrap gap-1.5 mb-3.5">
+                <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-3">
                   {product.specs.slice(0, 3).map((spec, idx) => (
                     <span
                       key={idx}
-                      className="text-[10px] font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md"
+                      className="text-[10px] font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md max-w-full truncate"
                     >
                       {spec}
                     </span>
@@ -378,22 +403,24 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
                 {/* Ideal For Note */}
                 <div className="bg-slate-50 border border-slate-200/70 rounded-lg p-2.5 text-[11px] text-slate-600">
                   <strong className="text-slate-900 font-semibold block mb-0.5">Best For:</strong>
-                  {product.idealFor}
+                  <span className="line-clamp-2">{product.idealFor}</span>
                 </div>
               </div>
             </div>
 
             {/* Card Footer Actions */}
-            <div className="p-5 pt-0 border-t border-slate-100 mt-3 flex items-center gap-2">
+            <div className="p-4 sm:p-5 pt-0 border-t border-slate-100 mt-2 sm:mt-3 flex items-center gap-2">
               <button
+                type="button"
                 onClick={() => onOpenInquiry(`Quote Request: ${product.name} (${product.modelCode})`)}
-                className="flex-1 py-2 px-3 rounded-lg bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-colors text-center cursor-pointer"
+                className="flex-1 py-2.5 px-3 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] active:bg-[#991b1b] text-white text-xs font-bold transition-colors text-center cursor-pointer shadow-2xs min-h-[40px] flex items-center justify-center"
               >
                 Request Quote
               </button>
               <button
+                type="button"
                 onClick={() => setSelectedProduct(product)}
-                className="py-2 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors cursor-pointer"
+                className="py-2.5 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs font-semibold transition-colors cursor-pointer min-h-[40px] flex items-center justify-center shrink-0"
               >
                 Full Specs
               </button>
@@ -403,9 +430,9 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
       </div>
 
       {/* 4. EXPLANATION: HOW EACH GATEWAY TYPE OPERATES */}
-      <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs">
-        <div className="mb-5">
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xs">
+        <div className="mb-4 sm:mb-5">
+          <h2 className="text-base sm:text-lg lg:text-xl font-bold text-slate-900 tracking-tight">
             How VoIP Gateways Connect Your Enterprise
           </h2>
           <p className="text-xs text-slate-500">
@@ -413,9 +440,9 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
           {/* Card 1: GSM / 4G Gateways */}
-          <div className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-5 flex flex-col justify-between">
+          <div className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-4 sm:p-5 flex flex-col justify-between">
             <div>
               <div className="w-9 h-9 rounded-xl bg-red-50 text-[#dc2626] flex items-center justify-center font-bold text-xs mb-3">
                 <Smartphone className="w-5 h-5" />
@@ -446,7 +473,7 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
           </div>
 
           {/* Card 2: FXS Gateways */}
-          <div className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-5 flex flex-col justify-between">
+          <div className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-4 sm:p-5 flex flex-col justify-between">
             <div>
               <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs mb-3">
                 <PhoneCall className="w-5 h-5" />
@@ -477,7 +504,7 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
           </div>
 
           {/* Card 3: FXO Gateways */}
-          <div className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-5 flex flex-col justify-between">
+          <div className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-4 sm:p-5 flex flex-col justify-between">
             <div>
               <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-xs mb-3">
                 <Zap className="w-5 h-5" />
@@ -564,12 +591,12 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
       </div>
 
       {/* 6. CONSULTATION & QUOTE CTA */}
-      <div className="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
-        <div>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-red-400 block mb-1">
+      <div className="bg-slate-900 text-white rounded-2xl p-4 sm:p-6 lg:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 shadow-sm">
+        <div className="w-full sm:w-auto">
+          <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-red-400 block mb-1">
             Need Help Choosing The Right Port Capacity?
           </span>
-          <h3 className="text-lg sm:text-xl font-bold tracking-tight mb-2">
+          <h3 className="text-base sm:text-lg lg:text-xl font-bold tracking-tight mb-1.5 sm:mb-2">
             Speak with an Enterprise Telephony Architect
           </h3>
           <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
@@ -578,7 +605,7 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
         </div>
         <button
           onClick={() => onOpenInquiry('VoIP Gateway Consultation')}
-          className="px-6 py-3 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-md hover:shadow-lg shrink-0 cursor-pointer flex items-center gap-1.5"
+          className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] active:bg-[#991b1b] text-white text-xs font-bold transition-all shadow-md shrink-0 cursor-pointer flex items-center justify-center gap-1.5 min-h-[42px]"
         >
           <span>Request Hardware Quote</span>
           <ArrowRight className="w-4 h-4" />
@@ -588,45 +615,49 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
       {/* 7. FULL SPECS MODAL */}
       {selectedProduct && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-xs animate-in fade-in duration-150 overflow-y-auto"
           onClick={() => setSelectedProduct(null)}
         >
           <div 
-            className="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-slate-200 relative max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-2xl max-w-xl w-full p-4 sm:p-6 shadow-2xl border border-slate-200 relative my-auto max-h-[92vh] flex flex-col overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-start justify-between gap-4 mb-4 pb-3 border-b border-slate-100">
-              <div>
+            {/* Modal Header: Sticky at top */}
+            <div className="flex items-start justify-between gap-3 mb-3 pb-3 border-b border-slate-100 shrink-0">
+              <div className="min-w-0 flex-1">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626] bg-red-50 px-2 py-0.5 rounded-full inline-block mb-1">
                   {selectedProduct.categoryLabel} • {selectedProduct.ports}
                 </span>
-                <h3 className="text-lg font-bold text-slate-900">
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-snug break-words">
                   {selectedProduct.name}
                 </h3>
-                <p className="text-xs font-mono text-slate-500">
+                <p className="text-xs font-mono text-slate-500 truncate">
                   Model: {selectedProduct.modelCode}
                 </p>
               </div>
               <button
+                type="button"
                 onClick={() => setSelectedProduct(null)}
-                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors text-sm font-bold"
+                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors text-sm font-bold shrink-0 min-h-[32px] min-w-[32px]"
+                aria-label="Close modal"
               >
                 ✕
               </button>
             </div>
 
-            <div className="h-44 rounded-xl overflow-hidden mb-4 bg-slate-50 flex items-center justify-center p-3 border border-slate-100">
-              <img
-                src={selectedProduct.image}
-                alt={selectedProduct.name}
-                className="max-h-full max-w-full object-contain"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/assets/ue_hardware_procurement.jpg';
-                }}
-              />
-            </div>
+            {/* Scrollable Modal Content */}
+            <div className="overflow-y-auto pr-1 space-y-4 text-xs flex-1">
+              <div className="h-36 sm:h-44 rounded-xl overflow-hidden bg-slate-50 flex items-center justify-center p-3 border border-slate-100">
+                <img
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name}
+                  className="max-h-full max-w-full object-contain"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/assets/ue_hardware_procurement.jpg';
+                  }}
+                />
+              </div>
 
-            <div className="space-y-4 text-xs">
               <div>
                 <h4 className="font-bold text-slate-900 mb-1">Product Overview</h4>
                 <p className="text-slate-600 leading-relaxed">
@@ -640,7 +671,7 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
                   {selectedProduct.specs.map((s, idx) => (
                     <div key={idx} className="flex items-center gap-2">
                       <span className="text-[#dc2626] font-bold">•</span>
-                      <span>{s}</span>
+                      <span className="break-words">{s}</span>
                     </div>
                   ))}
                 </div>
@@ -650,29 +681,50 @@ export default function GsmGatewaysShowcase({ onOpenInquiry }: GsmGatewaysShowca
                 <h4 className="font-bold text-slate-900 mb-1.5">Enterprise Highlights</h4>
                 <div className="space-y-1">
                   {selectedProduct.features.map((f, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-slate-700">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <div key={idx} className="flex items-start gap-2 text-slate-700">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                       <span>{f}</span>
                     </div>
                   ))}
                 </div>
               </div>
+
+              {/* Procurement Options Banner */}
+              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span className="text-xs font-bold text-emerald-900">
+                    Available For Outright Purchase &amp; Flexible Rental
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 text-[10px] font-bold">
+                  <span className="bg-white border border-emerald-300 text-emerald-800 px-2 py-0.5 rounded shadow-2xs">
+                    Monthly / Quarterly Rental
+                  </span>
+                  <span className="bg-white border border-emerald-300 text-emerald-800 px-2 py-0.5 rounded shadow-2xs">
+                    Outright Buy with AMC
+                  </span>
+                </div>
+              </div>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
+            {/* Modal Footer: Fixed at bottom */}
+            <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2 shrink-0">
               <button
+                type="button"
                 onClick={() => {
                   const prod = selectedProduct;
                   setSelectedProduct(null);
-                  onOpenInquiry(`Quote Request: ${prod.name}`);
+                  onOpenInquiry(`Quote Request: ${prod.name} (${prod.modelCode})`);
                 }}
-                className="flex-1 py-2.5 px-4 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-colors cursor-pointer text-center"
+                className="flex-1 py-2.5 px-4 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] active:bg-[#991b1b] text-white text-xs font-bold transition-colors cursor-pointer text-center shadow-2xs min-h-[42px] flex items-center justify-center"
               >
-                Request Quotation &amp; Availability
+                Request Quote
               </button>
               <button
+                type="button"
                 onClick={() => setSelectedProduct(null)}
-                className="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors cursor-pointer"
+                className="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs font-semibold transition-colors cursor-pointer min-h-[42px] flex items-center justify-center shrink-0"
               >
                 Close
               </button>

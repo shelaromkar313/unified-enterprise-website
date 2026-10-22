@@ -391,10 +391,10 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
         {/* Left Navigation Chevron Arrow */}
         <button
           onClick={prevSlide}
-          className="absolute left-3 sm:left-6 lg:left-8 z-50 w-11 h-11 rounded-full bg-white hover:bg-[#dc2626] text-[#dc2626] hover:text-white border border-slate-300/80 shadow-[0_4px_16px_rgba(0,0,0,0.12)] flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
+          className="absolute left-1.5 sm:left-6 lg:left-8 z-50 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-[#dc2626] text-[#dc2626] hover:text-white border border-slate-300/80 shadow-[0_4px_16px_rgba(0,0,0,0.12)] flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
           aria-label="Previous service capability"
         >
-          <ChevronLeft className="w-6 h-6 stroke-[2.5]" />
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
         </button>
 
         {/* Cards Track */}
@@ -432,7 +432,7 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
                   backfaceVisibility: 'hidden',
                   WebkitBackfaceVisibility: 'hidden',
                 }}
-                className={`absolute top-2 w-[calc(100vw-36px)] max-w-[320px] sm:max-w-none sm:w-[350px] lg:w-[370px] h-[450px] sm:h-[475px] bg-white rounded-[26px] p-5 sm:p-6 text-slate-800 flex flex-col justify-between overflow-hidden select-none transition-all duration-300 ${
+                className={`absolute top-2 w-[calc(100vw-36px)] max-w-[310px] sm:max-w-none sm:w-[350px] lg:w-[370px] h-[450px] sm:h-[475px] bg-white rounded-[26px] p-4 sm:p-6 text-slate-800 flex flex-col justify-between overflow-hidden select-none transition-all duration-300 ${
                   slot.isCenter 
                     ? 'border-2 border-[#dc2626] shadow-[0_25px_50px_-12px_rgba(220,38,38,0.22),0_15px_30px_-10px_rgba(0,0,0,0.1)] cursor-default ring-4 ring-[#dc2626]/10' 
                     : 'border border-slate-200/90 shadow-[0_10px_30px_-8px_rgba(0,0,0,0.08)] cursor-pointer hover:opacity-100 hover:scale-[0.90]'
@@ -491,10 +491,10 @@ export default function WhyUnifiedSection({ onOpenQuickSupport }: WhyUnifiedSect
         {/* Right Navigation Chevron Arrow */}
         <button
           onClick={nextSlide}
-          className="absolute right-3 sm:right-6 lg:right-8 z-50 w-11 h-11 rounded-full bg-white hover:bg-[#dc2626] text-[#dc2626] hover:text-white border border-slate-300/80 shadow-[0_4px_16px_rgba(0,0,0,0.12)] flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
+          className="absolute right-1.5 sm:right-6 lg:right-8 z-50 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-[#dc2626] text-[#dc2626] hover:text-white border border-slate-300/80 shadow-[0_4px_16px_rgba(0,0,0,0.12)] flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
           aria-label="Next service capability"
         >
-          <ChevronRight className="w-6 h-6 stroke-[2.5]" />
+          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
         </button>
       </div>
 

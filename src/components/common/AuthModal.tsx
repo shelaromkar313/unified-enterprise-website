@@ -114,10 +114,10 @@ export default function AuthModal({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Card Header: Company Logo & Top Utility Controls */}
-        <div className="pt-5 pb-5 px-6 sm:px-8 relative border-b border-slate-100 flex flex-col items-center">
+        <div className="pt-4 pb-4 sm:pt-5 sm:pb-5 px-4 sm:px-8 relative border-b border-slate-100 flex flex-col items-center">
           
           {/* Top-Right: Language Selector + Close X Button */}
-          <div className="absolute top-4 right-5 flex items-center gap-3">
+          <div className="absolute top-3.5 right-4 sm:top-4 sm:right-5 flex items-center gap-3">
             <div className="flex items-center gap-1 text-[11px] text-slate-500 font-medium">
               <Globe className="w-3.5 h-3.5 text-slate-400" />
               <span>US EN</span>
@@ -136,13 +136,13 @@ export default function AuthModal({
             <img
               src="/brand/ue_logo_horizontal.jpg"
               alt="Unified Enterprise Solutions"
-              className="h-11 sm:h-12 w-auto object-contain"
+              className="h-10 sm:h-12 w-auto object-contain"
             />
           </div>
         </div>
 
         {/* Card Body */}
-        <div className="p-6 sm:p-8">
+        <div className="p-4 sm:p-8">
           {authSuccess ? (
             <div className="text-center py-6 space-y-3 animate-in fade-in duration-200">
               <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">

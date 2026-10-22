@@ -94,7 +94,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f4f5f7] flex flex-col justify-between py-8 sm:py-12 px-4 select-none">
+    <div className="min-h-screen bg-[#f4f5f7] flex flex-col justify-between py-6 sm:py-12 px-3 sm:px-4 select-none">
       
       {/* Top spacing */}
       <div />
@@ -103,10 +103,10 @@ export default function LoginPage() {
       <div className="max-w-[460px] w-full mx-auto bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-200/80 overflow-hidden">
         
         {/* Card Header with Language Selector & Company Logo */}
-        <div className="pt-6 pb-6 px-8 relative border-b border-slate-100 flex flex-col items-center">
+        <div className="pt-5 pb-5 sm:pt-6 sm:pb-6 px-4 sm:px-8 relative border-b border-slate-100 flex flex-col items-center">
           
           {/* Top-Right Language / Region Badge */}
-          <div className="absolute top-5 right-6 flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+          <div className="absolute top-4 right-4 sm:top-5 sm:right-6 flex items-center gap-1 text-[11px] sm:text-xs text-slate-500 font-medium">
             <Globe className="w-3.5 h-3.5 text-slate-400" />
             <span>US EN</span>
           </div>
@@ -116,13 +116,13 @@ export default function LoginPage() {
             <img
               src="/brand/ue_logo_horizontal.jpg"
               alt="Unified Enterprise Solutions"
-              className="h-12 sm:h-14 w-auto object-contain transition-transform group-hover:scale-[1.02]"
+              className="h-10 sm:h-14 w-auto object-contain transition-transform group-hover:scale-[1.02]"
             />
           </Link>
         </div>
 
         {/* Card Body */}
-        <div className="p-8 sm:p-10">
+        <div className="p-5 sm:p-8 lg:p-10">
           
           {authSuccess ? (
             <div className="text-center py-6 space-y-4 animate-in fade-in zoom-in-95 duration-200">

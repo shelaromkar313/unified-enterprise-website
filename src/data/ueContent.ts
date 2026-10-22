@@ -166,7 +166,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     specs: 'Compatible with Asterisk, FreePBX, Cisco, Avaya, and Grandstream',
     rentalAvailable: true,
     image: '/assets/ue_telecom_voice.jpg',
-    badge: 'Multi-SIM Support'
+    badge: 'Rent & Buy Available'
   },
   {
     id: 'software-business-licences',
@@ -176,7 +176,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     features: ['Official Partner Licensing Support', 'License Utilization Audits', 'Automated Renewal Management', 'Cloud Identity & Access Provisioning'],
     specs: 'Volume licensing agreements tailored to organizational headcount',
     rentalAvailable: false,
-    image: '/assets/ue_amc_maintenance.jpg',
+    image: '/assets/real_software_workspace.jpg',
     badge: 'Tier-1 Partner'
   },
   {
@@ -198,7 +198,7 @@ export const PRODUCTS_DATA: ProductItem[] = [
     features: ['Dedicated Voice QoS Prioritization', 'Direct DID International Numbers', 'End-to-End Call Encryption (TLS/SRTP)', 'Proactive SIP Health Checks'],
     specs: 'Carrier-grade Session Border Controllers (SBC) for maximum uptime',
     rentalAvailable: true,
-    image: '/assets/telecom_ip_phones.jpg',
+    image: '/assets/real_managed_voip_desk.jpg',
     badge: 'Crystal HD Voice'
   }
 ];

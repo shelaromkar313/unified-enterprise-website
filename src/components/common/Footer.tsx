@@ -8,16 +8,16 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#0f172a] text-slate-300 pt-16 pb-12 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 cisco-reveal">
+    <footer className="bg-[#0f172a] text-slate-300 pt-10 sm:pt-16 pb-8 sm:pb-12 border-t border-slate-800">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-12 cisco-reveal">
 
         {/* Top Section: Brand & Contact Info */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-slate-800">
 
           {/* Brand Info */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-16 h-16 rounded-full overflow-hidden bg-white p-1.5 flex items-center justify-center shadow-md shrink-0">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden bg-white p-1.5 flex items-center justify-center shadow-md shrink-0">
                 <img
                   src="/brand/ue_logo_badge.jpg"
                   alt="Unified Enterprise Solutions"
@@ -25,10 +25,10 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white tracking-tight">
+                <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
                   Unified Enterprise Solutions
                 </h3>
-                <p className="text-xs text-[#dc2626] font-medium">
+                <p className="text-[11px] sm:text-xs text-[#dc2626] font-medium">
                   IT & Telecom Hardware Sales | Infra Support
                 </p>
               </div>
@@ -38,11 +38,11 @@ export default function Footer() {
               “Smart IT Services for a Smarter Business.” Providing end-to-end IT infrastructure management, hardware rental, networking design, AMC support, and enterprise telephony solutions across India.
             </p>
 
-            <div className="pt-2 flex items-center gap-2">
-              <span className="text-[11px] font-mono bg-red-950/60 text-red-300 px-3 py-1 rounded-md border border-red-800/40">
+            <div className="pt-2 flex flex-wrap items-center gap-2">
+              <span className="text-[11px] font-mono bg-red-950/60 text-red-300 px-2.5 py-1 rounded-md border border-red-800/40">
                 Pan-India SLA Coverage
               </span>
-              <span className="text-[11px] font-mono bg-slate-800 text-slate-300 px-3 py-1 rounded-md">
+              <span className="text-[11px] font-mono bg-slate-800 text-slate-300 px-2.5 py-1 rounded-md">
                 24/5 & Optional 24/7
               </span>
             </div>

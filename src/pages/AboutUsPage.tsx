@@ -338,8 +338,8 @@ export default function AboutUsPage({ onOpenQuickSupport }: AboutUsPageProps) {
             const current = supportAudience[activeSupportTab];
             const CurrentIcon = current.icon;
             return (
-              <div className="bg-slate-50/80 rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm transition-all duration-300">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="bg-slate-50/80 rounded-2xl sm:rounded-3xl p-4 sm:p-10 border border-slate-200/90 shadow-sm transition-all duration-300">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
                   <div className="lg:col-span-7 space-y-4">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-2xl bg-red-100 text-[#dc2626] flex items-center justify-center font-bold">
@@ -353,7 +353,7 @@ export default function AboutUsPage({ onOpenQuickSupport }: AboutUsPageProps) {
                       </div>
                     </div>
 
-                    <p className="text-base text-slate-700 font-medium leading-relaxed">
+                    <p className="text-sm sm:text-base text-slate-700 font-medium leading-relaxed">
                       {current.description}
                     </p>
 
@@ -366,10 +366,10 @@ export default function AboutUsPage({ onOpenQuickSupport }: AboutUsPageProps) {
                       ))}
                     </div>
 
-                    <div className="pt-4 flex items-center gap-4">
+                    <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                       <button
                         onClick={() => onOpenQuickSupport(current.title)}
-                        className="px-5 py-2.5 rounded-full bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs sm:text-sm font-semibold transition-all shadow-xs flex items-center gap-2 active:scale-95"
+                        className="w-full sm:w-auto min-h-[42px] px-5 py-2.5 rounded-full bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs sm:text-sm font-semibold transition-all shadow-xs flex items-center justify-center gap-2 active:scale-95"
                       >
                         <span>Request Tailored SLA</span>
                         <ArrowRight className="w-4 h-4" />
@@ -382,13 +382,13 @@ export default function AboutUsPage({ onOpenQuickSupport }: AboutUsPageProps) {
 
                   {/* Replaced Image: Clean Enterprise Server Datacenter (No awkward cropped people) */}
                   <div className="lg:col-span-5 flex justify-center">
-                    <div className="relative rounded-2xl overflow-hidden shadow-md border border-slate-200 w-full max-w-[440px] h-[250px] sm:h-[280px] bg-slate-900 group">
+                    <div className="relative rounded-2xl overflow-hidden shadow-md border border-slate-200 w-full max-w-[440px] h-[220px] sm:h-[280px] bg-slate-900 group">
                       <img
                         src="/assets/datacenter_servers.jpg"
                         alt="Enterprise IT Infrastructure & High-Availability Datacenter"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent flex items-end p-5">
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent flex items-end p-4 sm:p-5">
                         <div>
                           <span className="px-2 py-0.5 rounded bg-[#dc2626] text-white text-[10px] font-bold uppercase tracking-wider">
                             Mission-Critical
@@ -408,26 +408,26 @@ export default function AboutUsPage({ onOpenQuickSupport }: AboutUsPageProps) {
       </section>
 
       {/* 5. "What Makes Our Model Different" - Interactive Comparison in Priority Red */}
-      <section className="py-14 sm:py-20 bg-slate-50/70 border-t border-b border-slate-100">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-10">
+      <section className="py-12 sm:py-20 bg-slate-50/70 border-t border-b border-slate-100">
+        <div className="max-w-[1240px] mx-auto px-3.5 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
             <span className="text-xs font-bold uppercase tracking-wider text-[#dc2626] bg-red-50 px-3 py-1 rounded-md border border-red-100">
               Operational Impact
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#0B192C] mt-2">
               What Makes Our Model Different
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 mt-2">
+            <p className="text-xs sm:text-base text-slate-600 mt-2">
               We connect hardware supply, day-to-day support, telecom and project services into one coordinated service model with fewer hand-offs, clearer accountability and better visibility of the technology estate.
             </p>
           </div>
 
           {/* Interactive Toggle between Unified Coordinated Model vs Fragmented Multi-Vendor */}
           <div className="flex justify-center mb-8">
-            <div className="inline-flex rounded-full bg-slate-200/80 p-1 border border-slate-300/80">
+            <div className="flex flex-col sm:flex-row rounded-2xl sm:rounded-full bg-slate-200/80 p-1 border border-slate-300/80 w-full sm:w-auto">
               <button
                 onClick={() => setActiveModelView('coordinated')}
-                className={`px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                className={`px-4 sm:px-5 py-2.5 sm:py-2 rounded-xl sm:rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                   activeModelView === 'coordinated'
                     ? 'bg-[#dc2626] text-white shadow-xs'
                     : 'text-slate-700 hover:text-slate-900'
@@ -437,7 +437,7 @@ export default function AboutUsPage({ onOpenQuickSupport }: AboutUsPageProps) {
               </button>
               <button
                 onClick={() => setActiveModelView('fragmented')}
-                className={`px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                className={`px-4 sm:px-5 py-2.5 sm:py-2 rounded-xl sm:rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                   activeModelView === 'fragmented'
                     ? 'bg-slate-800 text-white shadow-xs'
                     : 'text-slate-700 hover:text-slate-900'

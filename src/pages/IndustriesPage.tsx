@@ -70,13 +70,13 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
   const currentCategoryObj = categoryList.find(c => c.id === selectedCategoryId);
 
   return (
-    <div className="min-h-[85vh] bg-white py-8 lg:py-12 border-b border-slate-100">
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <div className="min-h-[85vh] bg-white py-5 sm:py-8 lg:py-12 border-b border-slate-100">
+      <div className="max-w-[1536px] mx-auto px-3 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 items-start">
           
           {/* Mobile Category Selector */}
-          <div className="lg:hidden col-span-1 mb-2">
-            <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3.5 shadow-2xs">
+          <div className="lg:hidden col-span-1 mb-1">
+            <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3 shadow-2xs">
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0 flex-1">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626] block">
@@ -213,7 +213,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
               <div className="space-y-8">
                 
                 {/* Official Industry Solutions Architecture Hero */}
-                <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs relative overflow-hidden">
+                <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-7 shadow-xs relative overflow-hidden">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-[#dc2626] text-xs font-bold uppercase tracking-wider mb-3">
                     <Sparkles className="w-3.5 h-3.5 text-[#dc2626]" />
                     <span>Official Industry Solutions Architecture</span>
@@ -241,7 +241,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
                 </div>
 
                 {/* Industry Engineering Commitments (Assigned Engineer + L2 Escalation + Remote/Onsite) */}
-                <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs">
+                <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-2">
                       <span className="w-1.5 h-4 bg-[#dc2626] rounded-full inline-block" />
@@ -323,7 +323,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                     {categoryList.map((cat, idx) => {
                       const ind = INDUSTRIES_DATA[cat.id];
                       if (!ind) return null;
@@ -332,7 +332,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
                       return (
                         <div
                           key={cat.id}
-                          className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-xs hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between group"
+                          className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between group"
                         >
                           <div>
                             {/* Card Image Header */}
@@ -521,8 +521,8 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
                   </div>
 
                   {/* Top Split Hero Card (Matching Solutions & Services Pages) */}
-                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs relative overflow-hidden">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-7 shadow-xs relative overflow-hidden">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
                       
                       {/* Left Side: Sector Metadata & Action */}
                       <div className="lg:col-span-7 space-y-4">
@@ -613,10 +613,10 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
                   </div>
 
                   {/* Section 2: Key Challenges vs How We Help Split Grid */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 items-stretch">
                     
                     {/* Left: Key Challenges */}
-                    <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs flex flex-col justify-between border-t-4 border-t-rose-500">
+                    <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs flex flex-col justify-between border-t-4 border-t-rose-500">
                       <div>
                         <div className="flex items-center gap-2 mb-4">
                           <span className="p-1.5 rounded-lg bg-rose-50 text-rose-600">
@@ -643,7 +643,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
                     </div>
 
                     {/* Right: How We Help / Calling Infrastructure / What We Provide */}
-                    <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs flex flex-col justify-between border-t-4 border-t-emerald-500">
+                    <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs flex flex-col justify-between border-t-4 border-t-emerald-500">
                       <div>
                         <div className="flex items-center gap-2 mb-2">
                           <span className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600">
@@ -698,7 +698,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
 
                   {/* Section 3: Key Benefits (if present in PDF) */}
                   {currentIndustry.keyBenefits && currentIndustry.keyBenefits.length > 0 && (
-                    <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs">
+                    <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs">
                       <div className="flex items-center gap-2 mb-4">
                         <span className="w-1.5 h-4 bg-[#dc2626] rounded-full inline-block" />
                         <h3 className="text-base font-bold text-slate-900 tracking-tight">
@@ -708,7 +708,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
 
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
                         {currentIndustry.keyBenefits.map((benefit, bIdx) => (
-                          <div key={bIdx} className="bg-slate-50/80 border border-slate-200/80 rounded-xl p-4 flex items-start gap-3">
+                          <div key={bIdx} className="bg-slate-50/80 border border-slate-200/80 rounded-xl p-3.5 sm:p-4 flex items-start gap-3">
                             <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                             <span className="text-xs font-medium text-slate-800 leading-relaxed">
                               {benefit}
@@ -720,7 +720,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
                   )}
 
                   {/* Section 4: Solutions & Services + Assigned Engineer Guarantee */}
-                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs space-y-5">
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs space-y-5">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span className="w-1.5 h-4 bg-[#dc2626] rounded-full inline-block" />
@@ -745,7 +745,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
                     </div>
 
                     {/* Assigned Engineer Guarantee Callout */}
-                    <div className="p-4 bg-slate-50 border border-slate-200/90 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="p-3.5 sm:p-4 bg-slate-50 border border-slate-200/90 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="space-y-1">
                         <span className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
                           <Users className="w-4 h-4 text-[#dc2626]" />
@@ -765,7 +765,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
                   </div>
 
                   {/* Section 5: Frequently Asked Questions */}
-                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs space-y-4">
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs space-y-4">
                     <div className="flex items-center gap-2 mb-1">
                       <HelpCircle className="w-4 h-4 text-[#dc2626]" />
                       <h3 className="text-base font-bold text-slate-900 tracking-tight">
@@ -786,7 +786,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
                             <button
                               type="button"
                               onClick={() => toggleFaq(faqKey)}
-                              className="w-full text-left p-4 flex items-center justify-between gap-3 font-bold text-xs text-slate-900 hover:text-[#dc2626] transition-colors cursor-pointer"
+                              className="w-full text-left p-3.5 sm:p-4 flex items-center justify-between gap-3 font-bold text-xs text-slate-900 hover:text-[#dc2626] transition-colors cursor-pointer"
                             >
                               <span>{faq.q}</span>
                               {isOpen ? (
@@ -796,7 +796,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
                               )}
                             </button>
                             {isOpen && (
-                              <div className="px-4 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-white">
+                              <div className="px-3.5 sm:px-4 pb-3.5 sm:pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-white">
                                 {faq.a}
                               </div>
                             )}
@@ -807,7 +807,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
                   </div>
 
                   {/* Section 6: High-Conversion Assessment / Quote CTA Bar (Matching PDF Bottom Block) */}
-                  <div className="bg-white border-2 border-slate-200/90 border-l-4 border-l-[#dc2626] rounded-2xl p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                  <div className="bg-white border-2 border-slate-200/90 border-l-4 border-l-[#dc2626] rounded-2xl p-4 sm:p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-5">
                     <div className="space-y-1">
                       <span className="text-sm font-extrabold text-slate-900 block tracking-tight">
                         {currentIndustry.cta.label}
@@ -820,7 +820,7 @@ export default function IndustriesPage({ onOpenQuickSupport }: IndustriesPagePro
                     <button
                       type="button"
                       onClick={() => onOpenQuickSupport(`${currentIndustry.cta.label}: ${currentIndustry.name}`)}
-                      className="px-6 py-2.5 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer flex items-center gap-2 active:scale-95"
+                      className="w-full sm:w-auto min-h-[42px] px-6 py-2.5 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer flex items-center justify-center gap-2 active:scale-95"
                     >
                       <span>{currentIndustry.cta.buttonText}</span>
                       <ArrowRight className="w-3.5 h-3.5" />

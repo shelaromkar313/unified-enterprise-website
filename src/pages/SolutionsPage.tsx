@@ -60,13 +60,13 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
   const currentCategoryObj = categoryList.find(c => c.id === selectedCategoryId);
 
   return (
-    <div className="min-h-[85vh] bg-white py-8 lg:py-12 border-b border-slate-100">
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <div className="min-h-[85vh] bg-white py-5 sm:py-8 lg:py-12 border-b border-slate-100">
+      <div className="max-w-[1536px] mx-auto px-3 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 items-start">
           
           {/* Mobile Category Selector */}
-          <div className="lg:hidden col-span-1 mb-2">
-            <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3.5 shadow-2xs">
+          <div className="lg:hidden col-span-1 mb-1">
+            <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3 shadow-2xs">
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0 flex-1">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626] block">
@@ -181,7 +181,7 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
               <div className="space-y-8">
                 
                 {/* Official Natural Architecture Blueprint Hero */}
-                <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs relative overflow-hidden">
+                <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-7 shadow-xs relative overflow-hidden">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-[#dc2626] text-xs font-bold uppercase tracking-wider mb-3">
                     <Sparkles className="w-3.5 h-3.5 text-[#dc2626]" />
                     <span>Official Natural Architecture Blueprint</span>
@@ -209,7 +209,7 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
                 </div>
 
                 {/* Official Enterprise SLA Escalation Matrix (PDF Page 1) */}
-                <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs">
+                <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-2">
                       <span className="w-1.5 h-4 bg-[#dc2626] rounded-full inline-block" />
@@ -266,14 +266,14 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                     {categoryList.map((cat) => {
                       const sol = SOLUTIONS_DATA[cat.id];
                       if (!sol) return null;
                       return (
                         <div
                           key={sol.id}
-                          className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group"
+                          className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group"
                         >
                           <div>
                             {/* Card Image Header */}
@@ -360,7 +360,7 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
                 <div className="space-y-6 animate-in fade-in duration-200">
                   
                   {/* Solution Header & Meta Banner: Split Hero with High-Resolution Architecture Showcase */}
-                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 shadow-xs">
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-7 shadow-xs">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
                       
                       {/* Left Side: Overview & Deliverables Meta */}
@@ -450,7 +450,7 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
                   </div>
 
                   {/* Specialty Framework / Comparison Section (PDF Box 1) */}
-                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 shadow-xs">
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-7 shadow-xs">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5 pb-3 border-b border-slate-100">
                       <div className="flex items-center gap-2">
                         <span className="w-1.5 h-5 bg-[#dc2626] rounded-full inline-block" />
@@ -820,7 +820,7 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
                   </div>
 
                   {/* Core Business & Technical Advantages (3 Cards) */}
-                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs">
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs">
                     <div className="flex items-center gap-2 mb-4">
                       <span className="w-1.5 h-4 bg-[#dc2626] rounded-full inline-block" />
                       <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight uppercase">
@@ -828,11 +828,11 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
                       </h3>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4">
                       {currentSolution.coreAdvantages.map((adv, idx) => (
                         <div
                           key={idx}
-                          className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-4 hover:border-red-200 transition-all"
+                          className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-3.5 sm:p-4 hover:border-red-200 transition-all"
                         >
                           <div className="flex items-center gap-1.5 text-xs font-bold text-[#dc2626] mb-1.5">
                             <CheckCircle2 className="w-4 h-4 text-[#dc2626] shrink-0" />
@@ -847,7 +847,7 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
                   </div>
 
                   {/* Certified Handover Checklist (4 Deliverables) */}
-                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs">
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs">
                     <div className="flex items-center gap-2 mb-4">
                       <span className="w-1.5 h-4 bg-[#dc2626] rounded-full inline-block" />
                       <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight uppercase">
@@ -869,7 +869,7 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
                   </div>
 
                   {/* Engineering Deep Dive & Guide (Expandable / Detailed) */}
-                  <div className="bg-slate-50/70 border border-slate-200/90 rounded-2xl p-6 shadow-xs">
+                  <div className="bg-slate-50/70 border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs">
                     <div className="flex items-center justify-between gap-2 mb-3">
                       <div className="flex items-center gap-2">
                         <BookOpen className="w-4 h-4 text-[#dc2626]" />
@@ -914,7 +914,7 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
                   </div>
 
                   {/* Authorized OEM Equipment & Schedule Review Footer */}
-                  <div className="bg-white border border-slate-200/90 rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
+                  <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
                     <div>
                       <span className="text-[11px] font-bold text-slate-500 block mb-0.5">
                         Authorized OEM Equipment:
@@ -929,7 +929,7 @@ export default function SolutionsPage({ onOpenConsultation }: SolutionsPageProps
                     <button
                       type="button"
                       onClick={() => onOpenConsultation(`Technical Review: ${currentSolution.name}`)}
-                      className="px-5 py-2.5 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer flex items-center gap-1.5 active:scale-95"
+                      className="w-full sm:w-auto min-h-[42px] px-5 py-2.5 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer flex items-center justify-center gap-1.5 active:scale-95"
                     >
                       <span>Schedule Technical Review ✨</span>
                     </button>

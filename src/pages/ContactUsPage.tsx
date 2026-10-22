@@ -88,13 +88,13 @@ export default function ContactUsPage() {
   const currentCategory = categoryList.find(c => c.id === selectedCategoryId);
 
   return (
-    <div className="min-h-[85vh] bg-white py-10 lg:py-14 border-b border-slate-100">
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+    <div className="min-h-[85vh] bg-white py-6 sm:py-10 lg:py-14 border-b border-slate-100">
+      <div className="max-w-[1536px] mx-auto px-3 sm:px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-10 items-start">
           
           {/* Mobile Category Selector (Visible on mobile/tablet < lg) */}
-          <div className="lg:hidden col-span-1 mb-2">
-            <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3.5 shadow-2xs">
+          <div className="lg:hidden col-span-1 mb-1">
+            <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3 shadow-2xs">
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0 flex-1">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626] block">
@@ -268,7 +268,7 @@ export default function ContactUsPage() {
                     <div>
                       <div className="h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-100">
                         <img
-                          src="/assets/ue_amc_maintenance.jpg"
+                          src="/assets/ue_amc_support.jpg"
                           alt="Request an AMC Proposal"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
@@ -298,12 +298,12 @@ export default function ContactUsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start cisco-reveal">
               
               {/* Form Container */}
-              <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-2xs">
-                <div className="mb-6 pb-4 border-b border-slate-100">
+              <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-8 shadow-2xs">
+                <div className="mb-5 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-100">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-[#dc2626] block mb-1">
                     Direct Engineering Desk
                   </span>
-                  <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+                  <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
                     {currentCategory ? currentCategory.name : 'Connect with Our Systems Architects'}
                   </h2>
                   <p className="text-xs text-slate-600 mt-1">
@@ -446,7 +446,7 @@ export default function ContactUsPage() {
               <div className="lg:col-span-5 space-y-6">
                 
                 {/* SLA Commitment Card */}
-                <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-6 space-y-4">
+                <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-6 space-y-4">
                   <div className="flex items-center gap-2 text-[#dc2626]">
                     <ShieldCheck className="w-5 h-5 shrink-0" />
                     <h3 className="text-sm font-bold text-slate-900">Enterprise Service Guarantees</h3>
@@ -468,7 +468,7 @@ export default function ContactUsPage() {
                 </div>
 
                 {/* Regional Dispatch Desks */}
-                <div className="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-4 shadow-2xs">
+                <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 space-y-4 shadow-2xs">
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-4 bg-[#dc2626] rounded-full" />
                     <h3 className="text-sm font-bold text-[#173B67]">National Engineering Desks</h3>
@@ -511,7 +511,7 @@ export default function ContactUsPage() {
                 </div>
 
                 {/* Direct Hotline */}
-                <div className="bg-red-50/80 border border-red-100 rounded-2xl p-5 flex items-center gap-3">
+                <div className="bg-red-50/80 border border-red-100 rounded-2xl p-4 sm:p-5 flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-[#dc2626] text-white flex items-center justify-center shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>

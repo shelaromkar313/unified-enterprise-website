@@ -113,28 +113,28 @@ export default function WhyChooseUsInteractive({ onOpenQuickSupport }: WhyChoose
   }, [activeModal]);
 
   return (
-    <section className="py-20 bg-white border-b border-slate-200 relative overflow-hidden">
+    <section className="py-12 sm:py-20 bg-white border-b border-slate-200 relative overflow-hidden">
       {/* Subtle decorative background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-50/50 via-white to-slate-50/30 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-12 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 cisco-reveal">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-16 cisco-reveal">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-red-50 border border-red-200/70 text-xs font-bold uppercase tracking-[0.2em] text-[#dc2626] mb-3">
             <Sparkles className="w-3.5 h-3.5 text-[#dc2626]" />
             <span>Why Choose Us?</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-slate-900 tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-[40px] font-extrabold text-slate-900 tracking-tight leading-tight">
             Power Digital Growth That Matters
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 mt-2.5 max-w-xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-base text-slate-600 mt-2 max-w-xl mx-auto leading-relaxed">
             Your Vision, Our Technology: Driven for Real Results.
           </p>
         </div>
 
         {/* 4 Interactive Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 cisco-reveal cisco-stagger">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 cisco-reveal cisco-stagger">
           {PILLARS.map((card) => (
             <TiltCard 
               key={card.id} 
@@ -149,24 +149,24 @@ export default function WhyChooseUsInteractive({ onOpenQuickSupport }: WhyChoose
       {/* Interactive Detail Modal */}
       {activeModal && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fadeIn"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-md animate-fadeIn"
           onClick={() => setActiveModal(null)}
         >
           <div 
-            className="bg-white rounded-3xl max-w-2xl w-full p-5 sm:p-8 shadow-2xl border border-slate-100 relative max-h-[92vh] overflow-y-auto"
+            className="bg-white rounded-2xl sm:rounded-3xl max-w-2xl w-full p-4 sm:p-8 shadow-2xl border border-slate-100 relative max-h-[92vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-start justify-between gap-4 mb-6">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-50 border border-slate-100 p-1.5 shadow-md flex-shrink-0">
+            <div className="flex items-start justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
+              <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-slate-50 border border-slate-100 p-1.5 shadow-md flex-shrink-0">
                   <img 
                     src={activeModal.image} 
                     alt={activeModal.title} 
-                    className="w-full h-full object-cover rounded-xl"
+                    className="w-full h-full object-cover rounded-lg sm:rounded-xl"
                   />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#dc2626] bg-red-50 px-2.5 py-0.5 rounded-full inline-block mb-1">
                     {activeModal.badge}
                   </span>
@@ -288,7 +288,7 @@ function TiltCard({ card, onSelect }: TiltCardProps) {
         transform: transformStyle,
         transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)'
       }}
-      className="relative bg-white hover:bg-slate-50/50 rounded-[26px] p-6 sm:p-7 text-slate-800 text-center shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_22px_45px_-12px_rgba(220,38,38,0.18)] cursor-pointer flex flex-col justify-between items-center group overflow-hidden border border-slate-200/90 hover:border-red-400/60 select-none transition-all duration-300"
+      className="relative bg-white hover:bg-slate-50/50 rounded-[22px] sm:rounded-[26px] p-5 sm:p-7 text-slate-800 text-center shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_22px_45px_-12px_rgba(220,38,38,0.18)] cursor-pointer flex flex-col justify-between items-center group overflow-hidden border border-slate-200/90 hover:border-red-400/60 select-none transition-all duration-300"
     >
       {/* Interactive Glare Layer */}
       <div

@@ -74,7 +74,7 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
         </div>
 
         {/* Cisco-Style Announcement Micro-Bar Directly Floating on Video */}
-        <div className="w-full relative z-20 pt-4 pb-2 px-4 text-center text-[11px] sm:text-xs font-medium text-slate-200/90 flex items-center justify-center gap-2">
+        <div className="w-full relative z-20 pt-3 pb-2 px-3 text-center text-[11px] sm:text-xs font-medium text-slate-200/90 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
           <span>Evolve your approach to enterprise IT infrastructure & hardware lifecycle.</span>
           <Link to="/services" className="text-red-400 hover:text-red-300 font-semibold inline-flex items-center gap-0.5">
             See our guidance &rsaquo;
@@ -82,7 +82,7 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
         </div>
 
         {/* Compact, Cisco-Proportioned Left Text - Enhanced Font Size for Crisp Video Legibility */}
-        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10 w-full text-left my-auto py-10 sm:py-14">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 relative z-10 w-full text-left my-auto py-8 sm:py-14">
           <div className="max-w-md sm:max-w-lg lg:max-w-xl">
             <h1 className="text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-extrabold tracking-tight leading-[1.18] mb-4 text-left flex flex-col items-start justify-center text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
               <span className="text-white font-extrabold block">End-to-End IT Services for</span>
@@ -104,10 +104,10 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
             </p>
 
             {/* Cisco-Benchmarked Dual Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3.5">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3">
               <button
                 onClick={() => onOpenQuickSupport()}
-                className="w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white hover:bg-slate-100 text-slate-950 font-bold text-sm sm:text-[15px] shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 group active:scale-95"
+                className="w-full sm:w-auto px-5 sm:px-7 py-3 sm:py-3.5 min-h-[44px] rounded-full bg-white hover:bg-slate-100 text-slate-950 font-bold text-sm sm:text-[15px] shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 group active:scale-95"
               >
                 <span>Get Quick Support</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -115,7 +115,7 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
 
               <Link
                 to="/products"
-                className="w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-black/45 hover:bg-black/65 text-white border border-white/70 hover:border-white font-semibold text-sm sm:text-[15px] backdrop-blur-sm transition-all duration-200 flex items-center justify-center gap-2 active:scale-95"
+                className="w-full sm:w-auto px-5 sm:px-7 py-3 sm:py-3.5 min-h-[44px] rounded-full bg-black/45 hover:bg-black/65 text-white border border-white/70 hover:border-white font-semibold text-sm sm:text-[15px] backdrop-blur-sm transition-all duration-200 flex items-center justify-center gap-2 active:scale-95"
               >
                 <span>Explore Products & Catalog</span>
               </Link>
@@ -128,9 +128,10 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
       <WhyUnifiedSection onOpenQuickSupport={onOpenQuickSupport} />
 
       {/* 3. Unified Enterprise Framework (Blueprint-Aligned: Management, Delivery Model & Consultation) */}
-      <section className="bg-[#f8fafc] py-16 sm:py-24 border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 space-y-20">          {/* Section B: Unified IT & Telecom Management */}
-          <div className="bg-white rounded-3xl p-8 sm:p-10 lg:p-12 border border-slate-200 shadow-sm">
+      <section className="bg-[#f8fafc] py-10 sm:py-20 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-12 space-y-10 sm:space-y-16">
+          {/* Section B: Unified IT & Telecom Management */}
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-12 border border-slate-200 shadow-sm">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               <ScrollReveal delay={0} duration={800} distance={32} className="lg:col-span-5 space-y-4">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#dc2626] block">
@@ -247,11 +248,11 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
           </div>
 
           {/* Section D: Request a Consultation (High-Converting Cisco Banner) */}
-          <ScrollReveal delay={0} duration={850} distance={32} className="bg-gradient-to-r from-[#070b12] to-[#0f172a] rounded-3xl p-8 sm:p-12 text-white shadow-xl border border-slate-800">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-8 space-y-4 text-left">
+          <ScrollReveal delay={0} duration={850} distance={32} className="bg-gradient-to-r from-[#070b12] to-[#0f172a] rounded-2xl sm:rounded-3xl p-5 sm:p-10 lg:p-12 text-white shadow-xl border border-slate-800">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+              <div className="lg:col-span-8 space-y-3 sm:space-y-4 text-left">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-red-400 border border-red-500/20 text-xs font-semibold">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-red-400" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-red-400 shrink-0" />
                   <span>Free Technical Architecture Consultation</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
@@ -260,17 +261,17 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
                 <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
                   Speak directly with an enterprise systems architect. Whether you require 50 rental laptops dispatched tomorrow, a comprehensive server AMC, or a complete network revamp, we provide prompt, transparent quotations.
                 </p>
-                <div className="flex flex-wrap items-center gap-6 pt-2 text-xs text-slate-400">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-6 pt-2 text-xs text-slate-400">
                   <span className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-red-400" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-red-400 shrink-0" />
                     24-48h Delivery SLA
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-red-400" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-red-400 shrink-0" />
                     Zero Capital Lock-in
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-red-400" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-red-400 shrink-0" />
                     Pan-India Onsite AMC
                   </span>
                 </div>
@@ -279,7 +280,7 @@ export default function HomePage({ onOpenQuickSupport }: HomePageProps) {
               <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col items-stretch justify-center gap-3">
                 <button
                   onClick={() => onOpenQuickSupport('Request a Consultation')}
-                  className="w-full sm:w-auto min-h-[48px] px-6 py-3.5 rounded-full bg-white hover:bg-slate-100 text-slate-950 font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 group active:scale-[0.98]"
+                  className="w-full sm:w-auto min-h-[44px] px-6 py-3 rounded-full bg-white hover:bg-slate-100 text-slate-950 font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 group active:scale-[0.98]"
                 >
                   <span>Request a Consultation</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

@@ -39,12 +39,14 @@ export default function Navbar({ onOpenQuickSupport }: NavbarProps) {
 
   // Quick search directory data
   const searchItems = [
-    { title: 'Multiple Voice AI Agents & Conversational Bots', category: 'Priority Voice AI', path: '/products?item=voice-ai-speech-services', icon: PhoneCall },
-    { title: 'Speech to Text (STT) & Neural Text to Speech (TTS)', category: 'Priority Voice AI', path: '/products?item=voice-ai-speech-services', icon: PhoneCall },
-    { title: 'Real-Time Voice Call Transcription & Audio Analytics', category: 'Call Intelligence', path: '/products?item=voice-ai-speech-services', icon: PhoneCall },
-    { title: 'Call Sentiment Analysis & Customer Tone Scoring', category: 'Call Intelligence', path: '/products?item=voice-ai-speech-services', icon: PhoneCall },
-    { title: 'Rack Servers & Dell PowerEdge', category: 'Hardware Sales', path: '/products', icon: Server },
-    { title: 'Cisco & Fortinet Next-Gen Firewalls', category: 'Security & Network', path: '/products', icon: ShieldCheck },
+    { title: 'Multiple Voice AI Agents & Conversational Bots', category: 'Priority Voice AI', path: '/products?item=ai', icon: PhoneCall },
+    { title: 'Speech to Text (STT) & Neural Text to Speech (TTS)', category: 'Priority Voice AI', path: '/products?item=ai', icon: PhoneCall },
+    { title: 'Real-Time Voice Call Transcription & Audio Analytics', category: 'Call Intelligence', path: '/products?item=ai', icon: PhoneCall },
+    { title: 'Call Sentiment Analysis & Customer Tone Scoring', category: 'Call Intelligence', path: '/products?item=ai', icon: PhoneCall },
+    { title: 'Windows 11 Pro & Windows Server 2025 Licences', category: 'Software Licences', path: '/products?item=windows-licences', icon: Server },
+    { title: 'Trellix, Symantec, Trend Micro & Sophos Antivirus', category: 'Endpoint Security', path: '/products?item=antivirus', icon: ShieldCheck },
+    { title: 'Rack Servers & Dell PowerEdge', category: 'Hardware Sales', path: '/products?item=servers-storage', icon: Server },
+    { title: 'Cisco & Fortinet Next-Gen Firewalls', category: 'Security & Network', path: '/products?item=firewalls-network-security', icon: ShieldCheck },
     { title: 'Flexible Laptop & Server Rentals', category: 'Rental & Leasing', path: '/rental', icon: Laptop },
     { title: 'Comprehensive 2–4h SLA AMC Support', category: 'Maintenance & AMC', path: '/services', icon: ShieldCheck },
     { title: 'Grandstream IP PBX & Voice SIP Trunking', category: 'Unified Telecom', path: '/solutions', icon: PhoneCall },
@@ -102,15 +104,15 @@ export default function Navbar({ onOpenQuickSupport }: NavbarProps) {
       </div>
 
       {/* Main Navigation Bar */}
-      <nav className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-10 pt-1.5 pb-2.5 sm:pb-3 lg:pb-3 flex items-center justify-between min-h-[64px] sm:min-h-[76px] lg:min-h-[86px]">
+      <nav className="max-w-[1536px] mx-auto px-3 sm:px-6 lg:px-10 pt-1.5 pb-2 sm:pb-3 lg:pb-3 flex items-center justify-between min-h-[58px] sm:min-h-[76px] lg:min-h-[86px]">
         {/* Left Group: Brand Logo + Complete Navigation Links */}
-        <div className="flex items-center space-x-4 sm:space-x-6 xl:space-x-8">
-          {/* Brand Logo - Enlarged for Strong Brand Prominence */}
-          <Link to="/" className="flex items-center group py-0.5 shrink-0" aria-label="Home">
+        <div className="flex items-center space-x-4 sm:space-x-6 xl:space-x-8 min-w-0">
+          {/* Brand Logo - Enlarged on desktop, calibrated for 360px mobile viewports (e.g. Vivo Y30) */}
+          <Link to="/" className="flex items-center group py-0.5 shrink-0 min-w-0" aria-label="Home">
             <img
               src="/brand/ue_logo_horizontal.jpg"
               alt="Unified Enterprise Solutions"
-              className="h-13 sm:h-16 lg:h-[72px] xl:h-[80px] w-auto max-w-[280px] sm:max-w-[360px] lg:max-w-[420px] object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+              className="h-10 sm:h-16 lg:h-[72px] xl:h-[80px] w-auto max-w-[200px] sm:max-w-[360px] lg:max-w-[420px] object-contain transition-transform duration-200 group-hover:scale-[1.02]"
             />
           </Link>
 

@@ -24,6 +24,8 @@ import {
 
 interface SoftwareLicencesShowcaseProps {
   onOpenInquiry: (topic: string) => void;
+  initialTab?: LicenseCategory;
+  mode?: 'all-licences' | 'ai';
 }
 
 type LicenseCategory = 'all' | 'voice-ai' | 'm365-suites' | 'core-apps' | 'windows-server' | 'google-workspace' | 'database';
@@ -461,13 +463,27 @@ const LICENCE_PRODUCTS: LicenseProduct[] = [
   }
 ];
 
-export default function SoftwareLicencesShowcase({ onOpenInquiry }: SoftwareLicencesShowcaseProps) {
-  const [activeTab, setActiveTab] = useState<LicenseCategory>('all');
+export default function SoftwareLicencesShowcase({ onOpenInquiry, initialTab = 'all', mode = 'all-licences' }: SoftwareLicencesShowcaseProps) {
+  const [activeTab, setActiveTab] = useState<LicenseCategory>(initialTab);
   const [selectedProduct, setSelectedProduct] = useState<LicenseProduct | null>(null);
 
-  const filteredProducts = activeTab === 'all'
-    ? LICENCE_PRODUCTS
-    : LICENCE_PRODUCTS.filter((p) => p.category === activeTab);
+  // Synchronize when initialTab prop changes
+  React.useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+  }, [initialTab]);
+
+  const isAiMode = mode === 'ai';
+
+  const softwareLicenceProducts = LICENCE_PRODUCTS.filter((p) => p.category !== 'voice-ai');
+  const aiProducts = LICENCE_PRODUCTS.filter((p) => p.category === 'voice-ai');
+
+  const filteredProducts = isAiMode
+    ? aiProducts
+    : (activeTab === 'all'
+        ? softwareLicenceProducts
+        : softwareLicenceProducts.filter((p) => p.category === activeTab));
 
   return (
     <div className="space-y-8">
@@ -475,132 +491,159 @@ export default function SoftwareLicencesShowcase({ onOpenInquiry }: SoftwareLice
       {/* 1. HERO HEADER INTRO */}
       <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs">
         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-50 border border-red-200 text-[#dc2626] text-[11px] font-bold uppercase tracking-wider mb-3">
-          <Key className="w-3 h-3 text-[#dc2626]" />
-          <span>Authorized Volume &amp; Cloud Licensing</span>
+          <Sparkles className="w-3 h-3 text-[#dc2626]" />
+          <span>{isAiMode ? 'Next-Gen Conversational Voice Intelligence' : 'Authorized Volume & Cloud Licensing'}</span>
         </div>
 
         <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
-          Corporate <span className="text-[#dc2626]">Software &amp; Business Licences</span>
+          {isAiMode ? (
+            <>Enterprise <span className="text-[#dc2626]">AI Agents &amp; Voice Intelligence</span></>
+          ) : (
+            <>Corporate <span className="text-[#dc2626]">Software &amp; Business Licences</span></>
+          )}
         </h1>
 
         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl mb-5">
-          We provide <strong className="text-slate-900 font-semibold">100% genuine commercial licensing</strong> for enterprise software suites, cloud productivity, operating systems, and server infrastructure. As an authorized Cloud Solution Provider (CSP), we manage seamless deployment, tenant setup, email data migrations from legacy cPanel/GoDaddy/Zoho, automated seat reallocation, and single-window consolidated GST billing.
+          {isAiMode 
+            ? 'Deploy dedicated conversational Voice AI agents, sub-150ms Speech-to-Text & Neural TTS synthesis across 12+ Indian languages, 100% automated call transcription with PII masking, and real-time supervisor emotion telemetry.'
+            : 'We provide 100% genuine commercial licensing for enterprise software suites, cloud productivity, operating systems, and server infrastructure. As an authorized Cloud Solution Provider (CSP), we manage seamless deployment, tenant setup, email data migrations from legacy cPanel/GoDaddy/Zoho, automated seat reallocation, and single-window consolidated GST billing.'
+          }
         </p>
 
         {/* 3 Value Pillars */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 border-t border-slate-100">
-          <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
-            <ShieldCheck className="w-4 h-4 text-[#dc2626] shrink-0" />
-            <div>
-              <h4 className="text-xs font-bold text-slate-900">Genuine CSP &amp; Volume Licensing</h4>
-              <p className="text-[11px] text-slate-500">Official Microsoft &amp; Google Partner</p>
-            </div>
-          </div>
+          {isAiMode ? (
+            <>
+              <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
+                <Sparkles className="w-4 h-4 text-[#dc2626] shrink-0" />
+                <div>
+                  <h4 className="text-xs font-bold text-slate-900">Sub-450ms Voice AI Latency</h4>
+                  <p className="text-[11px] text-slate-500">Natural turn-taking &amp; caller barge-in</p>
+                </div>
+              </div>
 
-          <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
-            <Mail className="w-4 h-4 text-blue-600 shrink-0" />
-            <div>
-              <h4 className="text-xs font-bold text-slate-900">Zero-Downtime Email Migration</h4>
-              <p className="text-[11px] text-slate-500">Full mailbox &amp; contact transfer</p>
-            </div>
-          </div>
+              <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
+                <Globe className="w-4 h-4 text-blue-600 shrink-0" />
+                <div>
+                  <h4 className="text-xs font-bold text-slate-900">12+ Indian Regional Languages</h4>
+                  <p className="text-[11px] text-slate-500">Code-mixed Hinglish &amp; Neural TTS</p>
+                </div>
+              </div>
 
-          <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
-            <Building2 className="w-4 h-4 text-emerald-600 shrink-0" />
-            <div>
-              <h4 className="text-xs font-bold text-slate-900">Consolidated GST Tax Billing</h4>
-              <p className="text-[11px] text-slate-500">Input tax credit &amp; flexible INR terms</p>
-            </div>
-          </div>
+              <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
+                <Headphones className="w-4 h-4 text-emerald-600 shrink-0" />
+                <div>
+                  <h4 className="text-xs font-bold text-slate-900">100% Automated QA &amp; Diarization</h4>
+                  <p className="text-[11px] text-slate-500">Live transcription &amp; supervisor alerts</p>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
+                <ShieldCheck className="w-4 h-4 text-[#dc2626] shrink-0" />
+                <div>
+                  <h4 className="text-xs font-bold text-slate-900">Genuine CSP &amp; Volume Licensing</h4>
+                  <p className="text-[11px] text-slate-500">Official Microsoft &amp; Google Partner</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
+                <Mail className="w-4 h-4 text-blue-600 shrink-0" />
+                <div>
+                  <h4 className="text-xs font-bold text-slate-900">Zero-Downtime Email Migration</h4>
+                  <p className="text-[11px] text-slate-500">Full mailbox &amp; contact transfer</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/70 rounded-xl p-3">
+                <Building2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <div>
+                  <h4 className="text-xs font-bold text-slate-900">Consolidated GST Tax Billing</h4>
+                  <p className="text-[11px] text-slate-500">Input tax credit &amp; flexible INR terms</p>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
-      {/* 2. SUB-CATEGORY FILTER TABS */}
-      <div className="flex flex-wrap items-center gap-2 pb-1 border-b border-slate-200/80">
-        <button
-          type="button"
-          onClick={() => setActiveTab('all')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-            activeTab === 'all'
-              ? 'bg-[#dc2626] text-white shadow-2xs'
-              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-          }`}
-        >
-          All Licences ({LICENCE_PRODUCTS.length})
-        </button>
+      {/* 2. SUB-CATEGORY FILTER TABS (Only shown in general software licenses mode, not in dedicated AI mode) */}
+      {!isAiMode && (
+        <div className="flex flex-wrap items-center gap-2 pb-1 border-b border-slate-200/80">
+          <button
+            type="button"
+            onClick={() => setActiveTab('all')}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'all'
+                ? 'bg-[#dc2626] text-white shadow-2xs'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`}
+          >
+            All Licences ({softwareLicenceProducts.length})
+          </button>
 
-        <button
-          type="button"
-          onClick={() => setActiveTab('voice-ai')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-            activeTab === 'voice-ai'
-              ? 'bg-[#dc2626] text-white shadow-2xs'
-              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-          }`}
-        >
-          🎙️ Voice AI &amp; Speech Services ({LICENCE_PRODUCTS.filter(p => p.category === 'voice-ai').length})
-        </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab('m365-suites')}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'm365-suites'
+                ? 'bg-[#dc2626] text-white shadow-2xs'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`}
+          >
+            💼 Microsoft 365 Suites ({LICENCE_PRODUCTS.filter(p => p.category === 'm365-suites').length})
+          </button>
 
-        <button
-          type="button"
-          onClick={() => setActiveTab('m365-suites')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-            activeTab === 'm365-suites'
-              ? 'bg-[#dc2626] text-white shadow-2xs'
-              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-          }`}
-        >
-          💼 Microsoft 365 Suites ({LICENCE_PRODUCTS.filter(p => p.category === 'm365-suites').length})
-        </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab('core-apps')}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'core-apps'
+                ? 'bg-[#dc2626] text-white shadow-2xs'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`}
+          >
+            📑 Core Apps (Word, Excel, Edge, Teams) ({LICENCE_PRODUCTS.filter(p => p.category === 'core-apps').length})
+          </button>
 
-        <button
-          type="button"
-          onClick={() => setActiveTab('core-apps')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-            activeTab === 'core-apps'
-              ? 'bg-[#dc2626] text-white shadow-2xs'
-              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-          }`}
-        >
-          📑 Core Apps (Word, Excel, Edge, Teams) ({LICENCE_PRODUCTS.filter(p => p.category === 'core-apps').length})
-        </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab('windows-server')}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'windows-server'
+                ? 'bg-[#dc2626] text-white shadow-2xs'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`}
+          >
+            🖥️ Windows OS &amp; Windows Server ({LICENCE_PRODUCTS.filter(p => p.category === 'windows-server').length})
+          </button>
 
-        <button
-          type="button"
-          onClick={() => setActiveTab('windows-server')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-            activeTab === 'windows-server'
-              ? 'bg-[#dc2626] text-white shadow-2xs'
-              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-          }`}
-        >
-          🖥️ Windows OS &amp; Windows Server ({LICENCE_PRODUCTS.filter(p => p.category === 'windows-server').length})
-        </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab('google-workspace')}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'google-workspace'
+                ? 'bg-[#dc2626] text-white shadow-2xs'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`}
+          >
+            🌐 Google Workspace ({LICENCE_PRODUCTS.filter(p => p.category === 'google-workspace').length})
+          </button>
 
-        <button
-          type="button"
-          onClick={() => setActiveTab('google-workspace')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-            activeTab === 'google-workspace'
-              ? 'bg-[#dc2626] text-white shadow-2xs'
-              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-          }`}
-        >
-          🌐 Google Workspace ({LICENCE_PRODUCTS.filter(p => p.category === 'google-workspace').length})
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab('database')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-            activeTab === 'database'
-              ? 'bg-[#dc2626] text-white shadow-2xs'
-              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-          }`}
-        >
-          🗄️ SQL Server &amp; Database ({LICENCE_PRODUCTS.filter(p => p.category === 'database').length})
-        </button>
-      </div>
+          <button
+            type="button"
+            onClick={() => setActiveTab('database')}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'database'
+                ? 'bg-[#dc2626] text-white shadow-2xs'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`}
+          >
+            🗄️ SQL Server &amp; Database ({LICENCE_PRODUCTS.filter(p => p.category === 'database').length})
+          </button>
+        </div>
+      )}
 
       {/* 3. PRODUCT CATALOG GRID */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -696,7 +739,8 @@ export default function SoftwareLicencesShowcase({ onOpenInquiry }: SoftwareLice
         ))}
       </div>
 
-      {/* 4. COMPARISON GUIDE: MICROSOFT 365 BUSINESS TIERS */}
+      {/* 4. COMPARISON GUIDE: MICROSOFT 365 BUSINESS TIERS (Only shown in general software mode) */}
+      {!isAiMode && (
       <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs">
         <div className="mb-5">
           <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
@@ -802,79 +846,85 @@ export default function SoftwareLicencesShowcase({ onOpenInquiry }: SoftwareLice
           </div>
         </div>
       </div>
+      )}
 
-      {/* 5. SERVICES OUR COMPANY PROVIDES FOR LICENSING */}
-      <div>
-        <div className="mb-4">
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
-            How Our Company Supports Your Software Fleet
-          </h2>
-          <p className="text-xs text-slate-500">
-            More than just license keys: we deliver complete tenant onboarding, email migration, and ongoing license optimization
-          </p>
+      {/* 5. SERVICES OUR COMPANY PROVIDES FOR LICENSING (Only shown in software licenses mode) */}
+      {!isAiMode && (
+        <div>
+          <div className="mb-4">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+              How Our Company Supports Your Software Fleet
+            </h2>
+            <p className="text-xs text-slate-500">
+              More than just license keys: we deliver complete tenant onboarding, email migration, and ongoing license optimization
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white border border-slate-200/90 rounded-xl p-4 shadow-2xs">
+              <div className="w-8 h-8 rounded-lg bg-red-50 text-[#dc2626] flex items-center justify-center font-bold text-xs mb-2.5">
+                <Mail className="w-4 h-4" />
+              </div>
+              <h4 className="text-xs font-bold text-slate-900 mb-1">Turnkey Email Migration</h4>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
+                We migrate your complete email history, folders, and calendar from cPanel, GoDaddy, or GSuite into M365 with zero downtime.
+              </p>
+            </div>
+
+            <div className="bg-white border border-slate-200/90 rounded-xl p-4 shadow-2xs">
+              <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs mb-2.5">
+                <RefreshCw className="w-4 h-4" />
+              </div>
+              <h4 className="text-xs font-bold text-slate-900 mb-1">License Optimization</h4>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
+                Quarterly seat audits prevent paying for departed employees. Reassign or downgrade unused licenses to save up to 25% annually.
+              </p>
+            </div>
+
+            <div className="bg-white border border-slate-200/90 rounded-xl p-4 shadow-2xs">
+              <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs mb-2.5">
+                <Lock className="w-4 h-4" />
+              </div>
+              <h4 className="text-xs font-bold text-slate-900 mb-1">Security Hardening</h4>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
+                Enforce Multi-Factor Authentication (MFA), DKIM/SPF anti-spoofing DNS records, and conditional access policies out of the box.
+              </p>
+            </div>
+
+            <div className="bg-white border border-slate-200/90 rounded-xl p-4 shadow-2xs">
+              <div className="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center font-bold text-xs mb-2.5">
+                <Headphones className="w-4 h-4" />
+              </div>
+              <h4 className="text-xs font-bold text-slate-900 mb-1">Single-Window Support</h4>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
+                Direct access to our certified systems engineers for password resets, tenant configuration, and priority escalation without waiting in carrier queues.
+              </p>
+            </div>
+          </div>
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white border border-slate-200/90 rounded-xl p-4 shadow-2xs">
-            <div className="w-8 h-8 rounded-lg bg-red-50 text-[#dc2626] flex items-center justify-center font-bold text-xs mb-2.5">
-              <Mail className="w-4 h-4" />
-            </div>
-            <h4 className="text-xs font-bold text-slate-900 mb-1">Turnkey Email Migration</h4>
-            <p className="text-[11px] text-slate-600 leading-relaxed">
-              We migrate your complete email history, folders, and calendar from cPanel, GoDaddy, or GSuite into M365 with zero downtime.
-            </p>
-          </div>
-
-          <div className="bg-white border border-slate-200/90 rounded-xl p-4 shadow-2xs">
-            <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs mb-2.5">
-              <RefreshCw className="w-4 h-4" />
-            </div>
-            <h4 className="text-xs font-bold text-slate-900 mb-1">License Optimization</h4>
-            <p className="text-[11px] text-slate-600 leading-relaxed">
-              Quarterly seat audits prevent paying for departed employees. Reassign or downgrade unused licenses to save up to 25% annually.
-            </p>
-          </div>
-
-          <div className="bg-white border border-slate-200/90 rounded-xl p-4 shadow-2xs">
-            <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs mb-2.5">
-              <Lock className="w-4 h-4" />
-            </div>
-            <h4 className="text-xs font-bold text-slate-900 mb-1">Security Hardening</h4>
-            <p className="text-[11px] text-slate-600 leading-relaxed">
-              Enforce Multi-Factor Authentication (MFA), DKIM/SPF anti-spoofing DNS records, and conditional access policies out of the box.
-            </p>
-          </div>
-
-          <div className="bg-white border border-slate-200/90 rounded-xl p-4 shadow-2xs">
-            <div className="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center font-bold text-xs mb-2.5">
-              <Headphones className="w-4 h-4" />
-            </div>
-            <h4 className="text-xs font-bold text-slate-900 mb-1">Single-Window Support</h4>
-            <p className="text-[11px] text-slate-600 leading-relaxed">
-              Direct access to our certified systems engineers for password resets, tenant configuration, and priority escalation without waiting in carrier queues.
-            </p>
-          </div>
-        </div>
-      </div>
+      )}
 
       {/* 6. CONSULTATION & BULK QUOTE CTA */}
       <div className="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
         <div>
           <span className="text-[11px] font-bold uppercase tracking-wider text-red-400 block mb-1">
-            Need Volume Discounting or Custom Mix of Licences?
+            {isAiMode ? 'Enterprise Voice AI Deployment & Trial' : 'Need Volume Discounting or Custom Mix of Licences?'}
           </span>
           <h3 className="text-lg sm:text-xl font-bold tracking-tight mb-2">
-            Get a Customized Software Licensing Proposal
+            {isAiMode ? 'Deploy Dedicated Voice AI Agents for Your Call Floor' : 'Get a Customized Software Licensing Proposal'}
           </h3>
           <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
-            Whether you need 5 user seats for a growing startup or 500+ licenses across Windows Server, M365, and SQL Server, our licensing specialists will structure the most cost-effective agreement with full GST invoice compliance.
+            {isAiMode
+              ? 'Request a live pilot test with our conversational voice AI engine. We integrate with your existing Cloud PBX, SIP trunks, or CRM within 48 hours.'
+              : 'Whether you need 5 user seats for a growing startup or 500+ licenses across Windows Server, M365, and SQL Server, our licensing specialists will structure the most cost-effective agreement with full GST invoice compliance.'
+            }
           </p>
         </div>
         <button
-          onClick={() => onOpenInquiry('Software & Business Licences Consultation')}
+          onClick={() => onOpenInquiry(isAiMode ? 'Inquiry: Enterprise Voice AI Pilot Deployment' : 'Software & Business Licences Consultation')}
           className="px-6 py-3 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-md hover:shadow-lg shrink-0 cursor-pointer flex items-center gap-1.5"
         >
-          <span>Request Licensing Proposal</span>
+          <span>{isAiMode ? 'Request Voice AI Pilot' : 'Request Licensing Proposal'}</span>
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>

@@ -753,7 +753,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   // ENTERPRISE ANTIVIRUS & ENDPOINT SECURITY SUITES
   {
     id: 'quickheal-seqrite-eps',
-    categoryId: 'firewalls-network-security',
+    categoryId: 'antivirus',
     subCategory: 'antivirus',
     brand: 'Quick Heal',
     name: 'Quick Heal Seqrite Endpoint Security Cloud (EPS Cloud)',
@@ -773,7 +773,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'mcafee-trellix-ens',
-    categoryId: 'firewalls-network-security',
+    categoryId: 'antivirus',
     subCategory: 'antivirus',
     brand: 'McAfee',
     name: 'McAfee / Trellix Endpoint Security Complete (ENS)',
@@ -793,7 +793,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'symantec-endpoint-security',
-    categoryId: 'firewalls-network-security',
+    categoryId: 'antivirus',
     subCategory: 'antivirus',
     brand: 'Symantec',
     name: 'Symantec Endpoint Security Complete (SES Broadcom)',
@@ -813,7 +813,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'trendmicro-apex-one',
-    categoryId: 'firewalls-network-security',
+    categoryId: 'antivirus',
     subCategory: 'antivirus',
     brand: 'Trend Micro',
     name: 'Trend Micro Apex One & Worry-Free Services',
@@ -833,7 +833,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'kaspersky-endpoint-security',
-    categoryId: 'firewalls-network-security',
+    categoryId: 'antivirus',
     subCategory: 'antivirus',
     brand: 'Kaspersky',
     name: 'Kaspersky Endpoint Security for Business Advanced',
@@ -853,7 +853,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'bitdefender-gravityzone-enterprise',
-    categoryId: 'firewalls-network-security',
+    categoryId: 'antivirus',
     subCategory: 'antivirus',
     brand: 'Bitdefender',
     name: 'Bitdefender GravityZone Business Security Enterprise',
@@ -873,7 +873,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'eset-protect-enterprise',
-    categoryId: 'firewalls-network-security',
+    categoryId: 'antivirus',
     subCategory: 'antivirus',
     brand: 'ESET',
     name: 'ESET Protect Enterprise & NOD32 Antivirus Suite',
@@ -893,7 +893,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'sophos-intercept-x-edr',
-    categoryId: 'firewalls-network-security',
+    categoryId: 'antivirus',
     subCategory: 'antivirus',
     brand: 'Sophos',
     name: 'Sophos Intercept X Advanced with XDR',
@@ -910,6 +910,168 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     stockStatus: 'Instant License Activation • Cloud Bundle',
     rentalAvailable: false,
     idealFor: 'Organizations running Sophos Firewalls, hybrid workforces, and enterprises seeking turnkey XDR'
+  },
+
+  // WINDOWS LICENCES & SERVER OS
+  {
+    id: 'win-11-pro-commercial',
+    categoryId: 'windows-licences',
+    subCategory: 'Operating Systems',
+    brand: 'Microsoft',
+    name: 'Windows 11 Pro Commercial License (OEM / CSP ESD)',
+    image: 'https://img.icons8.com/color/480/windows-11.png',
+    tagline: 'Official Microsoft Windows 11 Pro 64-bit electronic software delivery with lifetime perpetual OEM / CSP activation.',
+    specs: {
+      processor: 'Compatible with 64-bit 1GHz+ dual-core processors, Intel 8th Gen+ / AMD Ryzen 2000+',
+      memory: '4GB RAM minimum (8GB+ recommended for enterprise workloads)',
+      storage: '64GB+ available storage space on SSD / NVMe drive',
+      security: 'BitLocker 256-bit drive encryption, TPM 2.0, Secure Boot, Windows Hello biometric login',
+      ports: 'Microsoft Entra ID (Azure AD) join, Domain Join, Hyper-V, Windows Sandbox, Remote Desktop Host'
+    },
+    keyPills: ['BitLocker Encryption', 'Entra ID / Domain Join', 'Hyper-V & Sandbox', 'Instant Key Delivery'],
+    stockStatus: 'Instant Electronic Delivery (ESD) • Official CSP Partner',
+    rentalAvailable: false,
+    idealFor: 'Corporate laptops, desktop PCs, executive ultrabooks, and engineering workstations'
+  },
+  {
+    id: 'win-11-enterprise-e3',
+    categoryId: 'windows-licences',
+    subCategory: 'Operating Systems',
+    brand: 'Microsoft',
+    name: 'Windows 11 Enterprise E3 / E5 (Cloud Subscription)',
+    image: 'https://img.icons8.com/color/480/windows-11.png',
+    tagline: 'Per-user cloud subscription licensing for up to 5 devices per employee with advanced Zero Trust controls.',
+    specs: {
+      processor: 'Cloud Solution Provider (CSP) Per-User / Month or Annual Commit agreement',
+      memory: 'Uncapped performance with support for up to 4 physical CPUs and 6TB memory',
+      storage: 'DirectAccess VPN-free remote connectivity and BranchCache local WAN acceleration',
+      security: 'Microsoft Defender for Endpoint, Credential Guard, Device Guard, Application Control (WDAC)',
+      ports: 'Windows Virtual Desktop Access (VDA) rights for cloud Azure Virtual Desktop, Citrix & VMware'
+    },
+    keyPills: ['Credential Guard', 'DirectAccess VPN-Free', 'VDA Cloud Rights', '5 Devices Per User'],
+    stockStatus: 'Cloud Activation • Volume Seat Discounts',
+    rentalAvailable: false,
+    idealFor: 'Large enterprises, financial institutions, defense contractors, and remote workforces'
+  },
+  {
+    id: 'win-server-2025-standard',
+    categoryId: 'windows-licences',
+    subCategory: 'Server Operating Systems',
+    brand: 'Microsoft',
+    name: 'Windows Server 2025 Standard (16-Core Base Pack)',
+    image: 'https://img.icons8.com/color/480/microsoft.png',
+    tagline: 'Next-gen flagship Windows Server 2025 with Hotpatching, Next-Gen Active Directory, and SMB over QUIC.',
+    specs: {
+      processor: '16-Core Base License Pack (additional 2-core / 4-core packs available for multi-socket servers)',
+      memory: 'Supports up to 24TB physical RAM and 64 sockets for high-density virtualization',
+      storage: 'Storage Replica (1 partnership & 1 resource group with 2TB volume) + NVMe storage tiering',
+      security: 'Secured-core server protection, Next-Gen Active Directory 32k page size, TLS 1.3 by default',
+      ports: 'Includes rights for 2 Operating System Environments (VMs) or Hyper-V containers, Hotpatching via Azure Arc'
+    },
+    keyPills: ['16-Core Base Pack', 'Hotpatching Ready', '2x Hyper-V VMs', 'SMB over QUIC'],
+    stockStatus: 'In Stock • Official 2025 Edition • 100% Audit Ready',
+    rentalAvailable: false,
+    idealFor: 'Mid-to-large business datacenters, corporate domain controllers, multi-user Tally servers, and Hyper-V'
+  },
+  {
+    id: 'win-server-2025-datacenter',
+    categoryId: 'windows-licences',
+    subCategory: 'Server Operating Systems',
+    brand: 'Microsoft',
+    name: 'Windows Server 2025 Datacenter (Unlimited OSEs & VMs)',
+    image: 'https://img.icons8.com/color/480/microsoft.png',
+    tagline: 'Engineered for highly virtualized hybrid cloud datacenters with unlimited VM rights and Storage Spaces Direct.',
+    specs: {
+      processor: '16-Core Base License Pack (Core-based licensing with unlimited virtualization)',
+      memory: 'Supports up to 24TB physical RAM, persistent memory, and live memory migration',
+      storage: 'Storage Spaces Direct (S2D) for hyper-converged high-IOPS cluster storage arrays',
+      security: 'Shielded Virtual Machines with Host Guardian Service (HGS) and hardware attestation',
+      ports: 'Software-Defined Networking (SDN) with network controller and microsegmentation firewall'
+    },
+    keyPills: ['Unlimited Hyper-V VMs', 'Storage Spaces Direct', 'Software-Defined Network', 'Shielded VMs'],
+    stockStatus: 'Datacenter Enterprise Tier • Immediate Provisioning',
+    rentalAvailable: false,
+    idealFor: 'Datacenters, private cloud clusters, telecom operators, and heavy enterprise virtualization'
+  },
+  {
+    id: 'win-server-2022-standard',
+    categoryId: 'windows-licences',
+    subCategory: 'Server Operating Systems',
+    brand: 'Microsoft',
+    name: 'Windows Server 2022 Standard (16-Core Base Pack)',
+    image: 'https://img.icons8.com/color/480/microsoft.png',
+    tagline: 'Industry-proven workhorse server OS with hardware root-of-trust, HTTPS/TLS 1.3, and hybrid Azure integration.',
+    specs: {
+      processor: '16-Core Base Pack (Core-based licensing for physical x64 servers)',
+      memory: 'Up to 24TB physical RAM and 512 logical processors supported',
+      storage: 'SMB compression, AES-256 GCM encryption, and Azure File Sync integration',
+      security: 'Secured-core server protection with TPM 2.0 and Virtualization-based security (VBS)',
+      ports: 'Rights for 2 Operating System Environments (VMs) or Hyper-V containers, Azure Arc native agent'
+    },
+    keyPills: ['16-Core Base', 'Secured-Core Server', 'Hardware Root-of-Trust', '2x VM Rights'],
+    stockStatus: 'Instant Electronic Delivery • Audit Compliant',
+    rentalAvailable: false,
+    idealFor: 'Branch office domain controllers, Tally Prime servers, print/file sharing, and application hosts'
+  },
+  {
+    id: 'win-server-cals-user-device',
+    categoryId: 'windows-licences',
+    subCategory: 'Client Access Licences',
+    brand: 'Microsoft',
+    name: 'Windows Server 2025 / 2022 CALs (User & Device Packs)',
+    image: 'https://img.icons8.com/color/480/conference-call.png',
+    tagline: 'Official Microsoft Client Access Licenses (CALs) required for each user or device connecting to Windows Server.',
+    specs: {
+      processor: 'User CAL (1 license for 1 named employee across all devices) OR Device CAL (per shared PC)',
+      memory: 'Compatible with all editions of Windows Server 2025, 2022, 2019, and 2016',
+      storage: 'Multi-pack tiers: Available in 5, 10, 25, 50, and 100 seat license packs',
+      security: 'Authorized access to Active Directory Domain Services, DNS, DHCP, and Windows File Server',
+      ports: 'Official Microsoft Volume Licensing Service Center (VLSC) electronic certificate and GST invoice'
+    },
+    keyPills: ['User CALs', 'Device CALs', 'Active Directory Rights', '5-100 Pack Tiers'],
+    stockStatus: 'In Stock • Electronic Certificate Dispatch',
+    rentalAvailable: false,
+    idealFor: 'Any business operating Windows Server to ensure 100% legal Microsoft software compliance'
+  },
+  {
+    id: 'win-rds-cals-terminal',
+    categoryId: 'windows-licences',
+    subCategory: 'Client Access Licences',
+    brand: 'Microsoft',
+    name: 'Microsoft Remote Desktop Services (RDS) 2025 / 2022 CALs',
+    image: 'https://img.icons8.com/color/480/remote-desktop.png',
+    tagline: 'Enables remote desktop sessions, multi-user Tally Prime access, and centralized ERP application publishing.',
+    specs: {
+      processor: 'Remote Desktop Services (RDS) User CAL or Device CAL for terminal server sessions',
+      memory: 'Multi-session remote desktop hosting, RemoteApp program streaming, session shadowing',
+      storage: 'Sold in convenient enterprise packs: 5, 10, 20, 50, and 100 user license bundles',
+      security: 'RD Gateway integration with SSL/TLS encryption, Network Level Authentication (NLA)',
+      ports: 'Compatible with Windows Server 2025, 2022, and 2019 Remote Desktop Session Host'
+    },
+    keyPills: ['RDS Terminal Server', 'Multi-User Tally / ERP', 'RemoteApp Streaming', 'Session Shadowing'],
+    stockStatus: 'Immediate Dispatch • RDS Licensing Server Ready',
+    rentalAvailable: false,
+    idealFor: 'CA firms, accounting departments, distributed branch teams, and remote workforces accessing Tally/SAP'
+  },
+  {
+    id: 'ms-sql-server-2022-std',
+    categoryId: 'windows-licences',
+    subCategory: 'Database Servers',
+    brand: 'Microsoft',
+    name: 'Microsoft SQL Server 2022 Standard (Per-Core & Server+CAL)',
+    image: 'https://img.icons8.com/color/480/microsoft-sql-server.png',
+    tagline: 'Mission-critical enterprise relational database with Azure Synapse Link and Ledger blockchain verification.',
+    specs: {
+      processor: 'Per-Core Licensing (2-Core packs, min 4 cores) OR Server + CAL model for internal LANs',
+      memory: 'Supports up to 24 CPU cores and 128 GB buffer pool memory per SQL Server instance',
+      storage: 'Intelligent Query Processing, in-memory OLTP, accelerated database recovery',
+      security: 'Always Encrypted with secure enclaves, Ledger for blockchain tamper-evident data verification',
+      ports: 'Automated backup directly to Azure Blob storage with point-in-time restore capabilities'
+    },
+    keyPills: ['Per-Core / Server+CAL', 'Always On Availability', 'Ledger Blockchain Security', 'Tally & SAP B1'],
+    stockStatus: 'Official CSP Partner • Instant Key Dispatch',
+    rentalAvailable: false,
+    idealFor: 'Enterprise ERP databases, CRM systems, high-transaction accounting servers, and business analytics'
   },
 
   // WI-FI & WIRELESS NETWORKING (D-Link, TP-Link, Cisco, Aruba, Ubiquiti, Ruckus)

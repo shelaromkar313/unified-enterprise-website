@@ -18,12 +18,12 @@ import ContactUsPage from './pages/ContactUsPage';
 import LoginPage from './pages/LoginPage';
 import { useGlobalScrollReveal } from './hooks/useGlobalScrollReveal';
 
-// Scroll to top automatically on route navigation
+// Scroll to top automatically on route or query parameter navigation
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [pathname]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [pathname, search]);
   return null;
 }
 

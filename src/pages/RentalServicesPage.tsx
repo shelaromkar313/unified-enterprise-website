@@ -875,13 +875,13 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
   const currentCategoryObj = categoryList.find((c) => c.id === selectedCategoryId);
 
   return (
-    <div className="min-h-[85vh] bg-white py-10 lg:py-14 border-b border-slate-100">
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+    <div className="min-h-[85vh] bg-white py-6 sm:py-10 lg:py-14 border-b border-slate-100">
+      <div className="max-w-[1536px] mx-auto px-3 sm:px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-10 items-start">
           
           {/* Mobile Category Selector (Visible on mobile/tablet < lg) */}
-          <div className="lg:hidden col-span-1 mb-2">
-            <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3.5 shadow-2xs">
+          <div className="lg:hidden col-span-1 mb-1">
+            <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3 shadow-2xs">
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0 flex-1">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626] block">
@@ -1271,26 +1271,26 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                               />
                               
                               {/* Brand Badge */}
-                              <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                                <span className="bg-white/95 backdrop-blur-xs border border-slate-200/80 text-slate-800 text-[10px] font-bold px-2 py-0.5 rounded shadow-2xs">
+                              <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 z-10 max-w-[48%]">
+                                <span className="bg-white/95 backdrop-blur-xs border border-slate-200/80 text-slate-800 text-[10px] font-bold px-2 py-0.5 rounded shadow-2xs truncate">
                                   {product.brand}
                                 </span>
                                 {product.brand === 'Acer' && (
-                                  <span className="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs flex items-center gap-1">
+                                  <span className="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs flex items-center gap-1 shrink-0">
                                     Rent / Buy
                                   </span>
                                 )}
                               </div>
 
                               {/* Availability Pill */}
-                              <span className="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs flex items-center gap-1">
-                                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                                {product.stockStatus}
+                              <span className="absolute top-2.5 right-2.5 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs flex items-center gap-1 max-w-[48%] truncate z-10">
+                                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse shrink-0" />
+                                <span className="truncate">{product.stockStatus}</span>
                               </span>
                             </div>
 
                             {/* Product Info */}
-                            <div className="p-5 space-y-3">
+                            <div className="p-4 sm:p-5 space-y-3">
                               <div>
                                 <h4 className="text-base font-bold text-slate-900 group-hover:text-[#dc2626] transition-colors leading-snug">
                                   {product.name}
@@ -1336,18 +1336,18 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                           </div>
 
                           {/* Action Buttons */}
-                          <div className="p-5 pt-0 border-t border-slate-100 flex items-center gap-2 mt-2">
+                          <div className="p-4 sm:p-5 pt-0 border-t border-slate-100 flex items-center gap-2 mt-2">
                             <button
                               type="button"
                               onClick={() => onOpenQuickSupport(`Rental Inquiry: ${product.name} (${product.rentalRate})`)}
-                              className="flex-1 py-2.5 px-3 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-colors text-center shadow-2xs"
+                              className="flex-1 min-h-[40px] py-2.5 px-3 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-colors text-center shadow-2xs flex items-center justify-center active:scale-95"
                             >
                               Request Rental Quote
                             </button>
                             <button
                               type="button"
                               onClick={() => setInspectRentalProduct(product)}
-                              className="py-2.5 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors"
+                              className="min-h-[40px] py-2.5 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors flex items-center justify-center active:scale-95 shrink-0"
                             >
                               Quick View
                             </button>
@@ -1464,7 +1464,7 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
           onClick={() => setInspectRentalProduct(null)}
         >
           <div
-            className="relative w-full max-w-2xl bg-white rounded-2xl border border-slate-200 shadow-2xl overflow-hidden p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto"
+            className="relative w-full max-w-2xl bg-white rounded-2xl border border-slate-200 shadow-2xl overflow-hidden p-4 sm:p-8 space-y-4 sm:space-y-6 max-h-[92vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}

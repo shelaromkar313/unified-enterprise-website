@@ -93,7 +93,7 @@ export const SERVICES_DATA: Record<string, ServiceItem> = {
     sla: 'Guaranteed 2 to 4 Hour Emergency Response',
     metrics: ['Sub-4hr Onsite SLA', '100% Spares Coverage', '5-Tier Escalation Path'],
     coverage: 'Laptops, Desktops, Servers, SAN Storage, Switches, Routers, PBX, Firewalls',
-    image: '/assets/ue_amc_maintenance.jpg',
+    image: '/assets/ue_amc_support.jpg',
     comparisonData: {
       traditionalTitle: 'Traditional Ad-Hoc / Local Repair Setup',
       traditionalPoints: [

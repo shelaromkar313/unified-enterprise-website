@@ -146,12 +146,12 @@ export default function QuickSupportModal({ isOpen, onClose, defaultService = 'I
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-[#dc2626] px-6 py-5 text-white flex items-center justify-between">
+        <div className="bg-[#dc2626] px-4 sm:px-6 py-4 sm:py-5 text-white flex items-center justify-between">
           <div>
-            <span className="text-[11px] uppercase tracking-widest font-semibold text-white/80 block">
+            <span className="text-[10px] sm:text-[11px] uppercase tracking-widest font-semibold text-white/80 block">
               Quick Support Desk
             </span>
-            <h3 className="text-xl font-bold">Connect With Our Technical Team</h3>
+            <h3 className="text-lg sm:text-xl font-bold">Connect With Our Technical Team</h3>
           </div>
           <button
             onClick={handleReset}
@@ -163,7 +163,7 @@ export default function QuickSupportModal({ isOpen, onClose, defaultService = 'I
         </div>
 
         {/* Body */}
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {submitted ? (
             <div className="text-center py-8 space-y-4">
               <div className="w-16 h-16 rounded-full bg-red-50 text-[#dc2626] flex items-center justify-center mx-auto">
