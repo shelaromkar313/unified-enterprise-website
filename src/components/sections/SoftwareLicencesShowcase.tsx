@@ -646,11 +646,11 @@ export default function SoftwareLicencesShowcase({ onOpenInquiry, initialTab = '
       )}
 
       {/* 3. PRODUCT CATALOG GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 cisco-stagger">
         {filteredProducts.map((product) => (
           <article
             key={product.id}
-            className="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
+            className="cisco-reveal bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
           >
             <div>
               {/* Product Header / Icon Container */}

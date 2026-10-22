@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
  * fade in and glide up slowly using a luxurious 850ms deceleration curve.
  */
 export function useGlobalScrollReveal() {
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -39,8 +39,8 @@ export function useGlobalScrollReveal() {
         });
       },
       {
-        threshold: 0.08,
-        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.05,
+        rootMargin: '0px 0px -50px 0px',
       }
     );
 
@@ -66,7 +66,7 @@ export function useGlobalScrollReveal() {
 
         const rect = el.getBoundingClientRect();
         // If element is already in the upper viewport upon landing/routing, reveal immediately
-        if (rect.top < window.innerHeight * 0.70 && rect.bottom > 0) {
+        if (rect.top < window.innerHeight * 0.55 && rect.bottom > 0) {
           el.classList.add('is-revealed');
         } else if (!el.classList.contains('is-revealed')) {
           observer.observe(el);
@@ -75,7 +75,7 @@ export function useGlobalScrollReveal() {
     };
 
     // Initial check after DOM paint
-    const timer = setTimeout(updateAndObserve, 70);
+    const timer = setTimeout(updateAndObserve, 60);
 
     // Watch for dynamic tab changes (e.g. category switches, catalog filters)
     const mutationObserver = new MutationObserver(() => {
@@ -89,5 +89,5 @@ export function useGlobalScrollReveal() {
       observer.disconnect();
       mutationObserver.disconnect();
     };
-  }, [pathname]);
+  }, [pathname, search]);
 }

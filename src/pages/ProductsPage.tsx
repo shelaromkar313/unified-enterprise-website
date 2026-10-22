@@ -579,11 +579,11 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 cisco-stagger">
                     {PRODUCT_OVERVIEW_VERTICALS.map((vert) => (
                       <div
                         key={vert.id}
-                        className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group"
+                        className="cisco-reveal bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group"
                       >
                         <div>
                           {/* Card Image Header */}
@@ -701,11 +701,11 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
 
                 {/* If we have specific catalog models for this category */}
                 {displayedCatalogProducts.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 cisco-reveal cisco-stagger">
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 cisco-stagger">
                     {displayedCatalogProducts.map((product) => (
                       <article
                         key={product.id}
-                        className="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
+                        className="cisco-reveal bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
                       >
                         <div>
                           {/* Product Image Container */}

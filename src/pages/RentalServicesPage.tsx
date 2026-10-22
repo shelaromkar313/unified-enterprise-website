@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { 
-  Laptop, Monitor, Server, Radio, 
-  PhoneCall, Boxes, ArrowRight, CheckCircle2, Calculator, ShieldCheck, Clock, ChevronDown, X, Sparkles
+import {
+  Laptop, Monitor, Server, Radio,
+  PhoneCall, Boxes, ArrowRight, CheckCircle2, Calculator, ShieldCheck, Clock, ChevronDown, X, Sparkles,
+  Sliders, Cpu, Wrench, Layers, RefreshCw, Building2, Zap, FileText, Check, HardDrive
 } from 'lucide-react';
 
 interface RentalServicesPageProps {
@@ -12,12 +13,18 @@ interface RentalServicesPageProps {
 export interface RentalProduct {
   id: string;
   categoryId: string;
+  subCategory?: 'grandstream' | 'fanvil' | 'gsm-gateway';
+  tier?: 'basic' | 'advance' | 'premium';
   name: string;
   brand: string;
   image: string;
+  processor?: string;
+  ram?: string;
+  ssd?: string;
+  bestFor?: string;
   specs: string[];
   rentalRate: string;
-  minLease: string;
+  minLease?: string;
   stockStatus: string;
   highlight: string;
   includedAccessories: string[];
@@ -37,494 +44,332 @@ interface RentalDetail {
   benefits: { title: string; desc: string }[];
 }
 
+// 4 Acquisition & Rental Framework Models
+const RENTAL_FRAMEWORK_MODELS = [
+  {
+    model: 'MODEL 01',
+    role: '100% OpEx Tax Shield',
+    badge: 'Zero CapEx Drain',
+    desc: 'Eliminate heavy upfront hardware outlays. 100% of monthly corporate lease payments are fully tax-deductible as operating business expenses.',
+    accentColor: 'border-t-blue-500',
+    badgeColor: 'bg-blue-50 text-blue-700 border-blue-200'
+  },
+  {
+    model: 'MODEL 02',
+    role: 'Pan-India Doorstep Logistics',
+    badge: '24–48h Dispatch',
+    desc: 'Pre-imaged, domain-joined, and BitLocker-encrypted systems drop-shipped directly to employee residences and corporate offices across 100+ cities.',
+    accentColor: 'border-t-emerald-500',
+    badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200'
+  },
+  {
+    model: 'MODEL 03',
+    role: 'On-Site 5% Standby Spares',
+    badge: 'Zero Work Downtime',
+    desc: 'We station a permanent 5% buffer inventory directly inside your facility, enabling your internal IT team to swap faulty machines in under 5 minutes.',
+    accentColor: 'border-t-purple-500',
+    badgeColor: 'bg-purple-50 text-purple-700 border-purple-200'
+  },
+  {
+    model: 'MODEL 04',
+    role: 'Certified DoD Data Sanitization',
+    badge: 'Zero Asset Liability',
+    desc: 'Enjoy seamless hardware refresh cycles at the end of your 2-year lease with certified DoD 5220.22-M data wiping and zero electronic disposal liability.',
+    accentColor: 'border-t-red-500',
+    badgeColor: 'bg-red-50 text-[#dc2626] border-red-200'
+  }
+];
+
 // Enterprise Rental Products Catalog
 export const RENTAL_PRODUCTS: RentalProduct[] = [
-  // 1. Laptop Rental Products
+  // --- 1. LAPTOP RENTAL PRODUCTS (Basic, Advance, Premium) ---
   {
-    id: 'rent-acer-travellite-tl14-52m',
+    id: 'rent-laptop-basic-tier',
     categoryId: 'laptop-rental',
-    name: 'Acer TravelLite TL14-52M Commercial Ultrabook',
-    brand: 'Acer',
-    image: '/assets/acer_travellite_tl14.jpg',
+    tier: 'basic',
+    name: 'Intel Core i3 Enterprise Laptop (Basic Tier)',
+    brand: 'Dell / HP / Acer',
+    image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800&auto=format&fit=crop&q=80',
+    processor: 'Intel Core i3 (12th/13th Gen)',
+    ram: '8 GB DDR4',
+    ssd: '256 GB NVMe SSD',
+    bestFor: 'Basic office operations, web CRM, email & administrative documentation',
     specs: [
-      'Intel Core 5 120U (10 Cores, 12 Threads, up to 5.0 GHz)',
-      '16GB DDR4 High-Speed RAM',
-      '512GB PCIe Gen4 NVMe M.2 SSD',
-      '14.0" Full HD (1920x1080) IPS Slim-Bezel Display',
-      'Wi-Fi 6 + Bluetooth 5.2, FHD (2M) Privacy Shutter Camera',
-      '5-Year Extended Commercial Warranty Coverage'
+      'Intel Core i3 12th/13th Gen Multi-Core Processor',
+      '8 GB DDR4 High-Speed RAM (Expandable to 16GB)',
+      '256 GB PCIe NVMe SSD High-Speed Storage',
+      '14.0" Full HD (1920x1080) Anti-Glare IPS Display',
+      'HD Webcam with Privacy Shutter, Dual Array Mic, Wi-Fi 6'
     ],
-    rentalRate: 'From ₹1,750 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: 'Priority Fleet • 150+ Units Ready',
-    highlight: 'Priority commercial fleet choice with 5-year commercial warranty and high battery efficiency',
+    rentalRate: 'Custom Quotation',
+    minLease: 'Minimum 2 Years Agreement',
+    stockStatus: 'Available for Immediate Dispatch',
+    highlight: 'Reliable, power-efficient ultrabook engineered for everyday billing, documentation, and office tasks',
     includedAccessories: [
-      'Original Acer 65W Rapid Power Adapter',
-      'Commercial Padded Laptop Shoulder Bag',
-      'Acer Optical Wireless Mouse',
-      'Corporate Enterprise OS Staging & BitLocker Encryption'
+      'OEM 65W Rapid Power Adapter & Cable',
+      'Commercial Padded Water-Resistant Laptop Backpack',
+      'Precision Optical Wireless / USB Mouse',
+      'Standard Corporate Windows 11 Pro Pre-installed & Security Configured'
     ]
   },
   {
-    id: 'rent-dell-latitude-5440',
+    id: 'rent-laptop-advance-tier',
     categoryId: 'laptop-rental',
-    name: 'Dell Latitude 5440 Enterprise Ultrabook',
-    brand: 'Dell',
-    image: '/assets/dell_latitude_laptop.jpg',
+    tier: 'advance',
+    name: 'Intel Core i5 Business Laptop (Advance Tier)',
+    brand: 'Dell Latitude / HP EliteBook',
+    image: 'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800&auto=format&fit=crop&q=80',
+    processor: 'Intel Core i5 (13th/14th Gen)',
+    ram: '16 GB DDR5',
+    ssd: '512 GB PCIe NVMe SSD',
+    bestFor: 'Multitasking, corporate ERP, business intelligence & daily professional workflow',
     specs: [
-      'Intel Core i5-1335U (10 Cores, up to 4.60 GHz)',
-      '16GB DDR5 4800MHz Memory',
-      '512GB PCIe NVMe Gen4 High-Speed SSD',
-      '14.0" FHD IPS Anti-Glare (1920x1080) 250 nits',
-      'Wi-Fi 6E, Bluetooth 5.3, Full HD IR Webcam'
+      'Intel Core i5-1335U / 1345U (10 Cores, up to 4.70 GHz)',
+      '16 GB DDR5 4800MHz High-Speed Memory',
+      '512 GB PCIe Gen4 M.2 NVMe SSD Storage',
+      '14.0" Full HD IPS Anti-Glare (1920x1080) 300 nits',
+      'Wi-Fi 6E, Bluetooth 5.3, Backlit Keyboard & IR Facial Webcam'
     ],
-    rentalRate: 'From ₹1,850 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: '120+ Units in Staging',
-    highlight: 'Top choice for remote corporate workforce and developers',
+    rentalRate: 'Custom Quotation',
+    minLease: 'Minimum 2 Years Agreement',
+    stockStatus: 'Available for Immediate Dispatch',
+    highlight: 'The standard choice for corporate knowledge workers, mid-level executives, and sales fleets',
     includedAccessories: [
-      'Original Dell 65W Type-C AC Adapter',
-      'Targus Commercial Padded Laptop Backpack',
-      'Dell Wireless Optical Mouse',
-      'Pre-loaded Windows 11 Pro Enterprise & BitLocker'
+      'Original USB-C 65W GaN Rapid Charger',
+      'Executive Padded Laptop Sleeve & Heavy-Duty Bag',
+      'Precision Dual-Mode Optical Wireless Mouse',
+      'Domain Join, BitLocker Encryption & Corporate Endpoint Security Stack'
     ]
   },
   {
-    id: 'rent-lenovo-thinkpad-t14',
+    id: 'rent-laptop-premium-tier',
     categoryId: 'laptop-rental',
-    name: 'Lenovo ThinkPad T14 Gen 4 Business Ultrabook',
-    brand: 'Lenovo',
-    image: '/assets/lenovo_thinkpad_laptop.jpg',
+    tier: 'premium',
+    name: 'Intel Core i7 Flagship Workstation Laptop (Premium Tier)',
+    brand: 'Lenovo ThinkPad T-Series / Dell Latitude',
+    image: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=800&auto=format&fit=crop&q=80',
+    processor: 'Intel Core i7 (13th/14th Gen)',
+    ram: '16–32 GB DDR5',
+    ssd: '512 GB–1 TB NVMe SSD',
+    bestFor: 'Heavy multitasking, software development, data science, financial models & CAD',
     specs: [
-      'Intel Core i7-1355U (10 Cores) / AMD Ryzen 7 PRO',
-      '32GB DDR5 Dual Channel RAM',
-      '1TB NVMe PCIe Gen4 High-Speed SSD',
-      '14.0" WUXGA (1920x1200) 400 nits Low Power IPS',
-      'MIL-STD-810H Military-Tested Chassis'
+      'Intel Core i7-1365U / 14700H (up to 5.0 GHz Turbo)',
+      '16 GB to 32 GB High-Speed DDR5 Dual-Channel Memory',
+      '512 GB to 1 TB Ultra-Fast PCIe Gen4 NVMe SSD',
+      '14.0" or 15.6" WUXGA / 2K IPS 400 nits Anti-Glare Display',
+      'Thunderbolt 4, Wi-Fi 6E, Fingerprint Reader, MIL-STD-810H Military Spec'
     ],
-    rentalRate: 'From ₹2,450 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: '75+ Units in Staging',
-    highlight: 'Legendary ThinkPad ergonomics, durability & long battery life',
+    rentalRate: 'Custom Quotation',
+    minLease: 'Minimum 2 Years Agreement',
+    stockStatus: 'Available for Immediate Dispatch',
+    highlight: 'Heavy-duty corporate compute built for engineers, senior management, and high-compute workloads',
     includedAccessories: [
-      'Lenovo 65W GaN Rapid Power Adapter',
-      'Lenovo ThinkPad Executive Sleeve',
-      'Lenovo Dual-Mode Wireless Mouse',
-      'Hardened Corporate OS Staging'
+      'Fast Power Delivery 100W GaN USB-C Charger',
+      'Heavy-Duty Executive Hardshell Case & Protective Sleeve',
+      'Ergonomic Bluetooth / 2.4GHz Dual Wireless Mouse',
+      'Performance-Tuned Corporate OS with BitLocker & Antivirus'
     ]
   },
   {
-    id: 'rent-apple-macbook-pro-14',
+    id: 'rent-laptop-apple-macbook-pro',
     categoryId: 'laptop-rental',
-    name: 'Apple MacBook Pro 14" M3 Pro',
+    tier: 'premium',
+    name: 'Apple MacBook Pro 14" (Apple M3 / M3 Pro Silicon)',
     brand: 'Apple',
     image: '/assets/apple_macbook_pro.jpg',
+    processor: 'Apple M3 Pro (11-Core CPU, 14-Core GPU)',
+    ram: '18 GB Unified Memory',
+    ssd: '512 GB High-Speed SSD',
+    bestFor: 'iOS / Mobile App Developers, Creative UI/UX Designers & CXOs',
     specs: [
-      'Apple M3 Pro (11-Core CPU, 14-Core GPU)',
-      '18GB Unified High-Bandwidth Memory',
-      '512GB Superfast NVMe SSD Storage',
-      '14.2" Liquid Retina XDR 120Hz ProMotion Display',
-      'Up to 18 Hours Battery Life & MagSafe 3'
+      'Apple M3 Pro Chip with 11-Core CPU and 14-Core GPU',
+      '18 GB Unified High-Bandwidth Memory',
+      '512 GB Superfast Unified SSD Storage',
+      '14.2" Liquid Retina XDR Display (3024x1964) with ProMotion 120Hz',
+      'Up to 18 Hours Battery Life, 3x Thunderbolt 4 Ports, HDMI, SDXC, MagSafe 3'
     ],
-    rentalRate: 'From ₹4,500 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: '35+ Units in Staging',
-    highlight: 'Engineered for UX/UI designers, iOS devs & video leads',
+    rentalRate: 'Custom Quotation',
+    minLease: 'Minimum 2 Years Agreement',
+    stockStatus: 'Available for Immediate Dispatch',
+    highlight: 'Industry-standard powerhouse for mobile software engineering, video rendering, and UI design',
     includedAccessories: [
-      'Apple 70W USB-C Power Adapter',
-      'Original MagSafe 3 Braided Fast Charging Cable',
-      'Shock-Absorbing Hardshell Sleeve',
-      'Pre-configured MDM Apple Business Profile Ready'
-    ]
-  },
-  {
-    id: 'rent-hp-elitebook-840',
-    categoryId: 'laptop-rental',
-    name: 'HP EliteBook 840 G10 Commercial Laptop',
-    brand: 'HP',
-    image: '/assets/hp_elitebook_laptop.jpg',
-    specs: [
-      'Intel 13th Gen Core i5-1345U vPro Enterprise',
-      '16GB DDR5 5200MHz Memory',
-      '512GB M.2 PCIe Gen4 NVMe SSD',
-      '14.0" WUXGA Anti-Glare IPS with HP Sure View',
-      '5MP IR Privacy Camera with Dual Mics'
-    ],
-    rentalRate: 'From ₹1,950 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: '90+ Units in Staging',
-    highlight: 'Sleek all-aluminum executive finish with hardware privacy screen',
-    includedAccessories: [
-      'HP 65W Smart USB-C Adapter',
-      'HP Professional Slim Top-load Case',
-      'HP Multi-Device Wireless Mouse',
-      'Factory Enterprise Windows 11 Load'
+      'Apple 70W USB-C Power Adapter & Braided MagSafe 3 Cable',
+      'Premium Padded Hardshell Travel Sleeve',
+      'Apple Magic Mouse or Logitech MX Master Precision Mouse',
+      'MDM-Ready Apple Business Manager Enrollment Support'
     ]
   },
 
-  // 2. Desktop Rental Products
+  // --- 2. DESKTOP RENTAL PRODUCTS (Basic, Advance, Premium) ---
   {
-    id: 'rent-acer-veriton-m200-h610',
+    id: 'rent-desktop-basic-tier',
     categoryId: 'desktop-rental',
-    name: 'Acer Veriton M200 Desktop (Core i5 14400 / 21.5" Bundle)',
-    brand: 'Acer',
-    image: '/assets/acer_veriton_m200_bundle.jpg',
+    tier: 'basic',
+    name: 'Intel Core i3 Enterprise Desktop Workstation (Basic Tier)',
+    brand: 'Dell OptiPlex / HP ProDesk / Lenovo ThinkCentre',
+    image: 'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=800&auto=format&fit=crop&q=80',
+    processor: 'Intel Core i3 (12th/13th Gen)',
+    ram: '8 GB DDR4',
+    ssd: '256 GB NVMe SSD',
+    bestFor: 'Basic office operations, data entry, CRM portals & billing desks',
     specs: [
-      'Intel Core i5 14400 (10 Cores, 16 Threads, up to 4.70 GHz)',
-      '16GB DDR4 RAM + 512GB NVMe High-Speed SSD',
-      'Intel H610 Chipset / 16-Liter MT Commercial Chassis',
-      'Acer 21.5" Full HD IPS Display + USB KB & Mouse Bundle',
-      'DOS / Windows 11 Ready, 5-Year OEM Comprehensive Support'
+      'Intel Core i3 12th/13th Gen Processor (Multi-Core)',
+      '8 GB DDR4 High-Speed RAM',
+      '256 GB PCIe NVMe Fast Boot SSD',
+      'Dell / HP 22" Full HD IPS Anti-Glare Monitor Included',
+      'Ultra-compact SFF / Micro chassis with USB 3.2, DisplayPort & HDMI ports'
     ],
-    rentalRate: 'From ₹1,450 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: 'Priority Fleet • 200+ Units Ready',
-    highlight: 'Priority commercial desktop bundle with 21.5" monitor, 14th Gen Core i5 & 5-year warranty',
+    rentalRate: 'Custom Quotation',
+    minLease: 'Minimum 2 Years Agreement',
+    stockStatus: 'Available for Immediate Dispatch',
+    highlight: 'Reliable, compact desktop setup built for general office operations, billing desks, and administration',
     includedAccessories: [
-      'Acer 21.5" Full HD Anti-Glare Monitor',
-      'Acer Commercial USB Keyboard & Optical Mouse',
-      'DisplayPort / HDMI & Heavy-Duty Power Cords',
-      'Pre-staged OS Imaging & Antivirus Provisioning'
+      '22-inch Borderless Full HD IPS Anti-Glare Display',
+      'OEM USB Business Keyboard & Optical Mouse Combo',
+      'Heavy-Duty Ergonomic Monitor Stand & Power Leads',
+      'Standard Corporate Windows 11 Pro Pre-installed & HDMI/DP Cords'
     ]
   },
   {
-    id: 'rent-dell-optiplex-7010-micro',
+    id: 'rent-desktop-advance-tier',
     categoryId: 'desktop-rental',
-    name: 'Dell OptiPlex 7010 Micro Workstation Bundle',
-    brand: 'Dell',
-    image: '/assets/dell_optiplex_desktop.jpg',
+    tier: 'advance',
+    name: 'Intel Core i5 Commercial Desktop Workstation (Advance Tier)',
+    brand: 'Dell OptiPlex / HP ProDesk / Lenovo',
+    image: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=800&auto=format&fit=crop&q=80',
+    processor: 'Intel Core i5 (13th/14th Gen)',
+    ram: '16 GB DDR4/DDR5',
+    ssd: '512 GB PCIe NVMe SSD',
+    bestFor: 'Multitasking, corporate ERP, financial analytics & high-load business apps',
     specs: [
-      'Intel Core i5-13500T (14 Cores, 20 Threads)',
-      '16GB DDR5 4800MHz Memory',
-      '512GB PCIe M.2 Gen4 NVMe SSD',
-      'Dell 24" P2422H FHD IPS Monitor Included',
-      'Ultra-compact 1-liter chassis with VESA mount'
+      'Intel Core i5-13500 / 14500 (14 Cores, 20 Threads, up to 4.80 GHz)',
+      '16 GB DDR4/DDR5 High-Speed Memory',
+      '512 GB PCIe M.2 NVMe High-Speed SSD',
+      'Dell / HP 24" Borderless Full HD IPS Monitor with ComfortView',
+      'Dual DisplayPort + HDMI output, Gigabit LAN & TPM 2.0 Enterprise Security'
     ],
-    rentalRate: 'From ₹1,650 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: '150+ Bundles Available',
-    highlight: 'Zero desk clutter; mounts cleanly behind included Dell 24" monitor',
+    rentalRate: 'Custom Quotation',
+    minLease: 'Minimum 2 Years Agreement',
+    stockStatus: 'Available for Immediate Dispatch',
+    highlight: 'Optimized high-efficiency workstation for multitasking, finance analytics, BPO management, and corporate ERPs',
     includedAccessories: [
-      'Dell 24-inch Borderless IPS Display',
-      'Dell KB216 Wired Keyboard & MS116 Optical Mouse',
-      'Behind-the-Monitor VESA Mounting Bracket',
-      'DisplayPort / HDMI & Power Extension Cords'
+      'Dell / HP 24-inch Borderless FHD IPS ComfortView Display',
+      'Precision Business Keyboard & High-DPI Optical Mouse',
+      'Behind-the-Monitor VESA Mount or Desk Cable Dressing',
+      'Corporate Antivirus, Domain Join & BitLocker Encryption Pre-Configured'
     ]
   },
   {
-    id: 'rent-hp-prodesk-600-sff',
+    id: 'rent-desktop-premium-tier',
     categoryId: 'desktop-rental',
-    name: 'HP ProDesk 600 G9 SFF Business Bundle',
-    brand: 'HP',
-    image: '/assets/dell_optiplex_desktop.jpg',
+    tier: 'premium',
+    name: 'Intel Core i7 High-Performance Desktop (Premium Tier)',
+    brand: 'Dell OptiPlex / Precision / HP EliteDesk',
+    image: '/assets/desktop_i7_workstation.jpg',
+    processor: 'Intel Core i7 (13th/14th Gen)',
+    ram: '16–32 GB DDR5',
+    ssd: '512 GB–1 TB Gen4 SSD',
+    bestFor: 'Software development, demanding data science, 2D/3D CAD & dual-monitor setups',
     specs: [
-      'Intel Core i7-13700 (16 Cores, 24 Threads, up to 5.2 GHz)',
-      '32GB DDR5 High-Speed Memory',
-      '1TB NVMe PCIe Gen4 High-Speed SSD',
-      'HP 27" Full HD Anti-Glare IPS Display Included',
-      'Dual DisplayPort 1.4 + HDMI 2.1 Outputs'
+      'Intel Core i7-13700 / 14700 (16 Cores, 24 Threads, up to 5.40 GHz)',
+      '16 GB to 32 GB High-Speed DDR5 Memory',
+      '512 GB to 1 TB Ultra-Fast PCIe Gen4 NVMe SSD',
+      'Dell / HP 27" Full HD / 2K QHD IPS Display with ComfortView Plus',
+      'Dual/Triple Display Outputs, High-Throughput I/O & ISV Certified'
     ],
-    rentalRate: 'From ₹2,350 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: '60+ Bundles Available',
-    highlight: 'Ideal for financial data analysts, multi-tab analysts & engineering',
+    rentalRate: 'Custom Quotation',
+    minLease: 'Minimum 2 Years Agreement',
+    stockStatus: 'Available for Immediate Dispatch',
+    highlight: 'Built for software engineering, heavy data computation, multi-screen workspaces, and resource-heavy software',
     includedAccessories: [
-      'HP 27" IPS ComfortView Display',
-      'HP Business Keyboard & Precision Mouse',
-      'Heavy-Duty Power Strip with Surge Suppression',
-      'Pre-loaded Enterprise Security Stack'
-    ]
-  },
-  {
-    id: 'rent-dell-precision-3660-gpu',
-    categoryId: 'desktop-rental',
-    name: 'Dell Precision 3660 High-Compute GPU Tower',
-    brand: 'Dell Precision',
-    image: '/assets/gpu_graphics_hardware.jpg',
-    specs: [
-      'Intel Core i9-13900K (24 Cores, 32 Threads, 5.8 GHz)',
-      '64GB ECC DDR5 Registered Memory',
-      '2TB NVMe PCIe Gen4 SSD + 4TB Enterprise HDD',
-      'NVIDIA RTX A4000 16GB Dedicated GDDR6 GPU',
-      '1000W 92% Efficient Platinum Power Supply'
-    ],
-    rentalRate: 'From ₹6,800 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: '20+ Units Available',
-    highlight: 'Certified ISV workstation for AutoCAD, SolidWorks & AI deep learning',
-    includedAccessories: [
-      'Dell Premier Multi-Device Wireless Combo',
-      'Dual 4K DisplayPort to HDMI Certified Adapters',
-      'Dedicated 1kVA Pure Sine Wave Online UPS',
-      'CAD / GPU Benchmark Verification Suite'
-    ]
-  },
-  {
-    id: 'rent-nvidia-rtx6000-workstation',
-    categoryId: 'desktop-rental',
-    name: 'NVIDIA RTX 6000 Ada Dual-GPU AI Engineering Workstation',
-    brand: 'NVIDIA',
-    image: '/assets/real_microchip_gpu.jpg',
-    specs: [
-      'Dual NVIDIA RTX 6000 Ada Generation (96GB Total VRAM)',
-      'AMD Ryzen Threadripper PRO 5975WX (32 Cores, 64 Threads)',
-      '256GB ECC DDR4 Registered Workstation Memory',
-      '2x 2TB PCIe Gen4 NVMe M.2 High-Speed SSDs in RAID 0',
-      '1600W Titanium 94% High-Efficiency Power Supply'
-    ],
-    rentalRate: 'From ₹18,500 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: '8 Units in Staging',
-    highlight: 'The ultimate on-premise generative AI development & neural rendering workstation',
-    includedAccessories: [
-      'Dual 4K Professional 27" UltraSharp Displays',
-      'Precision Wireless Ergonomic Keyboard & Mouse',
-      '2kVA Pure Sine Wave Online Dedicated UPS',
-      'Full Ubuntu 22.04 LTS / Windows 11 Pro CUDA Suite'
+      'Dell / HP 27-inch Anti-Glare ComfortView Plus IPS Display',
+      'Executive Wireless / Multi-Device Keyboard & Mouse Combo',
+      'Dedicated Surge-Protected Heavy-Duty Power Rail',
+      'Performance-Tuned Corporate OS & Comprehensive Warranty Staging'
     ]
   },
 
-  // 3. Server Rental Products
+  // --- 3. IP PHONE, GSM GATEWAY & TELECOM EQUIPMENT RENTAL ---
   {
-    id: 'rent-nvidia-dgx-h100',
-    categoryId: 'server-rental',
-    name: 'NVIDIA DGX H100 AI Supercomputer Server Rental',
-    brand: 'NVIDIA',
-    image: '/assets/real_server_cluster.jpg',
-    specs: [
-      '8x NVIDIA H100 SXM5 80GB GPUs (640GB HBM3 Memory)',
-      '32 PFLOPS FP8 AI Performance with Transformer Engine',
-      'Dual Intel Xeon Platinum 8480C Processors (112 Cores)',
-      '2TB DDR5 ECC High-Bandwidth System Memory',
-      '8x 400Gb/s OSFP InfiniBand / Ethernet Network Adapters'
-    ],
-    rentalRate: 'Custom Enterprise Lease / Monthly',
-    minLease: '1 Month Minimum',
-    stockStatus: 'AI Staging Lab Ready',
-    highlight: 'Turnkey high-performance compute for LLM training, diffusion models & fine-tuning',
-    includedAccessories: [
-      'NVIDIA Base Command & AI Enterprise Software Stack',
-      'Dual 100GbE QSFP Remote Management Interfaces',
-      'Dedicated Enterprise AI Support SLA & Escalation',
-      'Pre-staged PyTorch, TensorFlow & CUDA Driver Images'
-    ]
-  },
-  {
-    id: 'rent-dell-poweredge-r750',
-    categoryId: 'server-rental',
-    name: 'Dell PowerEdge R750 2U Enterprise Rack Server',
-    brand: 'Dell PowerEdge',
-    image: '/assets/datacenter_servers.jpg',
-    specs: [
-      'Dual Intel Xeon Silver 4314 (32 Threads Total)',
-      '128GB ECC Registered DDR4/DDR5 Memory',
-      '4x 1.92TB Enterprise Hot-Plug SAS/NVMe Mixed-Use SSDs',
-      'PERC H755 RAID with 8GB NV Cache',
-      'Dual Redundant 1400W Platinum Hot-Plug PSUs'
-    ],
-    rentalRate: 'From ₹14,500 / month',
-    minLease: '3 Months Minimum',
-    stockStatus: '18 Units Ready in Staging',
-    highlight: 'Mission-critical database host, ERP staging & private cloud clusters',
-    includedAccessories: [
-      'Dell ReadyRails II Sliding Rails for 4-Post Racks',
-      'Full iDRAC9 Enterprise Remote License & Dedicated Port',
-      'Front Security Bezel with Key Lock',
-      'Free VMware ESXi / Proxmox Staging Installation'
-    ]
-  },
-  {
-    id: 'rent-hpe-proliant-dl380-gen10',
-    categoryId: 'server-rental',
-    name: 'HPE ProLiant DL380 Gen10 2U High-Compute Node',
-    brand: 'HPE',
-    image: '/assets/hpe_proliant_server.jpg',
-    specs: [
-      'Dual Intel Xeon Gold 5218R (40 Cores / 80 Threads)',
-      '256GB ECC DDR4 Registered SmartMemory',
-      '8x 960GB Enterprise SATA/SAS SSDs in RAID 10',
-      'HPE Smart Array P408i-a SR Gen10 12G Controller',
-      'Quad 1GbE + Dual 10GbE SFP+ Network Adapters'
-    ],
-    rentalRate: 'From ₹21,000 / month',
-    minLease: '3 Months Minimum',
-    stockStatus: '12 Units Ready in Staging',
-    highlight: 'High-density compute powerhouse for SAP HANA drills and migration',
-    includedAccessories: [
-      'HPE iLO 5 Advanced Management License',
-      'HPE Ball-Bearing Sliding Rail Kit & Cable Arm',
-      'Dual 800W Flex Slot Platinum Power Supplies',
-      '2-Hour Pan-India Spare Part Replacement SLA'
-    ]
-  },
-  {
-    id: 'rent-dell-poweredge-r450',
-    categoryId: 'server-rental',
-    name: 'Dell PowerEdge R450 1U Edge Rack Server',
-    brand: 'Dell PowerEdge',
-    image: '/assets/datacenter_servers.jpg',
-    specs: [
-      'Single Intel Xeon Silver 4310 (12 Cores, 24 Threads)',
-      '64GB ECC Registered DDR4 Memory',
-      '2x 960GB Enterprise SATA SSDs in RAID 1 Mirror',
-      'Dual 1GbE + Dual 10GbE SFP+ Network Interface Card',
-      'Dual Redundant 600W Hot-Plug Power Supplies'
-    ],
-    rentalRate: 'From ₹9,500 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: '25 Units Ready in Staging',
-    highlight: 'Compact 1U form factor for branch virtualization, domain controllers & firewalls',
-    includedAccessories: [
-      '1U Static Tool-less Rack Rails',
-      'iDRAC9 Basic Remote Web Access',
-      'Dual Power Cables & Cat6 Patch Cables',
-      'Onsite Handover & Diagnostic Testing'
-    ]
-  },
-
-  // 4. Networking & Security Rental Products
-  {
-    id: 'rent-cisco-catalyst-9200l',
-    categoryId: 'networking-security-rental',
-    name: 'Cisco Catalyst 9200L 48-Port PoE+ Switch',
-    brand: 'Cisco',
-    image: '/assets/network_security_firewall.jpg',
-    specs: [
-      '48x 10/100/1000 PoE+ Ports with 740W Power Budget',
-      '4x 10G SFP+ Fixed High-Speed Uplink Ports',
-      'Up to 80 Gbps Hardware Stacking Capability',
-      'Layer 3 Enterprise Routing (OSPF, RIP, Static)'
-    ],
-    rentalRate: 'From ₹3,800 / month',
-    minLease: 'Daily / Weekly / Monthly',
-    stockStatus: '45 Units Available',
-    highlight: 'Ideal for conferences, hackathons, temporary project sites & expansions',
-    includedAccessories: [
-      '19" Standard Rack-Mount Brackets & Screws',
-      'Cisco RJ45-to-DB9 / USB Console Cable',
-      'Bundle of 10x Cat6 Certified Patch Cables',
-      'Pre-configured Access, Voice & Guest VLANs'
-    ]
-  },
-  {
-    id: 'rent-fortinet-fortigate-60f',
-    categoryId: 'networking-security-rental',
-    name: 'Fortinet FortiGate 60F Next-Gen Firewall',
-    brand: 'Fortinet',
-    image: '/assets/network_security_firewall.jpg',
-    specs: [
-      '10x GE RJ45 Ports (Dual WAN, 1x DMZ, 7x Internal)',
-      '10 Gbps Firewall Throughput & 1 Gbps IPS Throughput',
-      '700 Mbps Next-Gen Threat Protection Throughput',
-      'Integrated SD-WAN & Hardware SSL-VPN Engine'
-    ],
-    rentalRate: 'From ₹3,200 / month',
-    minLease: 'Daily / Weekly / Monthly',
-    stockStatus: '30 Units Available',
-    highlight: 'Secure pop-up branch offices, temporary project sites & external audits',
-    includedAccessories: [
-      'Heavy-duty Power Adapter with Locking Nut',
-      'High-Speed USB Console Cable',
-      'Active FortiGuard Threat Protection License Included',
-      'Pre-configured Site-to-Site IPsec VPN Staging'
-    ]
-  },
-  {
-    id: 'rent-aruba-ap22-wifi6',
-    categoryId: 'networking-security-rental',
-    name: 'Aruba Instant On AP22 Wi-Fi 6 High-Density Kit',
-    brand: 'Aruba HPE',
-    image: '/assets/wifi_access_point.jpg',
-    specs: [
-      'Wi-Fi 6 (802.11ax) 2x2:2 MU-MIMO Technology',
-      'Up to 1.77 Gbps Aggregate Wireless Throughput',
-      '75+ Active Client Concurrency per Access Point',
-      'Smart Mesh Auto-Linking & Cloud App Management'
-    ],
-    rentalRate: 'From ₹950 / month per AP',
-    minLease: 'Daily / Weekly / Monthly',
-    stockStatus: '80 Units Available',
-    highlight: 'Fast temporary wireless setup for exhibitions, townhalls & pop-up events',
-    includedAccessories: [
-      'Gigabit PoE Power Injector & Power Cord',
-      'Ceiling T-Bar and Wall Mounting Clips',
-      'Shielded Flat Cat6 Ethernet Cable',
-      'Pre-configured Captive Guest Portal'
-    ]
-  },
-
-  // 5. IP Phone, GSM Gateway & Telecom Equipment Rental
-  {
-    id: 'rent-grandstream-grp2614',
+    id: 'rent-grandstream-gxp-series',
     categoryId: 'ip-phone-gsm-telecom-rental',
-    name: 'Grandstream GRP2614 Carrier-Grade HD IP Phone',
+    subCategory: 'grandstream',
+    name: 'Grandstream GXP1620 / GXP1625 HD IP Phone',
     brand: 'Grandstream',
-    image: '/assets/telecom_ip_phones.jpg',
+    image: '/assets/phone_grandstream_grp2616.png',
     specs: [
-      'Dual Color Displays (2.8" Main + 2.4" Digital BLF Screen)',
-      '4 Lines, 4 SIP Accounts with 40 Virtual BLF Keys',
-      'Integrated Dual-Band Wi-Fi 802.11ac & Bluetooth',
-      'Dual Gigabit Ethernet Ports with 802.3af PoE'
+      '2 SIP Accounts, 2 Line Keys, 3 XML Programmable Context-Sensitive Soft Keys',
+      '132 x 48 Pixel Backlit Graphical LCD Display',
+      'Dual Switched 10/100 Mbps Ports, Integrated PoE (GXP1625)',
+      'HD Audio on Speakerphone and Handset with Acoustic Echo Cancellation',
+      '3-Way Audio Conferencing, EHS Support for Plantronics / Jabra Headsets'
     ],
-    rentalRate: 'From ₹450 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: '200+ Units Available',
-    highlight: 'High-volume phone for BPO campaigns, sales desks & reception consoles',
+    rentalRate: 'Custom Quotation',
+    minLease: 'Minimum 2 Years Agreement',
+    stockStatus: 'Available for Immediate Dispatch',
+    highlight: 'Reliable, clear HD voice IP phone built for standard enterprise workstations, front offices, and BPO call desks',
     includedAccessories: [
-      'Desk Stand with Dual Tilt Positions',
-      'High-Fidelity Handset with Reinforced Armored Cord',
-      'Cat6 RJ45 Patch Cable',
-      'Pre-provisioned SIP Account Profiles'
+      'Original Grandstream Handset with Armored Coil Cord',
+      'Universal 5V Power Adapter (or PoE Network Powered)',
+      'Dual-Position Ergonomic Desk Stand / Wall-Mount Bracket',
+      'Cat6 High-Speed RJ45 Ethernet Patch Cable',
+      'Auto-Provisioning Profiles for Asterisk, Vicidial, FreePBX & 3CX'
     ]
   },
   {
-    id: 'rent-cisco-8845-video',
+    id: 'rent-fanvil-x7a-android',
     categoryId: 'ip-phone-gsm-telecom-rental',
-    name: 'Cisco 8845 HD Video Desk Phone',
-    brand: 'Cisco',
-    image: '/assets/telecom_ip_phones.jpg',
+    subCategory: 'fanvil',
+    name: 'Fanvil X7A Enterprise Android Touch Screen IP Phone',
+    brand: 'Fanvil',
+    image: '/assets/phone_fanvil_x7.png',
     specs: [
-      '720p HD Video Camera Built-In with Privacy Shutter',
-      '5-inch 800x480 Widescreen Backlit Color Screen',
-      'Wideband Audio (G.722) with Hardware Echo Suppression',
-      'Dual Gigabit Ethernet Ports with Integrated PoE'
+      '7-inch (1024x600) Capacitive Color Touch Screen',
+      '20 SIP Lines with Up to 112 One-Touch DSS / BLF Keys',
+      'Android 9.0 OS with Third-Party Business App & CRM Support',
+      'Built-in Dual-Band Wi-Fi (2.4G/5G) & Bluetooth 4.2',
+      'Dual Gigabit Ethernet Ports with Integrated 802.3at PoE',
+      'Harman Speaker & Opus Codec for Crystal-Clear HD Audio'
     ],
-    rentalRate: 'From ₹1,100 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: '60 Units Available',
-    highlight: 'Direct one-touch video conferencing for CXO cabins and legal rooms',
+    rentalRate: 'Custom Quotation',
+    minLease: 'Minimum 2 Years Agreement',
+    stockStatus: 'Available for Immediate Dispatch',
+    highlight: 'Premium executive Android touch phone featuring 7-inch display, built-in Wi-Fi & Bluetooth for managerial desks and CXO suites',
     includedAccessories: [
-      'Hearing Aid Compatible Handset with Coil Cord',
-      'Ethernet Network Cable',
-      'Wall / Desk Dual-Mode Bracket',
-      'Cisco CallManager / FreePBX Auto-Provisioning'
+      'Wideband HD Handset with Noise Isolation Cord',
+      'Dual-Angle Desktop Stand (40° and 50°)',
+      'Cat6 Shielded Gigabit Patch Cable',
+      'Optional Fanvil CM60 USB HD Camera Interface Support',
+      'Cloud Provisioning via Fanvil FDMCS / Enterprise SIP Trunking'
     ]
   },
   {
-    id: 'rent-dinstar-16-channel-gsm',
+    id: 'rent-dinstar-gsm-gateway',
     categoryId: 'ip-phone-gsm-telecom-rental',
-    name: 'Dinstar 16-Channel 4G/GSM VoIP Gateway',
-    brand: 'Dinstar',
-    image: '/assets/gsm_gateway_pri.jpg',
+    subCategory: 'gsm-gateway',
+    name: 'Dinstar / Matrix 16-Port 4G VoIP GSM Gateway',
+    brand: 'Dinstar / Matrix Comsec',
+    image: '/assets/gsm_voip_gateway_16port.jpg',
     specs: [
-      '16 Concurrent 4G LTE / GSM Voice Channels',
-      'Hot-Swappable Standard SIM Card Slots',
-      'Full SIP v2.0 Compatibility (Vicidial, Asterisk, 3CX)',
-      'Built-in SMS API & Automated SIM Balancing'
+      '16 Channels 4G LTE / GSM SIM Cards Concurrent Voice Calling',
+      'SIP Protocol Support (RFC3261) compatible with Asterisk, Vicidial & 3CX',
+      'Intelligent SIM Rotation based on Call Minutes, SMS Quota & Carrier balance',
+      'Hot-Swappable SIM Trays, SMS API Gateway for Two-Factor Verification',
+      'Dual 10/100M Network Ports, Hardware Echo Cancellation (G.168 128ms)'
     ],
-    rentalRate: 'From ₹4,200 / month',
-    minLease: '1 Month Minimum',
-    stockStatus: '25 Units Available',
-    highlight: 'Cost-saving outbound GSM termination for call centers & verification IVRs',
+    rentalRate: 'Custom Quotation',
+    minLease: 'Minimum 2 Years Agreement',
+    stockStatus: 'Available for Immediate Dispatch',
+    highlight: 'Multi-SIM mobile voice gateway for automated outbound dialers, branch telecom bypass, and SMS verification',
     includedAccessories: [
-      '16x High-Gain Multi-Band Magnetic Antennas',
-      '19" 1U Rack Mount Brackets & Screws',
-      'Industrial Grounding Wire & Power Supply',
-      'Dialer SIP Trunk Configuration Guide'
+      '16x High-Gain Multi-Band 4G/GSM Antennas with Magnetic Extension Bases',
+      'Standard 19-inch 1U Rackmount Ears & Screws',
+      'Dual AC Power Adapter (100–240V Surge Protected)',
+      'Web-GUI Administration & Remote CDR Logging Utility'
     ]
   },
 
-  // 6. Bulk Device Deployment
+  // --- 4. BULK DEVICE DEPLOYMENT ---
   {
     id: 'rent-bulk-corporate-fleet-50-100',
     categoryId: 'bulk-device-deployment',
@@ -532,14 +377,14 @@ export const RENTAL_PRODUCTS: RentalProduct[] = [
     brand: 'Dell / HP Enterprise',
     image: '/assets/ue_equipment_rental.jpg',
     specs: [
-      '50x Uniform Dell Latitude or OptiPlex Core i5 Systems',
+      'Uniform Dell Latitude or OptiPlex Core i5 Systems',
       'Pre-configured Domain Joined, BitLocker & Antivirus',
       'Dedicated 5% Standby Spares Stored at Your Facility',
-      'Drop-shipped Directly to 50+ Employee Residences'
+      'Drop-shipped Directly to Employee Residences Across India'
     ],
-    rentalRate: 'Enterprise Volume Discount',
-    minLease: '3–12 Month Flexible Lease',
-    stockStatus: 'Instant Staging Capacity',
+    rentalRate: 'Custom Enterprise Quotation',
+    minLease: 'Minimum 2 Years Agreement',
+    stockStatus: 'Available for Immediate Dispatch',
     highlight: 'Zero downtime onboarding for rapid tech hiring and sudden branch ramp-ups',
     includedAccessories: [
       'Individual Drop-Ship Protective Mailer Boxes',
@@ -560,9 +405,9 @@ export const RENTAL_PRODUCTS: RentalProduct[] = [
       'HD PoE Gigabit IP Phones with Auto-Provisioning',
       'Core Layer 2 Managed PoE Switching Infrastructure'
     ],
-    rentalRate: 'Volume Tier Quotation',
-    minLease: 'Flexible Term / Multi-Year',
-    stockStatus: 'Warehoused in Mumbai / Pune / Delhi',
+    rentalRate: 'Custom Enterprise Quotation',
+    minLease: 'Minimum 2 Years Agreement',
+    stockStatus: 'Available for Immediate Dispatch',
     highlight: 'Turnkey facility ready to dial within 48 hours of lease sign-off',
     includedAccessories: [
       'Complete Workstation Cabling & Desk Dressing',
@@ -572,7 +417,7 @@ export const RENTAL_PRODUCTS: RentalProduct[] = [
     ]
   },
 
-  // 7. Rental Enquiry
+  // --- 5. RENTAL ENQUIRY ---
   {
     id: 'rent-custom-evaluation-fleet',
     categoryId: 'rental-enquiry',
@@ -581,42 +426,19 @@ export const RENTAL_PRODUCTS: RentalProduct[] = [
     image: '/assets/why_client_first.jpg',
     specs: [
       'Customized Mix: Laptops, Desktops, Servers & Firewalls',
-      '7-Day Proof-of-Concept Evaluation Units at No Cost',
-      'Flexible Rent-to-Own & Residual Buyback Provisions',
+      'Proof-of-Concept Evaluation Units Available',
+      'Flexible Long-Term Enterprise Deployment Terms',
       'Dedicated Senior Enterprise Account Specialist'
     ],
-    rentalRate: 'Quoted within 2 Business Hours',
-    minLease: 'Tailored Terms',
-    stockStatus: 'Dedicated Priority Allocation',
+    rentalRate: 'Formal Quotation on Request',
+    minLease: 'Minimum 2 Years Agreement',
+    stockStatus: 'Available for Immediate Dispatch',
     highlight: 'Ideal for customized computing specifications and multi-city delivery needs',
     includedAccessories: [
       'Comprehensive Technical Spec Evaluation Sheet',
       'Custom Master Services Agreement (MSA) SLA Terms',
       'Pan-India Multi-City Unified Billing Support',
       'End-of-Lease Certified DoD Data Sanitization'
-    ]
-  },
-  {
-    id: 'rent-short-term-event-kit',
-    categoryId: 'rental-enquiry',
-    name: 'Short-Term Event & Conference Hardware Fleet',
-    brand: 'Multi-Vendor Tier-1',
-    image: '/assets/ue_equipment_rental.jpg',
-    specs: [
-      'High-Performance Laptops, Registration PCs & Displays',
-      'High-Density Wi-Fi 6 Enterprise Coverage Kit',
-      'Onsite Dedicated Standby IT Engineers During Event',
-      'Same-Day Delivery & Immediate Post-Event Teardown'
-    ],
-    rentalRate: 'Per-Day / Per-Event Custom Rates',
-    minLease: '1 Day to 2 Weeks',
-    stockStatus: 'Nationwide Readiness',
-    highlight: 'Turnkey IT hardware for corporate AGMs, summits, hackathons & expos',
-    includedAccessories: [
-      'Hard Protective Flight Cases for Safe Transit',
-      'Standby Backup Units On-Premises (0-Downtime Guarantee)',
-      'Surge-Protected Power Strips & Cat6 Cabling',
-      'Onsite Technical Operator Support'
     ]
   }
 ];
@@ -633,10 +455,12 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
   // Calculator State
   const [selectedDevice, setSelectedDevice] = useState<string>('Enterprise Laptops');
   const [quantity, setQuantity] = useState<number>(25);
-  const [duration, setDuration] = useState<string>('3 Months');
+  const [duration, setDuration] = useState<string>('2 Years (24 Months)');
 
+  // Sync with URL parameter & scroll to top smoothly
   useEffect(() => {
     setSelectedCategoryId(urlItem || 'all');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [urlItem]);
 
   // Handle escape key to close modal
@@ -648,12 +472,10 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [inspectRentalProduct]);
 
-  // Exact 7 categories requested by the user
+  // Exact 5 categories requested by the user
   const categoryList = useMemo(() => [
     { id: 'laptop-rental', name: 'Laptop Rental' },
     { id: 'desktop-rental', name: 'Desktop Rental' },
-    { id: 'server-rental', name: 'Server Rental' },
-    { id: 'networking-security-rental', name: 'Networking & Security Equipment Rental' },
     { id: 'ip-phone-gsm-telecom-rental', name: 'IP Phone, GSM Gateway & Telecom Equipment Rental' },
     { id: 'bulk-device-deployment', name: 'Bulk Device Deployment' },
     { id: 'rental-enquiry', name: 'Rental Enquiry' },
@@ -667,36 +489,69 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
     } else {
       setSearchParams({ item: id }, { replace: true });
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleCalculatorSubmit = () => {
-    onOpenQuickSupport(`Rental Enquiry: ${quantity}x ${selectedDevice} for ${duration}`);
+    onOpenQuickSupport(`Rental Enquiry: ${quantity}x ${selectedDevice} for ${duration} (Minimum 2 Years Agreement)`);
   };
 
-  // Products filtered for the currently selected category
+  // Active criteria tab for Laptop Rental: 'all' | 'basic' | 'advance' | 'premium'
+  const [activeLaptopTier, setActiveLaptopTier] = useState<'all' | 'basic' | 'advance' | 'premium'>('all');
+
+  // Active criteria tab for Desktop Rental: 'all' | 'basic' | 'advance' | 'premium' | 'assemble'
+  const [activeDesktopTier, setActiveDesktopTier] = useState<'all' | 'basic' | 'advance' | 'premium' | 'assemble'>('all');
+
+  // Interactive Custom Assemble Form State for Desktops
+  const [customCpu, setCustomCpu] = useState<string>('Intel Core i7 (13th / 14th Gen - High Performance)');
+  const [customRam, setCustomRam] = useState<string>('32 GB DDR5 (Heavy Multi-tasking & Dev)');
+  const [customStorage, setCustomStorage] = useState<string>('1 TB NVMe Gen4 High-Speed SSD');
+  const [customGpu, setCustomGpu] = useState<string>('NVIDIA RTX 4060 8GB / RTX A2000 (Creative / CAD)');
+  const [customMonitor, setCustomMonitor] = useState<string>('Dual 24" Borderless IPS Displays (Multitasking)');
+  const [customChassis, setCustomChassis] = useState<string>('Tower Workstation (Expandable PCIe & Dual Power)');
+  const [customQuantity, setCustomQuantity] = useState<string>('25+ Systems');
+  const [customNotes, setCustomNotes] = useState<string>('');
+
+  // Active criteria tab for IP Phone Rental: 'all' | 'grandstream' | 'fanvil' | 'gsm-gateway'
+  const [activeTelecomBrand, setActiveTelecomBrand] = useState<'all' | 'grandstream' | 'fanvil' | 'gsm-gateway'>('all');
+
+  // Products filtered for the currently selected category and criteria tab
   const currentCategoryProducts = useMemo(() => {
-    return RENTAL_PRODUCTS.filter((p) => p.categoryId === selectedCategoryId);
-  }, [selectedCategoryId]);
+    const prods = RENTAL_PRODUCTS.filter((p) => p.categoryId === selectedCategoryId);
+    if (selectedCategoryId === 'laptop-rental' && activeLaptopTier !== 'all') {
+      return prods.filter((p) => p.tier === activeLaptopTier);
+    }
+    if (selectedCategoryId === 'desktop-rental') {
+      if (activeDesktopTier === 'assemble') return [];
+      if (activeDesktopTier !== 'all') {
+        return prods.filter((p) => p.tier === activeDesktopTier);
+      }
+    }
+    if (selectedCategoryId === 'ip-phone-gsm-telecom-rental' && activeTelecomBrand !== 'all') {
+      return prods.filter((p) => p.subCategory === activeTelecomBrand);
+    }
+    return prods;
+  }, [selectedCategoryId, activeLaptopTier, activeDesktopTier, activeTelecomBrand]);
 
   // Detailed data for all rental categories
   const rentalData: Record<string, RentalDetail> = useMemo(() => ({
     'laptop-rental': {
       id: 'laptop-rental',
       name: 'Commercial Laptop Rental',
-      duration: 'Flexible: Daily, Monthly, or Annual Leasing',
+      duration: 'Minimum 2 Years Agreement',
       leadTime: 'Dispatched within 24–48 hours Pan-India',
-      summary: 'Tier-1 commercial ultrabooks and laptops from Dell, HP, Lenovo, and Apple pre-loaded with your corporate OS image, BitLocker encryption, and domain configuration.',
-      metrics: ['24–48h Pan-India Dispatch', 'Zero CapEx Drain', '100% Tax-Deductible OPEX'],
-      whyExists: 'Organizations expanding their remote or hybrid workforce require rapid computing access without committing substantial upfront capital or enduring 6-week OEM manufacturing delays.',
+      summary: 'Tier-1 commercial ultrabooks and laptops from Dell Latitude, HP EliteBook, Lenovo ThinkPad, Acer TravelLite, and Apple MacBook Pro. Configured into Basic (i3), Advance (i5), and Premium (i7 / M3) tiers, pre-loaded with your corporate OS image, BitLocker encryption, and domain configuration.',
+      metrics: ['24–48h Pan-India Dispatch', 'Minimum 2 Years Agreement'],
+      whyExists: 'Organizations expanding their enterprise workforce require standardized computing access without committing substantial upfront capital or enduring long OEM procurement delays.',
       benefits: [
-        { title: 'Zero Capital Expenditure', desc: 'Preserve cash flow by moving hardware costs from balance-sheet CapEx to 100% tax-deductible monthly operating expenses.' },
+        { title: 'Zero Capital Expenditure', desc: 'Preserve cash flow by moving hardware costs from balance-sheet CapEx to 100% tax-deductible operating expenses under a 2-year enterprise agreement.' },
         { title: 'Same-Day Standby Replacements', desc: 'Local buffer stock ensures immediate hardware replacement within 4 hours if a machine experiences any hardware defect.' },
         { title: 'Multi-City Remote Drop-Shipping', desc: 'We deliver pre-imaged, secure laptops directly to employee residences across 100+ cities in India with doorstep unboxing.' }
       ],
       specs: [
-        'Intel Core i5 / i7 / Ultra or Apple M-Series chips',
-        '16GB to 32GB RAM with fast NVMe PCIe Gen4 SSDs',
-        'FHD / QHD anti-glare anti-fatigue displays',
+        'Basic: Intel Core i3 | 8 GB RAM | 256 GB SSD (Office & Browsing)',
+        'Advance: Intel Core i5 | 16 GB RAM | 512 GB SSD (Multitasking & Business Apps)',
+        'Premium: Intel Core i7 | 16–32 GB RAM | 512 GB–1 TB SSD (Heavy Computing & Dev)',
         'OEM chargers, commercial carry bags & wired/wireless mice included'
       ],
       deliverables: [
@@ -705,15 +560,15 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
         'Individual drop-shipping to remote employees across India',
         'Scheduled hardware maintenance and thermal servicing'
       ],
-      image: '/assets/dell_latitude_laptop.jpg'
+      image: 'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800&auto=format&fit=crop&q=80'
     },
     'desktop-rental': {
       id: 'desktop-rental',
       name: 'Commercial Desktop & Workstation Rental',
-      duration: 'Monthly, Quarterly, or Multi-Year Terms',
+      duration: 'Minimum 2 Years Agreement',
       leadTime: 'Dispatched within 24–48 hours in bulk volumes',
-      summary: 'High-density Micro, SFF, and Tower desktop PCs from Dell OptiPlex and HP ProDesk, paired with professional 24-inch or 27-inch IPS monitors.',
-      metrics: ['Dual-Screen Ready', 'Pre-Cabled Bundles', 'Zero Maintenance Overhead'],
+      summary: 'High-density Micro, SFF, and Tower desktop PCs from Dell OptiPlex and HP ProDesk, paired with professional 22-inch, 24-inch, or 27-inch IPS monitors with custom assembly options.',
+      metrics: ['Dual-Screen Ready', 'Pre-Cabled Bundles', 'Minimum 2 Years Agreement'],
       whyExists: 'High-density office floors, customer support centers, and design labs need reliable, uniform desktop hardware with full peripherals and zero maintenance burden.',
       benefits: [
         { title: 'Turnkey Workspace Bundles', desc: 'Each machine arrives complete with an IPS monitor, commercial keyboard, optical mouse, power cables, and display connectors.' },
@@ -721,9 +576,9 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
         { title: 'Hardware Upgrades Included', desc: 'Easily scale RAM or GPU compute mid-contract as software requirements increase without buying new equipment.' }
       ],
       specs: [
-        'Intel 12th/13th/14th Gen Core i5/i7 Processors',
-        '16GB to 64GB DDR4/DDR5 high-speed memory',
-        '24-inch FHD IPS bezel-less monitors included',
+        'Intel 12th/13th/14th Gen Core i3, i5 & i7 High-Performance Processors',
+        '8GB to 64GB DDR4/DDR5 high-speed dual-channel memory',
+        '22", 24" & 27" Borderless Full HD / 2K IPS Displays included',
         'Commercial keyboards, mice, power cables, and HDMI/DP cords'
       ],
       deliverables: [
@@ -732,80 +587,26 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
         'Support for dual-monitor configurations and graphic accelerators',
         'Quarterly OS health maintenance and performance audits'
       ],
-      image: '/assets/dell_optiplex_desktop.jpg'
-    },
-    'server-rental': {
-      id: 'server-rental',
-      name: 'Enterprise Rack Server Rental',
-      duration: '1 Month to 3 Years with Scaling Options',
-      leadTime: 'Configured to custom order in 48–72 hours',
-      summary: 'Dell PowerEdge and HPE ProLiant 1U/2U rack servers provisioned for compute spikes, private cloud testing, ERP migrations, or disaster recovery drills.',
-      metrics: ['Tier-1 Dual Xeon / EPYC', 'Hot-Swap Enterprise SAS/NVMe', '2-Hour Pan-India Spare SLA'],
-      whyExists: 'Cloud bills can spiral out of control during large-scale database migrations or private compute jobs; dedicated rented servers provide predictable performance at a fraction of cloud egress costs.',
-      benefits: [
-        { title: 'Custom Compute Provisioning', desc: 'Configure exact CPU core counts, multi-terabyte ECC memory, and hardware RAID controllers to match your workload benchmarks.' },
-        { title: 'Full Out-of-Band Remote Access', desc: 'Dedicated Dell iDRAC or HPE iLO Enterprise licenses give your sysadmins bare-metal remote console control 24/7.' },
-        { title: 'Pre-Staged Hypervisors', desc: 'Arrives pre-installed with your chosen virtualization layer (VMware ESXi, Proxmox, or Windows Hyper-V) ready to rack.' }
-      ],
-      specs: [
-        'Dual Intel Xeon Scalable or AMD EPYC Processors',
-        '64GB up to 512GB ECC Registered DDR4/DDR5 Memory',
-        'Hardware RAID Controllers with Hot-Swap Enterprise SAS/NVMe SSDs',
-        'Dual Redundant Platinum Hot-Plug Power Supplies'
-      ],
-      deliverables: [
-        'Pre-installed hypervisor (VMware ESXi, Hyper-V, Proxmox)',
-        'Full iDRAC / iLO Enterprise remote management access',
-        'Immediate 2-hour onsite engineer response for hardware faults',
-        'Optional secure off-site data replication staging'
-      ],
-      image: '/assets/hpe_proliant_server.jpg'
-    },
-    'networking-security-rental': {
-      id: 'networking-security-rental',
-      name: 'Networking & Security Equipment Rental',
-      duration: 'Event, Project, or Term Rental',
-      leadTime: 'Ready-to-deploy pre-configured kits in 24 hours',
-      summary: 'Layer 2/3 Cisco switches, Fortinet firewalls, and high-density Wi-Fi 6 access points available for short-term projects, conferences, or branch pop-ups.',
-      metrics: ['Zero-Trust Firewall Ready', 'High-Density Wi-Fi 6', 'Pre-Configured VLAN Staging'],
-      whyExists: 'Temporary event venues, construction project headquarters, and disaster recovery hot sites require carrier-grade network backbones without the commitment of a multi-year purchase.',
-      benefits: [
-        { title: 'Plug-and-Play Network Kits', desc: 'Switches and firewalls are pre-programmed with your designated IP subnets, VLANs, and firewall rules before leaving our facility.' },
-        { title: 'Flight Case Transit Safety', desc: 'All networking gear is shipped in reinforced flight cases complete with patch cables, rack brackets, and console cords.' },
-        { title: 'Onsite Deployment Engineers', desc: 'Optional senior network specialists handle rack mounting, cabling, RF survey tuning, and end-of-event teardown.' }
-      ],
-      specs: [
-        'Cisco Catalyst 24/48-Port PoE+ Gigabit Switches',
-        'Fortinet FortiGate / Cisco Secure Next-Gen Firewalls',
-        'High-density indoor/outdoor Wi-Fi 6 APs with POE injectors',
-        'Pre-terminated Category 6 patch cables & flight cases'
-      ],
-      deliverables: [
-        'Pre-configured VLANs, routing, and SSID parameters',
-        'Onsite network engineer staging and teardown assistance',
-        'Zero-Trust secure VPN credentials for temporary staff',
-        'Full Fluke test certification on all provided cabling'
-      ],
-      image: '/assets/network_security_firewall.jpg'
+      image: 'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=800&auto=format&fit=crop&q=80'
     },
     'ip-phone-gsm-telecom-rental': {
       id: 'ip-phone-gsm-telecom-rental',
       name: 'IP Phone, GSM Gateway & Telecom Equipment Rental',
-      duration: 'Short-Term Campaigns to Long-Term Leasing',
+      duration: 'Minimum 2 Years Agreement',
       leadTime: 'Pre-configured and dispatched in 24 hours',
-      summary: 'Cisco, Grandstream, and Yealink HD IP phones, 8 to 32 port GSM gateways, and PRI PCI cards for rapid call center expansions and seasonal campaigns.',
-      metrics: ['HD Wideband Audio', '4G LTE SIM Rotation', 'Asterisk / FreePBX Auto-Provisioning'],
-      whyExists: 'Surge telemarketing campaigns, festive sales drives, and seasonal customer support initiatives require instant voice connectivity without tying up capital in telecommunications hardware.',
+      summary: 'Grandstream GXP/GRP Series standard business IP phones and Fanvil X7A Enterprise Android Touch IP phones, paired with multi-channel GSM gateways for enterprise voice, contact centers, and executive cabins.',
+      metrics: ['Grandstream & Fanvil Fleets', 'HD Wideband Audio', 'Minimum 2 Years Agreement'],
+      whyExists: 'Customer support centers, sales desks, and corporate facilities require reliable voice connectivity without tying up capital in telecommunications hardware.',
       benefits: [
-        { title: 'Instant PBX Compatibility', desc: 'Phones are pre-registered to your cloud PBX, Asterisk, Vicidial, or 3CX server so agents simply plug in and dial.' },
-        { title: 'SIM Failover & Cost Reduction', desc: 'Multi-port GSM gateways route calls across mobile networks, eliminating expensive PSTN trunk fees during mass campaigns.' },
-        { title: 'Zero Defect Handset Guarantee', desc: 'Any dropped or malfunctioning handset is swapped immediately from local staging stock with zero call center interruption.' }
+        { title: 'Instant PBX Compatibility', desc: 'Grandstream and Fanvil phones are pre-registered to your cloud PBX, Asterisk, Vicidial, or 3CX server so agents simply plug in and dial.' },
+        { title: 'SIM Failover & Cost Reduction', desc: 'Multi-port GSM gateways route calls across mobile networks, eliminating expensive PSTN trunk fees during mass operations.' },
+        { title: 'Zero Defect Handset Guarantee', desc: 'Any dropped or malfunctioning handset is swapped immediately from local staging stock with zero interruption.' }
       ],
       specs: [
-        'Cisco 7800/8800 Series & Grandstream HD IP Phones',
-        '8, 16, and 32-Channel GSM/4G SIM Gateways',
-        'Commercial call center noise-canceling USB headsets',
-        'Compact Asterisk / FreePBX server appliances'
+        'Grandstream GXP1620/1625: 2 SIP lines, backlit LCD, HD audio, 3-way conference',
+        'Fanvil X7A Android: 7" color touch screen, 20 SIP lines, Wi-Fi, Bluetooth, 112 DSS keys',
+        '8, 16, and 32-Channel GSM/4G SIM Gateways with auto-balancing',
+        'Commercial call center noise-canceling USB/RJ9 headsets'
       ],
       deliverables: [
         'Auto-provisioning directly to your local or cloud PBX',
@@ -813,15 +614,15 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
         'Quick swap warranty for any damaged or dropped handsets',
         'Voice codec optimization for crystal-clear HD audio'
       ],
-      image: '/assets/telecom_ip_phones.jpg'
+      image: '/assets/phone_grandstream_grp2616.png'
     },
     'bulk-device-deployment': {
       id: 'bulk-device-deployment',
       name: 'Bulk Device Deployment (50–500+ Seats)',
-      duration: 'Custom Enterprise Rental Agreement',
+      duration: 'Minimum 2 Years Agreement',
       leadTime: 'Phased rollout with dedicated onsite logistics',
       summary: 'Turnkey fleet provisioning for large enterprise hiring batches, newly opened BPO centers, and multi-city corporate expansions with dedicated logistical management.',
-      metrics: ['50–500+ Machines Ready', 'Custom Asset Tag Registry', 'Resident Logistics Manager'],
+      metrics: ['50–500+ Machines Ready', 'Custom Asset Tag Registry', 'Minimum 2 Years Agreement'],
       whyExists: 'Rolling out hundreds of laptops or desktops across multiple offices introduces supply chain friction, asset tagging overhead, and deployment delays when managed in-house.',
       benefits: [
         { title: 'Unified Hardware Baseline', desc: 'Equip hundreds of employees with the exact same machine revision and OEM image, simplifying corporate IT administration.' },
@@ -845,24 +646,24 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
     'rental-enquiry': {
       id: 'rental-enquiry',
       name: 'Custom Fleet Rental Enquiry',
-      duration: 'Tailored to your organizational schedule',
+      duration: 'Minimum 2 Years Agreement',
       leadTime: 'Immediate quotation within 2 business hours',
-      summary: 'Speak directly with our hardware leasing team to customize computing specifications, lease terms, buyback options, or multi-city distribution.',
-      metrics: ['Formal Quote in 2 Hours', 'Custom SLA Terms', 'Zero Security Deposit for Corporates'],
+      summary: 'Speak directly with our hardware leasing team to customize computing specifications, 2+ year lease terms, buyback options, or multi-city distribution.',
+      metrics: ['Formal Quote in 2 Hours', 'Custom SLA Terms', 'Minimum 2 Years Agreement'],
       whyExists: 'Enterprise IT procurement often involves complex hybrid requirements combining compute, storage, security, and remote drop-shipping under one unified master services agreement.',
       benefits: [
-        { title: 'Tailored Financial Models', desc: 'Choose between pure operating leases, rent-to-own arrangements, or seasonal month-to-month contracts tailored to your budget.' },
+        { title: 'Tailored Financial Models', desc: 'Operating leases and long-term enterprise contracts structured around your company budgeting and financial cycles.' },
         { title: 'Proof-of-Concept Evaluation', desc: 'Receive trial hardware units at your office for technical benchmarking before finalizing multi-seat fleet contracts.' },
         { title: 'Dedicated Account Executive', desc: 'A single point of contact coordinates delivery schedules, hardware additions, billing adjustments, and onsite support SLAs.' }
       ],
       specs: [
-        'Mix-and-match workstation, server, and networking bundles',
+        'Mix-and-match laptop, desktop, and telecom hardware bundles',
         'Flexible OPEX financing with zero capital expenditure',
         'Pan-India delivery across 100+ cities and tier-2 regions',
-        'Comprehensive maintenance agreements included in all rates'
+        'Comprehensive maintenance agreements included throughout term'
       ],
       deliverables: [
-        'Formal commercial quotation with volume pricing tiers',
+        'Formal commercial quotation customized for your organization',
         'Sample evaluation units provided for technical testing',
         'Dedicated enterprise relationship account manager',
         'Custom Master Services Agreement (MSA) SLA terms'
@@ -875,17 +676,17 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
   const currentCategoryObj = categoryList.find((c) => c.id === selectedCategoryId);
 
   return (
-    <div className="min-h-[85vh] bg-white py-6 sm:py-10 lg:py-14 border-b border-slate-100">
-      <div className="max-w-[1536px] mx-auto px-3 sm:px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-10 items-start">
-          
+    <div className="min-h-[85vh] bg-white py-5 sm:py-8 lg:py-12 border-b border-slate-100">
+      <div className="max-w-[1536px] mx-auto px-3 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 items-start">
+
           {/* Mobile Category Selector (Visible on mobile/tablet < lg) */}
-          <div className="lg:hidden col-span-1 mb-1">
-            <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3 shadow-2xs">
+          <div className="lg:hidden col-span-1 mb-2">
+            <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3.5 shadow-2xs">
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0 flex-1">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626] block">
-                    Equipment Fleet
+                    Equipment Fleet Selection
                   </span>
                   <p className="text-sm font-bold text-slate-900 truncate">
                     {selectedCategoryId === 'all'
@@ -896,26 +697,26 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                 <button
                   type="button"
                   onClick={() => setMobileCategoryOpen(!mobileCategoryOpen)}
-                  className="px-3.5 py-2 min-h-[40px] rounded-xl bg-white border border-slate-200 text-xs font-semibold text-[#dc2626] shadow-2xs flex items-center gap-1.5 active:scale-95 transition-all shrink-0"
+                  className="px-3.5 py-2 min-h-[40px] rounded-xl bg-white border border-slate-200 text-xs font-semibold text-[#dc2626] shadow-2xs flex items-center gap-1.5 active:scale-95 transition-all shrink-0 cursor-pointer"
                 >
-                  <span>{mobileCategoryOpen ? 'Close' : 'Equipment'}</span>
+                  <span>{mobileCategoryOpen ? 'Close' : 'Categories'}</span>
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${mobileCategoryOpen ? 'rotate-180' : ''}`} />
                 </button>
               </div>
 
               {/* Collapsible Mobile Category List */}
               {mobileCategoryOpen && (
-                <div className="mt-3 pt-3 border-t border-slate-200/80 max-h-[300px] overflow-y-auto space-y-1">
+                <div className="mt-3 pt-3 border-t border-slate-200/80 max-h-[340px] overflow-y-auto space-y-1">
                   <button
                     onClick={() => {
                       handleSelectCategory('all');
                       setMobileCategoryOpen(false);
                     }}
-                    className={`w-full text-left py-2.5 px-3 min-h-[42px] flex items-center rounded-lg text-xs font-medium transition-colors ${
+                    className={`w-full text-left py-2.5 px-3 min-h-[42px] flex items-center justify-between rounded-lg text-xs font-medium transition-colors cursor-pointer ${
                       selectedCategoryId === 'all' ? 'bg-[#dc2626] text-white font-bold' : 'text-slate-700 hover:bg-slate-100'
                     }`}
                   >
-                    Rental Services Home
+                    <span>Rental Services Home (Overview)</span>
                   </button>
                   {categoryList.map((item) => (
                     <button
@@ -924,11 +725,11 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                         handleSelectCategory(item.id);
                         setMobileCategoryOpen(false);
                       }}
-                      className={`w-full text-left py-2.5 px-3 min-h-[42px] flex items-center rounded-lg text-xs font-medium transition-colors ${
+                      className={`w-full text-left py-2.5 px-3 min-h-[42px] flex items-center justify-between rounded-lg text-xs font-medium transition-colors cursor-pointer ${
                         selectedCategoryId === item.id ? 'bg-[#dc2626] text-white font-bold' : 'text-slate-700 hover:bg-slate-100'
                       }`}
                     >
-                      {item.name}
+                      <span>{item.name}</span>
                     </button>
                   ))}
                 </div>
@@ -936,14 +737,14 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
             </div>
           </div>
 
-          {/* Left Column: Clean Cisco-Style Minimalist Navigation (Desktop) */}
-          <aside className="hidden lg:block lg:col-span-3 border-r border-slate-200/90 pr-5 lg:sticky lg:top-28">
+          {/* Left Column: Clean Sidebar Navigation (Desktop) matching Solutions & Services */}
+          <aside className="hidden lg:block lg:col-span-3 border-r border-slate-200/90 pr-5 lg:sticky lg:top-4 max-h-[calc(100vh-2rem)] overflow-y-auto overscroll-contain [scrollbar-width:thin] [scrollbar-color:#e2e8f0_transparent]">
             {/* Rental Services Home Link */}
             <div className="mb-4 pb-3 border-b border-slate-100">
               <button
                 type="button"
                 onClick={() => handleSelectCategory('all')}
-                className={`relative text-left text-[13.5px] leading-snug transition-colors duration-150 block w-full py-1.5 pl-3.5 ${
+                className={`relative text-left text-[13.5px] leading-snug transition-colors duration-150 block w-full py-1.5 pl-3.5 cursor-pointer ${
                   selectedCategoryId === 'all'
                     ? 'text-[#dc2626] font-bold'
                     : 'text-[#dc2626] hover:underline font-medium'
@@ -968,10 +769,10 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                     <button
                       type="button"
                       onClick={() => handleSelectCategory(item.id)}
-                      className={`relative text-left text-[13.5px] leading-relaxed transition-colors duration-150 block w-full py-1.5 pl-3.5 ${
+                      className={`relative text-left text-[13px] leading-relaxed transition-colors duration-150 block w-full py-2 pl-3.5 pr-2 rounded-lg cursor-pointer ${
                         isActive
-                          ? 'text-slate-900 font-bold'
-                          : 'text-slate-700 hover:text-[#dc2626] font-normal'
+                          ? 'text-slate-900 font-bold bg-slate-50'
+                          : 'text-slate-700 hover:text-[#dc2626] hover:bg-slate-50/60 font-normal'
                       }`}
                     >
                       {isActive && (
@@ -988,110 +789,97 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
             </ul>
           </aside>
 
-          {/* Right Column: Cisco 3-Card Home OR Rich Rental Product View */}
-          <main className="lg:col-span-9">
-            
-            {/* 1. HOME VIEW: Cisco 3-Card Spotlight + Interactive Fleet Sizing Calculator */}
+          {/* Right Column: Main Content */}
+          <main className="lg:col-span-9 space-y-8">
+
+            {/* VIEW 1: RENTAL SERVICES HOME (Cisco 3-Spotlight + 4 Acquisition Framework + Calculator + 5 Verticals Grid) */}
             {selectedCategoryId === 'all' ? (
-              <div className="space-y-12">
-                
-                {/* 3 Featured Spotlight Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-1">
-                  
-                  {/* Card 1: Laptop Rental */}
-                  <div className="flex flex-col justify-between group">
-                    <div>
-                      <div className="h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img
-                          src="/assets/dell_latitude_laptop.jpg"
-                          alt="Laptop Rental"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                      <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug">
-                        Corporate Laptop Fleets
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                        Dell Latitude, HP EliteBook, and Lenovo ThinkPad ultrabooks pre-configured with Windows 11 Pro and domain encryption.
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleSelectCategory('laptop-rental')}
-                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#dc2626] hover:underline"
-                    >
-                      <span>Explore laptop leasing</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
+              <div className="space-y-8">
+
+                {/* Official Fleet Rental Hero Header Banner */}
+                <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-7 shadow-xs relative overflow-hidden">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-[#dc2626] text-xs font-bold uppercase tracking-wider mb-3">
+                    <Sparkles className="w-3.5 h-3.5 text-[#dc2626]" />
+                    <span>Official Enterprise Hardware Leasing &amp; Fleet Rental Portfolio</span>
                   </div>
 
-                  {/* Card 2: Server Rental */}
-                  <div className="flex flex-col justify-between group">
-                    <div>
-                      <div className="h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img
-                          src="/assets/hpe_proliant_server.jpg"
-                          alt="Server Rental"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                      <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug">
-                        High-Compute Server Arrays
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                        Dell PowerEdge and HPE ProLiant rack servers configured with hot-swap SAS/NVMe arrays for temporary workloads.
-                      </p>
+                  <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2 text-slate-900">
+                    Enterprise Hardware Rental &amp; Fleet Leasing
+                  </h1>
+
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl mb-5">
+                    Preserve working capital and eliminate hardware obsolescence with commercial-grade laptops, desktop workstations, telecom equipment, and turnkey BPO fleets under structured 2-year enterprise lease agreements. Includes 100% operating expense tax deductibility, nationwide drop-shipping, and guaranteed 5% local standby units for zero workplace downtime.
+                  </p>
+
+                  <div className="flex flex-wrap items-center gap-2 pt-3.5 border-t border-slate-100 text-xs">
+                    <span className="bg-slate-50 text-slate-700 px-3 py-1 rounded-md border border-slate-200/80">
+                      Procurement: <strong className="text-slate-900 font-semibold">100% OpEx Structured Leasing</strong>
+                    </span>
+                    <span className="bg-slate-50 text-slate-700 px-3 py-1 rounded-md border border-slate-200/80">
+                      Commitment: <strong className="text-slate-900 font-semibold">Minimum 2 Years Agreement</strong>
+                    </span>
+                    <span className="bg-emerald-50 text-emerald-800 px-3 py-1 rounded-md border border-emerald-200">
+                      Standby Buffer: <strong className="text-emerald-700 font-semibold">Permanent 5% Spares on Site</strong>
+                    </span>
+                  </div>
+                </div>
+
+                {/* Enterprise Acquisition & Rental Framework (4 Models like Solutions & Services) */}
+                <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs cisco-reveal">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-4 bg-[#dc2626] rounded-full inline-block" />
+                      <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
+                        Enterprise Rental &amp; Leasing Framework
+                      </h2>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => handleSelectCategory('server-rental')}
-                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#dc2626] hover:underline"
-                    >
-                      <span>Explore server rentals</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
+                    <span className="text-[11px] font-semibold text-red-600 bg-red-50 border border-red-200 px-2.5 py-0.5 rounded-full w-fit">
+                      Guaranteed Corporate OpEx Benefits
+                    </span>
                   </div>
 
-                  {/* Card 3: Bulk Deployment */}
-                  <div className="flex flex-col justify-between group">
-                    <div>
-                      <div className="h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img
-                          src="/assets/ue_equipment_rental.jpg"
-                          alt="Bulk Deployment"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                      <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug">
-                        Turnkey 50–500+ Seat Deployments
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                        Phased nationwide deployment with resident engineers, asset tagging, and complete standby replacement pools.
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleSelectCategory('bulk-device-deployment')}
-                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#dc2626] hover:underline"
-                    >
-                      <span>View bulk programs</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                  <p className="text-xs text-slate-600 leading-relaxed mb-5">
+                    We eliminate capital lockup, maintenance overhead, and tech obsolescence through 4 structured corporate leasing commitments:
+                  </p>
 
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 cisco-stagger">
+                    {RENTAL_FRAMEWORK_MODELS.map((m, idx) => (
+                      <div
+                        key={idx}
+                        className={`cisco-reveal bg-slate-50/70 border border-slate-200/80 rounded-xl p-3.5 border-t-4 ${m.accentColor} hover:bg-white hover:shadow-xs transition-all flex flex-col justify-between`}
+                      >
+                        <div>
+                          <div className="flex items-center justify-between gap-1 mb-1.5">
+                            <span className="text-[10px] font-mono font-bold text-slate-500 uppercase">
+                              {m.model}
+                            </span>
+                            <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${m.badgeColor}`}>
+                              {m.badge}
+                            </span>
+                          </div>
+                          <h4 className="text-xs font-bold text-slate-900 mb-1">
+                            {m.role}
+                          </h4>
+                          <p className="text-[11px] text-slate-600 leading-snug">
+                            {m.desc}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Interactive Fleet Sizing Calculator */}
-                <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-6 sm:p-8">
+                <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-6 sm:p-8 cisco-reveal">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#dc2626] mb-2">
                     <Calculator className="w-4 h-4" />
                     <span>Instant Fleet Calculator</span>
                   </div>
                   <h3 className="text-xl font-bold text-slate-900 mb-2">
-                    Configure Your Deployment Sizing
+                    Configure Your Fleet Deployment Sizing
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-600 mb-6 max-w-2xl">
-                    Select your preferred device class, unit volume, and rental term to receive an immediate formal procurement quote.
+                    Select your preferred device class, unit volume, and rental term to receive an immediate formal procurement quote with full warranty support.
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
@@ -1102,11 +890,11 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                         onChange={(e) => setSelectedDevice(e.target.value)}
                         className="w-full px-3 py-2 bg-white rounded-lg border border-slate-300 text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#dc2626]"
                       >
-                        <option value="Enterprise Laptops">Enterprise Laptops (vPro / Core i5/i7)</option>
-                        <option value="Commercial Desktops">Commercial Desktop Workstations</option>
-                        <option value="Rack Servers">2U High-Compute Rack Servers</option>
-                        <option value="Core Switches & Firewalls">Routers, Switches & Firewalls</option>
-                        <option value="IP Telecom & Gateways">IP Phones & GSM Gateways</option>
+                        <option value="Enterprise Laptops">Enterprise Laptops (vPro / Core i3/i5/i7)</option>
+                        <option value="Commercial Desktops">Commercial Desktop Workstations (SFF / Tower)</option>
+                        <option value="IP Telecom & Gateways">IP Phones & GSM Gateways (Grandstream / Fanvil)</option>
+                        <option value="Bulk BPO Fleet">Turnkey BPO Workstation Bundles (50–500 Seats)</option>
+                        <option value="Custom Multi-Device Kit">Custom Multi-Device Fleet Sizing</option>
                       </select>
                     </div>
 
@@ -1117,8 +905,8 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                         onChange={(e) => setQuantity(Number(e.target.value))}
                         className="w-full px-3 py-2 bg-white rounded-lg border border-slate-300 text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#dc2626]"
                       >
-                        <option value={10}>10 Units (Small Pilot)</option>
-                        <option value={25}>25 Units (Branch / Project)</option>
+                        <option value={10}>10 Units (Branch / Pilot)</option>
+                        <option value={25}>25 Units (Project Team)</option>
                         <option value={50}>50 Units (Mid-tier Corporate)</option>
                         <option value={100}>100 Units (BPO Scale)</option>
                         <option value={250}>250+ Units (Enterprise Rollout)</option>
@@ -1126,16 +914,15 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                     </div>
 
                     <div>
-                      <label className="text-xs font-bold text-slate-700 block mb-1.5">Lease Term</label>
+                      <label className="text-xs font-bold text-slate-700 block mb-1.5">Lease Term (Min. 2 Years Agreement)</label>
                       <select
                         value={duration}
                         onChange={(e) => setDuration(e.target.value)}
                         className="w-full px-3 py-2 bg-white rounded-lg border border-slate-300 text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#dc2626]"
                       >
-                        <option value="1 Month">1 Month (Event / Temporary)</option>
-                        <option value="3 Months">3 Months (Project Deployment)</option>
-                        <option value="6 Months">6 Months (Extended Contract)</option>
-                        <option value="12 Months">12 Months (Annual Fleet Lease)</option>
+                        <option value="2 Years (24 Months)">2 Years / 24 Months (Minimum 2 Years Agreement)</option>
+                        <option value="3 Years (36 Months)">3 Years / 36 Months (Enterprise Term)</option>
+                        <option value="5 Years (60 Months)">5 Years / 60 Months (Long-Term Corporate)</option>
                       </select>
                     </div>
                   </div>
@@ -1143,24 +930,123 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-slate-200">
                     <div className="flex items-center gap-2 text-xs text-slate-600">
                       <CheckCircle2 className="w-4 h-4 text-[#dc2626]" />
-                      <span>Includes full maintenance warranty and standby loaners</span>
+                      <span>Includes full on-site maintenance warranty and 5% local standby loaners</span>
                     </div>
                     <button
                       type="button"
                       onClick={handleCalculatorSubmit}
-                      className="px-6 py-2.5 rounded-lg bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-soft-sm"
+                      className="px-6 py-2.5 rounded-lg bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-soft-sm cursor-pointer"
                     >
                       Generate Custom Quote
                     </button>
                   </div>
                 </div>
 
+                {/* Explore All 5 Rental Verticals Grid (Matching Solutions/Services Page) */}
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h2 className="text-lg font-bold text-slate-900 tracking-tight">
+                        Explore All 5 Equipment Rental Verticals
+                      </h2>
+                      <p className="text-xs text-slate-500">
+                        Select any fleet category to view configured models, technical specifications, and tier filters
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 cisco-stagger">
+                    {categoryList.map((cat, idx) => {
+                      const det = rentalData[cat.id];
+                      if (!det) return null;
+                      return (
+                        <div
+                          key={cat.id}
+                          className="cisco-reveal bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group"
+                        >
+                          <div>
+                            {/* Card Image Header */}
+                            <div className="relative h-44 sm:h-52 rounded-xl overflow-hidden mb-4 bg-slate-100 border border-slate-200/70">
+                              <img
+                                src={det.image}
+                                alt={det.name}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                loading="lazy"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-900/15 to-transparent pointer-events-none" />
+
+                              <div className="absolute top-2.5 left-2.5">
+                                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-slate-950/80 backdrop-blur-md text-white border border-white/10 uppercase tracking-wider">
+                                  FLEET 0{idx + 1}
+                                </span>
+                              </div>
+
+                              <div className="absolute top-2.5 right-2.5">
+                                <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/90 text-white backdrop-blur-md flex items-center gap-1 shadow-xs">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                                  Available for Lease
+                                </span>
+                              </div>
+
+                              <div className="absolute bottom-2.5 left-3 right-3 text-white">
+                                <span className="text-[11px] font-bold text-red-300 block truncate">
+                                  {det.duration}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Card Content Header */}
+                            <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#dc2626] transition-colors leading-snug mb-1">
+                              {det.name}
+                            </h3>
+
+                            <span className="text-[11px] text-slate-500 block mb-2.5">
+                              SLA: <strong className="text-slate-700">{det.leadTime}</strong>
+                            </span>
+
+                            <p className="text-xs text-slate-600 leading-relaxed mb-3 line-clamp-2">
+                              {det.summary}
+                            </p>
+
+                            {/* Value Metrics Pills */}
+                            <div className="flex flex-wrap gap-1.5 mb-3">
+                              {det.metrics.map((metric, mIdx) => (
+                                <span
+                                  key={mIdx}
+                                  className="text-[10px] font-medium bg-slate-50 border border-slate-200/70 text-slate-700 px-2 py-0.5 rounded-md inline-flex items-center gap-1"
+                                >
+                                  <span className="w-1.5 h-1.5 rounded-full bg-[#dc2626]" />
+                                  {metric}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2 mt-2">
+                            <span className="text-[10px] text-slate-400 truncate max-w-[200px]">
+                              Zero CapEx • 100% OpEx
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => handleSelectCategory(cat.id)}
+                              className="text-xs font-bold text-[#dc2626] hover:text-[#b91c1c] inline-flex items-center gap-1 cursor-pointer"
+                            >
+                              <span>Explore Fleet Models</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
               </div>
             ) : (
-              /* 2. CATEGORY VIEW: Detailed Rental Category Presentation with Products Catalog */
+              /* VIEW 2: CATEGORY VIEW: Detailed Presentation + Criteria Tabs + Interactive Custom Assembler + Products */
               currentDetail && (
-                <div className="space-y-10 animate-in fade-in duration-200">
-                  
+                <div className="space-y-8 animate-in fade-in duration-200">
+
                   {/* Category Title Header */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
                     <div>
@@ -1168,22 +1054,22 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                         {currentDetail.name}
                       </h2>
                       <span className="text-xs text-[#dc2626] font-semibold block mt-1">
-                        Deployment SLA: {currentDetail.leadTime}
+                        Deployment SLA: {currentDetail.leadTime} • {currentDetail.duration}
                       </span>
                     </div>
 
                     <button
                       type="button"
-                      onClick={() => onOpenQuickSupport(`Rental Request: ${currentDetail.name}`)}
-                      className="px-5 py-2.5 rounded-full bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-soft-sm flex items-center gap-2 self-start sm:self-auto"
+                      onClick={() => onOpenQuickSupport(`Rental Request: ${currentDetail.name} (Minimum 2 Years Agreement)`)}
+                      className="px-5 py-2.5 rounded-full bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-soft-sm flex items-center gap-2 self-start sm:self-auto cursor-pointer"
                     >
                       <span>Request Rental Quotation</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
-                  {/* Executive Split Hero Panel (Compact image replacing the oversized full banner) */}
-                  <div className="bg-slate-50/70 border border-slate-200/90 rounded-2xl p-6 sm:p-7">
+                  {/* Executive Split Hero Panel */}
+                  <div className="bg-slate-50/70 border border-slate-200/90 rounded-2xl p-6 sm:p-7 cisco-reveal">
                     <div className="flex flex-col-reverse lg:flex-row gap-6 items-center">
                       <div className="flex-1 space-y-4">
                         <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
@@ -1203,7 +1089,7 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                           ))}
                         </div>
 
-                        {/* Why This Category Matters */}
+                        {/* Strategic Value */}
                         <div className="pt-2 border-t border-slate-200/70">
                           <p className="text-xs text-slate-600 leading-relaxed">
                             <strong className="text-slate-900 font-semibold">Strategic Value: </strong>
@@ -1212,7 +1098,7 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                         </div>
                       </div>
 
-                      {/* Minimized Framed Image Card */}
+                      {/* Framed Image Card */}
                       <div className="w-full lg:w-72 xl:w-80 h-44 sm:h-48 rounded-xl overflow-hidden border border-slate-200 shadow-2xs relative group shrink-0 bg-slate-100">
                         <img
                           src={currentDetail.image}
@@ -1225,139 +1111,534 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                             Verified Fleet
                           </span>
                           <span className="text-[10px] text-slate-200 font-medium">
-                            Zero Deposit
+                            Minimum 2 Years
                           </span>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* 3. AVAILABLE FLEET FOR IMMEDIATE RENTAL (Products Catalog) */}
+                  {/* FLEET CRITERIA FILTER TABS */}
                   <div className="space-y-4 cisco-reveal">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-100">
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-1.5 h-6 bg-[#dc2626] rounded-full shrink-0" />
-                        <h3 className="text-xl font-bold text-[#173B67] tracking-tight">
-                          Available Fleet for Immediate Rental
-                        </h3>
+                    
+                    {/* Laptop Rental Tiers */}
+                    {selectedCategoryId === 'laptop-rental' && (
+                      <div className="pt-2">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                            Filter by Fleet Tier / Hardware Criteria:
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-1.5 bg-slate-100/80 rounded-2xl border border-slate-200">
+                          <button
+                            type="button"
+                            onClick={() => setActiveLaptopTier('all')}
+                            className={`py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                              activeLaptopTier === 'all'
+                                ? 'bg-white text-[#dc2626] shadow-2xs border border-slate-200'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            <span>All Models ({RENTAL_PRODUCTS.filter(p => p.categoryId === 'laptop-rental').length})</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setActiveLaptopTier('basic')}
+                            className={`py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                              activeLaptopTier === 'basic'
+                                ? 'bg-white text-[#dc2626] shadow-2xs border border-slate-200'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            <span className="inline-block w-2 h-2 rounded-full bg-blue-500" />
+                            <span>Basic (Core i3)</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setActiveLaptopTier('advance')}
+                            className={`py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                              activeLaptopTier === 'advance'
+                                ? 'bg-white text-[#dc2626] shadow-2xs border border-slate-200'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500" />
+                            <span>Advance (Core i5)</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setActiveLaptopTier('premium')}
+                            className={`py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                              activeLaptopTier === 'premium'
+                                ? 'bg-white text-[#dc2626] shadow-2xs border border-slate-200'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            <span className="inline-block w-2 h-2 rounded-full bg-purple-500" />
+                            <span>Premium (Core i7 / M3)</span>
+                          </button>
+                        </div>
                       </div>
-                      <span className="text-xs text-slate-500 font-medium">
-                        {currentCategoryProducts.length} Configured Models Ready for Dispatch
-                      </span>
-                    </div>
+                    )}
 
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      All units undergo certified hardware diagnostic runs, thermal paste refresh, clean OS imaging, and include full standby replacement guarantees.
-                    </p>
+                    {/* Desktop Rental Tiers + Assemble Option */}
+                    {selectedCategoryId === 'desktop-rental' && (
+                      <div className="pt-2">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                            Filter by Fleet Tier / Custom Assemble:
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 p-1.5 bg-slate-100/80 rounded-2xl border border-slate-200">
+                          <button
+                            type="button"
+                            onClick={() => setActiveDesktopTier('all')}
+                            className={`py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                              activeDesktopTier === 'all'
+                                ? 'bg-white text-[#dc2626] shadow-2xs border border-slate-200'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            <span>All Models ({RENTAL_PRODUCTS.filter(p => p.categoryId === 'desktop-rental').length})</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setActiveDesktopTier('basic')}
+                            className={`py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                              activeDesktopTier === 'basic'
+                                ? 'bg-white text-[#dc2626] shadow-2xs border border-slate-200'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            <span className="inline-block w-2 h-2 rounded-full bg-blue-500" />
+                            <span>Basic (Core i3)</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setActiveDesktopTier('advance')}
+                            className={`py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                              activeDesktopTier === 'advance'
+                                ? 'bg-white text-[#dc2626] shadow-2xs border border-slate-200'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500" />
+                            <span>Advance (Core i5)</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setActiveDesktopTier('premium')}
+                            className={`py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                              activeDesktopTier === 'premium'
+                                ? 'bg-white text-[#dc2626] shadow-2xs border border-slate-200'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            <span className="inline-block w-2 h-2 rounded-full bg-purple-500" />
+                            <span>Premium (Core i7)</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setActiveDesktopTier('assemble')}
+                            className={`col-span-2 sm:col-span-1 py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                              activeDesktopTier === 'assemble'
+                                ? 'bg-[#dc2626] text-white shadow-md'
+                                : 'bg-red-50 text-[#dc2626] hover:bg-red-100/80 font-bold border border-red-200/60'
+                            }`}
+                          >
+                            <Wrench className="w-3.5 h-3.5" />
+                            <span>Assemble &amp; Customise</span>
+                          </button>
+                        </div>
+                      </div>
+                    )}
 
-                    {/* Products Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6 pt-2 cisco-reveal cisco-stagger">
-                      {currentCategoryProducts.map((product) => (
-                        <article
-                          key={product.id}
-                          className="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col justify-between group"
-                        >
+                    {/* Telecom Rental Filter Tabs (Grandstream, Fanvil, GSM Gateways) */}
+                    {selectedCategoryId === 'ip-phone-gsm-telecom-rental' && (
+                      <div className="pt-2">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                            Select Telecom Equipment Class:
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-1.5 bg-slate-100/80 rounded-2xl border border-slate-200">
+                          <button
+                            type="button"
+                            onClick={() => setActiveTelecomBrand('all')}
+                            className={`py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                              activeTelecomBrand === 'all'
+                                ? 'bg-white text-[#dc2626] shadow-2xs border border-slate-200'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            <span>All Telecom ({RENTAL_PRODUCTS.filter(p => p.categoryId === 'ip-phone-gsm-telecom-rental').length})</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setActiveTelecomBrand('grandstream')}
+                            className={`py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                              activeTelecomBrand === 'grandstream'
+                                ? 'bg-white text-[#dc2626] shadow-2xs border border-slate-200'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            <span className="w-2 h-2 rounded-full bg-[#173B67]" />
+                            <span>Grandstream IP</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setActiveTelecomBrand('fanvil')}
+                            className={`py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                              activeTelecomBrand === 'fanvil'
+                                ? 'bg-white text-[#dc2626] shadow-2xs border border-slate-200'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            <span className="w-2 h-2 rounded-full bg-[#dc2626]" />
+                            <span>Fanvil Touchscreen</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setActiveTelecomBrand('gsm-gateway')}
+                            className={`py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                              activeTelecomBrand === 'gsm-gateway'
+                                ? 'bg-white text-[#dc2626] shadow-2xs border border-slate-200'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            <span className="w-2 h-2 rounded-full bg-emerald-600" />
+                            <span>4G GSM Gateways</span>
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* ASSEMBLE TAB VIEW: Interactive Desktop Customisation Builder */}
+                    {selectedCategoryId === 'desktop-rental' && activeDesktopTier === 'assemble' ? (
+                      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 animate-in fade-in duration-200 cisco-reveal">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
                           <div>
-                            {/* Product Image Box */}
-                            <div className="h-44 sm:h-48 bg-slate-50 border-b border-slate-100 relative overflow-hidden flex items-center justify-center p-3">
-                              <img
-                                src={product.image}
-                                alt={product.name}
-                                className={`w-full h-full transition-transform duration-300 rounded-lg ${
-                                  product.brand === 'Acer'
-                                    ? 'object-contain p-2 group-hover:scale-105'
-                                    : 'object-cover group-hover:scale-105'
-                                }`}
-                              />
-                              
-                              {/* Brand Badge */}
-                              <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 z-10 max-w-[48%]">
-                                <span className="bg-white/95 backdrop-blur-xs border border-slate-200/80 text-slate-800 text-[10px] font-bold px-2 py-0.5 rounded shadow-2xs truncate">
-                                  {product.brand}
-                                </span>
-                                {product.brand === 'Acer' && (
-                                  <span className="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs flex items-center gap-1 shrink-0">
-                                    Rent / Buy
-                                  </span>
-                                )}
-                              </div>
-
-                              {/* Availability Pill */}
-                              <span className="absolute top-2.5 right-2.5 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs flex items-center gap-1 max-w-[48%] truncate z-10">
-                                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse shrink-0" />
-                                <span className="truncate">{product.stockStatus}</span>
-                              </span>
+                            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#dc2626] mb-1">
+                              <Cpu className="w-4 h-4" />
+                              <span>Tailored Corporate Hardware Assembly</span>
                             </div>
+                            <h3 className="text-xl font-bold text-slate-900">
+                              Assemble Your Custom Desktop Workstation
+                            </h3>
+                            <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
+                              Need non-standard specifications, dedicated graphics cards, dual displays, or custom Linux/Windows builds? Configure your exact requirements below and our engineering team will build, stress-test, and deploy your fleet.
+                            </p>
+                          </div>
+                          <span className="self-start sm:self-auto px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold rounded-full">
+                            Custom Build SLA: 24–48h
+                          </span>
+                        </div>
 
-                            {/* Product Info */}
-                            <div className="p-4 sm:p-5 space-y-3">
-                              <div>
-                                <h4 className="text-base font-bold text-slate-900 group-hover:text-[#dc2626] transition-colors leading-snug">
-                                  {product.name}
-                                </h4>
-                                <p className="text-[11px] text-[#dc2626] font-semibold mt-1">
-                                  {product.highlight}
-                                </p>
-                              </div>
+                        {/* Customisation Options Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                          {/* CPU Selection */}
+                          <div className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-2xs">
+                            <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                              <Cpu className="w-3.5 h-3.5 text-[#dc2626]" />
+                              <span>Processor / CPU Tier</span>
+                            </label>
+                            <select
+                              value={customCpu}
+                              onChange={(e) => setCustomCpu(e.target.value)}
+                              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#dc2626]"
+                            >
+                              <option value="Intel Core i3 (12th/13th Gen - Standard Office)">Intel Core i3 (12th/13th Gen - Standard Office)</option>
+                              <option value="Intel Core i5 (13th/14th Gen - Multi-Core Business)">Intel Core i5 (13th/14th Gen - Multi-Core Business)</option>
+                              <option value="Intel Core i7 (13th / 14th Gen - High Performance)">Intel Core i7 (13th / 14th Gen - High Performance)</option>
+                              <option value="Intel Core i9-13900K / 14900 (Workstation Compute)">Intel Core i9-13900K / 14900 (Workstation Compute)</option>
+                              <option value="AMD Ryzen 7 / 9 / Threadripper Pro">AMD Ryzen 7 / 9 / Threadripper Pro</option>
+                            </select>
+                            <span className="text-[11px] text-slate-500 block">Matched to motherboard chipset &amp; active cooling</span>
+                          </div>
 
-                              {/* Specs Chips */}
-                              <div className="space-y-1.5 bg-slate-50 border border-slate-200/70 p-3 rounded-xl">
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
-                                  Technical Specifications
+                          {/* RAM Memory Selection */}
+                          <div className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-2xs">
+                            <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                              <span className="w-2 h-2 rounded-full bg-blue-500" />
+                              <span>RAM Memory Volume</span>
+                            </label>
+                            <select
+                              value={customRam}
+                              onChange={(e) => setCustomRam(e.target.value)}
+                              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#dc2626]"
+                            >
+                              <option value="8 GB DDR4 (Basic Office)">8 GB DDR4 (Basic Office)</option>
+                              <option value="16 GB DDR4/DDR5 (Recommended Business)">16 GB DDR4/DDR5 (Recommended Business)</option>
+                              <option value="32 GB DDR5 (Heavy Multi-tasking & Dev)">32 GB DDR5 (Heavy Multi-tasking &amp; Dev)</option>
+                              <option value="64 GB High-Speed DDR5 (Engineering / Analytics)">64 GB High-Speed DDR5 (Engineering / Analytics)</option>
+                              <option value="128 GB ECC Registered DDR5 (AI / Scientific)">128 GB ECC Registered DDR5 (AI / Scientific)</option>
+                            </select>
+                            <span className="text-[11px] text-slate-500 block">Dual-channel high-bandwidth configuration</span>
+                          </div>
+
+                          {/* Storage Selection */}
+                          <div className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-2xs">
+                            <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                              <span>SSD / Storage Configuration</span>
+                            </label>
+                            <select
+                              value={customStorage}
+                              onChange={(e) => setCustomStorage(e.target.value)}
+                              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#dc2626]"
+                            >
+                              <option value="256 GB NVMe SSD">256 GB NVMe PCIe SSD (Fast Boot)</option>
+                              <option value="512 GB PCIe M.2 NVMe SSD">512 GB PCIe M.2 NVMe SSD</option>
+                              <option value="1 TB NVMe Gen4 High-Speed SSD">1 TB NVMe Gen4 High-Speed SSD</option>
+                              <option value="2 TB NVMe SSD + 2TB Secondary HDD">2 TB NVMe SSD + 2TB Secondary HDD</option>
+                              <option value="Dual NVMe SSDs in RAID 0/1">Dual NVMe SSDs in RAID 0/1 (Data Redundancy)</option>
+                            </select>
+                            <span className="text-[11px] text-slate-500 block">Up to 7000 MB/s read speeds for instant load</span>
+                          </div>
+
+                          {/* Dedicated GPU Option */}
+                          <div className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-2xs">
+                            <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                              <Sparkles className="w-3.5 h-3.5 text-purple-600" />
+                              <span>Dedicated Graphics / GPU</span>
+                            </label>
+                            <select
+                              value={customGpu}
+                              onChange={(e) => setCustomGpu(e.target.value)}
+                              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#dc2626]"
+                            >
+                              <option value="Integrated Intel UHD / Iris Xe (Standard Corporate)">Integrated Intel UHD / Iris Xe (Standard Corporate)</option>
+                              <option value="NVIDIA T400 / T1000 4GB / 8GB (Multi-Monitor Pro)">NVIDIA T400 / T1000 4GB / 8GB (Multi-Monitor Pro)</option>
+                              <option value="NVIDIA RTX 4060 8GB / RTX A2000 (Creative / CAD)">NVIDIA RTX 4060 8GB / RTX A2000 (Creative / CAD)</option>
+                              <option value="NVIDIA RTX A4000 16GB Dedicated GPU">NVIDIA RTX A4000 16GB Dedicated GPU (SolidWorks &amp; ML)</option>
+                              <option value="NVIDIA RTX 6000 Ada Generation (High-Compute AI)">NVIDIA RTX 6000 Ada Generation (High-Compute AI)</option>
+                            </select>
+                            <span className="text-[11px] text-slate-500 block">ISV-certified drivers and video hardware encoders</span>
+                          </div>
+
+                          {/* Display / Monitor Bundle */}
+                          <div className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-2xs">
+                            <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                              <Monitor className="w-3.5 h-3.5 text-[#173B67]" />
+                              <span>Monitor Pairing</span>
+                            </label>
+                            <select
+                              value={customMonitor}
+                              onChange={(e) => setCustomMonitor(e.target.value)}
+                              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#dc2626]"
+                            >
+                              <option value="Single 22-inch Full HD Borderless IPS Display">Single 22-inch Full HD Borderless IPS Display</option>
+                              <option value="Single 24-inch Borderless ComfortView IPS Display">Single 24-inch Borderless ComfortView IPS Display</option>
+                              <option value="Dual 24&quot; Borderless IPS Displays (Multitasking)">Dual 24" Borderless IPS Displays (Multitasking)</option>
+                              <option value="Single 27-inch 2K QHD IPS Precision Display">Single 27-inch 2K QHD IPS Precision Display</option>
+                              <option value="No Monitors Needed (Host PC Only)">No Monitors Needed (Host PC Only)</option>
+                            </select>
+                            <span className="text-[11px] text-slate-500 block">Includes HDMI/DisplayPort cabling &amp; ergonomic stand</span>
+                          </div>
+
+                          {/* Form Factor / Chassis */}
+                          <div className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-2xs">
+                            <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                              <Boxes className="w-3.5 h-3.5 text-amber-600" />
+                              <span>Chassis Form Factor</span>
+                            </label>
+                            <select
+                              value={customChassis}
+                              onChange={(e) => setCustomChassis(e.target.value)}
+                              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#dc2626]"
+                            >
+                              <option value="Micro / 1-Liter Tiny Desktop (Mounts behind screen)">Micro / 1-Liter Tiny Desktop (Mounts behind screen)</option>
+                              <option value="Small Form Factor (SFF) Space-Saving Chassis">Small Form Factor (SFF) Space-Saving Chassis</option>
+                              <option value="Tower Workstation (Expandable PCIe & Dual Power)">Tower Workstation (Expandable PCIe &amp; Dual Power)</option>
+                              <option value="Rackmount 2U/4U Desktop Chassis">Rackmount 2U/4U Desktop Chassis (Data Room / Lab)</option>
+                            </select>
+                            <span className="text-[11px] text-slate-500 block">Optimized airflow, thermal cooling &amp; acoustic dampening</span>
+                          </div>
+                        </div>
+
+                        {/* Special Customisation Notes */}
+                        <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
+                          <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                            Additional Custom Requirements / Software Staging (Optional)
+                          </label>
+                          <input
+                            type="text"
+                            value={customNotes}
+                            onChange={(e) => setCustomNotes(e.target.value)}
+                            placeholder="E.g., Linux Ubuntu 22.04 LTS dual boot, bitlocker encryption, specific graphics drivers, multi-city delivery..."
+                            className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-slate-800 focus:outline-hidden focus:border-[#dc2626]"
+                          />
+                        </div>
+
+                        {/* Configuration Summary & Action */}
+                        <div className="bg-white border border-slate-200/90 rounded-xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs">
+                          <div className="space-y-1">
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                              Custom Assembly Blueprint
+                            </span>
+                            <p className="text-xs sm:text-sm font-bold text-slate-900">
+                              {customCpu} • {customRam} • {customStorage} • {customGpu}
+                            </p>
+                            <p className="text-xs text-slate-500">
+                              Display: {customMonitor} | Chassis: {customChassis}
+                            </p>
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const requestText = `Custom Assemble Desktop Request: ${customCpu}, ${customRam}, ${customStorage}, GPU: ${customGpu}, Display: ${customMonitor}, Chassis: ${customChassis}${customNotes ? ` (Notes: ${customNotes})` : ''} (Minimum 2 Years Agreement)`;
+                              onOpenQuickSupport(requestText);
+                            }}
+                            className="px-6 py-3 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-soft-sm flex items-center justify-center gap-2 whitespace-nowrap self-stretch md:self-auto cursor-pointer"
+                          >
+                            <span>Request Custom Quotation</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      /* Standard Products Grid for all other views */
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 cisco-stagger">
+                        {currentCategoryProducts.map((product) => (
+                          <article
+                            key={product.id}
+                            className="cisco-reveal bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col justify-between group"
+                          >
+                            <div>
+                              {/* Product Image Box */}
+                              <div className={`h-48 sm:h-52 border-b border-slate-100 relative overflow-hidden flex items-center justify-center p-4 transition-colors ${
+                                selectedCategoryId === 'ip-phone-gsm-telecom-rental'
+                                  ? 'bg-gradient-to-b from-white to-slate-50/80'
+                                  : 'bg-slate-50'
+                              }`}>
+                                <img
+                                  src={product.image}
+                                  alt={product.name}
+                                  className={`w-full h-full group-hover:scale-105 transition-transform duration-300 rounded-lg ${
+                                    selectedCategoryId === 'ip-phone-gsm-telecom-rental'
+                                      ? 'object-contain max-h-40 drop-shadow-sm'
+                                      : 'object-cover'
+                                  }`}
+                                  loading="lazy"
+                                />
+
+                                {/* Tier Badge (Brand names removed from image overlay per user request) */}
+                                <div className="absolute top-3 left-3 flex items-center gap-1.5">
+                                  {product.tier && (
+                                    <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded shadow-2xs uppercase tracking-wider text-white ${
+                                      product.tier === 'basic' ? 'bg-blue-600' :
+                                      product.tier === 'advance' ? 'bg-emerald-600' : 'bg-purple-600'
+                                    }`}>
+                                      {product.tier} Tier
+                                    </span>
+                                  )}
+                                </div>
+
+                                {/* Availability Pill */}
+                                <span className="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs flex items-center gap-1">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                                  {product.stockStatus}
                                 </span>
-                                {product.specs.slice(0, 3).map((spec, sIdx) => (
-                                  <div key={sIdx} className="flex items-start gap-1.5 text-xs text-slate-700">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#dc2626] shrink-0 mt-1.5" />
-                                    <span className="line-clamp-1">{spec}</span>
-                                  </div>
-                                ))}
                               </div>
 
-                              {/* Rental Rate and Minimum Lease */}
-                              <div className="flex items-center justify-between pt-1 text-xs">
+                              {/* Product Info */}
+                              <div className="p-5 space-y-3">
                                 <div>
-                                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
-                                    Rental Terms
-                                  </span>
-                                  <span className="font-bold text-slate-900">
-                                    {product.rentalRate}
-                                  </span>
+                                  <h4 className="text-base font-bold text-slate-900 group-hover:text-[#dc2626] transition-colors leading-snug">
+                                    {product.name}
+                                  </h4>
+                                  <p className="text-[11px] text-[#dc2626] font-semibold mt-1">
+                                    {product.highlight}
+                                  </p>
                                 </div>
-                                <div className="text-right">
-                                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
-                                    Commitment
+
+                                {/* Key Specification Matrix for Tiers (CPU, RAM, Storage) */}
+                                {product.processor && (
+                                  <div className="grid grid-cols-3 gap-2 p-2.5 bg-slate-50 border border-slate-200/80 rounded-xl text-center">
+                                    <div>
+                                      <span className="text-[10px] uppercase font-bold text-slate-400 block">CPU</span>
+                                      <span className="text-xs font-bold text-slate-800 truncate block">{product.processor}</span>
+                                    </div>
+                                    <div className="border-x border-slate-200 px-1">
+                                      <span className="text-[10px] uppercase font-bold text-slate-400 block">RAM</span>
+                                      <span className="text-xs font-bold text-slate-800 truncate block">{product.ram}</span>
+                                    </div>
+                                    <div>
+                                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Storage</span>
+                                      <span className="text-xs font-bold text-slate-800 truncate block">{product.ssd}</span>
+                                    </div>
+                                  </div>
+                                )}
+
+                                {product.bestFor && (
+                                  <div className="text-xs text-slate-700 bg-red-50/60 border border-red-100 p-2.5 rounded-xl">
+                                    <strong className="text-[#dc2626] font-semibold">Best suited for: </strong>
+                                    <span>{product.bestFor}</span>
+                                  </div>
+                                )}
+
+                                {/* Specs Chips */}
+                                <div className="space-y-1.5 bg-slate-50 border border-slate-200/70 p-3 rounded-xl">
+                                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                                    Technical Specifications
                                   </span>
-                                  <span className="text-slate-600 font-medium">
-                                    {product.minLease}
-                                  </span>
+                                  {product.specs.slice(0, 3).map((spec, sIdx) => (
+                                    <div key={sIdx} className="flex items-start gap-1.5 text-xs text-slate-700">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-[#dc2626] shrink-0 mt-1.5" />
+                                      <span className="line-clamp-1">{spec}</span>
+                                    </div>
+                                  ))}
+                                </div>
+
+                                {/* Lease Terms / Pricing Model */}
+                                <div className="flex items-center justify-between pt-1 text-xs">
+                                  <div>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                                      Pricing Model
+                                    </span>
+                                    <span className="font-bold text-slate-900">
+                                      Custom Quote on Request
+                                    </span>
+                                  </div>
+                                  {product.minLease && (
+                                    <div className="text-right">
+                                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                                        Agreement Term
+                                      </span>
+                                      <span className="text-[#dc2626] font-bold">
+                                        {product.minLease}
+                                      </span>
+                                    </div>
+                                  )}
                                 </div>
                               </div>
                             </div>
-                          </div>
 
-                          {/* Action Buttons */}
-                          <div className="p-4 sm:p-5 pt-0 border-t border-slate-100 flex items-center gap-2 mt-2">
-                            <button
-                              type="button"
-                              onClick={() => onOpenQuickSupport(`Rental Inquiry: ${product.name} (${product.rentalRate})`)}
-                              className="flex-1 min-h-[40px] py-2.5 px-3 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-colors text-center shadow-2xs flex items-center justify-center active:scale-95"
-                            >
-                              Request Rental Quote
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => setInspectRentalProduct(product)}
-                              className="min-h-[40px] py-2.5 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors flex items-center justify-center active:scale-95 shrink-0"
-                            >
-                              Quick View
-                            </button>
-                          </div>
-                        </article>
-                      ))}
-                    </div>
+                            {/* Action Buttons */}
+                            <div className="p-5 pt-0 border-t border-slate-100 flex items-center gap-2 mt-2">
+                              <button
+                                type="button"
+                                onClick={() => onOpenQuickSupport(`Rental Inquiry: ${product.name} (Minimum 2 Years Agreement)`)}
+                                className="flex-1 py-2.5 px-3 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-colors text-center shadow-2xs cursor-pointer"
+                              >
+                                Request Rental Quote
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setInspectRentalProduct(product)}
+                                className="py-2.5 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors cursor-pointer"
+                              >
+                                Quick View
+                              </button>
+                            </div>
+                          </article>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
-                  {/* 4. Strategic Benefits: Why Lease from Unified Enterprise */}
+                  {/* Strategic Benefits: Why Lease from Unified Enterprise */}
                   <div className="space-y-4 pt-4 cisco-reveal">
                     <div className="flex items-center gap-2.5 pb-2 border-b border-slate-100">
                       <span className="w-1.5 h-6 bg-[#dc2626] rounded-full shrink-0" />
@@ -1366,11 +1647,11 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                       </h3>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 cisco-reveal cisco-stagger">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 cisco-stagger">
                       {currentDetail.benefits.map((b, idx) => (
                         <div
                           key={idx}
-                          className="bg-white border border-slate-200/90 rounded-xl p-5 shadow-2xs space-y-2 hover:border-slate-300 transition-colors"
+                          className="cisco-reveal bg-white border border-slate-200/90 rounded-xl p-5 shadow-2xs space-y-2 hover:border-slate-300 transition-colors"
                         >
                           <div className="w-8 h-8 rounded-lg bg-red-50 text-[#dc2626] flex items-center justify-center font-bold text-xs">
                             0{idx + 1}
@@ -1386,7 +1667,7 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                     </div>
                   </div>
 
-                  {/* 5. Hardware Standards & Lease Terms Checklist */}
+                  {/* Hardware Standards & Lease Terms Checklist */}
                   <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-7 space-y-6 shadow-2xs cisco-reveal">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* Technical Standards */}
@@ -1394,7 +1675,7 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                         <div className="flex items-center gap-2 mb-3">
                           <span className="w-1.5 h-4 bg-[#dc2626] rounded-full" />
                           <h4 className="text-sm font-bold text-[#173B67]">
-                            Hardware Configurations & Standards
+                            Hardware Configurations &amp; Standards
                           </h4>
                         </div>
                         <div className="space-y-2">
@@ -1412,7 +1693,7 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                         <div className="flex items-center gap-2 mb-3">
                           <span className="w-1.5 h-4 bg-[#dc2626] rounded-full" />
                           <h4 className="text-sm font-bold text-[#173B67]">
-                            Lease Terms & Maintenance Commitments
+                            Lease Terms &amp; Maintenance Commitments
                           </h4>
                         </div>
                         <div className="space-y-2.5">
@@ -1430,7 +1711,7 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                     <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 -mx-6 sm:-mx-7 -mb-6 sm:-mb-7 p-6 rounded-b-2xl">
                       <div>
                         <span className="text-xs font-bold text-slate-900 block">
-                          Terms: {currentDetail.duration}
+                          Commitment Terms: {currentDetail.duration}
                         </span>
                         <span className="text-xs text-slate-500">
                           Available with zero capital expenditure and same-day standby replacement pools across India.
@@ -1438,8 +1719,8 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                       </div>
                       <button
                         type="button"
-                        onClick={() => onOpenQuickSupport(`Enquiry: ${currentDetail.name}`)}
-                        className="px-6 py-2.5 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-colors whitespace-nowrap shadow-soft-sm"
+                        onClick={() => onOpenQuickSupport(`Enquiry: ${currentDetail.name} (Minimum 2 Years Agreement)`)}
+                        className="px-6 py-2.5 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-colors whitespace-nowrap shadow-soft-sm cursor-pointer"
                       >
                         Book Fleet Consultation
                       </button>
@@ -1464,14 +1745,14 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
           onClick={() => setInspectRentalProduct(null)}
         >
           <div
-            className="relative w-full max-w-2xl bg-white rounded-2xl border border-slate-200 shadow-2xl overflow-hidden p-4 sm:p-8 space-y-4 sm:space-y-6 max-h-[92vh] overflow-y-auto"
+            className="relative w-full max-w-2xl bg-white rounded-2xl border border-slate-200 shadow-2xl overflow-hidden p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
             <div className="flex items-start justify-between gap-4 pb-4 border-b border-slate-100">
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626] block">
-                  {inspectRentalProduct.brand} • Ready to Deploy
+                  {inspectRentalProduct.tier ? `${inspectRentalProduct.tier.toUpperCase()} TIER • ` : ''}Enterprise Fleet • Ready to Deploy
                 </span>
                 <h3 className="text-xl font-bold text-slate-900 leading-snug">
                   {inspectRentalProduct.name}
@@ -1484,7 +1765,7 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
               <button
                 type="button"
                 onClick={() => setInspectRentalProduct(null)}
-                className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors"
+                className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
@@ -1493,13 +1774,11 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
 
             {/* Modal Image + Highlights */}
             <div className="flex flex-col sm:flex-row gap-5 items-center bg-slate-50 border border-slate-200/80 p-4 rounded-xl">
-              <div className="w-full sm:w-48 h-36 rounded-lg overflow-hidden bg-white border border-slate-200/70 shrink-0 flex items-center justify-center p-1">
+              <div className="w-full sm:w-44 h-36 rounded-lg overflow-hidden bg-white border border-slate-200/70 shrink-0">
                 <img
                   src={inspectRentalProduct.image}
                   alt={inspectRentalProduct.name}
-                  className={`w-full h-full ${
-                    inspectRentalProduct.brand === 'Acer' ? 'object-contain p-1' : 'object-cover'
-                  }`}
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="space-y-2 flex-1">
@@ -1509,13 +1788,37 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                 <p className="text-xs text-slate-700 leading-relaxed">
                   {inspectRentalProduct.highlight}
                 </p>
+                {inspectRentalProduct.bestFor && (
+                  <p className="text-xs text-slate-600">
+                    <strong className="text-[#dc2626]">Recommended for: </strong>
+                    {inspectRentalProduct.bestFor}
+                  </p>
+                )}
+                {inspectRentalProduct.processor && (
+                  <div className="grid grid-cols-3 gap-2 p-2.5 bg-white border border-slate-200 rounded-lg text-center mt-2">
+                    <div>
+                      <span className="text-[10px] uppercase font-bold text-slate-400 block">CPU</span>
+                      <span className="text-xs font-bold text-slate-800">{inspectRentalProduct.processor}</span>
+                    </div>
+                    <div className="border-x border-slate-200 px-1">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 block">RAM</span>
+                      <span className="text-xs font-bold text-slate-800">{inspectRentalProduct.ram}</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Storage</span>
+                      <span className="text-xs font-bold text-slate-800">{inspectRentalProduct.ssd}</span>
+                    </div>
+                  </div>
+                )}
                 <div className="flex flex-wrap gap-2 pt-1 text-xs">
-                  <span className="px-2.5 py-1 bg-white rounded-md border border-slate-200 font-bold text-[#dc2626]">
-                    {inspectRentalProduct.rentalRate}
+                  <span className="px-2.5 py-1 bg-white rounded-md border border-slate-200 font-bold text-slate-800">
+                    Pricing: Custom Quote on Request
                   </span>
-                  <span className="px-2.5 py-1 bg-white rounded-md border border-slate-200 text-slate-600 font-medium">
-                    {inspectRentalProduct.minLease}
-                  </span>
+                  {inspectRentalProduct.minLease && (
+                    <span className="px-2.5 py-1 bg-white rounded-md border border-red-200 font-bold text-[#dc2626]">
+                      {inspectRentalProduct.minLease}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -1543,7 +1846,7 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
               <div className="flex items-center gap-2 mb-2.5">
                 <span className="w-1.5 h-4 bg-[#dc2626] rounded-full" />
                 <h4 className="text-xs font-bold uppercase tracking-wider text-[#173B67]">
-                  Included Peripherals & Deliverables
+                  Included Peripherals &amp; Deliverables
                 </h4>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -1561,7 +1864,7 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
               <button
                 type="button"
                 onClick={() => setInspectRentalProduct(null)}
-                className="w-full sm:w-auto px-5 py-2.5 text-xs font-medium text-slate-600 hover:text-slate-900 transition-colors"
+                className="w-full sm:w-auto px-5 py-2.5 text-xs font-medium text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
               >
                 Close Preview
               </button>
@@ -1570,9 +1873,9 @@ export default function RentalServicesPage({ onOpenQuickSupport }: RentalService
                 onClick={() => {
                   const prd = inspectRentalProduct;
                   setInspectRentalProduct(null);
-                  onOpenQuickSupport(`Rental Booking: ${prd.name} (${prd.rentalRate})`);
+                  onOpenQuickSupport(`Rental Booking: ${prd.name} (Minimum 2 Years Agreement)`);
                 }}
-                className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-soft-sm flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white text-xs font-bold transition-all shadow-soft-sm flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Request Quotation for this Unit</span>
                 <ArrowRight className="w-3.5 h-3.5" />

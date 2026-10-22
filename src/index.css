@@ -173,8 +173,8 @@
 [data-reveal],
 .reveal-on-scroll {
   opacity: 0;
-  transform: translate3d(0, 32px, 0);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate3d(0, 40px, 0);
+  transition: opacity 1.05s cubic-bezier(0.16, 1, 0.3, 1), transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -189,11 +189,14 @@
 
 /* Smooth Progressive Stagger Delays for Grid Children */
 .cisco-stagger > *:nth-child(1) { transition-delay: 0ms; }
-.cisco-stagger > *:nth-child(2) { transition-delay: 110ms; }
-.cisco-stagger > *:nth-child(3) { transition-delay: 220ms; }
-.cisco-stagger > *:nth-child(4) { transition-delay: 330ms; }
-.cisco-stagger > *:nth-child(5) { transition-delay: 440ms; }
-.cisco-stagger > *:nth-child(6) { transition-delay: 550ms; }
+.cisco-stagger > *:nth-child(2) { transition-delay: 90ms; }
+.cisco-stagger > *:nth-child(3) { transition-delay: 180ms; }
+.cisco-stagger > *:nth-child(4) { transition-delay: 270ms; }
+.cisco-stagger > *:nth-child(5) { transition-delay: 360ms; }
+.cisco-stagger > *:nth-child(6) { transition-delay: 450ms; }
+.cisco-stagger > *:nth-child(7) { transition-delay: 540ms; }
+.cisco-stagger > *:nth-child(8) { transition-delay: 630ms; }
+.cisco-stagger > *:nth-child(9) { transition-delay: 720ms; }
 
 /* Graceful Fallback: Never hide content if user prefers reduced motion */
 @media (prefers-reduced-motion: reduce) {
