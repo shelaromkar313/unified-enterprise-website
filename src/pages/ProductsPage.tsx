@@ -712,6 +712,7 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                           {/* Product Image Container */}
                           {(() => {
                             const isLifestyleCover =
+                              product.id === 'grandstream-grp2615-ip-phone' ||
                               product.id === 'acer-travellite-tl14-52m' ||
                               product.id === 'yealink-cp965-conference-phone' ||
                               product.id === 'dell-latitude-7440' ||
