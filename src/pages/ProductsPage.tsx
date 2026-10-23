@@ -709,33 +709,47 @@ export default function ProductsPage({ onOpenInquiry }: ProductsPageProps) {
                       >
                         <div>
                           {/* Product Image Container */}
-                          <div className="relative h-52 bg-white overflow-hidden flex items-center justify-center p-3 border-b border-slate-100">
-                            <img
-                              src={product.image}
-                              alt={product.name}
-                              className={`w-full h-full ${
-                                product.categoryId === 'antivirus' || product.categoryId === 'windows-licences' || product.subCategory === 'antivirus' || product.brand === 'Acer'
-                                  ? 'object-contain p-2 group-hover:scale-105'
-                                  : (product.categoryId === 'firewalls-network-security' || product.categoryId === 'wifi-wireless-networking' || product.categoryId === 'routers-network-switches' || product.categoryId === 'business-phones-ip-phones'
-                                      ? 'object-contain p-2 group-hover:scale-105'
-                                      : 'object-cover group-hover:scale-105')
-                              } transition-transform duration-500`}
-                              loading="lazy"
-                            />
-                            {/* Brand Badge */}
-                            <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs text-slate-800 text-[11px] font-bold px-2.5 py-0.5 rounded-md shadow-2xs border border-slate-200/80">
-                              {product.brand}
-                            </span>
-                            {product.rentalAvailable ? (
-                              <span className="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs">
-                                Rent / Buy
-                              </span>
-                            ) : (
-                              <span className="absolute top-3 right-3 bg-slate-800 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs">
-                                Buy Only
-                              </span>
-                            )}
-                          </div>
+                          {/* Product Image Container */}
+                          {(() => {
+                            const isLifestyleCover =
+                              product.id === 'acer-travellite-tl14-52m' ||
+                              product.id === 'yealink-cp965-conference-phone' ||
+                              product.id === 'dell-latitude-7440' ||
+                              product.id === 'hp-elitebook-840-g10' ||
+                              product.id === 'lenovo-thinkpad-x1-carbon-gen11' ||
+                              product.id === 'apple-macbook-pro-16-m3' ||
+                              (!['antivirus', 'windows-licences', 'firewalls-network-security', 'wifi-wireless-networking', 'routers-network-switches', 'business-phones-ip-phones'].includes(product.categoryId) && product.brand !== 'Acer');
+
+                            return (
+                              <div className={`relative h-52 bg-white overflow-hidden flex items-center justify-center border-b border-slate-100 ${
+                                isLifestyleCover ? 'p-0' : 'p-3'
+                              }`}>
+                                <img
+                                  src={product.image}
+                                  alt={product.name}
+                                  className={`w-full h-full ${
+                                    isLifestyleCover
+                                      ? 'object-cover group-hover:scale-105'
+                                      : 'object-contain p-2 group-hover:scale-105'
+                                  } transition-transform duration-500`}
+                                  loading="lazy"
+                                />
+                                {/* Brand Badge */}
+                                <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs text-slate-800 text-[11px] font-bold px-2.5 py-0.5 rounded-md shadow-2xs border border-slate-200/80">
+                                  {product.brand}
+                                </span>
+                                {product.rentalAvailable ? (
+                                  <span className="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs">
+                                    Rent / Buy
+                                  </span>
+                                ) : (
+                                  <span className="absolute top-3 right-3 bg-slate-800 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs">
+                                    Buy Only
+                                  </span>
+                                )}
+                              </div>
+                            );
+                          })()}
 
                           {/* Body Content */}
                           <div className="p-5">
